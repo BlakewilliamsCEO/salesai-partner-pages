@@ -1,0 +1,29 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { padding: 20px; background: var(--surface-page); display: flex; gap: 14px; align-items: center; }
+  .card { flex: 1; background: var(--neutral-900); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 20px; }
+  .eyebrow-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+  .value-row { display: flex; gap: 12px; align-items: flex-end; }
+  .delta { display: inline-flex; align-items: center; gap: 4px; padding: 2px 6px; border-radius: 4px; font: var(--type-numeric-delta); }
+  .delta.up   { background: rgba(62,222,111,.08); color: var(--mint-default); }
+  .delta.down { background: rgba(228,88,100,.08); color: var(--error-border); }
+  .delta svg { width: 10px; height: 10px; }
+</style></head>
+<body>
+  <div class="card">
+    <div class="eyebrow-row"><span class="eyebrow">ANSWERED CALLS</span><span class="body-sm">Last 30 days</span></div>
+    <div class="value-row"><span class="metric-value">1,089</span>
+      <span class="delta up"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6 L5 3 L8 6"/></svg>12.3%</span></div>
+  </div>
+  <div class="card">
+    <div class="eyebrow-row"><span class="eyebrow">MEETINGS BOOKED</span><span class="body-sm">Last 7 days</span></div>
+    <div class="value-row"><span class="metric-value">156</span>
+      <span class="delta up"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6 L5 3 L8 6"/></svg>15.4%</span></div>
+  </div>
+  <div class="card">
+    <div class="eyebrow-row"><span class="eyebrow">LIVE TRANSFERS</span><span class="body-sm">Last 30 days</span></div>
+    <div class="value-row"><span class="metric-value">89</span>
+      <span class="delta down"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4 L5 7 L8 4"/></svg>5.2%</span></div>
+  </div>
+</body></html>

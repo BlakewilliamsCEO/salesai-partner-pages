@@ -1,0 +1,21 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { padding: 24px; background: var(--surface-page); }
+  table { width: 100%; border-collapse: collapse; font: var(--type-body-md-reg); }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border-subtle); }
+  th { font: var(--type-numeric-eyebrow); color: var(--fg-2); letter-spacing: 0.2px; text-transform: uppercase; background: var(--neutral-900); }
+  tr:nth-child(even) td { background: var(--neutral-900); }
+  .pill { display: inline-flex; align-items: center; gap: 6px; padding: 2px 8px; border-radius: 999px; font: var(--type-body-sm-med); background: var(--mint-80); color: var(--mint-default); border: 1px solid var(--mint-240); }
+  .dot { width: 6px; height: 6px; border-radius: 999px; background: currentColor; }
+</style></head>
+<body>
+  <table>
+    <thead><tr><th>Contact</th><th>Agent</th><th>Outcome</th><th>Duration</th></tr></thead>
+    <tbody>
+      <tr><td>Elena Park</td><td>Apollo</td><td><span class="pill"><span class="dot"></span>Booked</span></td><td>4m 12s</td></tr>
+      <tr><td>Marcus Reyes</td><td>Apollo</td><td><span class="pill"><span class="dot"></span>Answered</span></td><td>2m 38s</td></tr>
+      <tr><td>Jasmine Liu</td><td>Nova</td><td><span class="pill"><span class="dot"></span>Transferred</span></td><td>1m 02s</td></tr>
+    </tbody>
+  </table>
+</body></html>

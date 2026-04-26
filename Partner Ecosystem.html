@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Partner Ecosystem — April 2026</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+  html, body { background: #000; }
+
+  deck-stage > section {
+    background: var(--neutral-1000);
+    color: var(--fg-1);
+    overflow: hidden;
+    position: relative;
+    font-family: var(--font-sans);
+  }
+
+  /* Signature Blob — bigger, placed per-slide via variable overrides */
+  .blob {
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+    width: 1400px;
+    height: 1400px;
+    left: -300px;
+    top: -400px;
+    background: radial-gradient(45% 45% at 35% 35%,
+                rgba(62, 222, 111, 0.32) 0%,
+                rgba(62, 222, 111, 0.14) 35%,
+                rgba(62, 222, 111, 0.04) 60%,
+                transparent 75%);
+    mix-blend-mode: screen;
+    filter: blur(20px);
+  }
+  .blob.br {
+    left: auto; right: -400px;
+    top: auto; bottom: -500px;
+    width: 1600px; height: 1600px;
+  }
+  .blob.tr {
+    left: auto; right: -300px; top: -400px;
+  }
+  .blob.small {
+    width: 900px; height: 900px;
+    background: radial-gradient(45% 45% at 35% 35%,
+                rgba(62, 222, 111, 0.22) 0%,
+                rgba(62, 222, 111, 0.10) 35%,
+                transparent 70%);
+  }
+
+  /* Dot background */
+  .dots {
+    position: absolute; inset: 0;
+    background-image: radial-gradient(circle, #272729 1px, transparent 1.2px);
+    background-size: 28px 28px;
+    opacity: 0.5;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .slide-inner {
+    position: relative;
+    z-index: 2;
+    padding: 72px 88px;
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font: var(--type-body-sm-med);
+    color: var(--fg-3);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .meta-row .dot { color: var(--mint-default); }
+  .brand-mark {
+    display: inline-flex; align-items: center; gap: 10px;
+    color: var(--fg-2);
+    font: 600 12px/1 var(--font-sans);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .brand-mark::before {
+    content: "";
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--mint-default);
+    box-shadow: 0 0 20px var(--mint-default);
+  }
+
+  /* ======= SLIDE 1 — COVER ======= */
+  .cover .slide-inner {
+    justify-content: space-between;
+  }
+  .cover h1 {
+    margin: 0;
+    font-family: var(--font-brand);
+    font-weight: 900;
+    font-size: 200px;
+    line-height: 0.86;
+    letter-spacing: -0.035em;
+    color: var(--fg-1);
+  }
+  .cover h1 em {
+    font-style: normal;
+    color: var(--mint-default);
+  }
+  .cover .sub {
+    max-width: 880px;
+    margin-top: 48px;
+    font: 400 26px/1.35 var(--font-brand);
+    color: var(--fg-2);
+    text-wrap: pretty;
+  }
+  .cover .presenter {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 48px;
+  }
+  .cover .presenter-block {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .cover .presenter-name {
+    font: 600 18px/1.3 var(--font-sans);
+    color: var(--fg-1);
+  }
+  .cover .presenter-role {
+    font: 500 14px/1.3 var(--font-sans);
+    color: var(--fg-3);
+    letter-spacing: 0.02em;
+  }
+
+  /* ======= SLIDE 2 — PROBLEM ======= */
+  .problem .eyebrow-lg {
+    font: 600 14px/1 var(--font-sans);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--mint-default);
+    margin-bottom: 28px;
+  }
+  .problem h2 {
+    margin: 0 0 72px;
+    font-family: var(--font-brand);
+    font-weight: 900;
+    font-size: 92px;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    color: var(--fg-1);
+    max-width: 1500px;
+  }
+  .problem h2 em {
+    font-style: normal;
+    color: var(--mint-default);
+  }
+  .problem-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--border-subtle);
+    margin-top: auto;
+  }
+  .problem-cell {
+    padding: 36px 0 12px;
+    border-right: 1px solid var(--border-subtle);
+    padding-right: 32px;
+  }
+  .problem-cell:last-child { border-right: none; padding-right: 0; }
+  .problem-cell + .problem-cell { padding-left: 32px; }
+  .problem-cell .n {
+    font-family: var(--font-brand);
+    font-weight: 900;
+    font-size: 120px;
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    color: var(--fg-1);
+  }
+  .problem-cell .n.warn { color: var(--warning); }
+  .problem-cell .n.err  { color: var(--error); }
+  .problem-cell .lbl {
+    margin-top: 16px;
+    font: 600 13px/1 var(--font-sans);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--fg-3);
+  }
+  .problem-cell .desc {
+    margin-top: 14px;
+    font: 400 18px/1.4 var(--font-brand);
+    color: var(--fg-2);
+    max-width: 420px;
+  }
+
+  /* ======= SLIDE 3 — ANALYSIS ======= */
+  .analysis h2 {
+    margin: 0;
+    font-family: var(--font-brand);
+    font-weight: 900;
+    font-size: 72px;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+  }
+  .analysis .lead {
+    margin: 20px 0 44px;
+    font: 400 22px/1.4 var(--font-brand);
+    color: var(--fg-2);
+    max-width: 1100px;
+  }
+  .matrix {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 220px repeat(5, 1fr);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--neutral-900);
+    font-size: 15px;
+  }
+  .matrix .mcell {
+    padding: 18px 20px;
+    border-right: 1px solid var(--border-subtle);
+    border-top: 1px solid var(--border-subtle);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+  }
+  .matrix .mcell.last-col { border-right: none; }
+  .matrix .mcell.top { border-top: none; }
+  .matrix .mcell.label {
+    font: 600 12px/1.2 var(--font-sans);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--fg-3);
+    background: var(--neutral-950);
+    justify-content: center;
+  }
+  .matrix .mcell.partner-head {
+    background: var(--neutral-850);
+    border-top: 3px solid transparent;
+    gap: 4px;
+    padding-top: 20px;
+  }
+  .matrix .mcell.partner-head.a1 { border-top-color: var(--mint-default); }
+  .matrix .mcell.partner-head.a2 { border-top-color: var(--mint-default); }
+  .matrix .mcell.partner-head.a3 { border-top-color: var(--mint-default); }
+  .matrix .mcell.partner-head.amber { border-top-color: var(--warning); }
+  .matrix .mcell.partner-head.red { border-top-color: var(--error); }
+
+  .partner-name {
+    font: 600 18px/1.1 var(--font-sans);
+    color: var(--fg-1);
+    letter-spacing: -0.01em;
+  }
+  .partner-meta {
+    font: 400 12px/1.3 var(--font-sans);
+    color: var(--fg-3);
+  }
+  .pill {
+    align-self: flex-start;
+    display: inline-block;
+    font: 600 10px/1 var(--font-sans);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 5px 9px;
+    border-radius: 3px;
+    margin-top: 4px;
+  }
+  .pill.green { background: rgba(62,222,111,0.12); color: var(--mint-default); }
+  .pill.amber { background: rgba(255,184,0,0.14); color: var(--warning-border); }
+  .pill.red { background: rgba(228,88,100,0.14); color: var(--error-border); }
+
+  .score {
+    font-family: var(--font-brand);
+    font-weight: 700;
+    font-size: 44px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .score.green { color: var(--mint-default); }
+  .score.amber { color: var(--warning); }
+  .score.red { color: var(--error); }
+
+  .arr-big {
+    font: 700 20px/1.1 var(--font-brand);
+    letter-spacing: -0.01em;
+    color: var(--fg-1);
+  }
+  .arr-big.green { color: var(--mint-default); }
+  .arr-big.amber { color: var(--warning-border); }
+  .arr-sub {
+    font: 400 11px/1.3 var(--font-sans);
+    color: var(--fg-3);
+  }
+
+  .effort-bar {
+    display: inline-flex; gap: 3px;
+  }
+  .tick {
+    width: 14px; height: 5px;
+    border-radius: 2px;
+    background: var(--neutral-800);
+  }
+  .tick.g { background: var(--mint-default); }
+  .tick.a { background: var(--warning); }
+  .tick.r { background: var(--error); }
+  .effort-label {
+    font: 600 13px/1 var(--font-sans);
+  }
+  .effort-label.g { color: var(--mint-default); }
+  .effort-label.a { color: var(--warning-border); }
+  .effort-label.r { color: var(--error-border); }
+
+  .cell-text {
+    font: 400 13px/1.35 var(--font-sans);
+    color: var(--fg-2);
+  }
+  .cell-text.muted { color: var(--fg-3); }
+
+  /* ======= SLIDE 4 — RECOMMENDATION ======= */
+  .rec .top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 40px;
+  }
+  .rec .eyebrow-lg {
+    font: 600 14px/1 var(--font-sans);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--mint-default);
+  }
+  .rec h2 {
+    margin: 0 0 24px;
+    font-family: var(--font-brand);
+    font-weight: 900;
+    font-size: 96px;
+    line-height: 0.88;
+    letter-spacing: -0.025em;
+    max-width: 1500px;
+  }
+  .rec h2 em { font-style: normal; color: var(--mint-default); }
+
+  .rec .hero {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 64px;
+    align-items: center;
+    flex: 1;
+    margin-top: 24px;
+  }
+  .hero-number {
+    font-family: var(--font-brand);
+    font-weight: 900;
+    font-size: 168px;
+    line-height: 0.85;
+    letter-spacing: -0.04em;
+    color: var(--mint-default);
+  }
+  .hero-caption {
+    margin-top: 24px;
+    font: 500 20px/1.3 var(--font-sans);
+    color: var(--fg-1);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .hero-sub {
+    margin-top: 18px;
+    font: 400 20px/1.5 var(--font-brand);
+    color: var(--fg-2);
+    max-width: 560px;
+  }
+  .top3 {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .top3-card {
+    background: var(--neutral-900);
+    border: 1px solid var(--border-subtle);
+    border-left: 3px solid var(--mint-default);
+    border-radius: var(--radius-md);
+    padding: 22px 26px;
+    display: grid;
+    grid-template-columns: 48px 1fr 210px;
+    gap: 20px;
+    align-items: center;
+  }
+  .top3-card > div:last-child { min-width: 0; }
+  .top3-rank {
+    font-family: var(--font-brand);
+    font-weight: 900;
+    font-size: 40px;
+    line-height: 1;
+    color: var(--mint-default);
+    letter-spacing: -0.02em;
+  }
+  .top3-name {
+    font: 600 22px/1.15 var(--font-sans);
+    color: var(--fg-1);
+    letter-spacing: -0.01em;
+  }
+  .top3-sub {
+    margin-top: 4px;
+    font: 400 13px/1.35 var(--font-sans);
+    color: var(--fg-3);
+  }
+  .top3-arr {
+    text-align: right;
+    font: 700 18px/1.1 var(--font-brand);
+    color: var(--mint-default);
+    letter-spacing: -0.01em;
+  }
+  .top3-arr-sub {
+    margin-top: 4px;
+    font: 400 11px/1.2 var(--font-sans);
+    color: var(--fg-3);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* ======= SLIDE 5 — 90 DAY PLAN ======= */
+  .plan h2 {
+    margin: 0 0 20px;
+    font-family: var(--font-brand);
+    font-weight: 900;
+    font-size: 80px;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+  }
+  .plan .lead {
+    margin: 0 0 48px;
+    font: 400 22px/1.4 var(--font-brand);
+    color: var(--fg-2);
+    max-width: 1100px;
+  }
+  .phases {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border-subtle);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    flex: 1;
+  }
+  .phase {
+    background: var(--neutral-900);
+    padding: 36px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+  }
+  .phase-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .phase-n {
+    font-family: var(--font-brand);
+    font-weight: 900;
+    font-size: 64px;
+    line-height: 0.9;
+    color: var(--mint-default);
+    letter-spacing: -0.03em;
+  }
+  .phase-window {
+    font: 600 11px/1 var(--font-sans);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--fg-3);
+  }
+  .phase-title {
+    font: 600 24px/1.2 var(--font-sans);
+    color: var(--fg-1);
+    letter-spacing: -0.01em;
+  }
+  .phase-target {
+    font: 400 14px/1.4 var(--font-sans);
+    color: var(--fg-2);
+  }
+  .phase-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 4px;
+  }
+  .phase-list li {
+    font: 400 15px/1.4 var(--font-brand);
+    color: var(--fg-2);
+    padding-left: 18px;
+    position: relative;
+  }
+  .phase-list li::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 9px;
+    width: 6px; height: 6px;
+    background: var(--mint-default);
+    border-radius: 50%;
+  }
+  .phase-footer {
+    margin-top: auto;
+    padding-top: 18px;
+    border-top: 1px solid var(--border-subtle);
+    font: 600 12px/1.3 var(--font-sans);
+    color: var(--fg-3);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .phase-footer strong {
+    color: var(--fg-1);
+    font-weight: 700;
+  }
+
+  /* ======= SLIDE 6 — RETIRED ======= */
+  .retired h2 {
+    margin: 0 0 16px;
+    font-family: var(--font-brand);
+    font-weight: 900;
+    font-size: 80px;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+  }
+  .retired h2 em { font-style: normal; color: var(--mint-default); }
+  .retired .lead {
+    margin: 0 0 44px;
+    font: 400 20px/1.4 var(--font-brand);
+    color: var(--fg-2);
+    max-width: 1100px;
+  }
+  .retired-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    flex: 1;
+  }
+  .retired-card {
+    background: var(--neutral-900);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 28px 28px 24px;
+    display: flex;
+    flex-direction: column;
+  }
+  .retired-card .count {
+    font-family: var(--font-brand);
+    font-weight: 900;
+    font-size: 72px;
+    line-height: 0.9;
+    color: var(--fg-1);
+    letter-spacing: -0.03em;
+  }
+  .retired-card .reason {
+    margin-top: 8px;
+    font: 600 13px/1 var(--font-sans);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--mint-default);
+  }
+  .retired-card .desc {
+    margin-top: 18px;
+    font: 400 15px/1.45 var(--font-brand);
+    color: var(--fg-2);
+  }
+  .retired-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 18px 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .retired-card li {
+    font: 500 12px/1 var(--font-sans);
+    color: var(--fg-3);
+    background: var(--neutral-850);
+    border: 1px solid var(--border-subtle);
+    padding: 6px 10px;
+    border-radius: 999px;
+  }
+
+  /* ======= SLIDE 7 — CLOSE ======= */
+  .close .slide-inner {
+    justify-content: space-between;
+  }
+  .close h2 {
+    margin: 40px 0 0;
+    font-family: var(--font-brand);
+    font-weight: 900;
+    font-size: 140px;
+    line-height: 0.88;
+    letter-spacing: -0.03em;
+    max-width: 1600px;
+  }
+  .close h2 em { font-style: normal; color: var(--mint-default); }
+  .close .asks {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border-subtle);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-top: 56px;
+  }
+  .ask {
+    background: var(--neutral-900);
+    padding: 32px 28px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .ask .n {
+    font-family: var(--font-brand);
+    font-weight: 900;
+    font-size: 40px;
+    line-height: 1;
+    color: var(--mint-default);
+    letter-spacing: -0.02em;
+  }
+  .ask .t {
+    font: 600 20px/1.2 var(--font-sans);
+    color: var(--fg-1);
+    letter-spacing: -0.01em;
+  }
+  .ask .d {
+    margin-top: 4px;
+    font: 400 14px/1.4 var(--font-brand);
+    color: var(--fg-3);
+  }
+</style>
+</head>
+<body>
+
+<deck-stage width="1920" height="1080">
+
+  <!-- ========== SLIDE 1 — COVER ========== -->
+  <section class="cover" data-label="Cover">
+    <div class="blob"></div>
+    <div class="blob br"></div>
+    <div class="dots" style="opacity:0.35"></div>
+    <div class="slide-inner">
+      <div class="meta-row">
+        <span class="brand-mark">SalesAi · Partner Ecosystem</span>
+        <span>April 2026 <span class="dot">·</span> Working session</span>
+      </div>
+
+      <div>
+        <div style="font: 600 14px/1 var(--font-sans); letter-spacing: 0.28em; text-transform: uppercase; color: var(--mint-default); margin-bottom: 36px;">
+          Partner portfolio review
+        </div>
+        <h1>Where<br>partner time<br><em>should go.</em></h1>
+        <p class="sub">Five active partners scored on fit, revenue, effort, and whether they're producing today. Fifteen others retired from the active portfolio.</p>
+      </div>
+
+      <div class="presenter">
+        <div class="presenter-block">
+          <span class="presenter-name">Presented by</span>
+          <span class="presenter-role">Head of Ecosystem Revenue &amp; Partnerships</span>
+        </div>
+        <div class="presenter-block" style="text-align:right;">
+          <span class="presenter-role">01 — Portfolio scorecard</span>
+          <span class="presenter-role">7 slides · ~10 min + discussion</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SLIDE 2 — PROBLEM ========== -->
+  <section class="problem" data-label="Where we stand">
+    <div class="blob tr small"></div>
+    <div class="slide-inner">
+      <div class="meta-row">
+        <span class="brand-mark">01 / Problem</span>
+        <span>Where we stand</span>
+      </div>
+
+      <div style="margin-top: 88px;">
+        <div class="eyebrow-lg">The honest state of the portfolio</div>
+        <h2>Twenty partners on paper.<br><em>Zero</em> producing pipeline today.</h2>
+      </div>
+
+      <div class="problem-grid">
+        <div class="problem-cell">
+          <div class="n">20</div>
+          <div class="lbl">Total partners on paper</div>
+          <div class="desc">Accumulated across agencies, communities, advisor networks, and master agents.</div>
+        </div>
+        <div class="problem-cell">
+          <div class="n">5</div>
+          <div class="lbl">Active — scored this review</div>
+          <div class="desc">The five partners with enough signal to measure against fit, revenue, and effort.</div>
+        </div>
+        <div class="problem-cell">
+          <div class="n err">0</div>
+          <div class="lbl">Producing intros / pipeline</div>
+          <div class="desc">Every active partner is either not live, burned on day one, or lost to a competitor.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SLIDE 3 — ANALYSIS ========== -->
+  <section class="analysis" data-label="Scorecard">
+    <div class="blob small" style="opacity:0.7"></div>
+    <div class="slide-inner" style="padding: 56px 64px;">
+      <div class="meta-row" style="margin-bottom: 36px;">
+        <span class="brand-mark">02 / Analysis</span>
+        <span>Fit · Revenue · Effort · State</span>
+      </div>
+
+      <h2>The five, scored side&#8209;by&#8209;side.</h2>
+      <p class="lead">Same four questions for every partner. Scores roll up ICP fit, CRO accountability, and a natural intro point into a single 0–100.</p>
+
+      <div class="matrix">
+        <!-- row 1: partner header -->
+        <div class="mcell label top">Partner</div>
+        <div class="mcell partner-head a1 top">
+          <div class="partner-name">Fluence</div>
+          <div class="partner-meta">Agency · Lehi, UT</div>
+          <span class="pill green">Pilot</span>
+        </div>
+        <div class="mcell partner-head a2 top">
+          <div class="partner-name">D2D Experts</div>
+          <div class="partner-meta">Community · Sandy, UT</div>
+          <span class="pill green">Scale</span>
+        </div>
+        <div class="mcell partner-head a3 top">
+          <div class="partner-name">Big Leap</div>
+          <div class="partner-meta">Agency · Lehi, UT</div>
+          <span class="pill green">Reactivate</span>
+        </div>
+        <div class="mcell partner-head amber top">
+          <div class="partner-name">Sales Xceleration</div>
+          <div class="partner-meta">225+ advisors · Indianapolis</div>
+          <span class="pill amber">Diagnose</span>
+        </div>
+        <div class="mcell partner-head red top last-col">
+          <div class="partner-name">OTG Consulting</div>
+          <div class="partner-meta">Master agent · Frisco, TX</div>
+          <span class="pill red">Referral</span>
+        </div>
+
+        <!-- row 2: fit score -->
+        <div class="mcell label">Fit score</div>
+        <div class="mcell"><div class="score green">92</div></div>
+        <div class="mcell"><div class="score green">80</div></div>
+        <div class="mcell"><div class="score green">85</div></div>
+        <div class="mcell"><div class="score amber">70</div></div>
+        <div class="mcell last-col"><div class="score amber">40</div></div>
+
+        <!-- row 3: ARR potential -->
+        <div class="mcell label">ARR potential</div>
+        <div class="mcell">
+          <div class="arr-big green">$475K–$1.38M</div>
+          <div class="arr-sub">25–55 ICP contractors</div>
+        </div>
+        <div class="mcell">
+          <div class="arr-big green">$3.8M–$10M</div>
+          <div class="arr-sub">200–400 ICP contractors</div>
+        </div>
+        <div class="mcell">
+          <div class="arr-big green">$285K–$750K</div>
+          <div class="arr-sub">15–30 ICP contractors</div>
+        </div>
+        <div class="mcell">
+          <div class="arr-big amber">$5.7M–$15M</div>
+          <div class="arr-sub">300–600 ICP contractors</div>
+        </div>
+        <div class="mcell last-col">
+          <div class="arr-big amber">$570K–$2.5M</div>
+          <div class="arr-sub">30–100 ICP contractors</div>
+        </div>
+
+        <!-- row 4: effort -->
+        <div class="mcell label">Effort to activate</div>
+        <div class="mcell">
+          <div class="effort-bar"><span class="tick g"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span></div>
+          <div class="effort-label g">Low</div>
+          <div class="cell-text muted">Single agency team</div>
+        </div>
+        <div class="mcell">
+          <div class="effort-bar"><span class="tick a"></span><span class="tick a"></span><span class="tick a"></span><span class="tick a"></span><span class="tick"></span></div>
+          <div class="effort-label a">High</div>
+          <div class="cell-text muted">Many-to-many community</div>
+        </div>
+        <div class="mcell">
+          <div class="effort-bar"><span class="tick g"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span></div>
+          <div class="effort-label g">Low</div>
+          <div class="cell-text muted">Single agency + leverage</div>
+        </div>
+        <div class="mcell">
+          <div class="effort-bar"><span class="tick a"></span><span class="tick a"></span><span class="tick a"></span><span class="tick a"></span><span class="tick a"></span></div>
+          <div class="effort-label a">Very high</div>
+          <div class="cell-text muted">225 advisors + competitor</div>
+        </div>
+        <div class="mcell last-col">
+          <div class="effort-bar"><span class="tick r"></span><span class="tick r"></span><span class="tick r"></span><span class="tick r"></span><span class="tick r"></span></div>
+          <div class="effort-label r">Extreme</div>
+          <div class="cell-text muted">Margin structure conflict</div>
+        </div>
+
+        <!-- row 5: producing today -->
+        <div class="mcell label">Producing today</div>
+        <div class="mcell"><div class="cell-text"><span style="color:var(--error-border);">✕</span> 0 intros — not live</div></div>
+        <div class="mcell"><div class="cell-text"><span style="color:var(--error-border);">✕</span> Contact instability</div></div>
+        <div class="mcell"><div class="cell-text"><span style="color:var(--error-border);">✕</span> 0 back · 20 sent</div></div>
+        <div class="mcell"><div class="cell-text"><span style="color:var(--error-border);">✕</span> Competitor won</div></div>
+        <div class="mcell last-col"><div class="cell-text"><span style="color:var(--warning-border);">◐</span> 4 accounts</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SLIDE 4 — RECOMMENDATION ========== -->
+  <section class="rec" data-label="Recommendation">
+    <div class="blob"></div>
+    <div class="blob br"></div>
+    <div class="slide-inner">
+      <div class="meta-row">
+        <span class="brand-mark">03 / Recommendation</span>
+        <span>Focus the portfolio</span>
+      </div>
+
+      <div class="top-row" style="margin-top: 40px;">
+        <div class="eyebrow-lg">Concentrate on three. Sequence the wins.</div>
+      </div>
+
+      <h2>Top three partners carry<br>the next <em>twelve months.</em></h2>
+
+      <div class="hero">
+        <div>
+          <div class="hero-number">$1.54M<br>–$2.03M</div>
+          <div class="hero-caption">Month 12 base case · ARR</div>
+          <div class="hero-sub">81 customers across the top 3 · 17–34% capture of ICP contractors. Everything else is optionality we earn later.</div>
+        </div>
+
+        <div class="top3">
+          <div class="top3-card">
+            <div class="top3-rank">01</div>
+            <div>
+              <div class="top3-name">Fluence</div>
+              <div class="top3-sub">Month-1 leakage audit · single agency team · fit 92</div>
+            </div>
+            <div>
+              <div class="top3-arr">$475K–$1.38M</div>
+              <div class="top3-arr-sub">ARR potential</div>
+            </div>
+          </div>
+          <div class="top3-card">
+            <div class="top3-rank">02</div>
+            <div>
+              <div class="top3-name">Big Leap</div>
+              <div class="top3-sub">QBR rankings-vs-revenue · reactivate · fit 85</div>
+            </div>
+            <div>
+              <div class="top3-arr">$285K–$750K</div>
+              <div class="top3-arr-sub">ARR potential</div>
+            </div>
+          </div>
+          <div class="top3-card">
+            <div class="top3-rank">03</div>
+            <div>
+              <div class="top3-name">D2D Experts</div>
+              <div class="top3-sub">Rep close-rate coaching · community scale · fit 80</div>
+            </div>
+            <div>
+              <div class="top3-arr">$3.8M–$10M</div>
+              <div class="top3-arr-sub">ARR potential</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SLIDE 5 — 90 DAY PLAN ========== -->
+  <section class="plan" data-label="90-day plan">
+    <div class="blob tr small"></div>
+    <div class="slide-inner">
+      <div class="meta-row">
+        <span class="brand-mark">04 / Plan</span>
+        <span>Next 90 days</span>
+      </div>
+
+      <div style="margin-top: 64px;">
+        <h2>Agencies first. Use the wins to unlock scale.</h2>
+        <p class="lead">Single-team activation with Fluence and Big Leap produces the proof points and case studies we need to go wide with D2D's community.</p>
+      </div>
+
+      <div class="phases">
+        <div class="phase">
+          <div class="phase-head">
+            <div class="phase-n">30</div>
+            <div class="phase-window">Days 0–30 · Land</div>
+          </div>
+          <div class="phase-title">Ship Fluence &amp; Big Leap pilots</div>
+          <div class="phase-target">Two agencies live on a leakage-audit motion; first intros in pipeline.</div>
+          <ul class="phase-list">
+            <li>Stand up joint motion &amp; shared KPIs (client ROAS, retainer retention)</li>
+            <li>Month-1 leakage audit template + QBR rankings-vs-revenue deck</li>
+            <li>Reactivate Big Leap contacts; repair trust after UX gap</li>
+          </ul>
+          <div class="phase-footer">Owner · <strong>Ecosystem Revenue</strong></div>
+        </div>
+
+        <div class="phase">
+          <div class="phase-head">
+            <div class="phase-n">60</div>
+            <div class="phase-window">Days 31–60 · Prove</div>
+          </div>
+          <div class="phase-title">First 6–10 closed-won from agencies</div>
+          <div class="phase-target">Two case studies published; activation infrastructure productized.</div>
+          <ul class="phase-list">
+            <li>Close 6–10 ICP contractors across Fluence + Big Leap</li>
+            <li>Build activation infrastructure (intake, enablement, co-sell plays)</li>
+            <li>Diagnose Sales Xceleration — keep or retire after 60-day audit</li>
+          </ul>
+          <div class="phase-footer">Checkpoint · <strong>Day 60 review</strong></div>
+        </div>
+
+        <div class="phase">
+          <div class="phase-head">
+            <div class="phase-n">90</div>
+            <div class="phase-window">Days 61–90 · Scale</div>
+          </div>
+          <div class="phase-title">Open D2D with proof in hand</div>
+          <div class="phase-target">Community motion launched into Circle CEOs on the back of agency wins.</div>
+          <ul class="phase-list">
+            <li>Re-open D2D with stable exec contact + case-study-led launch</li>
+            <li>Target 20–30 ICP contractors through coaches &amp; Circle</li>
+            <li>Retire OTG from active portfolio; move to pure referral</li>
+          </ul>
+          <div class="phase-footer">Target · <strong>81 customers by M12</strong></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SLIDE 6 — RETIRED 15 ========== -->
+  <section class="retired" data-label="Retired 15">
+    <div class="blob small" style="opacity:0.5"></div>
+    <div class="slide-inner">
+      <div class="meta-row">
+        <span class="brand-mark">05 / Cleanup</span>
+        <span>Retired from active portfolio</span>
+      </div>
+
+      <div style="margin-top: 56px;">
+        <h2>Fifteen partners, <em>retired.</em></h2>
+        <p class="lead">Each stopped earning a seat in the active portfolio for one of three reasons. They move to referral-only or are dropped entirely.</p>
+      </div>
+
+      <div class="retired-grid">
+        <div class="retired-card">
+          <div class="count">6</div>
+          <div class="reason">No ICP fit</div>
+          <div class="desc">Selling into verticals we don't serve, or into buyers who never touch the home-services contractor motion.</div>
+          <ul>
+            <li>Off-ICP vertical</li>
+            <li>SMB-only</li>
+            <li>No contractor access</li>
+          </ul>
+        </div>
+        <div class="retired-card">
+          <div class="count">5</div>
+          <div class="reason">No producing motion</div>
+          <div class="desc">Signed but never activated. No intros, no pipeline, no shared KPI. Dormant for 2+ quarters.</div>
+          <ul>
+            <li>0 intros in 180 days</li>
+            <li>Exec contact churned</li>
+            <li>No co-sell infra</li>
+          </ul>
+        </div>
+        <div class="retired-card">
+          <div class="count">4</div>
+          <div class="reason">Structural conflict</div>
+          <div class="desc">Economics or incentives fight our motion — competitor-aligned, margin-conflicted, or already sold a rival stack to the same buyers.</div>
+          <ul>
+            <li>Competitor preference</li>
+            <li>Margin conflict</li>
+            <li>Locked to rival stack</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SLIDE 7 — CLOSE / ASKS ========== -->
+  <section class="close" data-label="What I need">
+    <div class="blob"></div>
+    <div class="blob br"></div>
+    <div class="slide-inner">
+      <div class="meta-row">
+        <span class="brand-mark">06 / The ask</span>
+        <span>Next step — this session</span>
+      </div>
+
+      <div>
+        <div style="font: 600 14px/1 var(--font-sans); letter-spacing: 0.28em; text-transform: uppercase; color: var(--mint-default); margin-bottom: 28px;">
+          Decisions I need today
+        </div>
+        <h2>Focus three.<br>Retire fifteen.<br><em>Start Monday.</em></h2>
+      </div>
+
+      <div class="asks">
+        <div class="ask">
+          <div class="n">01</div>
+          <div class="t">Approve the top three</div>
+          <div class="d">Fluence, Big Leap, D2D Experts get all new partner capacity for Q2.</div>
+        </div>
+        <div class="ask">
+          <div class="n">02</div>
+          <div class="t">Retire fifteen, publicly</div>
+          <div class="d">Move the retired list to referral-only. Free the team from reporting overhead.</div>
+        </div>
+        <div class="ask">
+          <div class="n">03</div>
+          <div class="t">Commit to Day-60 review</div>
+          <div class="d">Go/no-go on Sales Xceleration; green-light D2D launch based on agency proof.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</deck-stage>
+
+<script src="deck-stage.js"></script>
+</body>
+</html>

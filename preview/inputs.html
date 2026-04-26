@@ -1,0 +1,16 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { padding: 24px; background: var(--surface-page); display: grid; gap: 12px; max-width: 360px; }
+  label { font: var(--type-body-sm-reg); color: var(--fg-1); display: flex; flex-direction: column; gap: 4px; }
+  .input { height: 40px; border-radius: 8px; background: var(--neutral-950); border: 1px solid var(--border-default); padding: 0 12px; color: var(--fg-1); font: var(--type-body-md-reg); box-shadow: var(--shadow-xs); }
+  .input::placeholder { color: var(--fg-3); }
+  .input:focus { outline: none; border-color: var(--border-focus); }
+  .input-lg { display: flex; align-items: center; gap: 8px; height: 40px; border-radius: 8px; background: var(--neutral-950); border: 1px solid var(--border-default); padding: 0 12px; box-shadow: var(--shadow-xs); }
+  .input-lg svg { width: 16px; height: 16px; color: var(--fg-3); flex-shrink: 0; }
+  .input-lg input { flex: 1; border: none; background: transparent; color: var(--fg-1); font: var(--type-body-md-reg); outline: none; }
+</style></head>
+<body>
+  <label>Contact name<input class="input" placeholder="e.g. Elena Park"></label>
+  <label>Search<div class="input-lg"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4"/></svg><input placeholder="Search contacts, calls…"></div></label>
+</body></html>

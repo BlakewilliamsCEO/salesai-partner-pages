@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Partner Portfolio Scorecard</title>
+<style>
+  * {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  :root {
+    /* Dark theme palette */
+    --bg-page: #1A1A1A;
+    --bg-surface: #212121;
+    --bg-surface-2: #2A2A2A;
+    --bg-surface-3: #262626;
+    --bg-hero-green: #1F2E26;
+    --bg-hero-amber: #2E2820;
+
+    --border: #333333;
+    --border-strong: #3D3D3D;
+
+    --text-primary: #E8E6E1;
+    --text-secondary: #A8A6A0;
+    --text-tertiary: #7A7874;
+
+    --accent-green: #4FBF8A;
+    --accent-green-bg: #1F3329;
+    --accent-green-text: #8FD9B0;
+
+    --accent-amber: #E8A33D;
+    --accent-amber-bg: #33281A;
+    --accent-amber-text: #F0C179;
+
+    --accent-red: #E66666;
+    --accent-red-bg: #3D1F1F;
+    --accent-red-text: #F28D8D;
+
+    --accent-blue: #7AB3E8;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg-page);
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .wrap {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 48px 32px;
+  }
+
+  /* Header */
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-bottom: 8px;
+  }
+  h1 {
+    margin: 0 0 10px;
+    font-size: 28px;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    color: var(--text-primary);
+  }
+  .deck {
+    margin: 0;
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    max-width: 720px;
+  }
+
+  /* Top metrics */
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 32px 0 28px;
+  }
+  .metric {
+    background: var(--bg-surface);
+    padding: 18px 20px;
+  }
+  .metric-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-bottom: 8px;
+  }
+  .metric-value {
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    color: var(--text-primary);
+  }
+  .metric-value.green { color: var(--accent-green); }
+  .metric-sub {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+  }
+
+  /* Scorecard */
+  .scorecard {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--bg-surface);
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 230px repeat(5, minmax(0, 1fr));
+    border-bottom: 1px solid var(--border);
+  }
+  .row:last-child { border-bottom: none; }
+
+  .cell {
+    padding: 16px;
+    border-left: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .cell.label {
+    border-left: none;
+    justify-content: flex-start;
+    text-align: left;
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+
+  /* Header row (partners) */
+  .header-row {
+    background: var(--bg-surface-2);
+  }
+  .partner-cell {
+    padding: 18px 14px 16px;
+    border-left: 1px solid var(--border);
+    background: var(--bg-surface-2);
+    position: relative;
+  }
+  .partner-accent {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .partner-accent.green { background: var(--accent-green); }
+  .partner-accent.amber { background: var(--accent-amber); }
+  .partner-accent.red { background: var(--accent-red); }
+
+  .partner-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 3px;
+    flex-wrap: wrap;
+  }
+  .partner-name {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+  }
+  .partner-sub {
+    font-size: 11px;
+    color: var(--text-secondary);
+    line-height: 1.4;
+  }
+
+  /* Verdict pill */
+  .pill {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: 3px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+  .pill.green { background: var(--accent-green-bg); color: var(--accent-green-text); }
+  .pill.amber { background: var(--accent-amber-bg); color: var(--accent-amber-text); }
+  .pill.red { background: var(--accent-red-bg); color: var(--accent-red-text); }
+
+  /* Section divider */
+  .section {
+    grid-column: 1 / -1;
+    padding: 12px 16px;
+    background: var(--bg-surface-3);
+    border-bottom: 1px solid var(--border);
+  }
+  .section-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+  }
+
+  /* Hero rows */
+  .row.hero-green { background: var(--bg-hero-green); }
+  .row.hero-amber { background: var(--bg-hero-amber); }
+  .row.hero-green .cell.label,
+  .row.hero-amber .cell.label {
+    color: var(--text-primary);
+    font-weight: 500;
+    font-size: 13px;
+  }
+
+  /* Badges */
+  .badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 11px;
+    border-radius: 3px;
+    letter-spacing: 0.01em;
+  }
+  .badge.strong { background: var(--accent-green-bg); color: var(--accent-green-text); }
+  .badge.moderate { background: var(--accent-amber-bg); color: var(--accent-amber-text); }
+  .badge.weak { background: var(--accent-red-bg); color: var(--accent-red-text); }
+
+  /* Check and X icons */
+  .check-circle, .x-circle {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+  }
+
+  /* Numbers */
+  .num {
+    font-size: 15px;
+    color: var(--text-primary);
+  }
+  .num.emphasis {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--accent-blue);
+  }
+  .fit-score {
+    font-size: 28px;
+    font-weight: 500;
+    letter-spacing: -0.025em;
+    line-height: 1;
+  }
+  .fit-score.green { color: var(--accent-green); }
+  .fit-score.amber { color: var(--accent-amber); }
+
+  /* ARR */
+  .arr-primary {
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+  .arr-primary.green { color: var(--accent-green); }
+  .arr-primary.amber { color: var(--accent-amber); }
+  .arr-sub {
+    font-size: 11px;
+    color: var(--text-tertiary);
+    margin-top: 4px;
+  }
+
+  /* Motion shape */
+  .motion {
+    font-size: 12px;
+    color: var(--text-primary);
+    line-height: 1.5;
+  }
+  .motion-sub {
+    color: var(--text-tertiary);
+  }
+
+  /* Effort scale */
+  .effort-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .effort-bar {
+    display: inline-flex;
+    gap: 3px;
+    margin-bottom: 9px;
+  }
+  .tick {
+    width: 14px;
+    height: 5px;
+    border-radius: 2px;
+    background: #2F2F2F;
+  }
+  .tick.green { background: var(--accent-green); }
+  .tick.amber { background: var(--accent-amber); }
+  .tick.red { background: var(--accent-red); }
+  .effort-label {
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .effort-label.green { color: var(--accent-green); }
+  .effort-label.amber { color: var(--accent-amber); }
+  .effort-label.red { color: var(--accent-red); }
+  .effort-desc {
+    font-size: 11px;
+    color: var(--text-tertiary);
+    margin-top: 4px;
+    line-height: 1.4;
+    max-width: 150px;
+  }
+
+  /* Small text */
+  .sm {
+    font-size: 12px;
+    color: var(--text-primary);
+  }
+  .sm-muted {
+    font-size: 11px;
+    color: var(--text-tertiary);
+    margin-top: 4px;
+  }
+  .sm-tert {
+    font-size: 12px;
+    color: var(--text-tertiary);
+  }
+
+  /* Intro point cell */
+  .intro-text {
+    font-size: 12px;
+    color: var(--text-primary);
+    line-height: 1.4;
+    font-weight: 500;
+    margin-top: 6px;
+  }
+  .intro-text.muted {
+    color: var(--text-tertiary);
+    font-weight: 400;
+  }
+
+  /* Footer legend */
+  .legend {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-top: 18px;
+    padding: 0 4px;
+    font-size: 11px;
+    color: var(--text-tertiary);
+    line-height: 1.5;
+  }
+  .legend-group {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .legend-note {
+    text-align: right;
+    max-width: 520px;
+    color: var(--text-tertiary);
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="eyebrow">Partner portfolio · April 2026</div>
+  <h1>Where partner time should go</h1>
+  <p class="deck">Five active partners scored against ICP fit, revenue potential, activation effort, and current producing state. Fifteen others retired from the active portfolio.</p>
+
+  <!-- METRICS -->
+  <div class="metrics">
+    <div class="metric">
+      <div class="metric-label">Top 3 ARR TAM</div>
+      <div class="metric-value green">$4.56M–$12.12M</div>
+      <div class="metric-sub">on $1.5M+ contractor tier</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Month 12 base case</div>
+      <div class="metric-value">$1.54M–$2.03M</div>
+      <div class="metric-sub">81 customers · 17–34% capture</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Best ARR-to-effort</div>
+      <div class="metric-value">Fluence · Big Leap</div>
+      <div class="metric-sub">single-team activation</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Sequence</div>
+      <div class="metric-value">Agencies → D2D</div>
+      <div class="metric-sub">use wins to unlock scale</div>
+    </div>
+  </div>
+
+  <!-- SCORECARD -->
+  <div class="scorecard">
+
+    <!-- Partner headers -->
+    <div class="row header-row">
+      <div class="cell label" style="background: var(--bg-surface-2);"></div>
+
+      <div class="partner-cell">
+        <div class="partner-accent green"></div>
+        <div class="partner-title">
+          <span class="partner-name">Fluence</span>
+          <span class="pill green">Pilot</span>
+        </div>
+        <div class="partner-sub">Agency · Lehi, UT</div>
+      </div>
+
+      <div class="partner-cell">
+        <div class="partner-accent green"></div>
+        <div class="partner-title">
+          <span class="partner-name">D2D Experts</span>
+          <span class="pill green">Scale</span>
+        </div>
+        <div class="partner-sub">Community · Sandy, UT</div>
+      </div>
+
+      <div class="partner-cell">
+        <div class="partner-accent green"></div>
+        <div class="partner-title">
+          <span class="partner-name">Big Leap</span>
+          <span class="pill green">Reactivate</span>
+        </div>
+        <div class="partner-sub">Agency · Lehi, UT</div>
+      </div>
+
+      <div class="partner-cell">
+        <div class="partner-accent amber"></div>
+        <div class="partner-title">
+          <span class="partner-name">Sales Xceleration</span>
+          <span class="pill amber">Diagnose</span>
+        </div>
+        <div class="partner-sub">225+ advisors · Indianapolis</div>
+      </div>
+
+      <div class="partner-cell">
+        <div class="partner-accent red"></div>
+        <div class="partner-title">
+          <span class="partner-name">OTG Consulting</span>
+          <span class="pill red">Referral</span>
+        </div>
+        <div class="partner-sub">Master agent · Frisco, TX</div>
+      </div>
+    </div>
+
+    <!-- SECTION: FIT -->
+    <div class="row">
+      <div class="section"><div class="section-label">Fit</div></div>
+    </div>
+
+    <!-- ICP fit -->
+    <div class="row">
+      <div class="cell label">ICP fit — home services</div>
+      <div class="cell"><svg class="check-circle" viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="#1F3329"/><path d="M6 10.5l2.5 2.5L14 7.5" stroke="#4FBF8A" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="cell"><svg class="check-circle" viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="#1F3329"/><path d="M6 10.5l2.5 2.5L14 7.5" stroke="#4FBF8A" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="cell"><svg class="check-circle" viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="#1F3329"/><path d="M6 10.5l2.5 2.5L14 7.5" stroke="#4FBF8A" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="cell sm-tert">Multi-vertical</div>
+      <div class="cell sm-tert">Unclear</div>
+    </div>
+
+    <!-- CRO -->
+    <div class="row">
+      <div class="cell label">CRO accountability</div>
+      <div class="cell"><span class="badge strong">Strong</span></div>
+      <div class="cell"><span class="badge moderate">Moderate</span></div>
+      <div class="cell"><span class="badge moderate">Moderate</span></div>
+      <div class="cell"><span class="badge strong">Strong</span></div>
+      <div class="cell"><span class="badge weak">Weak</span></div>
+    </div>
+
+    <!-- Natural intro -->
+    <div class="row">
+      <div class="cell label">Natural intro point</div>
+      <div class="cell">
+        <div>
+          <svg width="16" height="16" viewBox="0 0 16 16" style="display:block; margin:0 auto;"><path d="M3 8.5l3 3 7-7" stroke="#4FBF8A" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div class="intro-text">Month-1 leakage audit</div>
+        </div>
+      </div>
+      <div class="cell">
+        <div>
+          <svg width="16" height="16" viewBox="0 0 16 16" style="display:block; margin:0 auto;"><path d="M3 8.5l3 3 7-7" stroke="#4FBF8A" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div class="intro-text">Rep close-rate coaching</div>
+        </div>
+      </div>
+      <div class="cell">
+        <div>
+          <svg width="16" height="16" viewBox="0 0 16 16" style="display:block; margin:0 auto;"><path d="M3 8.5l3 3 7-7" stroke="#4FBF8A" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div class="intro-text">QBR rankings-vs-revenue</div>
+        </div>
+      </div>
+      <div class="cell">
+        <div>
+          <svg width="16" height="16" viewBox="0 0 16 16" style="display:block; margin:0 auto;"><path d="M3 8.5l3 3 7-7" stroke="#4FBF8A" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div class="intro-text">Phase-1 sales diagnostic</div>
+        </div>
+      </div>
+      <div class="cell">
+        <div>
+          <svg width="16" height="16" viewBox="0 0 16 16" style="display:block; margin:0 auto;"><path d="M4 4l8 8M12 4l-8 8" stroke="#E66666" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg>
+          <div class="intro-text muted">Enterprise CCaaS only</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Partner KPI -->
+    <div class="row">
+      <div class="cell label">Partner KPI we improve</div>
+      <div class="cell sm">Client ROAS</div>
+      <div class="cell sm">Close rate · rev/rep</div>
+      <div class="cell sm">Retainer retention</div>
+      <div class="cell sm">Year-1 sales lift</div>
+      <div class="cell sm-tert">Enterprise TCV only</div>
+    </div>
+
+    <!-- Fit score -->
+    <div class="row">
+      <div class="cell label">Fit score</div>
+      <div class="cell"><div class="fit-score green">92</div></div>
+      <div class="cell"><div class="fit-score green">80</div></div>
+      <div class="cell"><div class="fit-score green">85</div></div>
+      <div class="cell"><div class="fit-score amber">70</div></div>
+      <div class="cell"><div class="fit-score amber">40</div></div>
+    </div>
+
+    <!-- SECTION: REVENUE -->
+    <div class="row">
+      <div class="section"><div class="section-label">Revenue opportunity</div></div>
+    </div>
+
+    <!-- HS contractors -->
+    <div class="row">
+      <div class="cell label">HS contractors in book</div>
+      <div class="cell num">35–70</div>
+      <div class="cell num">250–500</div>
+      <div class="cell num">30–45</div>
+      <div class="cell num">400–800</div>
+      <div class="cell num">50–150</div>
+    </div>
+
+    <!-- 1.5M+ -->
+    <div class="row">
+      <div class="cell label">$1.5M+ contractors (ICP)</div>
+      <div class="cell num emphasis">25–55</div>
+      <div class="cell num emphasis">200–400</div>
+      <div class="cell num emphasis">15–30</div>
+      <div class="cell num emphasis">300–600</div>
+      <div class="cell num emphasis">30–100</div>
+    </div>
+
+    <!-- ARR (hero row) -->
+    <div class="row hero-green">
+      <div class="cell label">ARR potential</div>
+      <div class="cell">
+        <div>
+          <div class="arr-primary green">$475K–$1.38M</div>
+          <div class="arr-sub">$40K–$115K MRR</div>
+        </div>
+      </div>
+      <div class="cell">
+        <div>
+          <div class="arr-primary green">$3.8M–$10M</div>
+          <div class="arr-sub">$317K–$833K MRR</div>
+        </div>
+      </div>
+      <div class="cell">
+        <div>
+          <div class="arr-primary green">$285K–$750K</div>
+          <div class="arr-sub">$24K–$63K MRR</div>
+        </div>
+      </div>
+      <div class="cell">
+        <div>
+          <div class="arr-primary amber">$5.7M–$15M</div>
+          <div class="arr-sub">$475K–$1.25M MRR</div>
+        </div>
+      </div>
+      <div class="cell">
+        <div>
+          <div class="arr-primary amber">$570K–$2.5M</div>
+          <div class="arr-sub">$48K–$208K MRR</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION: ACTIVATION -->
+    <div class="row">
+      <div class="section"><div class="section-label">Activation economics</div></div>
+    </div>
+
+    <!-- Motion shape -->
+    <div class="row">
+      <div class="cell label">Motion shape</div>
+      <div class="cell motion"><div>Single agency team<br/><span class="motion-sub">~25–50 people</span></div></div>
+      <div class="cell motion"><div>Community of hundreds<br/><span class="motion-sub">coaches, Circle CEOs</span></div></div>
+      <div class="cell motion"><div>Single agency team<br/><span class="motion-sub">~80 people</span></div></div>
+      <div class="cell motion"><div>225+ fractional advisors<br/><span class="motion-sub">independent operators</span></div></div>
+      <div class="cell motion"><div>Master agent<br/><span class="motion-sub">vendor-margin conflict</span></div></div>
+    </div>
+
+    <!-- Effort (hero row) -->
+    <div class="row hero-amber">
+      <div class="cell label">Effort to activate</div>
+      <div class="cell">
+        <div class="effort-wrap">
+          <div class="effort-bar">
+            <span class="tick green"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span>
+          </div>
+          <div class="effort-label green">Low</div>
+          <div class="effort-desc">Single activation motion</div>
+        </div>
+      </div>
+      <div class="cell">
+        <div class="effort-wrap">
+          <div class="effort-bar">
+            <span class="tick amber"></span><span class="tick amber"></span><span class="tick amber"></span><span class="tick amber"></span><span class="tick"></span>
+          </div>
+          <div class="effort-label amber">High</div>
+          <div class="effort-desc">Many-to-many through community</div>
+        </div>
+      </div>
+      <div class="cell">
+        <div class="effort-wrap">
+          <div class="effort-bar">
+            <span class="tick green"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span>
+          </div>
+          <div class="effort-label green">Low</div>
+          <div class="effort-desc">Single agency + leverage</div>
+        </div>
+      </div>
+      <div class="cell">
+        <div class="effort-wrap">
+          <div class="effort-bar">
+            <span class="tick amber"></span><span class="tick amber"></span><span class="tick amber"></span><span class="tick amber"></span><span class="tick amber"></span>
+          </div>
+          <div class="effort-label amber">Very high</div>
+          <div class="effort-desc">225 advisors + competitor</div>
+        </div>
+      </div>
+      <div class="cell">
+        <div class="effort-wrap">
+          <div class="effort-bar">
+            <span class="tick red"></span><span class="tick red"></span><span class="tick red"></span><span class="tick red"></span><span class="tick red"></span>
+          </div>
+          <div class="effort-label red">Extreme</div>
+          <div class="effort-desc">Fighting margin structure</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ARR-to-effort -->
+    <div class="row">
+      <div class="cell label">ARR-to-effort ratio</div>
+      <div class="cell"><span class="badge strong">Highest</span></div>
+      <div class="cell"><span class="badge strong">High</span></div>
+      <div class="cell"><span class="badge strong">High</span></div>
+      <div class="cell"><span class="badge moderate">Medium</span></div>
+      <div class="cell"><span class="badge weak">Low</span></div>
+    </div>
+
+    <!-- SECTION: CURRENT STATE -->
+    <div class="row">
+      <div class="section"><div class="section-label">Current state</div></div>
+    </div>
+
+    <!-- Producing today -->
+    <div class="row">
+      <div class="cell label">Producing today</div>
+      <div class="cell">
+        <div>
+          <svg width="16" height="16" viewBox="0 0 16 16" style="display:block; margin:0 auto;"><path d="M4 4l8 8M12 4l-8 8" stroke="#E66666" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg>
+          <div class="sm-muted">0 intros</div>
+        </div>
+      </div>
+      <div class="cell">
+        <div>
+          <svg width="16" height="16" viewBox="0 0 16 16" style="display:block; margin:0 auto;"><path d="M4 4l8 8M12 4l-8 8" stroke="#E66666" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg>
+          <div class="sm-muted">Contact instability</div>
+        </div>
+      </div>
+      <div class="cell">
+        <div>
+          <svg width="16" height="16" viewBox="0 0 16 16" style="display:block; margin:0 auto;"><path d="M4 4l8 8M12 4l-8 8" stroke="#E66666" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg>
+          <div class="sm-muted">0 back · 20 sent</div>
+        </div>
+      </div>
+      <div class="cell">
+        <div>
+          <svg width="16" height="16" viewBox="0 0 16 16" style="display:block; margin:0 auto;"><path d="M4 4l8 8M12 4l-8 8" stroke="#E66666" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg>
+          <div class="sm-muted">Competitor won</div>
+        </div>
+      </div>
+      <div class="cell"><span class="badge moderate">4 accounts</span></div>
+    </div>
+
+    <!-- Activation infra -->
+    <div class="row">
+      <div class="cell label">Activation infrastructure</div>
+      <div class="cell"><svg class="x-circle" viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="#3D1F1F"/><path d="M6 6l8 8M14 6l-8 8" stroke="#E66666" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+      <div class="cell"><svg class="x-circle" viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="#3D1F1F"/><path d="M6 6l8 8M14 6l-8 8" stroke="#E66666" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+      <div class="cell"><svg class="x-circle" viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="#3D1F1F"/><path d="M6 6l8 8M14 6l-8 8" stroke="#E66666" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+      <div class="cell"><svg class="x-circle" viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="#3D1F1F"/><path d="M6 6l8 8M14 6l-8 8" stroke="#E66666" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+      <div class="cell"><svg class="x-circle" viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="#3D1F1F"/><path d="M6 6l8 8M14 6l-8 8" stroke="#E66666" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    </div>
+
+    <!-- Trust rebuild -->
+    <div class="row">
+      <div class="cell label">Trust rebuild needed</div>
+      <div class="cell sm">Likely — not live</div>
+      <div class="cell sm">Yes — burned day 1</div>
+      <div class="cell sm">Yes — own UX</div>
+      <div class="cell sm">Yes — + competitor</div>
+      <div class="cell sm">Yes — customer UX</div>
+    </div>
+
+  </div>
+
+  <!-- Legend -->
+  <div class="legend">
+    <div class="legend-group">
+      <div class="legend-item">
+        <svg width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="7" r="6" fill="#1F3329"/><path d="M4 7.5l2 2 5-5" stroke="#4FBF8A" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Present</span>
+      </div>
+      <div class="legend-item">
+        <svg width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="7" r="6" fill="#3D1F1F"/><path d="M4 4l6 6M10 4l-6 6" stroke="#E66666" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
+        <span>Missing / blocker</span>
+      </div>
+    </div>
+    <div class="legend-note">
+      ARR potential = $1.5M+ contractors × $19K min / $25K target · Effort = humans to change × economic headwinds
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

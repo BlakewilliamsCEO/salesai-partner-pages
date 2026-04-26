@@ -1,0 +1,25 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { padding: 20px; background: var(--surface-page); display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+  .av { border-radius: 999px; display: grid; place-items: center; font-family: var(--font-sans); font-weight: 600; color: var(--fg-1); background: var(--neutral-800); border: 1px solid var(--border-default); overflow: hidden; }
+  .av.brand { background: var(--mint-80); color: var(--mint-default); border-color: var(--mint-240); }
+  .av.purple { background: rgba(138,56,245,.12); color: #BD8AFF; border-color: rgba(138,56,245,.3); }
+  .ring { position: relative; }
+  .ring::after { content:""; position:absolute; inset:-3px; border-radius:999px; border:1px solid var(--mint-default); }
+  .group { display: flex; }
+  .group .av { margin-left: -8px; border: 2px solid var(--neutral-1000); box-sizing: content-box; }
+  .group .av:first-child { margin-left: 0; }
+</style></head>
+<body>
+  <div class="av" style="width:24px;height:24px;font-size:10px;">EP</div>
+  <div class="av brand" style="width:32px;height:32px;font-size:12px;">JL</div>
+  <div class="av" style="width:40px;height:40px;font-size:14px;">MR</div>
+  <div class="av ring purple" style="width:48px;height:48px;font-size:16px;">AI</div>
+  <div class="group">
+    <div class="av" style="width:28px;height:28px;font-size:11px;">EP</div>
+    <div class="av brand" style="width:28px;height:28px;font-size:11px;">JL</div>
+    <div class="av" style="width:28px;height:28px;font-size:11px;">MR</div>
+    <div class="av" style="width:28px;height:28px;font-size:11px; color: var(--fg-2);">+4</div>
+  </div>
+</body></html>

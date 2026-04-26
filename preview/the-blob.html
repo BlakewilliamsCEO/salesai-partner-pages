@@ -1,0 +1,18 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { padding: 0; margin: 0; background: var(--surface-page); height: 340px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+  body::before { content: ""; position: absolute; inset: -50px auto auto -50px; width: 500px; height: 500px; background: radial-gradient(50% 50% at 30% 30%, rgba(62,222,111,0.28), rgba(62,222,111,0.10) 45%, transparent 75%); pointer-events: none; mix-blend-mode: hard-light; }
+  .t { position: relative; z-index: 1; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .burst { width: 72px; height: 72px; }
+  .burst img { width: 100%; height: 100%; }
+  .wm { font: 700 44px/1 var(--font-sans); color: var(--fg-1); letter-spacing: -0.01em; }
+  .tag { font: 700 14px/1 var(--font-sans); color: #9EFFBA; }
+</style></head>
+<body>
+  <div class="t">
+    <div class="burst"><img src="../assets/brand/mint-burst.svg" alt=""></div>
+    <div class="wm">Mint</div>
+    <div class="tag">Fresh. Fun. Functional.</div>
+  </div>
+</body></html>

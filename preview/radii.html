@@ -1,0 +1,17 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { padding: 20px; background: var(--surface-page); display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+  .sw { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .sq { width: 60px; height: 60px; background: var(--neutral-800); border: 1px solid var(--border-default); }
+  .label { font: var(--type-body-xs); color: var(--fg-2); }
+</style></head>
+<body>
+  <div class="sw"><div class="sq" style="border-radius: 2px;"></div><span class="label">xs · 2</span></div>
+  <div class="sw"><div class="sq" style="border-radius: 8px;"></div><span class="label">md · 8</span></div>
+  <div class="sw"><div class="sq" style="border-radius: 12px;"></div><span class="label">lg · 12</span></div>
+  <div class="sw"><div class="sq" style="border-radius: 16px;"></div><span class="label">xl · 16</span></div>
+  <div class="sw"><div class="sq" style="border-radius: 999px;"></div><span class="label">pill</span></div>
+  <div style="flex:1;"></div>
+  <div style="color:var(--fg-2); font: var(--type-body-sm-reg); max-width: 220px;">Radii: 2 (section dividers) · 8 (buttons/metrics) · 12 (panels/inputs) · 16 (big cards) · pill (chips, toggles).</div>
+</body></html>

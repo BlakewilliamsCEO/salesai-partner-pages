@@ -1,0 +1,20 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { padding: 40px; background: var(--surface-page); display: grid; gap: 20px; justify-items: start; }
+  .mark { display: flex; align-items: center; gap: 16px; padding: 20px 24px; border-radius: 12px; background: var(--surface-raised); border: 1px solid var(--border-subtle); }
+  .mark img { height: 28px; display: block; }
+  .mark-inverse { background: var(--mint-default); }
+  .mark-inverse img { filter: none; }
+  .caption { color: var(--fg-3); font: var(--type-body-sm-reg); margin-top: 4px; }
+</style></head>
+<body>
+  <div class="mark"><img src="../assets/logos/salesai-lockup.svg" alt="SalesAi"></div>
+  <div class="caption">Lockup — logomark in <b style="color:var(--mint-default)">mint #3EDE6F</b>, wordmark in <b style="color:var(--fg-1)">off-white #F5F5F7</b>. Use on any dark surface.</div>
+
+  <div class="mark"><img src="../assets/logos/salesai-logomark.svg" style="color:var(--mint-default); height: 32px; width: 32px;" alt=""></div>
+  <div class="caption">Logomark — standalone, for collapsed sidebar, favicon, loading states. SVG uses <code style="font-family:var(--font-mono);">currentColor</code>.</div>
+
+  <div class="mark"><img src="../assets/logos/salesai-icon.png" alt="SalesAi icon" style="height: 48px;"></div>
+  <div class="caption">Icon (PNG) — for app icons, email signatures, external docs. 72×72 source.</div>
+</body></html>

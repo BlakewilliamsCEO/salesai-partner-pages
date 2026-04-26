@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Seller Enablement — Sales Conversation Guide</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+  html, body { background: #000; }
+
+  deck-stage > section {
+    background: var(--neutral-1000);
+    color: var(--fg-1);
+    overflow: hidden;
+    position: relative;
+    font-family: var(--font-sans);
+  }
+
+  .blob {
+    position: absolute; pointer-events: none; z-index: 0;
+    width: 1400px; height: 1400px; left: -300px; top: -400px;
+    background: radial-gradient(45% 45% at 35% 35%,
+                rgba(62, 222, 111, 0.32) 0%,
+                rgba(62, 222, 111, 0.14) 35%,
+                rgba(62, 222, 111, 0.04) 60%,
+                transparent 75%);
+    mix-blend-mode: screen; filter: blur(20px);
+  }
+  .blob.br { left: auto; right: -400px; top: auto; bottom: -500px; width: 1600px; height: 1600px; }
+  .blob.tr { left: auto; right: -300px; top: -400px; }
+  .blob.small { width: 900px; height: 900px;
+    background: radial-gradient(45% 45% at 35% 35%,
+                rgba(62, 222, 111, 0.22) 0%,
+                rgba(62, 222, 111, 0.10) 35%, transparent 70%); }
+
+  .dots { position: absolute; inset: 0;
+    background-image: radial-gradient(circle, #272729 1px, transparent 1.2px);
+    background-size: 28px 28px; opacity: 0.4; z-index: 0; pointer-events: none; }
+
+  .slide-inner {
+    position: relative; z-index: 2;
+    padding: 72px 88px; height: 100%;
+    box-sizing: border-box;
+    display: flex; flex-direction: column;
+  }
+
+  .meta-row {
+    display: flex; justify-content: space-between; align-items: center;
+    font: 600 14px/1 var(--font-sans);
+    color: var(--fg-3);
+    letter-spacing: 0.14em; text-transform: uppercase;
+  }
+  .brand-mark {
+    display: inline-flex; align-items: center; gap: 10px;
+    color: var(--fg-2);
+    font: 600 14px/1 var(--font-sans);
+    letter-spacing: 0.14em; text-transform: uppercase;
+  }
+  .brand-mark::before {
+    content: ""; width: 10px; height: 10px;
+    border-radius: 50%; background: var(--mint-default);
+    box-shadow: 0 0 20px var(--mint-default);
+  }
+
+  .eyebrow-lg {
+    font: 600 16px/1 var(--font-sans);
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--mint-default);
+  }
+
+  /* ===== COVER ===== */
+  .cover .slide-inner { justify-content: space-between; }
+  .cover h1 {
+    margin: 0;
+    font: 900 184px/0.86 var(--font-brand);
+    letter-spacing: -0.035em;
+  }
+  .cover h1 em { font-style: normal; color: var(--mint-default); }
+  .cover .sub {
+    max-width: 980px; margin-top: 44px;
+    font: 400 28px/1.35 var(--font-brand);
+    color: var(--fg-2); text-wrap: pretty;
+  }
+  .cover-foot {
+    display: flex; justify-content: space-between; align-items: flex-end; gap: 48px;
+  }
+  .cover-foot .block {
+    display: flex; flex-direction: column; gap: 6px;
+    font: 500 16px/1.3 var(--font-sans); color: var(--fg-3);
+  }
+  .cover-foot .block strong { color: var(--fg-1); font-weight: 600; font-size: 18px; }
+
+  /* ===== WHO WE ARE ===== */
+  .who h2 {
+    margin: 24px 0 28px;
+    font: 900 84px/0.9 var(--font-brand);
+    letter-spacing: -0.02em;
+  }
+  .who h2 em { font-style: normal; color: var(--mint-default); }
+  .who .pos {
+    background: var(--neutral-900);
+    border: 1px solid var(--border-subtle);
+    border-left: 3px solid var(--mint-default);
+    border-radius: var(--radius-lg);
+    padding: 36px 40px;
+    font: 400 26px/1.45 var(--font-brand);
+    color: var(--fg-1);
+    max-width: 1500px;
+    margin-bottom: 36px;
+  }
+  .who .pos .lbl {
+    display: block;
+    font: 600 13px/1 var(--font-sans);
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--mint-default); margin-bottom: 14px;
+  }
+  .who-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 20px; flex: 1;
+  }
+  .who-card {
+    background: var(--neutral-900);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 28px 28px 28px;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .who-card .lbl {
+    font: 600 13px/1 var(--font-sans);
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--fg-3);
+  }
+  .who-card .v {
+    font: 700 26px/1.2 var(--font-brand);
+    color: var(--fg-1); letter-spacing: -0.01em;
+    text-wrap: pretty;
+  }
+  .who-card .v em {
+    font-style: normal; color: var(--mint-default);
+  }
+
+  /* ===== DIFFERENTIATOR (big pull-quote) ===== */
+  .diff .slide-inner { justify-content: center; }
+  .diff .quote {
+    font: 900 104px/0.95 var(--font-brand);
+    letter-spacing: -0.03em;
+    max-width: 1620px;
+    margin-top: 32px;
+  }
+  .diff .quote .ac { color: var(--mint-default); }
+  .diff .attrib {
+    margin-top: 52px;
+    font: 500 18px/1.4 var(--font-sans);
+    letter-spacing: 0.04em; text-transform: uppercase;
+    color: var(--fg-3);
+    max-width: 1400px;
+  }
+  .diff .owned {
+    margin-top: 44px;
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .diff .owned .tile {
+    padding: 24px 26px;
+    background: var(--neutral-900);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+  }
+  .diff .owned .k {
+    font: 600 12px/1 var(--font-sans);
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--fg-3); margin-bottom: 10px;
+  }
+  .diff .owned .v {
+    font: 700 22px/1.2 var(--font-brand);
+    color: var(--fg-1); letter-spacing: -0.01em;
+  }
+  .diff .owned .v em { font-style: normal; color: var(--mint-default); }
+
+  /* ===== SAY THIS / NOT THIS ===== */
+  .lang h2 {
+    margin: 24px 0 16px;
+    font: 900 80px/0.9 var(--font-brand);
+    letter-spacing: -0.02em;
+  }
+  .lang .lead {
+    margin: 0 0 32px;
+    font: 400 22px/1.4 var(--font-brand);
+    color: var(--fg-2); max-width: 1200px;
+  }
+  .lang-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px; flex: 1;
+  }
+  .lang-col {
+    background: var(--neutral-900);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 28px 30px;
+    display: flex; flex-direction: column;
+  }
+  .lang-col.say { border-left: 3px solid var(--mint-default); }
+  .lang-col.not { border-left: 3px solid var(--error); }
+  .lang-col .hdr {
+    display: flex; align-items: baseline; gap: 14px;
+    padding-bottom: 18px; margin-bottom: 20px;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .lang-col .hdr .tag {
+    font: 600 12px/1 var(--font-sans);
+    letter-spacing: 0.22em; text-transform: uppercase;
+  }
+  .lang-col.say .hdr .tag { color: var(--mint-default); }
+  .lang-col.not .hdr .tag { color: var(--error-border); }
+  .lang-col .hdr .ttl {
+    font: 700 28px/1 var(--font-brand);
+    letter-spacing: -0.015em;
+    color: var(--fg-1);
+  }
+  .lang-col ul {
+    list-style: none; padding: 0; margin: 0;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .lang-col li {
+    font: 500 18px/1.35 var(--font-sans);
+    color: var(--fg-1);
+    padding-left: 22px; position: relative;
+  }
+  .lang-col.say li::before {
+    content: ""; position: absolute; left: 0; top: 10px;
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--mint-default);
+  }
+  .lang-col.not li {
+    color: var(--fg-3);
+    text-decoration: line-through;
+    text-decoration-color: rgba(228, 88, 100, 0.55);
+    text-decoration-thickness: 2px;
+  }
+  .lang-col.not li::before {
+    content: ""; position: absolute; left: 0; top: 11px;
+    width: 10px; height: 2px;
+    background: var(--error);
+  }
+
+  /* ===== TERMINOLOGY BY SIZE ===== */
+  .sizing h2 {
+    margin: 24px 0 16px;
+    font: 900 72px/0.9 var(--font-brand);
+    letter-spacing: -0.02em;
+  }
+  .sizing .lead {
+    margin: 0 0 32px;
+    font: 400 22px/1.4 var(--font-brand);
+    color: var(--fg-2); max-width: 1200px;
+  }
+  .sizing-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 24px; flex: 1;
+  }
+  .size-card {
+    background: var(--neutral-900);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 36px 40px;
+    display: flex; flex-direction: column; gap: 20px;
+    position: relative; overflow: hidden;
+  }
+  .size-card .range {
+    font: 900 72px/0.88 var(--font-brand);
+    color: var(--mint-default);
+    letter-spacing: -0.025em;
+  }
+  .size-card .who-is {
+    font: 600 16px/1.3 var(--font-sans);
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--fg-3);
+  }
+  .size-card .use {
+    font: 700 34px/1.15 var(--font-brand);
+    color: var(--fg-1);
+    letter-spacing: -0.01em;
+    padding: 20px 0;
+    border-top: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .size-card .use .ac { color: var(--mint-default); }
+  .size-card .why {
+    font: 400 17px/1.45 var(--font-brand);
+    color: var(--fg-2);
+  }
+
+  /* ===== OBJECTIONS FLIP CARDS ===== */
+  .obj h2 {
+    margin: 24px 0 12px;
+    font: 900 80px/0.9 var(--font-brand);
+    letter-spacing: -0.02em;
+  }
+  .obj .lead {
+    margin: 0 0 28px;
+    font: 400 20px/1.4 var(--font-brand);
+    color: var(--fg-2); max-width: 1300px;
+  }
+  .obj .hint {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: rgba(62,222,111,0.08);
+    border: 1px solid rgba(62,222,111,0.24);
+    color: var(--mint-default);
+    font: 600 13px/1 var(--font-sans);
+    letter-spacing: 0.14em; text-transform: uppercase;
+    align-self: flex-start;
+    margin-bottom: 28px;
+  }
+  .obj .hint::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--mint-default); }
+  .flip-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 20px; flex: 1;
+  }
+  .flip {
+    perspective: 1600px;
+    cursor: pointer;
+  }
+  .flip-inner {
+    position: relative;
+    width: 100%; height: 100%;
+    transition: transform 600ms cubic-bezier(.2,.8,.2,1);
+    transform-style: preserve-3d;
+  }
+  .flip.flipped .flip-inner { transform: rotateY(180deg); }
+  .flip-face {
+    position: absolute; inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: var(--radius-lg);
+    padding: 28px 30px;
+    display: flex; flex-direction: column;
+    overflow: hidden;
+  }
+  .flip-front {
+    background: var(--neutral-900);
+    border: 1px solid var(--border-subtle);
+    justify-content: space-between;
+  }
+  .flip-front .q {
+    font: 700 26px/1.2 var(--font-brand);
+    color: var(--fg-1);
+    letter-spacing: -0.01em;
+    text-wrap: pretty;
+  }
+  .flip-front .bot {
+    display: flex; justify-content: space-between; align-items: center;
+    font: 600 12px/1 var(--font-sans);
+    letter-spacing: 0.18em; text-transform: uppercase;
+  }
+  .flip-front .tag { color: var(--error-border); }
+  .flip-front .cue { color: var(--fg-3); display: inline-flex; gap: 8px; align-items: center; }
+  .flip-front .cue::after {
+    content: "↻"; font-size: 16px; color: var(--mint-default);
+  }
+  .flip-back {
+    background: var(--neutral-850);
+    border: 1px solid var(--mint-deep);
+    border-left: 3px solid var(--mint-default);
+    transform: rotateY(180deg);
+    justify-content: space-between;
+  }
+  .flip-back .a {
+    font: 500 17px/1.4 var(--font-sans);
+    color: var(--fg-1);
+    text-wrap: pretty;
+  }
+  .flip-back .one {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border-subtle);
+    font: 700 18px/1.3 var(--font-brand);
+    color: var(--mint-default);
+    letter-spacing: -0.005em;
+    text-wrap: pretty;
+  }
+  .flip-back .one .lbl {
+    display: block;
+    font: 600 11px/1 var(--font-sans);
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--fg-3); margin-bottom: 8px;
+  }
+
+  /* ===== STATS ===== */
+  .stats h2 {
+    margin: 24px 0 28px;
+    font: 900 72px/0.9 var(--font-brand);
+    letter-spacing: -0.02em;
+  }
+  .stats-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 20px; flex: 1;
+  }
+  .stat {
+    background: var(--neutral-900);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 32px 32px;
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .stat .n {
+    font: 900 108px/0.88 var(--font-brand);
+    letter-spacing: -0.035em;
+    color: var(--mint-default);
+  }
+  .stat .n.neut { color: var(--fg-1); }
+  .stat .caption {
+    font: 500 18px/1.35 var(--font-sans);
+    color: var(--fg-1);
+    text-wrap: pretty;
+  }
+  .stat .src {
+    margin-top: auto;
+    font: 600 12px/1 var(--font-sans);
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--fg-3);
+  }
+  .stat .use {
+    font: 400 14px/1.4 var(--font-brand);
+    color: var(--fg-3);
+    padding-top: 12px;
+    border-top: 1px solid var(--border-subtle);
+    text-wrap: pretty;
+  }
+
+  /* ===== DEMO LINE HERO ===== */
+  .demo .slide-inner { justify-content: space-between; padding-top: 88px; padding-bottom: 80px; }
+  .demo .top {
+    display: flex; flex-direction: column; gap: 24px;
+  }
+  .demo .subtitle {
+    font: 500 28px/1.3 var(--font-brand);
+    color: var(--fg-2); max-width: 1400px;
+  }
+  .demo-number {
+    text-align: left;
+    font: 900 280px/0.88 var(--font-brand);
+    letter-spacing: -0.045em;
+    color: var(--mint-default);
+    text-shadow: 0 0 80px rgba(62,222,111,0.35);
+  }
+  .demo-meta {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: var(--border-subtle);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg); overflow: hidden;
+  }
+  .demo-meta .cell {
+    background: var(--neutral-900);
+    padding: 24px 28px;
+  }
+  .demo-meta .k {
+    font: 600 12px/1 var(--font-sans);
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--fg-3); margin-bottom: 10px;
+  }
+  .demo-meta .v {
+    font: 600 20px/1.3 var(--font-sans);
+    color: var(--fg-1);
+    letter-spacing: -0.005em;
+  }
+
+  /* ===== CLOSE ===== */
+  .close .slide-inner { justify-content: space-between; }
+  .close h2 {
+    margin: 40px 0 0;
+    font: 900 132px/0.88 var(--font-brand);
+    letter-spacing: -0.03em;
+    max-width: 1700px;
+  }
+  .close h2 em { font-style: normal; color: var(--mint-default); }
+  .close .rules {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: var(--border-subtle);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg); overflow: hidden;
+    margin-top: 48px;
+  }
+  .close .rule {
+    background: var(--neutral-900);
+    padding: 32px 30px 30px;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .close .rule .n {
+    font: 900 40px/1 var(--font-brand);
+    color: var(--mint-default);
+    letter-spacing: -0.02em;
+  }
+  .close .rule .t {
+    font: 700 22px/1.2 var(--font-brand);
+    color: var(--fg-1);
+    letter-spacing: -0.01em;
+  }
+  .close .rule .d {
+    margin-top: 4px;
+    font: 400 16px/1.45 var(--font-brand);
+    color: var(--fg-3);
+    text-wrap: pretty;
+  }
+</style>
+</head>
+<body>
+
+<deck-stage width="1920" height="1080">
+
+  <!-- ===== 1. COVER ===== -->
+  <section class="cover" data-label="Cover">
+    <div class="blob"></div>
+    <div class="blob br"></div>
+    <div class="dots"></div>
+    <div class="slide-inner">
+      <div class="meta-row">
+        <span class="brand-mark">SalesAi · Seller enablement</span>
+        <span>April 2026 · Internal use only</span>
+      </div>
+
+      <div>
+        <div class="eyebrow-lg" style="margin-bottom: 36px;">Sales conversation guide</div>
+        <h1>Win the<br>moments that<br><em>matter.</em></h1>
+        <p class="sub">The language, positioning, and objections every SalesAi AE should know cold. This is how we talk — on every call, in every deck, in every reply.</p>
+      </div>
+
+      <div class="cover-foot">
+        <div class="block">
+          <strong>New-AE onboarding</strong>
+          <span>Live training · 9 slides · ~30 min + roleplay</span>
+        </div>
+        <div class="block" style="text-align:right;">
+          <strong>Demo line — call it now</strong>
+          <span>463-220-4953 · Sarah answers</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 2. WHO WE ARE ===== -->
+  <section class="who" data-label="Who we are">
+    <div class="blob tr small"></div>
+    <div class="slide-inner">
+      <div class="meta-row">
+        <span class="brand-mark">01 / Who we are</span>
+        <span>Positioning</span>
+      </div>
+
+      <div style="margin-top: 48px;">
+        <div class="eyebrow-lg">Lead with this</div>
+        <h2>The <em>only</em> fully managed AI CSR team<br>built for home services, $1M–50M.</h2>
+      </div>
+
+      <div class="pos">
+        <span class="lbl">One-line pitch</span>
+        We build it, integrate it with your ServiceTitan or Housecall Pro, run it daily, and optimize it monthly. You don't consider yourself onboarded until you've hit real revenue milestones. You don't pay for a features list — you pay for outcomes.
+      </div>
+
+      <div class="who-grid">
+        <div class="who-card">
+          <span class="lbl">Owned delivery model</span>
+          <span class="v"><em>Agent-as-a-Service.</em></span>
+          <span class="lbl" style="color:var(--fg-3); letter-spacing:0; text-transform:none; font-weight:400; font-size:15px; line-height:1.4;">Branded. Uncontested. Use it to describe how we work.</span>
+        </div>
+        <div class="who-card">
+          <span class="lbl">Tagline — through-line</span>
+          <span class="v">Win the moments<br>that <em>matter.</em></span>
+          <span class="lbl" style="color:var(--fg-3); letter-spacing:0; text-transform:none; font-weight:400; font-size:15px; line-height:1.4;">Use in every customer-facing conversation.</span>
+        </div>
+        <div class="who-card">
+          <span class="lbl">Campaign line</span>
+          <span class="v">We build it.<br>We run it.<br><em>You book the jobs.</em></span>
+          <span class="lbl" style="color:var(--fg-3); letter-spacing:0; text-transform:none; font-weight:400; font-size:15px; line-height:1.4;">Use to explain managed model in 10 seconds.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 3. DIFFERENTIATOR ===== -->
+  <section class="diff" data-label="Differentiator">
+    <div class="blob"></div>
+    <div class="blob br"></div>
+    <div class="slide-inner">
+      <div class="meta-row">
+        <span class="brand-mark">02 / Differentiator</span>
+        <span>Say this often</span>
+      </div>
+
+      <div>
+        <div class="eyebrow-lg">Our strongest claim — belongs at the top of every sales conversation</div>
+        <p class="quote">"We don't consider you onboarded<br>until you hit your <span class="ac">first real<br>business outcome.</span>"</p>
+        <p class="attrib">No competitor makes this commitment. Not Hatch. Not Cactus. Not ServiceTitan. This is the line that separates us.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 4. SAY / DON'T SAY ===== -->
+  <section class="lang" data-label="Say this, not this">
+    <div class="blob small" style="opacity:0.6"></div>
+    <div class="slide-inner">
+      <div class="meta-row">
+        <span class="brand-mark">03 / Language</span>
+        <span>Every word choice sells or slips</span>
+      </div>
+
+      <h2>Say this. Not this.</h2>
+      <p class="lead">The terms on the left earn trust with home-services owners. The terms on the right read as tech-bro. Train the muscle memory.</p>
+
+      <div class="lang-grid">
+        <div class="lang-col say">
+          <div class="hdr">
+            <span class="tag">Say</span>
+            <span class="ttl">Operator language</span>
+          </div>
+          <ul>
+            <li>Jobs booked</li>
+            <li>Your shop, your crew, your techs</li>
+            <li>AI CSR  ·  AI voice agent  ·  "Sarah"</li>
+            <li>Fill the board, book more jobs</li>
+            <li>Homeowners, callers</li>
+            <li>Humans in the loop</li>
+            <li>We run it for you</li>
+          </ul>
+        </div>
+        <div class="lang-col not">
+          <div class="hdr">
+            <span class="tag">Don't say</span>
+            <span class="ttl">Tech-bro language</span>
+          </div>
+          <ul>
+            <li>Leads converted, pipeline, conversion</li>
+            <li>Workforce, technicians, staff</li>
+            <li>Bots, chatbots, robocalls, AI software</li>
+            <li>Drive revenue, increase conversion</li>
+            <li>End users, prospects, clients</li>
+            <li>Fully automated, no humans</li>
+            <li>Set it and forget it</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 5. TERMINOLOGY BY SIZE ===== -->
+  <section class="sizing" data-label="Terminology by size">
+    <div class="blob tr small"></div>
+    <div class="slide-inner">
+      <div class="meta-row">
+        <span class="brand-mark">04 / Language rule</span>
+        <span>Match the buyer's frame</span>
+      </div>
+
+      <h2>Company size changes the word.</h2>
+      <p class="lead">The same product, two different vocabularies. Pick the right one in the first two minutes of the call.</p>
+
+      <div class="sizing-grid">
+        <div class="size-card">
+          <div class="who-is">Owner answers the phone themselves</div>
+          <div class="range">$1M–3M</div>
+          <div class="use">Use <span class="ac">"AI voice agent"</span> or call her <span class="ac">"Sarah."</span></div>
+          <div class="why">These owners don't have a CSR role yet — they relate to a <em>person</em> picking up the phone. Selling them a "CSR" is selling a title they haven't hired for.</div>
+        </div>
+        <div class="size-card">
+          <div class="who-is">Has an existing CSR team</div>
+          <div class="range">$3M–50M</div>
+          <div class="use">Use <span class="ac">"your AI CSR"</span> freely.</div>
+          <div class="why">These buyers already think in CSR terms and understand augmentation instantly. Leading with "augment your CSRs" gets the head-nod in the first 30 seconds.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 6. OBJECTIONS FLIP CARDS ===== -->
+  <section class="obj" data-label="Objections">
+    <div class="blob small"></div>
+    <div class="slide-inner">
+      <div class="meta-row">
+        <span class="brand-mark">05 / Objections</span>
+        <span>Tap a card</span>
+      </div>
+
+      <h2>Flip the objection.</h2>
+      <p class="lead">Six objections every AE will hear. Click any card to see the response + the one-liner.</p>
+      <span class="hint">Tap cards to reveal</span>
+
+      <div class="flip-grid">
+        <div class="flip"><div class="flip-inner">
+          <div class="flip-face flip-front">
+            <div class="q">"My customers want to talk to a real person."</div>
+            <div class="bot"><span class="tag">Objection</span><span class="cue">Reveal</span></div>
+          </div>
+          <div class="flip-face flip-back">
+            <div class="a">It's not AI vs. human — it's AI vs. voicemail. They're already getting voicemail, a distracted CSR, or nothing at 9pm Sunday. Tell them to call 463-220-4953 now.</div>
+            <div class="one"><span class="lbl">One-liner</span>"Your customers aren't asking for a human. They're asking for someone who picks up. Sarah picks up."</div>
+          </div>
+        </div></div>
+
+        <div class="flip"><div class="flip-inner">
+          <div class="flip-face flip-front">
+            <div class="q">"I already tried something like this."</div>
+            <div class="bot"><span class="tag">Objection</span><span class="cue">Reveal</span></div>
+          </div>
+          <div class="flip-face flip-back">
+            <div class="a">Two products in the category: software you manage yourself, and a managed service where we run it. They tried the first one. We are not that.</div>
+            <div class="one"><span class="lbl">One-liner</span>"You didn't try SalesAi. You tried a software platform that put you in charge of making it work."</div>
+          </div>
+        </div></div>
+
+        <div class="flip"><div class="flip-inner">
+          <div class="flip-face flip-front">
+            <div class="q">"I can't afford it."</div>
+            <div class="bot"><span class="tag">Objection</span><span class="cue">Reveal</span></div>
+          </div>
+          <div class="flip-face flip-back">
+            <div class="a">Walk the math. 27% of inbound calls go unanswered × $1,200 per missed call × 8/week = $9,600/wk leaving through the back door. $1,500/mo to stop that isn't a cost.</div>
+            <div class="one"><span class="lbl">One-liner</span>"$1,500 a month to stop losing $4,800 a week isn't a cost. It's the best trade you'll make this year."</div>
+          </div>
+        </div></div>
+
+        <div class="flip"><div class="flip-inner">
+          <div class="flip-face flip-front">
+            <div class="q">"I don't want a one-year contract."</div>
+            <div class="bot"><span class="tag">Objection</span><span class="cue">Reveal</span></div>
+          </div>
+          <div class="flip-face flip-back">
+            <div class="a">Cancel-anytime means the vendor has nothing at stake. Our loss if you cancel early is an account manager's time, an integration build, and our reputation. We have more to lose than you do.</div>
+            <div class="one"><span class="lbl">One-liner</span>"Cancel-anytime means they have nothing at stake. We're accountable to your outcomes for a year."</div>
+          </div>
+        </div></div>
+
+        <div class="flip"><div class="flip-inner">
+          <div class="flip-face flip-front">
+            <div class="q">"We already have a CSR team."</div>
+            <div class="bot"><span class="tag">Objection</span><span class="cue">Reveal</span></div>
+          </div>
+          <div class="flip-face flip-back">
+            <div class="a">SalesAi doesn't replace CSRs. It handles the 40th routine booking call, the 9pm overflow, and every call that lands while CSRs are already on the phone. Humans focus on the complex stuff.</div>
+            <div class="one"><span class="lbl">One-liner</span>"Your CSRs don't want to answer the 40th routine call. SalesAi takes that one. They take the ones that matter."</div>
+          </div>
+        </div></div>
+
+        <div class="flip"><div class="flip-inner">
+          <div class="flip-face flip-front">
+            <div class="q">"We're not ready for AI."</div>
+            <div class="bot"><span class="tag">Objection</span><span class="cue">Reveal</span></div>
+          </div>
+          <div class="flip-face flip-back">
+            <div class="a">41% of home-service bookings come in after hours. Is your team answering those calls? The best companies in your market are already using AI CSRs to win jobs you're sending to voicemail.</div>
+            <div class="one"><span class="lbl">One-liner</span>"The question isn't 'ready for AI.' It's 'ready to keep losing 41% of jobs to voicemail.'"</div>
+          </div>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 7. STATS ===== -->
+  <section class="stats" data-label="Stats that land">
+    <div class="blob small" style="opacity:0.5"></div>
+    <div class="slide-inner">
+      <div class="meta-row">
+        <span class="brand-mark">06 / Proof</span>
+        <span>Stats that land</span>
+      </div>
+
+      <h2>Five numbers to memorize.</h2>
+
+      <div class="stats-grid">
+        <div class="stat">
+          <div class="n">41%</div>
+          <div class="caption">of home-service bookings come in <em>after hours.</em></div>
+          <div class="use">Lead with this when they say "we're usually available." Is your team available at 1am? That's when 41% of the work is.</div>
+          <div class="src">Housecall Pro · 2026</div>
+        </div>
+        <div class="stat">
+          <div class="n neut">&lt;3%</div>
+          <div class="caption">of callers who hit voicemail <em>leave a message.</em></div>
+          <div class="use">"97% of people who hit your voicemail just called your competitor."</div>
+          <div class="src">Invoca</div>
+        </div>
+        <div class="stat">
+          <div class="n neut">27%</div>
+          <div class="caption">of inbound calls to home-service businesses <em>go unanswered.</em></div>
+          <div class="use">"You're not seeing those missed calls on your P&amp;L. They just disappear."</div>
+          <div class="src">Invoca</div>
+        </div>
+        <div class="stat">
+          <div class="n">$1,200</div>
+          <div class="caption">average revenue per <em>missed call</em> in home services.</div>
+          <div class="use">Multiply by their missed-call estimate to make the loss concrete on the call.</div>
+          <div class="src">Invoca</div>
+        </div>
+        <div class="stat">
+          <div class="n">78%</div>
+          <div class="caption">of jobs go to the company that <em>responds first.</em></div>
+          <div class="use">"Your competitor isn't better than you. They just picked up."</div>
+          <div class="src">Industry benchmark</div>
+        </div>
+        <div class="stat" style="background: var(--bg-hero-green, rgba(62,222,111,0.06)); border-color: rgba(62,222,111,0.32);">
+          <div class="n" style="font-size: 88px;">Sarah</div>
+          <div class="caption">doesn't have bad days. She doesn't put someone on hold at 9pm.</div>
+          <div class="use" style="color: var(--mint-default);">Have them call 463-220-4953 during the conversation. 90 seconds does more selling than 30 minutes of explanation.</div>
+          <div class="src" style="color: var(--mint-default);">The demo that closes</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 8. DEMO LINE HERO ===== -->
+  <section class="demo" data-label="Demo line">
+    <div class="blob"></div>
+    <div class="blob br"></div>
+    <div class="dots"></div>
+    <div class="slide-inner">
+      <div class="top">
+        <div class="meta-row">
+          <span class="brand-mark">07 / The demo</span>
+          <span>Single most powerful sales asset</span>
+        </div>
+        <div class="eyebrow-lg" style="margin-top: 12px;">Use this on every call</div>
+        <div class="subtitle">Tell every prospect to call this number before or during the conversation. 90 seconds does more selling than 30 minutes of explanation.</div>
+      </div>
+
+      <div class="demo-number">463-220-<br>4953</div>
+
+      <div class="demo-meta">
+        <div class="cell">
+          <div class="k">Who answers</div>
+          <div class="v">Sarah — our AI CSR, live and production</div>
+        </div>
+        <div class="cell">
+          <div class="k">What it proves</div>
+          <div class="v">"AI will hurt my customer relationships" — dies on the spot</div>
+        </div>
+        <div class="cell">
+          <div class="k">When to use it</div>
+          <div class="v">Before, during, or immediately after every first call</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 9. CLOSE / 3 RULES ===== -->
+  <section class="close" data-label="Three rules">
+    <div class="blob"></div>
+    <div class="blob br"></div>
+    <div class="slide-inner">
+      <div class="meta-row">
+        <span class="brand-mark">08 / The ask</span>
+        <span>Three things to carry into every call</span>
+      </div>
+
+      <div>
+        <div class="eyebrow-lg" style="margin-bottom: 28px;">Three rules, every call, every deal</div>
+        <h2>Their words.<br>Our outcomes.<br><em>Sarah's voice.</em></h2>
+      </div>
+
+      <div class="rules">
+        <div class="rule">
+          <div class="n">01</div>
+          <div class="t">Speak their language</div>
+          <div class="d">Jobs booked, your crew, homeowners. Never "pipeline," "workforce," or "bots." Match the size-of-company vocabulary in the first two minutes.</div>
+        </div>
+        <div class="rule">
+          <div class="n">02</div>
+          <div class="t">Anchor on outcomes</div>
+          <div class="d">"We don't consider you onboarded until you hit your first real business outcome." Say it in every first call. Every one.</div>
+        </div>
+        <div class="rule">
+          <div class="n">03</div>
+          <div class="t">End with Sarah</div>
+          <div class="d">Get them to dial 463-220-4953 before the call ends. The demo closes deals we can't close with decks.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</deck-stage>
+
+<script src="deck-stage.js"></script>
+<script>
+  // Objection flip interactions
+  document.querySelectorAll('.flip').forEach(card => {
+    card.addEventListener('click', () => card.classList.toggle('flipped'));
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        card.classList.toggle('flipped');
+      }
+    });
+    card.setAttribute('tabindex', '0');
+  });
+
+  // Reset flipped state when navigating away from the objections slide
+  document.querySelector('deck-stage').addEventListener('slidechange', (e) => {
+    document.querySelectorAll('.flip.flipped').forEach(f => f.classList.remove('flipped'));
+  });
+</script>
+</body>
+</html>

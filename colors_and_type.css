@@ -1,0 +1,395 @@
+/* ============================================================
+   Mint Design System — SalesAi
+   colors_and_type.css
+   Dark-mode-first token layer + semantic classes.
+   ============================================================ */
+
+/* ---------- Fonts ----------
+   Inter Tight is the Mint brand sans (UI workhorse — local TTFs in fonts/).
+   Sen is the Mint display/numeric face (metric values, eyebrows, cover hero).
+   Both are fully self-hosted; no external font CDNs.
+   ------------------------------------------------ */
+
+@font-face { font-family: "Inter Tight"; font-style: normal; font-weight: 100; font-display: swap; src: url("fonts/InterTight-Thin.ttf") format("truetype"); }
+@font-face { font-family: "Inter Tight"; font-style: italic; font-weight: 100; font-display: swap; src: url("fonts/InterTight-ThinItalic.ttf") format("truetype"); }
+@font-face { font-family: "Inter Tight"; font-style: normal; font-weight: 200; font-display: swap; src: url("fonts/InterTight-ExtraLight.ttf") format("truetype"); }
+@font-face { font-family: "Inter Tight"; font-style: italic; font-weight: 200; font-display: swap; src: url("fonts/InterTight-ExtraLightItalic.ttf") format("truetype"); }
+@font-face { font-family: "Inter Tight"; font-style: normal; font-weight: 300; font-display: swap; src: url("fonts/InterTight-Light.ttf") format("truetype"); }
+@font-face { font-family: "Inter Tight"; font-style: italic; font-weight: 300; font-display: swap; src: url("fonts/InterTight-LightItalic.ttf") format("truetype"); }
+@font-face { font-family: "Inter Tight"; font-style: normal; font-weight: 400; font-display: swap; src: url("fonts/InterTight-Regular.ttf") format("truetype"); }
+@font-face { font-family: "Inter Tight"; font-style: italic; font-weight: 400; font-display: swap; src: url("fonts/InterTight-Italic.ttf") format("truetype"); }
+@font-face { font-family: "Inter Tight"; font-style: normal; font-weight: 500; font-display: swap; src: url("fonts/InterTight-Medium.ttf") format("truetype"); }
+@font-face { font-family: "Inter Tight"; font-style: italic; font-weight: 500; font-display: swap; src: url("fonts/InterTight-MediumItalic.ttf") format("truetype"); }
+@font-face { font-family: "Inter Tight"; font-style: normal; font-weight: 600; font-display: swap; src: url("fonts/InterTight-SemiBold.ttf") format("truetype"); }
+@font-face { font-family: "Inter Tight"; font-style: italic; font-weight: 600; font-display: swap; src: url("fonts/InterTight-SemiBoldItalic.ttf") format("truetype"); }
+@font-face { font-family: "Inter Tight"; font-style: normal; font-weight: 700; font-display: swap; src: url("fonts/InterTight-Bold.ttf") format("truetype"); }
+@font-face { font-family: "Inter Tight"; font-style: italic; font-weight: 700; font-display: swap; src: url("fonts/InterTight-BoldItalic.ttf") format("truetype"); }
+@font-face { font-family: "Inter Tight"; font-style: normal; font-weight: 800; font-display: swap; src: url("fonts/InterTight-ExtraBold.ttf") format("truetype"); }
+@font-face { font-family: "Inter Tight"; font-style: italic; font-weight: 800; font-display: swap; src: url("fonts/InterTight-ExtraBoldItalic.ttf") format("truetype"); }
+@font-face { font-family: "Inter Tight"; font-style: normal; font-weight: 900; font-display: swap; src: url("fonts/InterTight-Black.ttf") format("truetype"); }
+@font-face { font-family: "Inter Tight"; font-style: italic; font-weight: 900; font-display: swap; src: url("fonts/InterTight-BlackItalic.ttf") format("truetype"); }
+
+/* Sen — display + numeric brand face. Used for metric values, eyebrows, and cover hero sizes. */
+/* Sen retired (not in Brand Guidelines; not in Figma foundations). Files remain in fonts/ but are unreferenced. */
+
+/* Roboto — the BRAND face per SalesAi Brand Guidelines 2025.
+   Used for: marketing surfaces, decks, headlines, body prose, metric values.
+   Full family self-hosted (Thin 100 → Black 900, upright + italic).
+   Roboto Condensed + SemiCondensed ship in fonts/ as well but are not wired by default
+   — add @font-face declarations as needed for display/promo work. */
+@font-face { font-family: "Roboto"; font-style: normal; font-weight: 100; font-display: swap; src: url("fonts/Roboto-Thin.ttf") format("truetype"); }
+@font-face { font-family: "Roboto"; font-style: italic; font-weight: 100; font-display: swap; src: url("fonts/Roboto-ThinItalic.ttf") format("truetype"); }
+@font-face { font-family: "Roboto"; font-style: normal; font-weight: 200; font-display: swap; src: url("fonts/Roboto-ExtraLight.ttf") format("truetype"); }
+@font-face { font-family: "Roboto"; font-style: italic; font-weight: 200; font-display: swap; src: url("fonts/Roboto-ExtraLightItalic.ttf") format("truetype"); }
+@font-face { font-family: "Roboto"; font-style: normal; font-weight: 300; font-display: swap; src: url("fonts/Roboto-Light.ttf") format("truetype"); }
+@font-face { font-family: "Roboto"; font-style: italic; font-weight: 300; font-display: swap; src: url("fonts/Roboto-LightItalic.ttf") format("truetype"); }
+@font-face { font-family: "Roboto"; font-style: normal; font-weight: 400; font-display: swap; src: url("fonts/Roboto-Regular.ttf") format("truetype"); }
+@font-face { font-family: "Roboto"; font-style: italic; font-weight: 400; font-display: swap; src: url("fonts/Roboto-Italic.ttf") format("truetype"); }
+@font-face { font-family: "Roboto"; font-style: normal; font-weight: 500; font-display: swap; src: url("fonts/Roboto-Medium.ttf") format("truetype"); }
+@font-face { font-family: "Roboto"; font-style: italic; font-weight: 500; font-display: swap; src: url("fonts/Roboto-MediumItalic.ttf") format("truetype"); }
+@font-face { font-family: "Roboto"; font-style: normal; font-weight: 600; font-display: swap; src: url("fonts/Roboto-SemiBold.ttf") format("truetype"); }
+@font-face { font-family: "Roboto"; font-style: italic; font-weight: 600; font-display: swap; src: url("fonts/Roboto-SemiBoldItalic.ttf") format("truetype"); }
+@font-face { font-family: "Roboto"; font-style: normal; font-weight: 700; font-display: swap; src: url("fonts/Roboto-Bold.ttf") format("truetype"); }
+@font-face { font-family: "Roboto"; font-style: italic; font-weight: 700; font-display: swap; src: url("fonts/Roboto-BoldItalic.ttf") format("truetype"); }
+@font-face { font-family: "Roboto"; font-style: normal; font-weight: 800; font-display: swap; src: url("fonts/Roboto-ExtraBold.ttf") format("truetype"); }
+@font-face { font-family: "Roboto"; font-style: italic; font-weight: 800; font-display: swap; src: url("fonts/Roboto-ExtraBoldItalic.ttf") format("truetype"); }
+@font-face { font-family: "Roboto"; font-style: normal; font-weight: 900; font-display: swap; src: url("fonts/Roboto-Black.ttf") format("truetype"); }
+@font-face { font-family: "Roboto"; font-style: italic; font-weight: 900; font-display: swap; src: url("fonts/Roboto-BlackItalic.ttf") format("truetype"); }
+
+:root {
+  /* ============================================================
+     RAW PALETTE — "Mint" core + neutrals + semantic
+     ============================================================ */
+
+  /* Mint (brand green) */
+  --mint-50:  rgba(62, 222, 111, 0.05);
+  --mint-80:  rgba(62, 222, 111, 0.08);
+  --mint-120: rgba(62, 222, 111, 0.12);
+  --mint-240: rgba(62, 222, 111, 0.24);
+  --mint-600: rgba(62, 222, 111, 0.60);
+  --mint-pressed:  #6DF79A;
+  --mint-hover:    #47ED7D;
+  --mint-default:  #3EDE6F;   /* THE brand color */
+  --mint-strong:   #21B873;
+  --mint-deep:     #052A18;
+
+  /* ------------------------------------------------------------
+     Supporting accents (Brand Guidelines 2025 p.11)
+     "Used sparingly" — never the hero, never more than one per surface.
+     ------------------------------------------------------------ */
+  --support-blue:     #236BD0;   /* primary support / information / links on light */
+  --support-purple:   #955DF1;   /* secondary — creative / tagging */
+  --support-purple-2: #602BB6;   /* deep purple — backgrounds, category tiles */
+  --support-orange:   #F69315;   /* warm accent — alerts, callouts, promo */
+
+  /* Neutrals — black → white ladder */
+  --neutral-1000: #0A0C10;
+  --neutral-950:  #0E0E10;
+  --neutral-900:  #141416;
+  --neutral-850:  #1C1C1E;
+  --neutral-800:  #202022;
+  --neutral-750:  #272729;
+  --neutral-700:  #353637;
+  --neutral-600:  #4E4F50;
+  --neutral-500:  #5F6061;
+  --neutral-400:  #8E8E90;
+  --neutral-300:  #ABADAE;
+  --neutral-200:  #EEEEF0;
+  --neutral-100:  #F5F5F7;
+  --neutral-0:    #FFFFFF;
+
+  /* Semantic raw */
+  --info:          #26A9D8;
+  --info-deep:     #0F2027;
+  --success:       #21B873;
+  --success-strong:#3EDE6F;
+  --warning:       #FFB800;
+  --warning-border:#FFC93D;
+  --error:         #E45864;
+  --error-border:  #ED7E88;
+  --error-deep:    #731F29;
+  --error-strong:  #D73D4A;
+
+  /* Tooling purple — Figma-only, do NOT ship in product */
+  --fig-purple:    #8A38F5;
+  --fig-purple-2:  #BD8AFF;
+
+  /* ============================================================
+     SEMANTIC TOKENS
+     ============================================================ */
+
+  /* Surface */
+  --surface-page:     var(--neutral-1000);
+  --surface-raised:   var(--neutral-900);
+  --surface-subtle:   var(--neutral-800);
+  --surface-brand:    var(--mint-default);
+  --surface-inverse:  var(--neutral-100);
+  --surface-overlay:  rgba(10, 12, 16, 0.64);
+  --surface-success:  rgba(33, 184, 115, 0.08);
+
+  /* Foreground / text */
+  --fg-1:         var(--neutral-100);   /* primary text */
+  --fg-2:         var(--neutral-300);   /* secondary / labels */
+  --fg-3:         var(--neutral-400);   /* tertiary */
+  --fg-4:         var(--neutral-500);   /* quaternary */
+  --fg-disabled:  #404142;
+  --fg-inverse:   var(--neutral-950);
+  --fg-brand:     var(--mint-default);
+  --fg-on-brand:  #052A18;              /* text ON a mint fill */
+  --fg-info:      var(--info);
+  --fg-success:   var(--mint-default);
+  --fg-warning:   var(--warning);
+  --fg-error:     var(--error-border);
+
+  /* Background states (buttons, chips, rows) */
+  --bg-primary:          var(--mint-default);
+  --bg-primary-hover:    var(--mint-hover);
+  --bg-primary-pressed:  var(--mint-pressed);
+  --bg-secondary:          var(--mint-80);
+  --bg-secondary-hover:    var(--mint-120);
+  --bg-secondary-pressed:  var(--mint-240);
+  --bg-tertiary:           var(--neutral-900);
+  --bg-tertiary-hover:     var(--neutral-850);
+  --bg-tertiary-pressed:   var(--neutral-750);
+  --bg-inverse:            var(--neutral-100);
+  --bg-info:               var(--success);   /* Figma sets bg/info to #21B873 (green), not blue — source of truth */
+  --bg-success:            var(--success);
+  --bg-warning:            var(--warning);
+  --bg-error:              var(--error-border);
+
+  /* Border */
+  --border-subtle:    var(--neutral-750);
+  --border-default:   var(--neutral-700);
+  --border-stronger:  var(--neutral-600);
+  --border-strongest: var(--neutral-400);
+  --border-brand:         var(--mint-default);
+  --border-brand-subtle:  var(--mint-deep);
+  --border-focus:         var(--neutral-300);
+  --border-info:          var(--info);
+  --border-success:       var(--success);
+  --border-warning:       var(--warning-border);
+  --border-error:         var(--error);
+
+  /* Button family shorthands (from Figma Semantic Colors) */
+  --button-primary-border:    var(--mint-pressed);
+  --button-secondary-border:  var(--mint-240);
+  --button-tertiary-border:   #686B74;
+
+  /* ============================================================
+     RADII
+     ============================================================ */
+  --radius-xs:  2px;    /* section markers */
+  --radius-sm:  5px;    /* Figma tooling wrappers — don't ship */
+  --radius-md:  8px;    /* buttons, metric cards, chips */
+  --radius-lg:  12px;   /* sidebar, panels, input wrappers */
+  --radius-xl:  16px;   /* large cards, drawer inner edges */
+  --radius-pill: 999px;
+  --radius-hero: 80px;  /* cover frames only */
+
+  /* ============================================================
+     SPACING (4px grid)
+     ============================================================ */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+
+  /* ============================================================
+     SHADOWS — tinted mint-green (signature)
+     ============================================================ */
+  --shadow-xs:   0 1px 2px 0 rgba(46, 120, 86, 0.20);
+  --shadow-sm:   0 2px 4px 0 rgba(40, 140, 95, 0.22);
+  --shadow-md:   2px 4px 12px -1px rgba(45, 100, 84, 0.22);
+  --shadow-lg:   1px 2px 24px -2px rgba(40, 110, 90, 0.24);
+  --shadow-xl:   2px 4px 48px -4px rgba(35, 120, 95, 0.26);
+  --shadow-dark: 0 0 24px 0 rgba(0, 0, 0, 0.4),
+                 0 0 80px 0 rgb(0, 0, 0),
+                 0 0 160px 0 rgba(0, 0, 0, 0.3);
+  --shadow-focus: 0 0 0 2px rgba(62, 222, 111, 0.40);
+
+  /* ============================================================
+     TYPOGRAPHY — families
+     Dual-system per content design & Brand Guidelines 2025:
+       --font-brand : Roboto. The VOICE of SalesAi. Headlines, hero copy,
+                      marketing surfaces, deck titles, metric values.
+                      (Brand Guidelines p.5, p.9)
+       --font-sans  : Inter Tight. The SCAFFOLD of product UI. Subheads,
+                      table cells, sidebar, form labels, eyebrows, chips.
+                      Organizes information under Roboto headlines.
+       --font-numeric : Roboto Bold (tabular figures). Metric cards.
+     Fallback chain matches Brand Guidelines: Arial → Helvetica → system.
+     ============================================================ */
+  --font-brand:   "Roboto", Arial, Helvetica, system-ui, sans-serif;
+  --font-sans:    "Inter Tight", "Inter", Arial, Helvetica, system-ui, sans-serif;
+  --font-numeric: "Roboto", "Inter Tight", Arial, system-ui, sans-serif;
+  --font-display: "Roboto", "Inter Tight", Arial, system-ui, sans-serif;  /* cover + hero */
+  --font-mono:    ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  /* ============================================================
+     TYPOGRAPHY — scale
+     Headers use the BRAND face (Roboto) at tight 0.88 leading.
+     Subheads/titles use the SCAFFOLD face (Inter Tight) for vertical
+     tension under Roboto headlines. Body copy: 1.2 leading per
+     Brand Guidelines p.9.
+     ============================================================ */
+
+  /* Annotation (Figma-only docs) */
+  --type-annotation-sm: 500 10px/14px var(--font-sans);
+  --type-annotation-md: 500 12px/16px var(--font-sans);
+
+  /* Body — Inter Tight for product UI chrome */
+  --type-body-xs:       400 10px/14px var(--font-sans);
+  --type-body-sm-reg:   400 12px/16px var(--font-sans);
+  --type-body-sm-med:   500 12px/16px var(--font-sans);
+  --type-body-md-reg:   400 14px/20px var(--font-sans);
+  --type-body-md-med:   500 14px/20px var(--font-sans);
+  --type-body-lg-reg:   400 16px/24px var(--font-sans);
+  --type-body-lg-med:   500 16px/24px var(--font-sans);
+
+  /* Prose — Roboto for long-form reading (marketing, docs, descriptions) */
+  --type-prose-sm:      400 14px/1.5 var(--font-brand);
+  --type-prose-md:      400 16px/1.5 var(--font-brand);
+  --type-prose-lg:      400 18px/1.5 var(--font-brand);
+
+  /* Title / Sub-headlines (Inter Tight — sits under a Roboto headline) */
+  --type-label-small:   600 12px/16px var(--font-sans); /* tracked up for EYEBROW */
+  --type-title-sm:      500 14px/20px var(--font-sans);
+  --type-title-md:      600 16px/24px var(--font-sans);
+  --type-title-lg:      500 20px/28px var(--font-sans);
+
+  /* Heading — Roboto Bold, tight 0.88 leading (Brand Guidelines p.9) */
+  --type-h4:            700 18px/0.88 var(--font-brand);
+  --type-h3:            700 20px/0.88 var(--font-brand);
+  --type-h2:            700 28px/0.88 var(--font-brand);
+  --type-h1:            700 36px/0.88 var(--font-brand);
+
+  /* Numeric — Roboto Bold (tabular-friendly) */
+  --type-numeric-eyebrow: 700 12px/16px var(--font-sans); /* eyebrow stays Inter Tight */
+  --type-numeric-value:   700 28px/0.88 var(--font-numeric);
+  --type-numeric-delta:   500 12px/16px var(--font-sans);
+
+  /* Mono */
+  --type-mono-sm:       400 12px/16px var(--font-mono);
+  --type-mono-md:       400 14px/20px var(--font-mono);
+
+  /* Display (cover slides / hero only) — Roboto Black, tight 0.88 leading */
+  --type-display-xxl:   900 240px/0.88 var(--font-display);
+  --type-display-xl:    900 96px/0.88 var(--font-display);
+  --type-display-lg:    900 56px/0.88 var(--font-display);
+  --type-display-md:    700 36px/0.88 var(--font-display);
+}
+
+/* ============================================================
+   BASE RESET / PAGE SKIN
+   ============================================================ */
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--surface-page);
+  color: var(--fg-1);
+  font: var(--type-body-md-reg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+::selection {
+  background: var(--mint-240);
+  color: var(--neutral-100);
+}
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--neutral-750); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--neutral-700); }
+
+/* ============================================================
+   SEMANTIC TEXT CLASSES
+   ============================================================ */
+
+/* Headlines — Roboto (brand face). Tight 0.88 leading per Guidelines. */
+.h1 { font: var(--type-h1); letter-spacing: -0.01em;  color: var(--fg-1); }
+.h2 { font: var(--type-h2); letter-spacing: -0.008em; color: var(--fg-1); }
+.h3 { font: var(--type-h3); letter-spacing: -0.005em; color: var(--fg-1); }
+.h4 { font: var(--type-h4); color: var(--fg-1); }
+
+/* Display — hero / cover sizes */
+.display-xxl { font: var(--type-display-xxl); letter-spacing: -0.02em; color: var(--fg-1); }
+.display-xl  { font: var(--type-display-xl);  letter-spacing: -0.02em; color: var(--fg-1); }
+.display-lg  { font: var(--type-display-lg);  letter-spacing: -0.015em; color: var(--fg-1); }
+.display-md  { font: var(--type-display-md);  letter-spacing: -0.01em;  color: var(--fg-1); }
+
+.title-lg { font: var(--type-title-lg); color: var(--fg-1); }
+.title-md { font: var(--type-title-md); color: var(--fg-1); }
+.title-sm { font: var(--type-title-sm); color: var(--fg-1); }
+
+.body-lg     { font: var(--type-body-lg-reg); color: var(--fg-1); }
+.body-md     { font: var(--type-body-md-reg); color: var(--fg-1); }
+.body-md-med { font: var(--type-body-md-med); color: var(--fg-1); }
+.body-sm     { font: var(--type-body-sm-reg); color: var(--fg-2); }
+.body-xs     { font: var(--type-body-xs);     color: var(--fg-2); }
+
+/* Prose — Roboto, marketing / long-form reading. */
+.prose-lg    { font: var(--type-prose-lg); color: var(--fg-1); text-wrap: pretty; }
+.prose-md    { font: var(--type-prose-md); color: var(--fg-1); text-wrap: pretty; }
+.prose-sm    { font: var(--type-prose-sm); color: var(--fg-2); text-wrap: pretty; }
+
+.eyebrow {
+  font: var(--type-numeric-eyebrow);
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+  color: var(--fg-2);
+}
+
+.metric-value { font: var(--type-numeric-value); color: var(--fg-1); letter-spacing: 0.2px; }
+.metric-delta { font: var(--type-numeric-delta); }
+.metric-delta.up   { color: var(--mint-default); }
+.metric-delta.down { color: var(--error-border); }
+
+.code { font: var(--type-mono-sm); color: var(--fg-1); background: var(--neutral-800); padding: 2px 6px; border-radius: 4px; }
+
+/* ============================================================
+   HELPERS — common elevated / card blocks
+   ============================================================ */
+.card {
+  background: var(--surface-raised);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+}
+.card--lg    { border-radius: var(--radius-xl); }
+.card--panel { background: rgba(10, 12, 16, 0.64); border-color: var(--border-brand-subtle); backdrop-filter: blur(12px); border-radius: var(--radius-lg); }
+
+.elev-xs { box-shadow: var(--shadow-xs); }
+.elev-sm { box-shadow: var(--shadow-sm); }
+.elev-md { box-shadow: var(--shadow-md); }
+.elev-lg { box-shadow: var(--shadow-lg); }
+.elev-xl { box-shadow: var(--shadow-xl); }
+.elev-dark { box-shadow: var(--shadow-dark); }
+
+/* Signature brand glow (The Blob) — attach to a large container */
+.mint-blob {
+  position: relative;
+  isolation: isolate;
+}
+.mint-blob::before {
+  content: "";
+  position: absolute;
+  inset: auto auto 0 0;
+  top: -25px; left: -20px;
+  width: 458px; height: 685px;
+  pointer-events: none;
+  z-index: -1;
+  background: radial-gradient(60% 50% at 20% 20%,
+              rgba(94, 207, 129, 0.18) 0%,
+              rgba(94, 207, 129, 0.08) 40%,
+              transparent 70%);
+  mix-blend-mode: hard-light;
+}

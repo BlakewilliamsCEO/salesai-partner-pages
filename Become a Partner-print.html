@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Become a SalesAI Partner — Partner Ecosystem</title>
+<meta name="description" content="Join a community of partners building, marketing, and selling voice AI for home services. Earn commissions, expand your practice, and grow with SalesAI." />
+
+<style>
+  /* ─────────── Print rules ─────────── */
+  @media print {
+    @page { size: Letter; margin: 0.5in; }
+    html, body {
+      background: #0A0C10 !important;
+      color: #F5F5F7 !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    .util, .nav, .subnav { display: none !important; }
+    .nav { position: static !important; }
+    section { padding: 32px 24px !important; break-inside: avoid; }
+    .hero { padding: 32px 24px !important; }
+    .hero::before, .hero::after, .bsms-section::before, .callout::before { display: none !important; }
+    .tracks, .why-grid, .bsms-grid, .spec-grid, .footer-ctas .section-inner {
+      break-inside: avoid;
+    }
+    .track, .why, .bsms-cell, .spec, .case, .fcta, .callout {
+      break-inside: avoid;
+    }
+    .case { margin-bottom: 16px !important; }
+    a { color: inherit !important; text-decoration: none !important; }
+    .btn, .track-cta, .fcta a, .spec a {
+      border: 1px solid currentColor !important;
+      padding: 8px 14px !important;
+      border-radius: 999px !important;
+    }
+    /* Force section break before major sections */
+    .bsms-section, .case-section, .form-section, .footer-ctas {
+      break-before: page;
+    }
+    form button[type="submit"] { display: none !important; }
+  }
+
+  :root {
+    /* On-brand palette (Mint / SalesAi) — variable names preserved
+       so the original markup keeps working pixel-for-pixel. */
+    --ink:        #0A0C10;          /* page background (was cream) */
+    --ink-2:      #141416;          /* raised surfaces */
+    --cream:      #F5F5F7;          /* primary text on dark */
+    --cream-2:    #ABADAE;          /* secondary text on dark */
+    --paper:      #141416;          /* "card" surface — was white, now raised */
+    --line:       #272729;          /* borders on light(ish) surfaces */
+    --line-dark:  #272729;          /* borders on dark surfaces */
+    --accent:     #3EDE6F;          /* THE mint accent */
+    --accent-soft: rgba(62,222,111,0.12);
+    --blue:       #052A18;          /* deep mint, used as callout bg */
+    --muted:      #8E8E90;
+    --muted-dark: #ABADAE;
+
+    --display: "Roboto", Arial, Helvetica, system-ui, sans-serif;
+    --sans:    "Inter Tight", "Inter", Arial, Helvetica, system-ui, sans-serif;
+    --mono:    ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+    --max: 1240px;
+    --pad: clamp(20px, 4vw, 56px);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans);
+    background: var(--ink);
+    color: var(--cream);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.5;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+
+  /* ─────────── Top utility bar ─────────── */
+  .util { background: #000; color: var(--cream-2); font-size: 13px; border-bottom: 1px solid var(--line-dark); }
+  .util-inner {
+    max-width: var(--max); margin: 0 auto;
+    padding: 10px var(--pad);
+    display: flex; justify-content: flex-end; gap: 28px;
+  }
+  .util a { opacity: .75; transition: opacity .15s; }
+  .util a:hover { opacity: 1; color: var(--accent); }
+
+  /* ─────────── Main nav ─────────── */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(10,12,16,0.78);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line-dark);
+  }
+  .nav-inner {
+    max-width: var(--max); margin: 0 auto;
+    padding: 18px var(--pad);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .logo {
+    font-family: var(--display);
+    font-weight: 700; font-size: 22px;
+    letter-spacing: -0.02em;
+    display: flex; align-items: center; gap: 10px;
+    color: var(--cream);
+  }
+  .logo-mark {
+    width: 32px; height: 32px;
+    background: var(--accent); color: #052A18;
+    border-radius: 9px;
+    display: grid; place-items: center;
+    box-shadow: 0 0 24px rgba(62,222,111,0.45);
+  }
+  .logo-mark svg { width: 18px; height: 18px; }
+  .nav-links { display: flex; gap: 28px; align-items: center; font-size: 14px; }
+  .nav-links a { opacity: .7; transition: opacity .15s, color .15s; color: var(--cream); }
+  .nav-links a:hover, .nav-links a.active { opacity: 1; color: var(--accent); }
+  .nav-cta {
+    background: var(--accent); color: #052A18 !important;
+    padding: 10px 18px; border-radius: 999px;
+    font-size: 14px; font-weight: 600; opacity: 1 !important;
+    transition: transform .15s, background .15s, box-shadow .15s;
+    box-shadow: 0 2px 4px 0 rgba(40,140,95,0.22);
+  }
+  .nav-cta:hover { background: #47ED7D; transform: translateY(-1px); color: #052A18 !important; }
+  @media (max-width: 820px) {
+    .nav-links a:not(.nav-cta):not(.active) { display: none; }
+  }
+
+  /* ─────────── Section sub-nav (3-tab) ─────────── */
+  .subnav { border-bottom: 1px solid var(--line-dark); background: var(--ink); }
+  .subnav-inner {
+    max-width: var(--max); margin: 0 auto;
+    padding: 0 var(--pad);
+    display: flex; gap: 8px; overflow-x: auto;
+  }
+  .subnav a {
+    padding: 18px 4px; margin-right: 24px;
+    font-size: 14px; color: var(--muted);
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: color .15s, border-color .15s;
+  }
+  .subnav a:hover { color: var(--cream); }
+  .subnav a.current {
+    color: var(--cream);
+    border-bottom-color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* ─────────── Hero ─────────── */
+  .hero {
+    padding: 96px var(--pad) 88px;
+    max-width: var(--max); margin: 0 auto;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: 40px; right: -120px;
+    width: 720px; height: 720px;
+    background: radial-gradient(45% 45% at 35% 35%,
+                rgba(62, 222, 111, 0.32) 0%,
+                rgba(62, 222, 111, 0.14) 35%,
+                rgba(62, 222, 111, 0.04) 60%,
+                transparent 75%);
+    mix-blend-mode: screen;
+    filter: blur(20px);
+    z-index: 0; pointer-events: none;
+  }
+  .hero::after {
+    content: "";
+    position: absolute; inset: 0;
+    background-image: radial-gradient(circle, #272729 1px, transparent 1.2px);
+    background-size: 28px 28px;
+    opacity: 0.4;
+    z-index: 0; pointer-events: none;
+  }
+  .hero-inner { position: relative; z-index: 1; max-width: 820px; }
+  .eyebrow {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 12px; text-transform: uppercase;
+    letter-spacing: 0.2em; color: var(--accent);
+    margin-bottom: 28px;
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .eyebrow::before { content: ""; width: 24px; height: 1px; background: var(--accent); box-shadow: 0 0 12px var(--accent); }
+  h1.display {
+    font-family: var(--display);
+    font-weight: 900;
+    font-size: clamp(44px, 7vw, 88px);
+    line-height: 0.92;
+    letter-spacing: -0.025em;
+    margin-bottom: 28px;
+    color: var(--cream);
+  }
+  h1.display em {
+    font-style: normal;
+    font-weight: 900;
+    color: var(--accent);
+  }
+  .hero-sub {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(17px, 1.4vw, 20px);
+    color: var(--muted-dark);
+    max-width: 620px;
+    margin-bottom: 40px;
+    line-height: 1.55;
+  }
+  .cta-row { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 24px; border-radius: 999px;
+    font-family: var(--sans);
+    font-size: 15px; font-weight: 600;
+    transition: transform .15s, background .15s, border-color .15s, color .15s;
+    cursor: pointer; border: none;
+  }
+  .btn-primary {
+    background: var(--accent); color: #052A18;
+    box-shadow: 0 2px 4px 0 rgba(40,140,95,0.22);
+  }
+  .btn-primary:hover { background: #47ED7D; transform: translateY(-1px); }
+  .btn-secondary {
+    background: transparent; color: var(--cream);
+    border: 1px solid var(--line-dark);
+  }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+  .btn .arrow { transition: transform .15s; }
+  .btn:hover .arrow { transform: translateX(3px); }
+
+  /* ─────────── Section primitives ─────────── */
+  section { padding: 96px var(--pad); }
+  .section-inner { max-width: var(--max); margin: 0 auto; }
+  .kicker {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 12px; text-transform: uppercase;
+    letter-spacing: 0.2em; color: var(--accent);
+    margin-bottom: 18px;
+  }
+  h2.section-title {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(34px, 4.6vw, 56px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    max-width: 880px;
+    margin-bottom: 24px;
+    color: var(--cream);
+  }
+  .section-lede {
+    font-family: var(--display);
+    font-size: 18px; color: var(--muted-dark);
+    max-width: 720px; line-height: 1.55;
+    margin-bottom: 56px;
+  }
+
+  /* ─────────── Tracks grid (5 equal) ─────────── */
+  .tracks {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 0;
+    border-top: 1px solid var(--line-dark);
+    border-left: 1px solid var(--line-dark);
+  }
+  .track {
+    background: var(--ink-2);
+    border-right: 1px solid var(--line-dark);
+    border-bottom: 1px solid var(--line-dark);
+    padding: 32px 28px 36px;
+    display: flex; flex-direction: column;
+    transition: background .2s;
+    position: relative;
+  }
+  .track:hover { background: #1C1C1E; }
+  .track-num {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 11px; color: var(--muted);
+    letter-spacing: 0.2em; text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+  .track-icon {
+    width: 36px; height: 36px;
+    display: grid; place-items: center;
+    color: var(--accent);
+    margin-bottom: 24px;
+  }
+  .track-icon svg { width: 28px; height: 28px; }
+  .track-title {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 26px;
+    letter-spacing: -0.01em;
+    margin-bottom: 14px;
+    line-height: 1.05;
+    color: var(--cream);
+  }
+  .track-tag {
+    font-family: var(--display);
+    font-size: 14px; color: var(--muted-dark);
+    margin-bottom: 24px; line-height: 1.5;
+  }
+  .track-list {
+    list-style: none; padding: 0; margin: 0 0 28px 0;
+    flex-grow: 1;
+  }
+  .track-list li {
+    font-size: 14px; color: var(--cream);
+    padding: 10px 0;
+    border-top: 1px solid var(--line-dark);
+    line-height: 1.45;
+  }
+  .track-list li:last-child { border-bottom: 1px solid var(--line-dark); }
+  .track-cta {
+    font-size: 13px; color: var(--accent);
+    font-weight: 600;
+    display: inline-flex; align-items: center; gap: 6px;
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 2px;
+    align-self: flex-start;
+  }
+  .track-cta:hover { color: #47ED7D; border-color: #47ED7D; }
+
+  /* ─────────── Build/Sell/Market/Scale (was the dark section — now mint-tinted dark) ─────────── */
+  .bsms-section { background: #000; color: var(--cream); position: relative; overflow: hidden; }
+  .bsms-section::before {
+    content: ""; position: absolute;
+    left: -300px; top: -200px;
+    width: 1100px; height: 1100px;
+    background: radial-gradient(45% 45% at 35% 35%,
+                rgba(62,222,111,0.22) 0%,
+                rgba(62,222,111,0.08) 35%,
+                transparent 70%);
+    mix-blend-mode: screen; filter: blur(20px);
+    z-index: 0; pointer-events: none;
+  }
+  .bsms-section .section-inner { position: relative; z-index: 1; }
+  .bsms-section .kicker { color: var(--accent); }
+  .bsms-section .section-lede { color: var(--muted-dark); }
+  .bsms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1px;
+    background: var(--line-dark);
+    border: 1px solid var(--line-dark);
+  }
+  .bsms-cell {
+    background: var(--ink-2);
+    padding: 36px 32px;
+    display: flex; flex-direction: column;
+  }
+  .bsms-cell h3 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 28px;
+    margin-bottom: 14px;
+    letter-spacing: -0.01em;
+    color: var(--cream);
+  }
+  .bsms-cell h3 .dot {
+    display: inline-block;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-right: 12px;
+    vertical-align: middle;
+    margin-top: -4px;
+    box-shadow: 0 0 16px var(--accent);
+  }
+  .bsms-cell p {
+    font-family: var(--display);
+    color: var(--muted-dark);
+    font-size: 14px;
+    margin-bottom: 22px;
+    line-height: 1.55;
+  }
+  .bsms-cell ul {
+    list-style: none; padding: 0; margin: 0;
+  }
+  .bsms-cell li {
+    font-size: 14px;
+    padding: 12px 0;
+    border-top: 1px solid var(--line-dark);
+    color: var(--cream);
+    display: flex; gap: 10px;
+  }
+  .bsms-cell li::before {
+    content: "→";
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  /* ─────────── Why partners (4 cards) ─────────── */
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 0;
+    border-top: 1px solid var(--line-dark);
+    border-left: 1px solid var(--line-dark);
+  }
+  .why {
+    background: var(--ink-2);
+    border-right: 1px solid var(--line-dark);
+    border-bottom: 1px solid var(--line-dark);
+    padding: 36px 32px;
+    display: flex; flex-direction: column;
+  }
+  .why-icon {
+    width: 36px; height: 36px;
+    color: var(--accent);
+    margin-bottom: 28px;
+  }
+  .why-icon svg { width: 100%; height: 100%; }
+  .why h3 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 26px;
+    letter-spacing: -0.01em;
+    margin-bottom: 14px;
+    line-height: 1.1;
+    color: var(--cream);
+  }
+  .why p {
+    font-family: var(--display);
+    color: var(--muted-dark); font-size: 14px;
+    line-height: 1.55; margin-bottom: 22px;
+  }
+  .why ul { list-style: none; padding: 0; margin: 0; }
+  .why li {
+    font-size: 14px;
+    padding: 12px 0;
+    border-top: 1px solid var(--line-dark);
+    color: var(--cream);
+  }
+
+  /* ─────────── Specializations ─────────── */
+  .spec-section { background: #000; }
+  .spec-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+  .spec {
+    border: 1px solid var(--line-dark);
+    background: var(--ink-2);
+    padding: 36px 32px;
+    display: flex; flex-direction: column;
+    transition: border-color .15s, box-shadow .15s;
+    border-radius: 12px;
+  }
+  .spec:hover { border-color: var(--accent); box-shadow: 2px 4px 24px -2px rgba(40,110,90,0.4); }
+  .spec-badge {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: rgba(62,222,111,0.12);
+    border: 1px solid rgba(62,222,111,0.4);
+    color: var(--accent);
+    display: grid; place-items: center;
+    margin-bottom: 24px;
+  }
+  .spec-badge svg { width: 22px; height: 22px; }
+  .spec h3 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 24px;
+    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+    color: var(--cream);
+  }
+  .spec p {
+    font-family: var(--display);
+    color: var(--muted-dark); font-size: 14px;
+    line-height: 1.55; margin-bottom: 22px;
+    flex-grow: 1;
+  }
+  .spec a {
+    font-size: 13px; font-weight: 600;
+    color: var(--accent);
+    border-bottom: 1px solid var(--accent);
+    align-self: flex-start; padding-bottom: 2px;
+  }
+  .spec a:hover { color: #47ED7D; border-color: #47ED7D; }
+
+  /* ─────────── Tracks section background ─────────── */
+  .tracks-section { background: var(--ink); }
+
+  /* ─────────── Case study ─────────── */
+  .case-section { background: #000; }
+  .case {
+    background: var(--ink-2);
+    border: 1px solid var(--line-dark);
+    border-left: 3px solid var(--accent);
+    padding: clamp(40px, 5vw, 64px);
+    margin-bottom: 24px;
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 56px;
+    align-items: start;
+    border-radius: 12px;
+  }
+  @media (max-width: 880px) {
+    .case { grid-template-columns: 1fr; gap: 32px; }
+  }
+  .case-eyebrow {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 12px; text-transform: uppercase;
+    letter-spacing: 0.2em; color: var(--accent);
+    margin-bottom: 18px;
+  }
+  .case h3 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(28px, 3vw, 38px);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    margin-bottom: 20px;
+    color: var(--cream);
+  }
+  .case-intro {
+    font-family: var(--display);
+    color: var(--muted-dark); font-size: 15px; line-height: 1.6;
+  }
+  .case-grid h4 {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    margin-bottom: 8px;
+    margin-top: 22px;
+  }
+  .case-grid h4:first-child { margin-top: 0; }
+  .case-grid p {
+    font-family: var(--display);
+    font-size: 15px;
+    color: var(--cream);
+    line-height: 1.55;
+  }
+  .quote {
+    margin-top: 32px;
+    padding: 24px 0 0;
+    border-top: 1px solid var(--line-dark);
+    font-family: var(--display);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 19px;
+    line-height: 1.45;
+    color: var(--cream);
+  }
+  .quote-attr {
+    font-family: var(--sans);
+    font-style: normal;
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 14px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  /* ─────────── PE / Franchise callout ─────────── */
+  .callout-section { padding: 60px var(--pad); background: var(--ink); }
+  .callout {
+    max-width: var(--max);
+    margin: 0 auto;
+    background: linear-gradient(135deg, #052A18 0%, #0A0C10 100%);
+    border: 1px solid rgba(62,222,111,0.4);
+    color: var(--cream);
+    padding: clamp(40px, 5vw, 60px);
+    border-radius: 16px;
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 48px;
+    align-items: center;
+    box-shadow: 2px 4px 48px -4px rgba(35,120,95,0.26);
+    position: relative; overflow: hidden;
+  }
+  .callout::before {
+    content: ""; position: absolute;
+    right: -200px; top: -150px;
+    width: 600px; height: 600px;
+    background: radial-gradient(45% 45% at 35% 35%,
+                rgba(62,222,111,0.32) 0%,
+                rgba(62,222,111,0.10) 40%,
+                transparent 70%);
+    mix-blend-mode: screen; filter: blur(20px);
+    pointer-events: none;
+  }
+  .callout > * { position: relative; z-index: 1; }
+  @media (max-width: 760px) {
+    .callout { grid-template-columns: 1fr; gap: 24px; }
+  }
+  .callout h3 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(26px, 3vw, 38px);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    margin-bottom: 18px;
+    color: var(--cream);
+  }
+  .callout p {
+    font-family: var(--display);
+    color: var(--muted-dark);
+    font-size: 16px; line-height: 1.55;
+  }
+  .callout .btn-primary {
+    background: var(--accent); color: #052A18;
+  }
+  .callout .btn-primary:hover { background: #47ED7D; }
+
+  /* ─────────── Form ─────────── */
+  .form-section { background: var(--ink-2); }
+  .form-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 80px;
+    max-width: var(--max);
+    margin: 0 auto;
+  }
+  @media (max-width: 880px) {
+    .form-grid { grid-template-columns: 1fr; gap: 40px; }
+  }
+  .form-grid p {
+    font-family: var(--display);
+    color: var(--muted-dark); font-size: 16px; line-height: 1.55; margin-bottom: 16px;
+  }
+  .form-grid p a { color: var(--accent); border-bottom: 1px solid var(--accent); }
+  form { display: flex; flex-direction: column; gap: 22px; }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 540px) { .form-row { grid-template-columns: 1fr; } }
+  label {
+    font-family: var(--sans);
+    font-size: 13px; color: var(--cream);
+    font-weight: 600;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  label .hint {
+    font-size: 12px; color: var(--muted);
+    font-weight: 400;
+  }
+  input, select, textarea {
+    font-family: var(--sans);
+    font-size: 15px;
+    padding: 12px 14px;
+    border: 1px solid var(--line-dark);
+    background: #000;
+    border-radius: 8px;
+    color: var(--cream);
+    outline: none;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  input::placeholder, textarea::placeholder { color: var(--muted); }
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(62,222,111,0.24);
+  }
+  textarea { resize: vertical; min-height: 100px; }
+  select option { background: var(--ink-2); color: var(--cream); }
+  .checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 8px;
+  }
+  .checkbox-group label {
+    flex-direction: row; align-items: center; gap: 8px;
+    font-weight: 500; font-size: 14px;
+    padding: 12px 14px;
+    border: 1px solid var(--line-dark);
+    background: #000;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: border-color .15s, background .15s;
+    color: var(--cream);
+  }
+  .checkbox-group label:hover {
+    border-color: var(--accent);
+    background: rgba(62,222,111,0.05);
+  }
+  .checkbox-group input { width: auto; padding: 0; margin: 0; accent-color: var(--accent); }
+  .privacy-note {
+    font-family: var(--display);
+    font-size: 12px; color: var(--muted);
+    line-height: 1.55;
+  }
+  .privacy-note a { border-bottom: 1px solid var(--muted); color: var(--muted-dark); }
+
+  /* ─────────── Footer CTAs ─────────── */
+  .footer-ctas { background: #000; color: var(--cream); border-top: 1px solid var(--line-dark); }
+  .footer-ctas .section-inner {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1px;
+    background: var(--line-dark);
+    border: 1px solid var(--line-dark);
+  }
+  .fcta {
+    background: #000;
+    padding: 40px 36px;
+    display: flex; flex-direction: column; gap: 14px;
+    transition: background .2s;
+  }
+  .fcta:hover { background: var(--ink-2); }
+  .fcta h3 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 26px;
+    letter-spacing: -0.015em;
+    line-height: 1.1;
+    color: var(--cream);
+  }
+  .fcta p {
+    font-family: var(--display);
+    color: var(--muted-dark);
+    font-size: 14px; line-height: 1.5;
+    flex-grow: 1;
+  }
+  .fcta a {
+    font-size: 14px;
+    color: var(--accent);
+    border-bottom: 1px solid var(--accent);
+    align-self: flex-start;
+    padding-bottom: 2px;
+    font-weight: 600;
+  }
+  .fcta a:hover { color: #47ED7D; border-color: #47ED7D; }
+
+  /* ─────────── Site footer ─────────── */
+  footer.site {
+    background: #000;
+    color: var(--muted);
+    padding: 32px var(--pad);
+    border-top: 1px solid var(--line-dark);
+    font-size: 13px;
+  }
+  footer.site .inner {
+    max-width: var(--max); margin: 0 auto;
+    display: flex; justify-content: space-between; gap: 24px;
+    flex-wrap: wrap;
+  }
+  footer.site a { opacity: .8; }
+  footer.site a:hover { opacity: 1; color: var(--accent); }
+
+  /* Force any inline-styled accent overrides into mint */
+  [style*="--accent"] em,
+  em[style*="color: var(--accent)"] {
+    color: var(--accent) !important;
+    font-style: normal !important;
+  }
+</style>
+
+<link rel="stylesheet" href="colors_and_type.css">
+</head>
+<body>
+
+<!-- ─────────── Top utility bar ─────────── -->
+<div class="util">
+  <div class="util-inner">
+    <a href="#">Contact us</a>
+    <a href="#">Partner directory</a>
+    <a href="#">Sign in</a>
+  </div>
+</div>
+
+<!-- ─────────── Main nav ─────────── -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      <span class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+          <path d="M3 12h2"/><path d="M7 8v8"/><path d="M11 5v14"/><path d="M15 9v6"/><path d="M19 11v2"/>
+        </svg>
+      </span>
+      SalesAI
+    </a>
+    <div class="nav-links">
+      <a href="#">Product</a>
+      <a href="#">Industries</a>
+      <a href="#">Customers</a>
+      <a href="#">Pricing</a>
+      <a href="partners.html">Partners</a>
+      <a href="#" class="nav-cta">Book a demo →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ─────────── Section sub-nav ─────────── -->
+<div class="subnav">
+  <div class="subnav-inner">
+    <a href="partners.html">Work with a partner</a>
+    <a href="become-a-partner.html" class="current">Become a partner</a>
+    <a href="#">Partner login</a>
+  </div>
+</div>
+
+<!-- ─────────── Hero ─────────── -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">SalesAI Partner Program</div>
+    <h1 class="display">Partner with SalesAI to grow with <em>home services</em>.</h1>
+    <p class="hero-sub">
+      Join a community of partners building, recommending, and selling voice AI for the home services industry.
+      Pick the track that fits how you reach contractors — and earn alongside the fastest-converting voice agent in the trades.
+    </p>
+    <div class="cta-row">
+      <a href="#apply" class="btn btn-primary">Get started <span class="arrow">→</span></a>
+      <a href="partners.html" class="btn btn-secondary">View partner directory</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── Partner Tracks ─────────── -->
+<section style="background: var(--paper);">
+  <div class="section-inner">
+    <div class="kicker">Partnering with SalesAI</div>
+    <h2 class="section-title">Five ways to partner. One shared goal: book more jobs for contractors.</h2>
+    <p class="section-lede">
+      Every track maps to a different relationship with the home services contractor — the seller in their pipeline,
+      the agency running their growth, the platform running their operations, the fund that owns them, and the coach
+      they trust. Pick the track that matches how you already work.
+    </p>
+
+    <div class="tracks">
+
+      <!-- 01 SELLERS -->
+      <div class="track">
+        <div class="track-num">01 / Track</div>
+        <div class="track-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M22 11l-3 3-2-2"/>
+          </svg>
+        </div>
+        <div class="track-title">Sellers</div>
+        <div class="track-tag">Independent reps, fractional sales leaders, and channel sellers with home services contractors in their pipeline.</div>
+        <ul class="track-list">
+          <li>Earn recurring commissions on every customer</li>
+          <li>Plug SalesAI into deals where conversion is the objection</li>
+          <li>Self-serve enablement and 24-hour activation</li>
+        </ul>
+        <a href="#apply" class="track-cta">Apply as a seller →</a>
+      </div>
+
+      <!-- 02 AGENCIES -->
+      <div class="track">
+        <div class="track-num">02 / Track</div>
+        <div class="track-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-6"/>
+          </svg>
+        </div>
+        <div class="track-title">Agencies</div>
+        <div class="track-tag">Marketing, PPC, SEO, and growth agencies that own the lead-gen relationship with home services contractors.</div>
+        <ul class="track-list">
+          <li>Bundle SalesAI to capture the leads you already generate</li>
+          <li>White-label and co-branded options</li>
+          <li>Joint pipeline planning and co-marketing</li>
+        </ul>
+        <a href="#apply" class="track-cta">Apply as an agency →</a>
+      </div>
+
+      <!-- 03 FSM -->
+      <div class="track">
+        <div class="track-num">03 / Track</div>
+        <div class="track-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <path d="M2 10h20"/>
+            <path d="M8 4v6"/><path d="M16 4v6"/>
+          </svg>
+        </div>
+        <div class="track-title">FSM Platforms</div>
+        <div class="track-tag">Field service management, dispatch, and CRM platforms serving the trades and looking to embed voice AI.</div>
+        <ul class="track-list">
+          <li>Embed SalesAI as the voice layer of your platform</li>
+          <li>Add 24/7 booking to your contractor base</li>
+          <li>Joint go-to-market and revenue share</li>
+        </ul>
+        <a href="#apply" class="track-cta">Apply as a platform →</a>
+      </div>
+
+      <!-- 04 PRIVATE EQUITY -->
+      <div class="track">
+        <div class="track-num">04 / Track</div>
+        <div class="track-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 21h18"/>
+            <path d="M5 21V8l7-5 7 5v13"/>
+            <path d="M9 21v-6h6v6"/>
+          </svg>
+        </div>
+        <div class="track-title">Private Equity</div>
+        <div class="track-tag">PE funds and operating teams building home services platforms across HVAC, plumbing, and electrical roll-ups.</div>
+        <ul class="track-list">
+          <li>Standardize voice AI across the portfolio</li>
+          <li>Portfolio-level pricing and rollout support</li>
+          <li>Operating partner enablement and benchmarking</li>
+        </ul>
+        <a href="#apply" class="track-cta">Talk to our team →</a>
+      </div>
+
+      <!-- 05 EVERYONE ELSE -->
+      <div class="track">
+        <div class="track-num">05 / Track</div>
+        <div class="track-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 2a15 15 0 0 1 0 20"/>
+            <path d="M12 2a15 15 0 0 0 0 20"/>
+            <path d="M2 12h20"/>
+          </svg>
+        </div>
+        <div class="track-title">Everyone Else</div>
+        <div class="track-tag">Coaches, masterminds, franchise systems, lead marketplaces, and other influence partners across the industry.</div>
+        <ul class="track-list">
+          <li>Custom partnership structures by relationship</li>
+          <li>Co-branded offerings to your member base</li>
+          <li>Referral economics and white-label paths</li>
+        </ul>
+        <a href="#apply" class="track-cta">Tell us how you fit →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── Build / Sell / Market / Scale ─────────── -->
+<section class="bsms-section">
+  <div class="section-inner">
+    <div class="kicker">Partner benefits and resources</div>
+    <h2 class="section-title">Develop your SalesAI go-to-market plan with confidence.</h2>
+    <p class="section-lede">
+      Become an expert at building, marketing, and selling voice AI for home services. As a SalesAI partner, you can
+      onboard your team to the partner portal and access on-demand resources to help you deepen contractor engagement,
+      become more knowledgeable about voice AI, and earn more revenue.
+    </p>
+
+    <div class="bsms-grid">
+      <div class="bsms-cell">
+        <h3><span class="dot"></span>Build</h3>
+        <p>Develop solutions and services with SalesAI. Advance your mastery of voice AI through technical and sales training to establish trust with contractors.</p>
+        <ul>
+          <li>Resources to build your SalesAI practice</li>
+          <li>Live and on-demand sales enablement</li>
+          <li>Technical training and certifications</li>
+        </ul>
+      </div>
+
+      <div class="bsms-cell">
+        <h3><span class="dot"></span>Sell</h3>
+        <p>Submit co-selling opportunities to help close deals faster. Access enablement and account planning to grow your business with SalesAI.</p>
+        <ul>
+          <li>Deal registration for co-selling support</li>
+          <li>Sales enablement and voice AI education</li>
+          <li>Joint account planning and mapping</li>
+        </ul>
+      </div>
+
+      <div class="bsms-cell">
+        <h3><span class="dot"></span>Market</h3>
+        <p>Launch marketing campaigns with prebuilt playbooks, customizable assets, and co-marketing funds to reach new contractors and improve retention.</p>
+        <ul>
+          <li>Co-marketing content and campaign assets</li>
+          <li>SalesAI partner directory listing</li>
+          <li>SalesAI Verified Partner marks and badges</li>
+        </ul>
+      </div>
+
+      <div class="bsms-cell">
+        <h3><span class="dot"></span>Scale</h3>
+        <p>Stay close to our product roadmap and leadership team as we build a long-standing partnership together.</p>
+        <ul>
+          <li>Dedicated portal and partner support</li>
+          <li>Invitations to partner networking events</li>
+          <li>Early access to betas and the rebuild</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── Case Studies ─────────── -->
+<section class="case-section">
+  <div class="section-inner">
+    <div class="kicker">Partner stories</div>
+    <h2 class="section-title">Partners building real outcomes for home services.</h2>
+    <p class="section-lede">Three illustrative examples of how SalesAI partners create value for their contractors and their own books of business. <em style="color: var(--accent); font-style: normal; font-weight: 600;">[Replace with real partner stories as they ship.]</em></p>
+
+    <!-- CASE 1 -->
+    <article class="case">
+      <div>
+        <div class="case-eyebrow">Agency Partner</div>
+        <h3>How [Agency Name] turned PPC spend into booked jobs for 40 home pros.</h3>
+        <p class="case-intro">[Agency Name] is a home services growth agency running paid acquisition for HVAC, plumbing, and electrical contractors across the Southeast.</p>
+        <blockquote class="quote">
+          "We used to lose 30% of the leads we generated to missed calls. With SalesAI on every contractor's line, we finally close the loop on what we're paid to do — generate booked revenue, not clicks."
+          <div class="quote-attr">— [Name], [Title] at [Agency Name]</div>
+        </blockquote>
+      </div>
+      <div class="case-grid">
+        <h4>Challenge</h4>
+        <p>Their contractor clients were burning ad spend on calls that went to voicemail. Booking rate ceiling capped agency retention and ACV.</p>
+        <h4>Solution</h4>
+        <p>Bundled SalesAI as the conversion layer for every PPC engagement, white-labeled inside the agency's reporting.</p>
+        <h4>Impact</h4>
+        <p>Booking rate lifted from 58% to 84% across the contractor cohort. Agency retention up 22%, average ACV up 1.6×.</p>
+      </div>
+    </article>
+
+    <!-- CASE 2 -->
+    <article class="case">
+      <div>
+        <div class="case-eyebrow">FSM Platform Partner</div>
+        <h3>How [FSM Platform] launched 24/7 booking without building a voice product.</h3>
+        <p class="case-intro">[FSM Platform] is a field service management platform serving thousands of small home services operators across North America.</p>
+        <blockquote class="quote">
+          "Building voice AI in-house would have taken us two years and pulled focus from the rest of the platform. SalesAI shipped a category-leading voice layer to our customers in a quarter."
+          <div class="quote-attr">— [Name], [Title] at [FSM Platform]</div>
+        </blockquote>
+      </div>
+      <div class="case-grid">
+        <h4>Challenge</h4>
+        <p>Customers were asking for after-hours booking and overflow call handling. Native build would have taken multiple quarters.</p>
+        <h4>Solution</h4>
+        <p>Embedded SalesAI as the platform's voice layer with revenue share and joint go-to-market.</p>
+        <h4>Impact</h4>
+        <p>Voice AI live for 1,200+ contractors in 90 days. Net new ARR contribution exceeded the platform's previous full-year add-on revenue.</p>
+      </div>
+    </article>
+
+    <!-- CASE 3 -->
+    <article class="case">
+      <div>
+        <div class="case-eyebrow">Private Equity Partner</div>
+        <h3>How [PE Fund] standardized voice AI across a 22-company HVAC platform.</h3>
+        <p class="case-intro">[PE Fund] operates a roll-up of regional HVAC and plumbing operators across the Southeast and Midwest, with a focus on EBITDA expansion through operational standardization.</p>
+        <blockquote class="quote">
+          "Voice AI was on our hit list for portfolio standardization. SalesAI gave us one contract, one rollout playbook, and benchmark visibility across every company we own."
+          <div class="quote-attr">— [Name], Operating Partner at [PE Fund]</div>
+        </blockquote>
+      </div>
+      <div class="case-grid">
+        <h4>Challenge</h4>
+        <p>22 portfolio operators running fragmented call answering — some on internal CSRs, some on legacy services. No standard, no benchmark.</p>
+        <h4>Solution</h4>
+        <p>Master agreement with portfolio-level pricing. Phased rollout from one operator to all 22 over six months.</p>
+        <h4>Impact</h4>
+        <p>Average booking rate across the portfolio rose seven points. Cost per booked job dropped 31%. Standardized reporting now feeds the operating partner dashboard.</p>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ─────────── PE / Coaches Callout ─────────── -->
+<section class="callout-section">
+  <div class="callout">
+    <div>
+      <h3>Private equity, franchise systems, and coaching networks</h3>
+      <p>Unlock SalesAI pricing, joint go-to-market, and standardized rollout across your portfolio companies, franchisees, or member base. Built for operators with scale.</p>
+    </div>
+    <div>
+      <a href="#apply" class="btn btn-primary">Talk to our team <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── Application Form ─────────── -->
+<section class="form-section" id="apply">
+  <div class="form-grid">
+    <div>
+      <div class="kicker">Apply</div>
+      <h2 class="section-title" style="font-size: clamp(28px, 3.6vw, 44px);">Interested in becoming a SalesAI partner?</h2>
+      <p>Tell us about yourself to start your journey to become a SalesAI partner. Questions? Reach out to us at <a href="mailto:partners@salesai.com">partners@salesai.com</a>.</p>
+    </div>
+    <form>
+      <div class="form-row">
+        <label>First name <input type="text" placeholder="Jane" required /></label>
+        <label>Last name <input type="text" placeholder="Diaz" required /></label>
+      </div>
+      <label>
+        Company website
+        <input type="url" placeholder="example.com" required />
+      </label>
+      <label>
+        Work email
+        <input type="email" placeholder="jane@example.com" required />
+      </label>
+      <label>
+        Country / Region
+        <select required>
+          <option value="">Select country</option>
+          <option>United States</option>
+          <option>Canada</option>
+          <option>United Kingdom</option>
+          <option>Australia</option>
+          <option>Other</option>
+        </select>
+      </label>
+      <label>
+        Which track are you interested in?
+        <span class="hint">Select the track that best matches how you work with home services contractors.</span>
+        <select required>
+          <option value="">Select a track</option>
+          <option>Sellers</option>
+          <option>Agencies</option>
+          <option>FSM Platforms</option>
+          <option>Private Equity</option>
+          <option>Everyone Else</option>
+        </select>
+      </label>
+      <label>
+        What is your ideal partnership model with SalesAI?
+        <span class="hint">Select all that apply.</span>
+      </label>
+      <div class="checkbox-group">
+        <label><input type="checkbox" /> Refer customers</label>
+        <label><input type="checkbox" /> Resell SalesAI</label>
+        <label><input type="checkbox" /> Co-sell with SalesAI</label>
+        <label><input type="checkbox" /> White-label SalesAI</label>
+        <label><input type="checkbox" /> Embed via integration</label>
+        <label><input type="checkbox" /> Portfolio rollout</label>
+      </div>
+      <label>
+        Why are you interested in partnering with SalesAI?
+        <span class="hint">Describe the home services contractors you work with and the partnership you want to build.</span>
+        <textarea placeholder="Tell us about your business and the opportunity you see..."></textarea>
+      </label>
+      <p class="privacy-note">
+        You may receive marketing communications from SalesAI. You can opt out at any time. SalesAI will handle your data pursuant to its <a href="#">Privacy Policy</a>.
+      </p>
+      <button type="submit" class="btn btn-primary" style="align-self: flex-start;">
+        Submit <span class="arrow">→</span>
+      </button>
+    </form>
+  </div>
+</section>
+
+<!-- ─────────── Footer CTAs ─────────── -->
+<section class="footer-ctas">
+  <div class="section-inner">
+    <div class="fcta">
+      <h3>Explore the partner ecosystem</h3>
+      <p>Discover how SalesAI partners help home services operators of all sizes.</p>
+      <a href="partners.html">View partner directory →</a>
+    </div>
+    <div class="fcta">
+      <h3>Already a SalesAI partner?</h3>
+      <p>Manage your benefits, deals, and enablement in the partner portal.</p>
+      <a href="#">Log in →</a>
+    </div>
+    <div class="fcta">
+      <h3>View partner requirements</h3>
+      <p>See what it takes to become a SalesAI partner across each track.</p>
+      <a href="#">View requirements →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── Site footer ─────────── -->
+<footer class="site">
+  <div class="inner">
+    <div>© 2026 SalesAI</div>
+    <div style="display: flex; gap: 24px;">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="#">Security</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (async () => {
+    if (document.fonts && document.fonts.ready) {
+      await document.fonts.ready;
+    }
+    setTimeout(() => window.print(), 500);
+  })();
+</script>
+</body>
+</html>

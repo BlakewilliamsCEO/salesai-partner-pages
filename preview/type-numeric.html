@@ -1,0 +1,28 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { padding: 24px; background: var(--surface-page); display: flex; gap: 24px; align-items: center; }
+  .card { min-width: 240px; background: var(--neutral-900); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 20px; }
+  .eyebrow-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+  .value-row { display: flex; gap: 16px; align-items: flex-end; }
+  .delta { display: inline-flex; align-items: center; gap: 4px; padding: 2px 6px; border-radius: 4px; background: rgba(62,222,111,0.08); }
+  .delta svg { width: 10px; height: 10px; }
+  .tf { font: var(--type-body-sm-reg); color: var(--fg-2); }
+</style></head>
+<body>
+  <div class="card">
+    <div class="eyebrow-row"><span class="eyebrow">ANSWERED CALLS</span><span class="tf">Last 30 days</span></div>
+    <div class="value-row">
+      <span class="metric-value">1,089</span>
+      <span class="delta metric-delta up">
+        <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6 L5 3 L8 6"/></svg>
+        12.3%
+      </span>
+    </div>
+  </div>
+  <div style="font: var(--type-body-sm-reg); color: var(--fg-2); max-width: 280px;">
+    Eyebrow: <b style="color:var(--fg-1);">Inter Tight Semi 12</b>, tracked 0.2px, muted.
+    Value: <b style="color:var(--fg-1);">Roboto Bold 28</b>, lh 0.88 (brand-compliant).
+    Delta: <b style="color:var(--fg-1);">Inter Tight Med 12</b>.
+  </div>
+</body></html>

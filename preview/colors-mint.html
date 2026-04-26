@@ -1,0 +1,19 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { padding: 20px; background: var(--surface-page); }
+  .row { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
+  .swatch { aspect-ratio: 1/1; border-radius: 8px; display: flex; flex-direction: column; justify-content: flex-end; padding: 8px; border: 1px solid var(--border-subtle); }
+  .name { font: var(--type-body-xs); color: var(--fg-1); }
+  .hex  { font: var(--type-body-xs); color: var(--fg-2); }
+</style></head>
+<body>
+  <div class="row">
+    <div class="swatch" style="background: var(--mint-default);"><span class="name" style="color: var(--fg-on-brand);">default</span><span class="hex" style="color: #052A18;">#3EDE6F</span></div>
+    <div class="swatch" style="background: var(--mint-hover);"><span class="name" style="color: var(--fg-on-brand);">hover</span><span class="hex" style="color: #052A18;">#47ED7D</span></div>
+    <div class="swatch" style="background: var(--mint-pressed);"><span class="name" style="color: var(--fg-on-brand);">pressed</span><span class="hex" style="color: #052A18;">#6DF79A</span></div>
+    <div class="swatch" style="background: var(--mint-strong);"><span class="name" style="color: #052A18;">strong</span><span class="hex" style="color: #052A18;">#21B873</span></div>
+    <div class="swatch" style="background: var(--mint-240);"><span class="name">/24%</span><span class="hex">alpha</span></div>
+    <div class="swatch" style="background: var(--mint-deep);"><span class="name">deep</span><span class="hex">#052A18</span></div>
+  </div>
+</body></html>

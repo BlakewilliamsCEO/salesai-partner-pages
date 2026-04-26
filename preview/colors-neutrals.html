@@ -1,0 +1,21 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { padding: 20px; background: var(--surface-page); }
+  .row { display: grid; grid-template-columns: repeat(8, 1fr); gap: 6px; }
+  .swatch { aspect-ratio: 1/1; border-radius: 8px; display: flex; flex-direction: column; justify-content: flex-end; padding: 6px; border: 1px solid var(--border-subtle); }
+  .name { font: var(--type-body-xs); color: var(--fg-1); }
+  .hex { font: 400 10px/12px var(--font-sans); color: var(--fg-2); }
+</style></head>
+<body>
+  <div class="row">
+    <div class="swatch" style="background: var(--neutral-1000);"><span class="name">1000</span><span class="hex">#0A0C10</span></div>
+    <div class="swatch" style="background: var(--neutral-950);"><span class="name">950</span><span class="hex">#0E0E10</span></div>
+    <div class="swatch" style="background: var(--neutral-900);"><span class="name">900</span><span class="hex">#141416</span></div>
+    <div class="swatch" style="background: var(--neutral-800);"><span class="name">800</span><span class="hex">#202022</span></div>
+    <div class="swatch" style="background: var(--neutral-750);"><span class="name">750</span><span class="hex">#272729</span></div>
+    <div class="swatch" style="background: var(--neutral-600);"><span class="name">600</span><span class="hex">#4E4F50</span></div>
+    <div class="swatch" style="background: var(--neutral-400);"><span class="name" style="color:#0E0E10;">400</span><span class="hex" style="color:#0E0E10;">#8E8E90</span></div>
+    <div class="swatch" style="background: var(--neutral-100);"><span class="name" style="color:#0E0E10;">100</span><span class="hex" style="color:#0E0E10;">#F5F5F7</span></div>
+  </div>
+</body></html>

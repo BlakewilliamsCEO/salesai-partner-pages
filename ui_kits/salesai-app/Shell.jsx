@@ -1,0 +1,165 @@
+/* eslint-disable */
+/* useState is declared in ui.jsx (loaded first) and lives on the shared Babel scope. */
+
+/* Inline SalesAi lockup (logomark + wordmark) — must be inline (not <img>) so the
+   wordmark glyphs inherit `color` (Brand Guidelines p.6: logomark stays mint #3EDE6F,
+   wordmark recolors per context).
+   Paths lifted verbatim from assets/logos/salesai-lockup.svg. */
+const Lockup = ({ height = 22, wordmarkColor = "var(--fg-1)", markColor = "var(--mint-default)" }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 97 24"
+    style={{ height, width: "auto", display: "block" }}
+    aria-label="SalesAi"
+  >
+    {/* Logomark (mint green) — rounded square flag */}
+    <path d="M6.4466 0C2.89154 0 0 2.88167 0 6.42461V8.7534H15.2166V23.9181H17.5534C21.1085 23.9181 24 21.0365 24 17.4935V0H6.4466ZM17.8951 21.2311V6.08403H2.69625C2.86935 4.17323 4.4871 2.67158 6.4466 2.67158H21.3193V17.4935C21.3193 19.4486 19.8125 21.0586 17.8951 21.2311Z" fill={markColor}/>
+    {/* Logomark — circle/lens */}
+    <path d="M10.1859 13.787C9.06742 12.7033 7.58948 12.104 6.0272 12.104C5.99835 12.104 5.9695 12.104 5.94065 12.104C4.34509 12.1261 2.85383 12.7652 1.74426 13.902C-0.55033 16.2551 -0.49707 20.028 1.86188 22.317C2.98032 23.4007 4.45827 24 6.02276 24C6.05161 24 6.08046 24 6.10931 24C7.70487 23.9779 9.19613 23.3387 10.3057 22.202C11.4153 21.0652 12.0144 19.5614 11.9922 17.9713C11.9678 16.3789 11.3265 14.8927 10.1859 13.787ZM9.22498 18.0066C9.23608 18.8603 8.91652 19.6653 8.31957 20.2757C7.72484 20.8861 6.92373 21.2289 6.06714 21.24C6.05161 21.24 6.03608 21.24 6.02054 21.24C5.17949 21.24 4.39169 20.9215 3.79031 20.3376C3.17782 19.7449 2.83386 18.9466 2.82276 18.0929C2.81167 17.2392 3.13122 16.4342 3.72817 15.8238C4.35619 15.1803 5.19059 14.8596 6.02498 14.8596C6.83053 14.8596 7.63608 15.1604 8.25744 15.7619C8.8677 16.3568 9.21167 17.153 9.22498 18.0066Z" fill={markColor}/>
+    {/* Wordmark "salesai" */}
+    <path d="M43.0406 15.2165C43.0406 14.7717 42.8797 14.4246 42.5599 14.1752C42.2402 13.9258 41.6748 13.6701 40.8681 13.4041C40.0613 13.138 39.4007 12.8803 38.8882 12.6329C37.2218 11.8285 36.3875 10.7248 36.3875 9.31976C36.3875 8.6193 36.595 8.00198 37.01 7.4678C37.4251 6.93362 38.0137 6.51584 38.7739 6.21861C39.5341 5.92138 40.3874 5.77173 41.336 5.77173C42.2614 5.77173 43.0893 5.93386 43.8241 6.2581C44.5588 6.58235 45.1284 7.04378 45.535 7.6424C45.9415 8.24101 46.1448 8.92484 46.1448 9.69389H43.0512C43.0512 9.17842 42.8903 8.77934 42.5705 8.49667C42.2487 8.21399 41.8146 8.07265 41.2662 8.07265C40.7114 8.07265 40.2752 8.1932 39.9533 8.43223C39.6315 8.67126 39.4727 8.97681 39.4727 9.34678C39.4727 9.67103 39.6484 9.9641 40.002 10.2281C40.3556 10.492 40.9761 10.7623 41.8675 11.0429C42.7569 11.3235 43.4874 11.6248 44.0591 11.9491C45.4503 12.7348 46.1448 13.8198 46.1448 15.202C46.1448 16.3057 45.7213 17.1745 44.8722 17.8043C44.0231 18.4341 42.8606 18.75 41.3826 18.75C40.3408 18.75 39.3964 18.5671 38.5494 18.1992C37.7046 17.8313 37.0672 17.3283 36.6416 16.6902C36.2139 16.0521 36 15.3163 36 14.4828H39.1106C39.1106 15.1604 39.2884 15.6572 39.6442 15.9793C39.9999 16.2994 40.5801 16.4616 41.3805 16.4616C41.8929 16.4616 42.2974 16.3535 42.5959 16.1373C42.8945 15.9211 43.0406 15.6094 43.0406 15.2165Z" fill={wordmarkColor}/>
+    <path d="M52.98 18.5733C52.8741 18.382 52.7788 18.1014 52.6963 17.7314C52.1478 18.409 51.3834 18.7458 50.3988 18.7458C49.4968 18.7458 48.7323 18.4776 48.1013 17.9435C47.4703 17.4093 47.1548 16.7358 47.1548 15.9273C47.1548 14.9088 47.5381 14.1398 48.3046 13.6201C49.0711 13.1005 50.1849 12.8386 51.6439 12.8386H52.5629V12.3419C52.5629 11.4751 52.1838 11.0428 51.4237 11.0428C50.7164 11.0428 50.3628 11.3857 50.3628 12.0716H47.3856C47.3856 11.1654 47.7795 10.4296 48.5651 9.86218C49.3507 9.29682 50.3543 9.01207 51.574 9.01207C52.7937 9.01207 53.7571 9.30306 54.4643 9.88712C55.1716 10.4712 55.5337 11.2714 55.5506 12.2899V16.4448C55.5633 17.3074 55.6988 17.9663 55.9572 18.4215V18.5691H52.98V18.5733ZM51.1166 16.6652C51.4872 16.6652 51.7963 16.5862 52.0398 16.4303C52.2834 16.2744 52.4591 16.0977 52.565 15.9003V14.3996H51.6989C50.6614 14.3996 50.1447 14.8569 50.1447 15.7693C50.1447 16.0354 50.2358 16.2515 50.4179 16.4157C50.6 16.5841 50.8329 16.6652 51.1166 16.6652Z" fill={wordmarkColor}/>
+    <path d="M60.3424 18.5733H57.3547V5.25H60.3424V18.5733Z" fill={wordmarkColor}/>
+    <path d="M66.8008 18.7478C65.3334 18.7478 64.1476 18.3176 63.2392 17.4592C62.3329 16.6007 61.8777 15.4825 61.8777 14.1065V13.8633C61.8777 12.903 62.0598 12.0571 62.4218 11.3213C62.7839 10.5876 63.3133 10.0181 64.0078 9.61691C64.7024 9.21575 65.5282 9.01414 66.481 9.01414C67.8235 9.01414 68.8844 9.42361 69.6615 10.2425C70.4386 11.0615 70.8282 12.2005 70.8282 13.6638V14.8007H64.9078C65.0136 15.3266 65.2466 15.7402 65.6065 16.0416C65.9665 16.343 66.4302 16.4926 67.0019 16.4926C67.9442 16.4926 68.6811 16.1684 69.2105 15.522L70.572 17.1017C70.2014 17.6047 69.6742 18.0058 68.9945 18.303C68.3169 18.5982 67.5842 18.7478 66.8008 18.7478ZM66.4662 11.2693C65.5938 11.2693 65.075 11.8368 64.912 12.9696H67.9167V12.743C67.9294 12.2753 67.8087 11.9116 67.5546 11.6539C67.2984 11.3982 66.9363 11.2693 66.4662 11.2693Z" fill={wordmarkColor}/>
+    <path d="M77.0344 15.9377C77.0344 15.6883 76.901 15.4887 76.6364 15.3391C76.3717 15.1894 75.8677 15.0335 75.1245 14.8714C74.3812 14.7093 73.7693 14.4973 73.2865 14.2333C72.8037 13.9693 72.4353 13.6513 72.1812 13.2751C71.9271 12.8989 71.8022 12.4686 71.8022 11.9823C71.8022 11.1197 72.1643 10.4109 72.8884 9.85178C73.6126 9.29474 74.5612 9.01414 75.7343 9.01414C76.9942 9.01414 78.0085 9.29474 78.775 9.85594C79.5415 10.4171 79.9248 11.155 79.9248 12.0675H76.937C76.937 11.3151 76.5326 10.9388 75.7258 10.9388C75.4146 10.9388 75.152 11.0241 74.9403 11.1945C74.7285 11.3649 74.6226 11.577 74.6226 11.8326C74.6226 12.0924 74.7518 12.3044 75.0123 12.4666C75.2706 12.6287 75.6856 12.7617 76.2531 12.8656C76.8206 12.9696 77.3203 13.0943 77.7501 13.2377C79.1879 13.7241 79.9057 14.5929 79.9057 15.8483C79.9057 16.7047 79.5182 17.401 78.7432 17.9393C77.9682 18.4776 76.9646 18.7458 75.7343 18.7458C74.9148 18.7458 74.1843 18.6003 73.5427 18.3114C72.9011 18.0224 72.3993 17.6296 72.0414 17.1308C71.6815 16.634 71.5015 16.1102 71.5015 15.5615H74.286C74.2987 15.9959 74.4448 16.3118 74.7285 16.5114C75.0123 16.7109 75.3743 16.8107 75.8148 16.8107C76.2213 16.8107 76.5262 16.7296 76.7295 16.5675C76.9328 16.4074 77.0344 16.1975 77.0344 15.9377Z" fill={wordmarkColor}/>
+    <path d="M88.742 16.2141H84.4922L83.749 18.5733H80.4352L85.1529 5.94418H88.0686L92.8224 18.5733H89.4916L88.742 16.2141ZM85.2355 13.8633H88.0009L86.6139 9.4839L85.2355 13.8633Z" fill={wordmarkColor}/>
+    <path d="M93.6037 6.76938C93.6037 6.35367 93.7562 6.01279 94.0632 5.74674C94.3702 5.48069 94.7662 5.34767 95.2553 5.34767C95.7445 5.34767 96.1426 5.48069 96.4475 5.74674C96.7545 6.01279 96.907 6.35367 96.907 6.76938C96.907 7.18508 96.7545 7.52596 96.4475 7.79201C96.1404 8.05806 95.7445 8.19108 95.2553 8.19108C94.7662 8.19108 94.3681 8.05806 94.0632 7.79201C93.7583 7.52596 93.6037 7.18508 93.6037 6.76938ZM96.7672 18.5733H93.7795V9.18877H96.7672V18.5733Z" fill={wordmarkColor}/>
+  </svg>
+);
+
+/* Logomark only (the mint flag + circle) — for collapsed sidebar / favicon / loading states. */
+const Logomark = ({ size = 24, color = "var(--mint-default)" }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={size} height={size} fill="none" style={{ display: "block" }}>
+    <path d="M6.4466 0C2.89154 0 0 2.88167 0 6.42461V8.7534H15.2166V23.9181H17.5534C21.1085 23.9181 24 21.0365 24 17.4935V0H6.4466ZM17.8951 21.2311V6.08403H2.69625C2.86935 4.17323 4.4871 2.67158 6.4466 2.67158H21.3193V17.4935C21.3193 19.4486 19.8125 21.0586 17.8951 21.2311Z" fill={color}/>
+    <path d="M10.1859 13.787C9.06742 12.7033 7.58948 12.104 6.0272 12.104C5.99835 12.104 5.9695 12.104 5.94065 12.104C4.34509 12.1261 2.85383 12.7652 1.74426 13.902C-0.55033 16.2551 -0.49707 20.028 1.86188 22.317C2.98032 23.4007 4.45827 24 6.02276 24C6.05161 24 6.08046 24 6.10931 24C7.70487 23.9779 9.19613 23.3387 10.3057 22.202C11.4153 21.0652 12.0144 19.5614 11.9922 17.9713C11.9678 16.3789 11.3265 14.8927 10.1859 13.787ZM9.22498 18.0066C9.23608 18.8603 8.91652 19.6653 8.31957 20.2757C7.72484 20.8861 6.92373 21.2289 6.06714 21.24C6.05161 21.24 6.03608 21.24 6.02054 21.24C5.17949 21.24 4.39169 20.9215 3.79031 20.3376C3.17782 19.7449 2.83386 18.9466 2.82276 18.0929C2.81167 17.2392 3.13122 16.4342 3.72817 15.8238C4.35619 15.1803 5.19059 14.8596 6.02498 14.8596C6.83053 14.8596 7.63608 15.1604 8.25744 15.7619C8.8677 16.3568 9.21167 17.153 9.22498 18.0066Z" fill={color}/>
+  </svg>
+);
+
+function Sidebar({ current, onNavigate, collapsed, onToggle }) {
+  useLucide();
+  const items = [
+    { id: "overview",  label: "Voice AI",          icon: "bar-chart-3" },
+    { id: "workflows", label: "Workflows",         icon: "workflow" },
+    { id: "knowledge", label: "Knowledge Library", icon: "book-open" },
+    { id: "activity",  label: "Activity Log",      icon: "clock" },
+    { id: "contacts",  label: "Contacts",          icon: "users" },
+    { id: "agents",    label: "My Agents",         icon: "bot" },
+    { id: "import",    label: "Data Import",       icon: "download" },
+  ];
+  const width = collapsed ? 64 : 240;
+
+  return (
+    <aside style={{
+      width, flexShrink: 0,
+      position: "relative",
+      padding: 16,
+    }}>
+      <div style={{
+        position: "absolute", inset: -25 + 16 + "px auto auto " + (-20 + 16) + "px",
+        top: -25, left: -20, width: 458, height: 685,
+        pointerEvents: "none",
+        background: "radial-gradient(60% 50% at 20% 20%, rgba(62,222,111,0.18), rgba(62,222,111,0.06) 40%, transparent 70%)",
+        mixBlendMode: "hard-light", zIndex: 0,
+      }}/>
+      <div style={{
+        position: "relative", zIndex: 1,
+        background: "rgba(10,12,16,0.64)",
+        border: "1px solid var(--border-brand-subtle)",
+        borderRadius: 12,
+        backdropFilter: "blur(12px)",
+        height: "calc(100vh - 32px)",
+        display: "flex", flexDirection: "column",
+      }}>
+        <div style={{
+          display: "flex", alignItems: "center", justifyContent: collapsed ? "center" : "space-between",
+          padding: "16px 12px 16px 20px", height: 56, gap: 24,
+        }}>
+          {collapsed
+            ? <Logomark size={24}/>
+            : <Lockup height={22}/>
+          }
+          {!collapsed && (
+            <button onClick={onToggle} style={{
+              width: 24, height: 24, background: "transparent", border: "none",
+              color: "var(--fg-2)", cursor: "pointer", padding: 0,
+            }}>
+              <Icon name="panel-left-close" size={18}/>
+            </button>
+          )}
+        </div>
+
+        <div style={{ flex: 1, padding: "0 12px", display: "flex", flexDirection: "column", gap: 4 }}>
+          {items.map((it) => {
+            const active = current === it.id;
+            return (
+              <button key={it.id} onClick={() => onNavigate(it.id)} style={{
+                display: "flex", alignItems: "center", gap: 10,
+                height: 40, padding: collapsed ? 0 : "0 12px",
+                justifyContent: collapsed ? "center" : "flex-start",
+                background: active ? "var(--mint-80)" : "transparent",
+                border: active ? "1px solid var(--mint-240)" : "1px solid transparent",
+                borderRadius: 8,
+                color: active ? "var(--mint-default)" : "var(--fg-2)",
+                fontFamily: "var(--font-sans)", fontWeight: 500, fontSize: 14,
+                cursor: "pointer", transition: "all 150ms ease",
+              }}
+              onMouseEnter={(e) => !active && (e.currentTarget.style.background = "rgba(255,255,255,0.03)", e.currentTarget.style.color = "var(--fg-1)")}
+              onMouseLeave={(e) => !active && (e.currentTarget.style.background = "transparent", e.currentTarget.style.color = "var(--fg-2)")}>
+                <Icon name={it.icon} size={16}/>
+                {!collapsed && it.label}
+              </button>
+            );
+          })}
+        </div>
+
+        <div style={{ padding: 12, borderTop: "1px solid var(--border-brand-subtle)", display: "flex",
+                      alignItems: "center", gap: 10, justifyContent: collapsed ? "center" : "flex-start" }}>
+          <Avatar initials="EP" size={32} tone="brand" ring/>
+          {!collapsed && (
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ color: "var(--fg-1)", fontSize: 13, fontWeight: 500, lineHeight: "16px" }}>Elena Park</div>
+              <div style={{ color: "var(--fg-3)", fontSize: 11, lineHeight: "14px" }}>Admin · Acme Co</div>
+            </div>
+          )}
+          {collapsed && (
+            <button onClick={onToggle} style={{
+              position: "absolute", bottom: 56, right: 12,
+              width: 24, height: 24, background: "transparent", border: "none",
+              color: "var(--fg-2)", cursor: "pointer",
+            }}>
+              <Icon name="panel-left-open" size={18}/>
+            </button>
+          )}
+        </div>
+      </div>
+    </aside>
+  );
+}
+
+function TopBar({ title, breadcrumb, actions }) {
+  useLucide();
+  return (
+    <header style={{
+      display: "flex", alignItems: "center", justifyContent: "space-between",
+      padding: "24px 32px 16px",
+    }}>
+      <div>
+        {breadcrumb && (
+          <div className="body-sm" style={{ color: "var(--fg-2)", marginBottom: 6,
+                                            display: "flex", gap: 6, alignItems: "center" }}>
+            {breadcrumb.map((b, i) => (
+              <React.Fragment key={i}>
+                {i > 0 && <Icon name="chevron-right" size={12} style={{ color: "var(--fg-3)" }}/>}
+                <span>{b}</span>
+              </React.Fragment>
+            ))}
+          </div>
+        )}
+        <h1 className="h2" style={{ margin: 0 }}>{title}</h1>
+      </div>
+      <div style={{ display: "flex", gap: 8 }}>{actions}</div>
+    </header>
+  );
+}
+
+Object.assign(window, { Sidebar, TopBar });

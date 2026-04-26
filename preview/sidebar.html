@@ -1,0 +1,28 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { padding: 20px; background: var(--surface-page); display: flex; gap: 16px; align-items: center; }
+  .panel { width: 220px; height: 360px; background: rgba(10,12,16,0.72); border: 1px solid var(--border-brand-subtle); border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 6px; backdrop-filter: blur(12px); position: relative; overflow: hidden; }
+  .panel::before { content: ""; position: absolute; inset: -25px auto auto -20px; width: 300px; height: 400px; background: radial-gradient(60% 50% at 25% 25%, rgba(62,222,111,0.30), rgba(62,222,111,0.08) 40%, transparent 70%); pointer-events: none; }
+  .hdr { display: flex; align-items: center; gap: 8px; padding: 8px; margin-bottom: 4px; }
+  .hdr img { height: 20px; }
+  .item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 8px; color: var(--fg-2); font: var(--type-body-md-med); cursor: pointer; }
+  .item.active { background: var(--mint-80); color: var(--mint-default); border: 1px solid var(--mint-240); }
+  .item:hover:not(.active) { background: rgba(255,255,255,0.03); color: var(--fg-1); }
+  .item svg { width: 16px; height: 16px; stroke-width: 1.5; color: currentColor; }
+  .desc { font: var(--type-body-sm-reg); color: var(--fg-2); max-width: 300px; }
+</style></head>
+<body>
+  <div class="panel">
+    <div class="hdr"><img src="../assets/logos/salesai-lockup.svg" style="height:22px;"></div>
+    <div class="item active"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor"><path d="M2 10v4h4v-4M8 6v8h4V6M12 2v12h2V2"/></svg>Voice AI</div>
+    <div class="item"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor"><path d="M3 6l3-3 3 3M3 10l3 3 3-3M12 3v10"/></svg>Workflows</div>
+    <div class="item"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor"><path d="M3 3h7v10H3zM10 5h3v8h-3"/></svg>Knowledge Library</div>
+    <div class="item"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor"><path d="M8 3v5l3 2M1 8a7 7 0 1 0 14 0 7 7 0 0 0-14 0"/></svg>Activity Log</div>
+    <div class="item"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor"><circle cx="8" cy="6" r="2.5"/><path d="M3 14c0-2.5 2-4.5 5-4.5s5 2 5 4.5"/></svg>Contacts</div>
+    <div class="item"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor"><circle cx="6" cy="5" r="2"/><circle cx="10" cy="5" r="2"/><path d="M3 13c0-2 1.5-3.5 3-3.5s3 1.5 3 3.5M7 13c0-2 1.5-3.5 3-3.5s3 1.5 3 3.5"/></svg>My Agents</div>
+  </div>
+  <div class="desc">
+    Expanded sidebar at <b style="color:var(--fg-1);">240px</b> over a <b style="color:var(--fg-1);">#0A0C10 @ 64%</b> fill with brand-subtle border and The Blob glowing top-left.
+  </div>
+</body></html>
