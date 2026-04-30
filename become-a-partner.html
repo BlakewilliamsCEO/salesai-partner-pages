@@ -147,7 +147,7 @@
     margin-bottom: 28px;
   }
   h1.display em {
-    font-style: normal;
+    font-style: italic;
     font-weight: 700;
     color: var(--accent);
   }
@@ -521,25 +521,16 @@
   .wins-section { background: var(--cream-2); padding-top: 0; }
   .wins-section .section-inner { padding-top: 8px; }
 
-  .wins-row-1,
-  .wins-row-2,
-  .wins-row-3 {
+  .wins-grid {
     display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 1px;
     background: var(--line);
     border: 1px solid var(--line);
     margin-top: 28px;
   }
-  .wins-row-1 { grid-template-columns: 1fr; }
-  .wins-row-2 { grid-template-columns: repeat(2, 1fr); margin-top: 1px; border-top: none; }
-  .wins-row-3 { grid-template-columns: repeat(3, 1fr); margin-top: 1px; border-top: none; }
-
-  @media (max-width: 1000px) {
-    .wins-row-3 { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (max-width: 640px) {
-    .wins-row-2,
-    .wins-row-3 { grid-template-columns: 1fr; }
+  @media (max-width: 720px) {
+    .wins-grid { grid-template-columns: 1fr; }
   }
 
   .win-card {
@@ -547,53 +538,6 @@
     padding: 32px 28px;
     display: flex;
     flex-direction: column;
-  }
-
-  /* Hero card — full-width, larger type, generous padding, side-by-side layout */
-  .win-card.win-hero {
-    padding: clamp(40px, 4.5vw, 64px) clamp(36px, 4vw, 56px);
-    display: grid;
-    grid-template-columns: 1.4fr 1fr;
-    gap: clamp(28px, 4vw, 56px);
-    align-items: start;
-  }
-  @media (max-width: 800px) {
-    .win-card.win-hero { grid-template-columns: 1fr; gap: 24px; }
-  }
-  .win-card.win-hero h3 {
-    font-size: clamp(28px, 3.4vw, 44px);
-    line-height: 1.06;
-    margin-bottom: 22px;
-  }
-  .win-card.win-hero p {
-    font-size: 15px;
-    line-height: 1.6;
-    margin-bottom: 14px;
-  }
-  .win-card.win-hero .win-stats {
-    grid-template-columns: repeat(2, 1fr);
-    margin: 0;
-    padding: 0;
-    border: none;
-    gap: 24px;
-  }
-  .win-card.win-hero .win-stat-num {
-    font-size: clamp(40px, 4.4vw, 56px);
-  }
-  .win-card.win-hero .win-stat-lbl {
-    font-size: 12px;
-    max-width: 14ch;
-  }
-  .win-card.win-hero .win-meta {
-    grid-column: 1 / -1;
-    margin-top: 24px;
-    padding-top: 22px;
-    border-top: 1px solid var(--line);
-  }
-  .win-card.win-hero .win-hero-right {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
   }
 
   .win-eyebrow {
@@ -1026,6 +970,75 @@
     opacity: 0.55;
   }
 
+  /* Economics strip + bio under closing CTA */
+  .closing-cta-strip {
+    max-width: 1200px;
+    margin: 56px auto 0;
+    padding-top: 40px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 40px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+  @media (max-width: 880px) {
+    .closing-cta-strip {
+      grid-template-columns: 1fr;
+      gap: 32px;
+      margin-top: 40px;
+    }
+  }
+  .economics-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .economics-pill {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.13em;
+    color: var(--cream);
+    border: 1px solid rgba(255,255,255,0.18);
+    padding: 8px 14px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .economics-pill strong {
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .closing-bio {
+    text-align: right;
+    max-width: 360px;
+  }
+  @media (max-width: 880px) {
+    .closing-bio { text-align: left; }
+  }
+  .closing-bio-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .closing-bio-name {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--cream);
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+  }
+  .closing-bio-line {
+    font-size: 13px;
+    color: var(--muted-dark);
+    line-height: 1.5;
+  }
+
   /* ─────────── Site footer ─────────── */
   footer.site {
     background: var(--ink);
@@ -1098,33 +1111,25 @@
     <h2 class="section-title">Receipts, not pitches.</h2>
     <p class="section-lede">Our partner program was founded on creating leverage for everyone involved. The customer outcomes show it.</p>
 
-    <!-- ROW 1: Hero win, full width -->
-    <div class="wins-row-1">
-      <article class="win-card win-hero">
-        <div>
-          <div class="win-eyebrow">Customer Win · Immigration Law</div>
-          <h3>Nearly 400 live transfers. 573 callbacks. One firm.</h3>
-          <p>A bilingual immigration practice in El Paso went live with SalesAI and captured ~400 live transfers and 573 voicemail callbacks in their first weeks running the agent — turning a category of inbound demand they couldn't previously see into a managed, measurable intake stream.</p>
-          <p>That's the size of the leak partners help us close every time they introduce a contractor we should be talking to.</p>
-        </div>
-        <div class="win-hero-right">
-          <div class="win-stats">
-            <div>
-              <div class="win-stat-num">~400</div>
-              <div class="win-stat-lbl">Live transfers routed to intake</div>
-            </div>
-            <div>
-              <div class="win-stat-num">573</div>
-              <div class="win-stat-lbl">Callbacks recovered in one week</div>
-            </div>
+    <!-- 2 columns × 3 rows wins grid -->
+    <div class="wins-grid">
+      <article class="win-card">
+        <div class="win-eyebrow">Customer Win · Immigration Law</div>
+        <h3>Nearly 400 live transfers. 573 callbacks. One firm.</h3>
+        <p>A bilingual immigration practice in El Paso went live with SalesAI and captured ~400 live transfers and 573 voicemail callbacks in their first weeks running the agent — turning a category of inbound demand they couldn't previously see into a managed, measurable intake stream.</p>
+        <div class="win-stats">
+          <div>
+            <div class="win-stat-num">~400</div>
+            <div class="win-stat-lbl">Live transfers routed to intake</div>
+          </div>
+          <div>
+            <div class="win-stat-num">573</div>
+            <div class="win-stat-lbl">Callbacks recovered in one week</div>
           </div>
         </div>
         <div class="win-meta">Bilingual immigration practice · El Paso, TX · Live since Q4 2025</div>
       </article>
-    </div>
 
-    <!-- ROW 2: Two-up — Corpay + GTM Insurance -->
-    <div class="wins-row-2">
       <article class="win-card">
         <div class="win-eyebrow">Customer Win · Finance &amp; AR</div>
         <h3>AI vs. 30 humans. The AI won.</h3>
@@ -1162,10 +1167,7 @@
         </div>
         <div class="win-meta">Independent insurance · Outbound speed-to-lead</div>
       </article>
-    </div>
 
-    <!-- ROW 3: Three-up — Debt Mgmt + Real Estate + Telephony -->
-    <div class="wins-row-3">
       <article class="win-card">
         <div class="win-eyebrow">Customer Win · Financial Services</div>
         <h3>Inbound and outbound, running together.</h3>
@@ -1482,6 +1484,19 @@
     <div class="closing-cta-actions">
       <a href="#meet" class="btn">Meet the Head of Partnerships <span class="arrow">→</span></a>
       <div class="closing-cta-meta">30 minutes · Founding cohort intake</div>
+    </div>
+  </div>
+
+  <div class="closing-cta-strip">
+    <div class="economics-pills">
+      <div class="economics-pill"><strong>Recurring</strong> · No caps</div>
+      <div class="economics-pill"><strong>Founding cohort</strong> · Economics won't exist post-scale</div>
+      <div class="economics-pill"><strong>Quarterly</strong> · Paid 30 days post-quarter</div>
+    </div>
+    <div class="closing-bio">
+      <div class="closing-bio-tag">Who you'll meet</div>
+      <div class="closing-bio-name">Blake Williams · Head of Partnerships</div>
+      <div class="closing-bio-line">10 years driving revenue through partnerships. Built the program that feels like operating in the future.</div>
     </div>
   </div>
 </section>
