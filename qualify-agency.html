@@ -1,0 +1,1742 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Apply — SalesAI Agency Partner</title>
+<meta name="description" content="Apply to the SalesAI Agency Partner program. Six minutes. Then 30 with Blake." />
+<meta name="robots" content="noindex" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --ink: #0A0F0F;
+    --ink-2: #141A1A;
+    --ink-3: #1B2222;
+    --cream: #FFFFFF;
+    --line: #1F2626;
+    --line-bright: #2A3434;
+    --accent: #00D67A;
+    --accent-bright: #1FE890;
+    --accent-soft: rgba(0, 214, 122, 0.12);
+    --muted: #9AA4A4;
+    --muted-soft: #5C6868;
+    --display: "Inter", -apple-system, system-ui, sans-serif;
+    --sans: "Inter", -apple-system, system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+    --pad: clamp(20px, 4vw, 56px);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    height: 100%;
+    background: var(--ink);
+    color: var(--cream);
+    font-family: var(--sans);
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+  input, textarea {
+    font-family: inherit;
+    color: inherit;
+    background: transparent;
+    border: none;
+    outline: none;
+  }
+
+  /* ─────────── Top chrome ─────────── */
+  .chrome {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 50;
+    padding: 20px var(--pad);
+    display: flex; justify-content: space-between; align-items: center;
+    background: linear-gradient(to bottom, var(--ink) 0%, rgba(10,15,15,0.6) 70%, transparent 100%);
+    pointer-events: none;
+  }
+  .chrome > * { pointer-events: auto; }
+
+  .brand {
+    display: flex; align-items: center; gap: 10px;
+    font-weight: 600; font-size: 16px;
+    letter-spacing: -0.01em;
+  }
+  .brand-mark {
+    width: 28px; height: 28px;
+    background: var(--accent);
+    border-radius: 7px;
+    display: grid; place-items: center;
+  }
+  .brand-mark svg { width: 14px; height: 14px; }
+
+  .save-exit {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    transition: color .15s;
+  }
+  .save-exit:hover { color: var(--cream); }
+
+  /* ─────────── Progress bar ─────────── */
+  .progress-rail {
+    position: fixed; top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--line);
+    z-index: 60;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    width: 0%;
+    transition: width .35s cubic-bezier(.4, 0, .2, 1);
+  }
+
+  /* ─────────── Stage ─────────── */
+  .stage {
+    flex: 1;
+    display: grid;
+    place-items: center;
+    padding: 100px var(--pad) 60px;
+    width: 100%;
+    max-width: 880px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .screen {
+    width: 100%;
+    display: none;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity .35s ease, transform .35s ease;
+  }
+  .screen.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .screen.exit {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+
+  /* ─────────── Question elements ─────────── */
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    margin-bottom: 24px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .eyebrow::before {
+    content: "";
+    display: inline-block;
+    width: 22px; height: 1px;
+    background: var(--accent);
+  }
+
+  h1.question {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(28px, 4.4vw, 52px);
+    line-height: 1.06;
+    letter-spacing: -0.028em;
+    margin-bottom: 18px;
+    color: var(--cream);
+  }
+  h1.question em {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .sublede {
+    font-size: clamp(15px, 1.4vw, 17px);
+    color: var(--muted);
+    line-height: 1.55;
+    margin-bottom: 44px;
+    max-width: 620px;
+  }
+
+  /* ─────────── Option buttons (radios/multi) ─────────── */
+  .options {
+    display: grid;
+    gap: 12px;
+    max-width: 720px;
+  }
+  .options.cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (max-width: 640px) {
+    .options.cols-2 { grid-template-columns: 1fr; }
+  }
+  /* Grouped (bucketed) multi-select layout */
+  .options.options-grouped {
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+  }
+  .options-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .options-group-label {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 2px;
+  }
+  .options-group-label::before {
+    content: "";
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+  }
+  .options-group-label.high::before { background: var(--accent); }
+  .options-group-label.low::before { background: var(--muted-soft); }
+  .options-group-label .group-tag {
+    color: var(--muted-soft);
+    font-weight: 400;
+  }
+  .options-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  @media (max-width: 640px) {
+    .options-grid { grid-template-columns: 1fr; }
+  }
+  .opt {
+    width: 100%;
+    text-align: left;
+    padding: 18px 20px;
+    background: var(--ink-2);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    color: var(--cream);
+    font-size: 16px;
+    font-weight: 500;
+    transition: background .15s, border-color .15s, transform .12s;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    line-height: 1.35;
+  }
+  .opt:hover, .opt:focus-visible {
+    background: var(--ink-3);
+    border-color: var(--accent);
+    transform: translateX(2px);
+  }
+  .opt.selected {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+  }
+  .opt-key {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    width: 24px; height: 24px;
+    border: 1px solid var(--line-bright);
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: color .15s, border-color .15s, background .15s;
+  }
+  .opt:hover .opt-key,
+  .opt.selected .opt-key {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: rgba(0,214,122,0.08);
+  }
+  .opt-text { flex: 1; }
+  .opt-check {
+    width: 18px; height: 18px;
+    border: 1.5px solid var(--line-bright);
+    border-radius: 4px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    transition: background .15s, border-color .15s;
+  }
+  .opt.selected .opt-check {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .opt-check svg {
+    width: 12px; height: 12px;
+    opacity: 0;
+    transition: opacity .12s;
+  }
+  .opt.selected .opt-check svg { opacity: 1; }
+
+  /* ─────────── Footer controls ─────────── */
+  .controls {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 24px;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 600;
+    transition: gap .15s, background .15s, transform .12s;
+    border: 1px solid transparent;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: var(--ink);
+  }
+  .btn-primary:hover { background: var(--accent-bright); gap: 14px; }
+  .btn-primary:disabled {
+    background: var(--ink-3);
+    color: var(--muted-soft);
+    cursor: not-allowed;
+  }
+  .btn-primary:disabled:hover { gap: 10px; }
+  .btn-ghost {
+    background: transparent;
+    color: var(--muted);
+    padding: 14px 16px;
+  }
+  .btn-ghost:hover { color: var(--cream); }
+  .keyboard-hint {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--muted-soft);
+    margin-left: auto;
+  }
+  .keyboard-hint kbd {
+    background: var(--ink-3);
+    border: 1px solid var(--line-bright);
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-family: inherit;
+    font-size: 10px;
+    color: var(--muted);
+    margin: 0 2px;
+  }
+  @media (max-width: 640px) { .keyboard-hint { display: none; } }
+
+  /* ─────────── Text inputs ─────────── */
+  .input-row {
+    display: grid;
+    gap: 16px;
+    max-width: 620px;
+  }
+  .input-row.cols-2 { grid-template-columns: 1fr 1fr; }
+  @media (max-width: 640px) { .input-row.cols-2 { grid-template-columns: 1fr; } }
+
+  .field {
+    display: block;
+  }
+  .field-label {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--muted);
+    margin-bottom: 8px;
+    display: block;
+  }
+  .field-input {
+    width: 100%;
+    padding: 14px 16px;
+    background: var(--ink-2);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    font-size: 15px;
+    color: var(--cream);
+    transition: border-color .15s, background .15s;
+  }
+  .field-input:focus {
+    border-color: var(--accent);
+    background: var(--ink-3);
+  }
+  .field-input::placeholder { color: var(--muted-soft); }
+  .field-input.error { border-color: #FF5D5D; }
+
+  .skip-link {
+    margin-top: 18px;
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    border-bottom: 1px solid var(--line-bright);
+    padding-bottom: 2px;
+    transition: color .15s, border-color .15s;
+  }
+  .skip-link:hover { color: var(--accent); border-color: var(--accent); }
+
+  /* ─────────── Welcome screen ─────────── */
+  .welcome {
+    text-align: left;
+  }
+  .welcome h1 {
+    font-size: clamp(36px, 6vw, 80px);
+    font-weight: 700;
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    margin-bottom: 28px;
+    max-width: 16ch;
+  }
+  .welcome h1 em {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .welcome-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+    margin: 36px 0 0;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+  }
+  .welcome-meta-item {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .welcome-meta-item strong {
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  /* ─────────── Success screen — celebration moment ─────────── */
+  .success {
+    text-align: left;
+    max-width: 760px;
+  }
+
+  /* Animated checkmark badge */
+  .success-check {
+    width: 84px;
+    height: 84px;
+    margin-bottom: 32px;
+    position: relative;
+  }
+  .success-check svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+  .success-check-circle {
+    fill: rgba(0, 214, 122, 0.08);
+    stroke: var(--accent);
+    stroke-width: 2;
+    stroke-dasharray: 188.5;
+    stroke-dashoffset: 188.5;
+    animation: drawCircle 0.55s cubic-bezier(.22,.95,.34,1) forwards;
+  }
+  .success-check-path {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 50;
+    stroke-dashoffset: 50;
+    animation: drawCheck 0.4s cubic-bezier(.22,.95,.34,1) 0.45s forwards;
+  }
+  .success-check-glow {
+    position: absolute;
+    inset: -20px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,214,122,0.22) 0%, transparent 70%);
+    opacity: 0;
+    animation: glowIn 0.8s ease-out 0.45s forwards;
+  }
+  @keyframes drawCircle {
+    to { stroke-dashoffset: 0; }
+  }
+  @keyframes drawCheck {
+    to { stroke-dashoffset: 0; }
+  }
+  @keyframes glowIn {
+    0% { opacity: 0; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.08); }
+    100% { opacity: 0.6; transform: scale(1); }
+  }
+
+  /* Eyebrow row */
+  .success-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    margin-bottom: 22px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    opacity: 0;
+    animation: fadeUp 0.5s ease-out 0.85s forwards;
+  }
+  .success-eyebrow .dot {
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 4px rgba(0,214,122,0.18);
+    animation: pulse 1.6s ease-in-out 1.2s infinite;
+  }
+  .success-eyebrow .divider {
+    color: var(--muted-soft);
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 4px rgba(0,214,122,0.18); }
+    50% { box-shadow: 0 0 0 9px rgba(0,214,122,0.05); }
+  }
+
+  /* Headline */
+  .success h1 {
+    font-family: var(--display);
+    font-size: clamp(44px, 6vw, 80px);
+    font-weight: 700;
+    line-height: 1.0;
+    letter-spacing: -0.035em;
+    color: var(--cream);
+    margin-bottom: 22px;
+    opacity: 0;
+    animation: fadeUp 0.55s ease-out 1.05s forwards;
+  }
+  .success h1 em {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  /* Body */
+  .success p {
+    font-size: 17px;
+    color: var(--muted);
+    line-height: 1.55;
+    margin-bottom: 36px;
+    max-width: 56ch;
+    opacity: 0;
+    animation: fadeUp 0.5s ease-out 1.25s forwards;
+  }
+
+  /* Stats / receipts row */
+  .success-receipts {
+    display: flex;
+    gap: 32px;
+    margin-bottom: 36px;
+    padding: 18px 22px;
+    background: var(--ink-2);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.5s ease-out 1.25s forwards;
+  }
+  .success-receipt {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .success-receipt-label {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--muted-soft);
+  }
+  .success-receipt-value {
+    font-family: var(--display);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--cream);
+    letter-spacing: -0.005em;
+  }
+
+  /* Calendar mount */
+  .calendar-wrap {
+    background: var(--ink-2);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 32px;
+    margin-top: 8px;
+    min-height: 380px;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    opacity: 0;
+    animation: fadeUp 0.6s ease-out 1.45s forwards;
+  }
+  .calendar-placeholder {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.6;
+    max-width: 480px;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .calendar-placeholder strong {
+    color: var(--accent);
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  /* ─────────── Month 1 preview ─────────── */
+  .month1-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 32px;
+    margin-bottom: 40px;
+    max-width: 880px;
+  }
+  @media (max-width: 720px) {
+    .month1-grid { grid-template-columns: 1fr; }
+  }
+  .month1-card {
+    background: var(--ink-2);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 24px;
+  }
+  .month1-card-eyebrow {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .month1-card-title {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin-bottom: 16px;
+    color: var(--cream);
+  }
+  .month1-card-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+  }
+  .month1-card-list li {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+    padding-left: 18px;
+    position: relative;
+  }
+  .month1-card-list li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-family: var(--mono);
+  }
+
+  /* ─────────── Loading state ─────────── */
+  .submitting {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--muted);
+    font-size: 14px;
+  }
+  .spinner {
+    width: 16px; height: 16px;
+    border: 2px solid var(--line-bright);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin .8s linear infinite;
+  }
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* ─────────── Error screen ─────────── */
+  .error-banner {
+    background: rgba(255, 93, 93, 0.08);
+    border: 1px solid rgba(255, 93, 93, 0.4);
+    color: #FF8888;
+    padding: 14px 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    margin-bottom: 20px;
+    display: none;
+  }
+  .error-banner.visible { display: block; }
+
+  /* ─────────── Reduced motion ─────────── */
+  @media (prefers-reduced-motion: reduce) {
+    .screen, .progress-fill, .opt, .btn { transition: none !important; }
+    .success-eyebrow .dot,
+    .success-check-circle,
+    .success-check-path,
+    .success-check-glow { animation: none !important; }
+    .success-eyebrow,
+    .success h1,
+    .success p,
+    .success-receipts,
+    .calendar-wrap { opacity: 1 !important; transform: none !important; animation: none !important; }
+    .success-check-circle { stroke-dashoffset: 0 !important; }
+    .success-check-path { stroke-dashoffset: 0 !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Progress bar -->
+<div class="progress-rail">
+  <div class="progress-fill" id="progressFill"></div>
+</div>
+
+<!-- Top chrome -->
+<header class="chrome">
+  <a href="https://salesai.com" class="brand" aria-label="SalesAi">
+    <span class="brand-mark">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 6 L4 18 M9 4 L9 20 M14 8 L14 16 M19 10 L19 14" stroke="#0A0F0F" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </span>
+    SalesAi
+  </a>
+  <a href="#" class="save-exit" id="saveExit">Save &amp; exit</a>
+</header>
+
+<!-- Stage holds all screens -->
+<main class="stage" id="stage">
+
+  <!-- ─────────── Screen 0 — Welcome ─────────── -->
+  <section class="screen welcome" data-screen="welcome" data-progress="0">
+    <div class="eyebrow">Agency Partner Application</div>
+    <h1>A partnership you can <em>brag</em> about.</h1>
+    <p class="sublede" style="font-size: 18px; max-width: 560px; margin-bottom: 8px;">
+      Six minutes. Then 30 with Blake.
+    </p>
+    <div class="welcome-meta">
+      <div class="welcome-meta-item"><strong>~6 min</strong> to complete</div>
+      <div class="welcome-meta-item"><strong>No floor</strong> · 1 client or 50</div>
+      <div class="welcome-meta-item"><strong>Built for</strong> home services agencies</div>
+    </div>
+    <div class="controls">
+      <button class="btn btn-primary" data-action="next">Start <span>→</span></button>
+      <span class="keyboard-hint">Press <kbd>Enter</kbd> to begin</span>
+    </div>
+  </section>
+
+  <!-- ─────────── Screen 1 — Vertical fit ─────────── -->
+  <section class="screen" data-screen="vertical_fit" data-progress="7">
+    <div class="eyebrow">01 / 11 · Fit</div>
+    <h1 class="question">What % of your client book is home services contractors?</h1>
+    <p class="sublede">HVAC, plumbing, electrical, roofing, garage doors, pest, lawn — the trades.</p>
+    <div class="options" data-q="vertical_fit">
+      <button class="opt" data-value="under_25" data-points="1"><span class="opt-key">1</span><span class="opt-text">Less than 25% — we have a few</span></button>
+      <button class="opt" data-value="25_to_50" data-points="2"><span class="opt-key">2</span><span class="opt-text">25–50% — meaningful slice</span></button>
+      <button class="opt" data-value="50_to_75" data-points="3"><span class="opt-key">3</span><span class="opt-text">50–75% — most of our book</span></button>
+      <button class="opt" data-value="75_plus" data-points="4"><span class="opt-key">4</span><span class="opt-text">75%+ — home services is who we serve</span></button>
+    </div>
+    <div class="controls">
+      <button class="btn btn-ghost" data-action="back">← Back</button>
+      <span class="keyboard-hint"><kbd>1</kbd>–<kbd>4</kbd> to select · <kbd>Enter</kbd> to continue</span>
+    </div>
+  </section>
+
+  <!-- ─────────── Screen 2 — Scale ─────────── -->
+  <section class="screen" data-screen="scale" data-progress="14">
+    <div class="eyebrow">02 / 11 · Scale</div>
+    <h1 class="question">How many home services contractor clients do you serve today?</h1>
+    <p class="sublede">No floor. We sign up agencies with one client and agencies with fifty. Just helps us match the right motion to your size.</p>
+    <div class="options" data-q="scale">
+      <button class="opt" data-value="1_to_4" data-points="1"><span class="opt-key">1</span><span class="opt-text">1–4 clients</span></button>
+      <button class="opt" data-value="5_to_15" data-points="2"><span class="opt-key">2</span><span class="opt-text">5–15 clients</span></button>
+      <button class="opt" data-value="16_to_50" data-points="3"><span class="opt-key">3</span><span class="opt-text">16–50 clients</span></button>
+      <button class="opt" data-value="50_plus" data-points="4"><span class="opt-key">4</span><span class="opt-text">50+ clients</span></button>
+    </div>
+    <div class="controls">
+      <button class="btn btn-ghost" data-action="back">← Back</button>
+      <span class="keyboard-hint"><kbd>1</kbd>–<kbd>4</kbd> to select · <kbd>Enter</kbd> to continue</span>
+    </div>
+  </section>
+
+  <!-- ─────────── Screen 3 — Service fit (multi) ─────────── -->
+  <section class="screen" data-screen="service_fit" data-progress="21">
+    <div class="eyebrow">03 / 11 · Service</div>
+    <h1 class="question">What's your primary service to home services clients?</h1>
+    <p class="sublede">Pick all that apply. We're built for agencies that own the lead-gen conversation.</p>
+    <div class="options cols-2" data-q="service_fit" data-multi="true">
+      <button class="opt" data-value="paid_media" data-points="4"><span class="opt-key">1</span><span class="opt-text">Paid media (Google, Meta)</span><span class="opt-check"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6 L5 9 L10 3" stroke="#0A0F0F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button>
+      <button class="opt" data-value="seo" data-points="4"><span class="opt-key">2</span><span class="opt-text">SEO / organic growth</span><span class="opt-check"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6 L5 9 L10 3" stroke="#0A0F0F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button>
+      <button class="opt" data-value="full_service" data-points="4"><span class="opt-key">3</span><span class="opt-text">Full-service growth</span><span class="opt-check"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6 L5 9 L10 3" stroke="#0A0F0F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button>
+      <button class="opt" data-value="brand_creative" data-points="2"><span class="opt-key">4</span><span class="opt-text">Brand &amp; creative</span><span class="opt-check"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6 L5 9 L10 3" stroke="#0A0F0F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button>
+      <button class="opt" data-value="web_design" data-points="2"><span class="opt-key">5</span><span class="opt-text">Web design / dev</span><span class="opt-check"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6 L5 9 L10 3" stroke="#0A0F0F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button>
+      <button class="opt" data-value="other" data-points="1"><span class="opt-key">6</span><span class="opt-text">Other</span><span class="opt-check"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6 L5 9 L10 3" stroke="#0A0F0F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button>
+    </div>
+    <div class="controls">
+      <button class="btn btn-ghost" data-action="back">← Back</button>
+      <button class="btn btn-primary" data-action="next" disabled>Continue <span>→</span></button>
+      <span class="keyboard-hint">Multi-select · <kbd>Enter</kbd> to continue</span>
+    </div>
+  </section>
+
+  <!-- ─────────── Screen 4 — Pain validation ─────────── -->
+  <section class="screen" data-screen="pain_validation" data-progress="28">
+    <div class="eyebrow">04 / 11 · Client reality</div>
+    <h1 class="question">When you talk to your clients, what's the biggest gap between leads you deliver and revenue they book?</h1>
+    <p class="sublede">The honest answer. We're trying to find agencies who already see the problem, not sell them on it.</p>
+    <div class="options" data-q="pain_validation">
+      <button class="opt" data-value="after_hours" data-points="4"><span class="opt-key">1</span><span class="opt-text">Calls outside business hours hit voicemail</span></button>
+      <button class="opt" data-value="speed_to_lead" data-points="4"><span class="opt-key">2</span><span class="opt-text">Speed-to-lead — leads go cold before someone calls back</span></button>
+      <button class="opt" data-value="bad_routing" data-points="4"><span class="opt-key">3</span><span class="opt-text">Bad lead routing — wrong service area, wrong tech, wrong time</span></button>
+      <button class="opt" data-value="volume_problem" data-points="2"><span class="opt-key">4</span><span class="opt-text">They book fine — it's a lead-volume problem</span></button>
+      <button class="opt" data-value="not_sure" data-points="1"><span class="opt-key">5</span><span class="opt-text">Honestly, I'm not sure — we hand off and let them run with it</span></button>
+    </div>
+    <div class="controls">
+      <button class="btn btn-ghost" data-action="back">← Back</button>
+      <span class="keyboard-hint"><kbd>1</kbd>–<kbd>5</kbd> to select · <kbd>Enter</kbd> to continue</span>
+    </div>
+  </section>
+
+  <!-- ─────────── Screen 5 — AI demand from clients ─────────── -->
+  <section class="screen" data-screen="ai_demand" data-progress="35">
+    <div class="eyebrow">05 / 11 · Client signal</div>
+    <h1 class="question">Are your clients already asking you about AI?</h1>
+    <p class="sublede">Builds on a conversation they're already having.</p>
+    <div class="options" data-q="ai_demand">
+      <button class="opt" data-value="not_yet" data-points="1"><span class="opt-key">1</span><span class="opt-text">Honestly, not really</span></button>
+      <button class="opt" data-value="early_signals" data-points="2"><span class="opt-key">2</span><span class="opt-text">A handful — early signals</span></button>
+      <button class="opt" data-value="accelerating" data-points="3"><span class="opt-key">3</span><span class="opt-text">Yes, it's accelerating</span></button>
+      <button class="opt" data-value="every_conversation" data-points="4"><span class="opt-key">4</span><span class="opt-text">Yes — every conversation lately</span></button>
+    </div>
+    <div class="controls">
+      <button class="btn btn-ghost" data-action="back">← Back</button>
+      <span class="keyboard-hint"><kbd>1</kbd>–<kbd>4</kbd> to select · <kbd>Enter</kbd> to continue</span>
+    </div>
+  </section>
+
+  <!-- ─────────── Screen 6 — Middle funnel roadmap ─────────── -->
+  <section class="screen" data-screen="middle_funnel_roadmap" data-progress="42">
+    <div class="eyebrow">06 / 11 · Strategic fit</div>
+    <h1 class="question">Is owning more middle-funnel work part of your roadmap this quarter?</h1>
+    <p class="sublede">Most agencies live top-of-funnel. The wallet-share growth is in lead-to-booked-revenue — which is where SalesAI lives.</p>
+    <div class="options" data-q="middle_funnel_roadmap">
+      <button class="opt" data-value="top_funnel_lane" data-points="1"><span class="opt-key">1</span><span class="opt-text">No — top-of-funnel is our lane</span></button>
+      <button class="opt" data-value="maybe_later" data-points="2"><span class="opt-key">2</span><span class="opt-text">Maybe down the line</span></button>
+      <button class="opt" data-value="exploring" data-points="3"><span class="opt-key">3</span><span class="opt-text">We're exploring it</span></button>
+      <button class="opt" data-value="exactly_the_play" data-points="4"><span class="opt-key">4</span><span class="opt-text">Yes — that's exactly the play</span></button>
+    </div>
+    <div class="controls">
+      <button class="btn btn-ghost" data-action="back">← Back</button>
+      <span class="keyboard-hint"><kbd>1</kbd>–<kbd>4</kbd> to select · <kbd>Enter</kbd> to continue</span>
+    </div>
+  </section>
+
+  <!-- ─────────── Screen 7 — Client KPIs (two buckets: P&L vs activity) ─────────── -->
+  <section class="screen" data-screen="motion_metrics" data-progress="49">
+    <div class="eyebrow">07 / 11 · Client KPIs</div>
+    <h1 class="question">Which KPIs do you put in front of clients?</h1>
+    <p class="sublede">What's on the dashboard when you're showing them how you're crushing it. Pick all that apply.</p>
+    <div class="options options-grouped" data-q="motion_metrics" data-multi="true">
+
+      <div class="options-group">
+        <div class="options-group-label high">Outcome metrics <span class="group-tag">· their P&amp;L</span></div>
+        <div class="options-grid">
+          <button class="opt" data-value="roas" data-points="4"><span class="opt-key">1</span><span class="opt-text">ROAS (Return on Ad Spend)</span><span class="opt-check"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6 L5 9 L10 3" stroke="#0A0F0F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button>
+          <button class="opt" data-value="revenue_per_lead" data-points="4"><span class="opt-key">2</span><span class="opt-text">Revenue per lead / CPA</span><span class="opt-check"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6 L5 9 L10 3" stroke="#0A0F0F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button>
+          <button class="opt" data-value="booked_jobs" data-points="4"><span class="opt-key">3</span><span class="opt-text">Booked jobs / appointments</span><span class="opt-check"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6 L5 9 L10 3" stroke="#0A0F0F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button>
+          <button class="opt" data-value="booking_rate" data-points="4"><span class="opt-key">4</span><span class="opt-text">Booking rate / conversion</span><span class="opt-check"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6 L5 9 L10 3" stroke="#0A0F0F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button>
+          <button class="opt" data-value="closed_won_revenue" data-points="4"><span class="opt-key">5</span><span class="opt-text">Closed-won revenue / pipeline</span><span class="opt-check"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6 L5 9 L10 3" stroke="#0A0F0F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button>
+        </div>
+      </div>
+
+      <div class="options-group">
+        <div class="options-group-label low">Activity metrics <span class="group-tag">· the funnel</span></div>
+        <div class="options-grid">
+          <button class="opt" data-value="lead_volume" data-points="2"><span class="opt-key">6</span><span class="opt-text">Lead volume</span><span class="opt-check"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6 L5 9 L10 3" stroke="#0A0F0F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button>
+          <button class="opt" data-value="cpl" data-points="2"><span class="opt-key">7</span><span class="opt-text">Cost per lead (CPL)</span><span class="opt-check"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6 L5 9 L10 3" stroke="#0A0F0F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button>
+          <button class="opt" data-value="ctr_cpc" data-points="1"><span class="opt-key">8</span><span class="opt-text">Cost per click / CTR</span><span class="opt-check"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6 L5 9 L10 3" stroke="#0A0F0F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button>
+          <button class="opt" data-value="impressions" data-points="1"><span class="opt-key">9</span><span class="opt-text">Impressions / reach</span><span class="opt-check"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6 L5 9 L10 3" stroke="#0A0F0F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button>
+        </div>
+      </div>
+
+    </div>
+    <div class="controls">
+      <button class="btn btn-ghost" data-action="back">← Back</button>
+      <button class="btn btn-primary" data-action="next" disabled>Continue <span>→</span></button>
+      <span class="keyboard-hint">Multi-select · <kbd>Enter</kbd> to continue</span>
+    </div>
+  </section>
+
+  <!-- ─────────── Screen 8 — QBR cadence ─────────── -->
+  <section class="screen" data-screen="motion_qbr" data-progress="56">
+    <div class="eyebrow">08 / 11 · Operating cadence</div>
+    <h1 class="question">Do you run formal QBRs or business reviews with your clients?</h1>
+    <p class="sublede">Honest answer. No wrong one.</p>
+    <div class="options" data-q="motion_qbr">
+      <button class="opt" data-value="quarterly" data-points="4"><span class="opt-key">1</span><span class="opt-text">Yes — quarterly, every client</span></button>
+      <button class="opt" data-value="biannual" data-points="3"><span class="opt-key">2</span><span class="opt-text">Twice a year</span></button>
+      <button class="opt" data-value="ad_hoc" data-points="2"><span class="opt-key">3</span><span class="opt-text">Ad hoc — when the client asks or something's off</span></button>
+      <button class="opt" data-value="none" data-points="1"><span class="opt-key">4</span><span class="opt-text">No formal cadence</span></button>
+    </div>
+    <div class="controls">
+      <button class="btn btn-ghost" data-action="back">← Back</button>
+      <span class="keyboard-hint"><kbd>1</kbd>–<kbd>4</kbd> to select · <kbd>Enter</kbd> to continue</span>
+    </div>
+  </section>
+
+  <!-- ─────────── Screen 9 — Decision velocity ─────────── -->
+  <section class="screen" data-screen="decision_velocity" data-progress="63">
+    <div class="eyebrow">09 / 11 · Decision speed</div>
+    <h1 class="question">Who at your agency would decide to bring SalesAI to a client?</h1>
+    <p class="sublede">We move fast with single decision-makers. We can move slower if your shape is different.</p>
+    <div class="options" data-q="decision_velocity">
+      <button class="opt" data-value="me" data-points="4"><span class="opt-key">1</span><span class="opt-text">Me — I make the call</span></button>
+      <button class="opt" data-value="me_plus_one" data-points="3"><span class="opt-key">2</span><span class="opt-text">Me + one other person</span></button>
+      <button class="opt" data-value="depends" data-points="2"><span class="opt-key">3</span><span class="opt-text">Depends on the client</span></button>
+      <button class="opt" data-value="committee" data-points="1"><span class="opt-key">4</span><span class="opt-text">Committee / leadership team</span></button>
+    </div>
+    <div class="controls">
+      <button class="btn btn-ghost" data-action="back">← Back</button>
+      <span class="keyboard-hint"><kbd>1</kbd>–<kbd>4</kbd> to select · <kbd>Enter</kbd> to continue</span>
+    </div>
+  </section>
+
+  <!-- ─────────── Screen 10 — Existing partner programs (text) ─────────── -->
+  <section class="screen" data-screen="existing_programs" data-progress="70">
+    <div class="eyebrow">10 / 11 · Context</div>
+    <h1 class="question">Are you currently in any other formal partner programs?</h1>
+    <p class="sublede">HubSpot, ServiceTitan, Jobber, Housecall Pro, anything. Optional — helps us tune onboarding.</p>
+    <div class="input-row">
+      <label class="field">
+        <span class="field-label">Partner programs (optional)</span>
+        <input type="text" class="field-input" data-q="existing_programs" placeholder="e.g. HubSpot Solutions, ServiceTitan Ignite — or leave blank" autocomplete="off" />
+      </label>
+    </div>
+    <a href="#" class="skip-link" data-action="skip">Skip this question</a>
+    <div class="controls">
+      <button class="btn btn-ghost" data-action="back">← Back</button>
+      <button class="btn btn-primary" data-action="next">Continue <span>→</span></button>
+    </div>
+  </section>
+
+  <!-- ─────────── Screen 11 — Speed of first intro ─────────── -->
+  <section class="screen" data-screen="first_intro_speed" data-progress="77">
+    <div class="eyebrow">11 / 11 · Reality check</div>
+    <h1 class="question">Realistically, how fast could you introduce 1–5 qualified contractor clients to SalesAI?</h1>
+    <p class="sublede">We validate partnerships on bi-directional lead flow. Just calibrating expectations.</p>
+    <div class="options" data-q="first_intro_speed">
+      <button class="opt" data-value="this_week" data-points="4"><span class="opt-key">1</span><span class="opt-text">This week — I have a client in mind</span></button>
+      <button class="opt" data-value="this_month" data-points="3"><span class="opt-key">2</span><span class="opt-text">This month</span></button>
+      <button class="opt" data-value="this_quarter" data-points="2"><span class="opt-key">3</span><span class="opt-text">This quarter</span></button>
+      <button class="opt" data-value="not_sure" data-points="1"><span class="opt-key">4</span><span class="opt-text">Not sure yet — depends on the conversation</span></button>
+    </div>
+    <div class="controls">
+      <button class="btn btn-ghost" data-action="back">← Back</button>
+      <span class="keyboard-hint"><kbd>1</kbd>–<kbd>4</kbd> to select · <kbd>Enter</kbd> to continue</span>
+    </div>
+  </section>
+
+  <!-- ─────────── Screen 12 — Month 1 preview ─────────── -->
+  <section class="screen" data-screen="month1_preview" data-progress="84">
+    <div class="eyebrow">What's next</div>
+    <h1 class="question">Here's what month one <em>actually</em> looks like.</h1>
+    <p class="sublede">No "we'll be in touch." Real playbook, executed in 4 weeks.</p>
+
+    <div class="month1-grid">
+      <div class="month1-card">
+        <div class="month1-card-eyebrow">Week 1 — You're in</div>
+        <div class="month1-card-title">Founding cohort welcome.</div>
+        <ul class="month1-card-list">
+          <li>30-min call with Blake to align on your book</li>
+          <li>Partner agreement + Ash access + commission structure</li>
+          <li>Slack channel live so we can move fast</li>
+        </ul>
+      </div>
+      <div class="month1-card">
+        <div class="month1-card-eyebrow">Week 2 — Customer mapping</div>
+        <div class="month1-card-title">Where do we attack first.</div>
+        <ul class="month1-card-list">
+          <li>Joint review of your contractor book</li>
+          <li>We co-identify 2–3 clients to approach first</li>
+          <li>Custom demo built for those use cases</li>
+        </ul>
+      </div>
+      <div class="month1-card">
+        <div class="month1-card-eyebrow">Week 3 — First intros</div>
+        <div class="month1-card-title">Warm intros, joint discovery.</div>
+        <ul class="month1-card-list">
+          <li>You make warm intros to SalesAI</li>
+          <li>Joint discovery calls with your clients</li>
+          <li>Deal registration locks in your commission</li>
+        </ul>
+      </div>
+      <div class="month1-card">
+        <div class="month1-card-eyebrow">Week 4 — Month 1 retro</div>
+        <div class="month1-card-title">30-day retro + month 2 plan.</div>
+        <ul class="month1-card-list">
+          <li>30-day retro: pipeline review + commission events</li>
+          <li>What's working, what to refine for month 2</li>
+          <li>First deal in flight or close</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button class="btn btn-ghost" data-action="back">← Back</button>
+      <button class="btn btn-primary" data-action="next">Are you up for that? <span>→</span></button>
+    </div>
+  </section>
+
+  <!-- ─────────── Screen 13 — Contact details ─────────── -->
+  <section class="screen" data-screen="contact" data-progress="91">
+    <div class="eyebrow">Last step · 5 fields</div>
+    <h1 class="question">Tell us about you and your agency.</h1>
+    <p class="sublede">We'll use this to follow up and prep your call.</p>
+
+    <div class="error-banner" id="errorBanner">
+      Please complete the required fields.
+    </div>
+
+    <div class="input-row cols-2">
+      <label class="field">
+        <span class="field-label">Agency name *</span>
+        <input type="text" class="field-input" data-q="agency_name" required autocomplete="organization" />
+      </label>
+      <label class="field">
+        <span class="field-label">Website *</span>
+        <input type="url" class="field-input" data-q="website" required autocomplete="url" placeholder="https://" />
+      </label>
+    </div>
+    <div class="input-row cols-2" style="margin-top:16px;">
+      <label class="field">
+        <span class="field-label">Your name *</span>
+        <input type="text" class="field-input" data-q="contact_name" required autocomplete="name" />
+      </label>
+      <label class="field">
+        <span class="field-label">Your role *</span>
+        <input type="text" class="field-input" data-q="contact_role" required autocomplete="organization-title" placeholder="Founder, Head of Growth, etc." />
+      </label>
+    </div>
+    <div class="input-row" style="margin-top:16px;">
+      <label class="field">
+        <span class="field-label">Work email *</span>
+        <input type="email" class="field-input" data-q="contact_email" required autocomplete="email" />
+      </label>
+    </div>
+
+    <div class="controls">
+      <button class="btn btn-ghost" data-action="back">← Back</button>
+      <button class="btn btn-primary" data-action="submit">Submit application <span>→</span></button>
+    </div>
+  </section>
+
+  <!-- ─────────── Screen 11 — Submitting ─────────── -->
+  <section class="screen" data-screen="submitting" data-progress="96">
+    <div class="eyebrow">Submitting</div>
+    <h1 class="question">Locking it in...</h1>
+    <div class="submitting" style="margin-top:32px;">
+      <span class="spinner"></span>
+      <span>Saving your application</span>
+    </div>
+  </section>
+
+  <!-- ─────────── Screen 12 — Success / Celebration moment ─────────── -->
+  <section class="screen success" data-screen="success" data-progress="100">
+    <div class="success-check">
+      <div class="success-check-glow"></div>
+      <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle class="success-check-circle" cx="32" cy="32" r="30"></circle>
+        <path class="success-check-path" d="M18 33 L28 43 L46 23"></path>
+      </svg>
+    </div>
+
+    <div class="success-eyebrow">
+      <span class="dot"></span>
+      <span>Founding cohort</span>
+      <span class="divider">·</span>
+      <span>Application locked in</span>
+    </div>
+
+    <h1 id="successHeadline">You're <em>in</em>.</h1>
+
+    <p>Pick a time below. We'll spend 30 minutes on your book, your KPIs, and the contractors we should be talking to first. No "we'll be in touch."</p>
+
+    <div class="success-receipts">
+      <div class="success-receipt">
+        <div class="success-receipt-label">Application ID</div>
+        <div class="success-receipt-value" id="receiptAppId">—</div>
+      </div>
+      <div class="success-receipt">
+        <div class="success-receipt-label">Submitted</div>
+        <div class="success-receipt-value" id="receiptTime">—</div>
+      </div>
+      <div class="success-receipt">
+        <div class="success-receipt-label">Next step</div>
+        <div class="success-receipt-value">30-min intake call</div>
+      </div>
+    </div>
+
+    <div class="calendar-wrap" id="calendarMount">
+      <div class="calendar-placeholder">
+        <strong>Calendar embed</strong>
+        Drop your Cal.com / HubSpot Meetings / Calendly embed here.<br/>
+        The booking flow is the final step — there is no "we'll be in touch."
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────── Screen 13 — Submit error ─────────── -->
+  <section class="screen" data-screen="error" data-progress="96">
+    <div class="eyebrow" style="color:#FF8888;">Something went sideways</div>
+    <h1 class="question">We couldn't save that.</h1>
+    <p class="sublede">Connection blip on our end. Your answers are still here — we can try again, or email <a href="mailto:blake@salesai.com" style="color:var(--accent); text-decoration:underline;">blake@salesai.com</a> directly.</p>
+    <div class="controls">
+      <button class="btn btn-primary" data-action="retry">Try again <span>→</span></button>
+      <button class="btn btn-ghost" data-action="back">← Back to form</button>
+    </div>
+  </section>
+
+</main>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════════
+   SalesAI Agency Partner Application — wizard logic
+   ═══════════════════════════════════════════════════════════════════
+   - State machine over data-screen sections
+   - Silent scoring → tier (A | B | C) on submit
+   - Keyboard nav: 1–9 to select, Enter to advance, ← / Esc to go back
+   - LocalStorage save for resume-on-exit
+   - POST to API_ENDPOINT (placeholder)
+   ═══════════════════════════════════════════════════════════════════ */
+
+// ─── CONFIG (Blake to replace) ─────────────────────────────────────
+const CONFIG = {
+  // PLACEHOLDER: replace with your Postgres-backed API endpoint
+  API_ENDPOINT: '/api/partner-applications',
+
+  // PLACEHOLDER: optional auth header. Leave null for none.
+  // Example: { name: 'Authorization', value: 'Bearer xxxxx' }
+  AUTH_HEADER: null,
+
+  // PLACEHOLDER: drop in Cal.com / HubSpot Meetings / Calendly embed URL
+  CALENDAR_EMBED_URL: null, // e.g., 'https://cal.com/blake/agency-intake'
+
+  // Resume-from-localStorage key
+  STORAGE_KEY: 'salesai_qualify_agency_v2',
+
+  // Scoring weights — tunable. Sum of (max_per_q × weight) = 72.
+  WEIGHTS: {
+    vertical_fit: 1,
+    scale: 1,
+    service_fit: 1,
+    pain_validation: 3,
+    ai_demand: 2,
+    middle_funnel_roadmap: 2,
+    motion_metrics: 2,
+    motion_qbr: 1,
+    decision_velocity: 2,
+    first_intro_speed: 3,
+  },
+
+  // Tier cuts (out of 72 max)
+  TIER_CUTS: {
+    A: 54, // Strategic — Blake's calendar, founding cohort, full PX (75%+)
+    B: 36, // Active — onboarding flow + 15-min Blake intro (50–74%)
+    // anything below 36 → C (self-serve via Ash, auto-promote on first intro)
+  },
+
+  WEIGHTS_VERSION: 'v1',
+};
+
+// ─── STATE ──────────────────────────────────────────────────────────
+const STATE = {
+  flow: [
+    'welcome',
+    'vertical_fit',
+    'scale',
+    'service_fit',
+    'pain_validation',
+    'ai_demand',
+    'middle_funnel_roadmap',
+    'motion_metrics',
+    'motion_qbr',
+    'decision_velocity',
+    'existing_programs',
+    'first_intro_speed',
+    'month1_preview',
+    'contact',
+    'submitting',
+    'success',
+  ],
+  currentIdx: 0,
+  answers: {},      // { question_id: value | array of values }
+  rawPoints: {},    // { question_id: numeric points } (pre-weight)
+  startTime: Date.now(),
+};
+
+// ─── DOM ────────────────────────────────────────────────────────────
+const $progressFill = document.getElementById('progressFill');
+const $stage = document.getElementById('stage');
+const screens = {};
+document.querySelectorAll('.screen').forEach(s => { screens[s.dataset.screen] = s; });
+
+// ─── INIT ───────────────────────────────────────────────────────────
+function init() {
+  restoreFromStorage();
+  bindOptionButtons();
+  bindControls();
+  bindKeyboard();
+  bindSaveExit();
+  showScreen(STATE.currentIdx, /* skipAnim */ true);
+}
+
+// ─── SCREEN NAVIGATION ──────────────────────────────────────────────
+let pendingActivation = null;
+function showScreen(idx, skipAnim = false) {
+  if (idx < 0 || idx >= STATE.flow.length) return;
+  const id = STATE.flow[idx];
+  const screen = screens[id];
+  if (!screen) return;
+
+  // Cancel any pending screen activation from a previous showScreen call
+  // (prevents two screens both ending up `.active` if showScreen runs twice in quick succession)
+  if (pendingActivation) {
+    cancelAnimationFrame(pendingActivation);
+    pendingActivation = null;
+  }
+
+  // Hide all
+  Object.values(screens).forEach(s => {
+    s.classList.remove('active', 'exit');
+  });
+
+  // Show target
+  if (skipAnim) {
+    screen.classList.add('active');
+  } else {
+    pendingActivation = requestAnimationFrame(() => {
+      screen.classList.add('active');
+      pendingActivation = null;
+    });
+  }
+
+  STATE.currentIdx = idx;
+  updateProgress();
+  scrollToTop();
+  focusFirstInput(screen);
+  saveToStorage();
+}
+
+function next() {
+  if (STATE.currentIdx >= STATE.flow.length - 1) return;
+  // Validate current screen
+  if (!validateCurrent()) return;
+  showScreen(STATE.currentIdx + 1);
+}
+
+function back() {
+  if (STATE.currentIdx === 0) return;
+  // Skip submitting/success/error screens on back
+  let target = STATE.currentIdx - 1;
+  while (target > 0 && ['submitting', 'success', 'error'].includes(STATE.flow[target])) {
+    target--;
+  }
+  showScreen(target);
+}
+
+function updateProgress() {
+  const screen = screens[STATE.flow[STATE.currentIdx]];
+  const pct = parseInt(screen?.dataset.progress || '0', 10);
+  $progressFill.style.width = pct + '%';
+}
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function focusFirstInput(screen) {
+  const input = screen.querySelector('.field-input');
+  if (input) {
+    setTimeout(() => input.focus(), 350);
+  }
+}
+
+// ─── VALIDATION ─────────────────────────────────────────────────────
+function validateCurrent() {
+  const id = STATE.flow[STATE.currentIdx];
+  const screen = screens[id];
+
+  // Welcome / submitting / success — always pass
+  if (['welcome', 'submitting', 'success', 'error'].includes(id)) return true;
+
+  // Question screens with options
+  const optsContainer = screen.querySelector('.options');
+  if (optsContainer) {
+    const q = optsContainer.dataset.q;
+    const isMulti = optsContainer.dataset.multi === 'true';
+    const ans = STATE.answers[q];
+    if (isMulti) {
+      return Array.isArray(ans) && ans.length > 0;
+    }
+    return ans !== undefined && ans !== null && ans !== '';
+  }
+
+  // Text inputs
+  const required = screen.querySelectorAll('.field-input[required]');
+  let allValid = true;
+  required.forEach(input => {
+    if (!input.value.trim()) {
+      input.classList.add('error');
+      allValid = false;
+    } else if (input.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value.trim())) {
+      input.classList.add('error');
+      allValid = false;
+    } else {
+      input.classList.remove('error');
+    }
+  });
+  if (!allValid) {
+    const banner = document.getElementById('errorBanner');
+    if (banner) banner.classList.add('visible');
+  }
+  return allValid;
+}
+
+// ─── OPTION BUTTONS ─────────────────────────────────────────────────
+function bindOptionButtons() {
+  document.querySelectorAll('.options').forEach(container => {
+    const q = container.dataset.q;
+    const isMulti = container.dataset.multi === 'true';
+
+    container.querySelectorAll('.opt').forEach(btn => {
+      btn.addEventListener('click', () => handleOptClick(btn, q, isMulti, container));
+    });
+  });
+}
+
+function handleOptClick(btn, q, isMulti, container) {
+  const value = btn.dataset.value;
+  const points = parseInt(btn.dataset.points || '0', 10);
+
+  if (isMulti) {
+    // Toggle in array
+    if (!Array.isArray(STATE.answers[q])) STATE.answers[q] = [];
+    if (!Array.isArray(STATE.rawPoints[q])) STATE.rawPoints[q] = [];
+
+    const existing = STATE.answers[q].indexOf(value);
+    if (existing >= 0) {
+      STATE.answers[q].splice(existing, 1);
+      STATE.rawPoints[q].splice(existing, 1);
+      btn.classList.remove('selected');
+    } else {
+      STATE.answers[q].push(value);
+      STATE.rawPoints[q].push(points);
+      btn.classList.add('selected');
+    }
+
+    // Enable Continue when at least 1 selected
+    const continueBtn = container.parentElement.querySelector('[data-action="next"]');
+    if (continueBtn) {
+      continueBtn.disabled = STATE.answers[q].length === 0;
+    }
+  } else {
+    // Single-select: clear siblings
+    container.querySelectorAll('.opt').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    STATE.answers[q] = value;
+    STATE.rawPoints[q] = points;
+
+    // Auto-advance after a brief moment for visual feedback
+    saveToStorage();
+    setTimeout(() => next(), 180);
+  }
+}
+
+// ─── CONTROL BUTTONS ────────────────────────────────────────────────
+function bindControls() {
+  document.querySelectorAll('[data-action]').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.preventDefault();
+      const action = btn.dataset.action;
+      switch (action) {
+        case 'next': next(); break;
+        case 'back': back(); break;
+        case 'submit': handleSubmit(); break;
+        case 'skip': handleSkip(); break;
+        case 'retry': handleRetry(); break;
+      }
+    });
+  });
+
+  // Text inputs — capture values + clear errors on type
+  document.querySelectorAll('.field-input').forEach(input => {
+    input.addEventListener('input', () => {
+      const q = input.dataset.q;
+      if (q) STATE.answers[q] = input.value.trim();
+      input.classList.remove('error');
+      const banner = document.getElementById('errorBanner');
+      if (banner) banner.classList.remove('visible');
+      saveToStorage();
+    });
+    // Enter on text input → next
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && input.tagName === 'INPUT' && input.type !== 'submit') {
+        e.preventDefault();
+        next();
+      }
+    });
+  });
+}
+
+function handleSkip() {
+  // For optional questions
+  const id = STATE.flow[STATE.currentIdx];
+  if (id === 'existing_programs') {
+    STATE.answers.existing_programs = '';
+  }
+  next();
+}
+
+// ─── KEYBOARD ───────────────────────────────────────────────────────
+function bindKeyboard() {
+  document.addEventListener('keydown', e => {
+    const id = STATE.flow[STATE.currentIdx];
+    const screen = screens[id];
+    if (!screen) return;
+
+    // Don't interfere when typing in text inputs (handled separately)
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+      if (e.key === 'Escape') back();
+      return;
+    }
+
+    // Number keys: select option N
+    if (/^[1-9]$/.test(e.key)) {
+      const opts = screen.querySelectorAll('.opt');
+      const idx = parseInt(e.key, 10) - 1;
+      if (opts[idx]) {
+        e.preventDefault();
+        opts[idx].click();
+      }
+      return;
+    }
+
+    // Enter: advance
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      next();
+      return;
+    }
+
+    // Escape or Left: back
+    if (e.key === 'Escape' || e.key === 'ArrowLeft') {
+      e.preventDefault();
+      back();
+    }
+  });
+}
+
+// ─── SAVE & EXIT ────────────────────────────────────────────────────
+function bindSaveExit() {
+  document.getElementById('saveExit').addEventListener('click', e => {
+    e.preventDefault();
+    saveToStorage();
+    if (confirm('Save your progress and come back later? Your answers will be here when you return.')) {
+      window.location.href = 'https://salesai.com';
+    }
+  });
+}
+
+function saveToStorage() {
+  try {
+    localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify({
+      answers: STATE.answers,
+      rawPoints: STATE.rawPoints,
+      currentIdx: STATE.currentIdx,
+      startTime: STATE.startTime,
+    }));
+  } catch (e) { /* ignore quota errors */ }
+}
+
+function restoreFromStorage() {
+  try {
+    const raw = localStorage.getItem(CONFIG.STORAGE_KEY);
+    if (!raw) return;
+    const saved = JSON.parse(raw);
+    if (saved && saved.answers) {
+      STATE.answers = saved.answers;
+      STATE.rawPoints = saved.rawPoints || {};
+      STATE.startTime = saved.startTime || Date.now();
+      // Resume mid-flow if not at submit/success/error
+      const restoreIdx = saved.currentIdx || 0;
+      if (restoreIdx > 0 && restoreIdx < STATE.flow.length - 2) {
+        STATE.currentIdx = restoreIdx;
+      }
+      // Re-mark selected options
+      Object.keys(STATE.answers).forEach(q => {
+        const container = document.querySelector(`.options[data-q="${q}"]`);
+        if (!container) return;
+        const ans = STATE.answers[q];
+        const values = Array.isArray(ans) ? ans : [ans];
+        values.forEach(v => {
+          const btn = container.querySelector(`.opt[data-value="${v}"]`);
+          if (btn) btn.classList.add('selected');
+        });
+        // Re-enable continue button on multi-select screens
+        const continueBtn = container.parentElement.querySelector('[data-action="next"]');
+        if (continueBtn && container.dataset.multi === 'true' && Array.isArray(ans) && ans.length > 0) {
+          continueBtn.disabled = false;
+        }
+      });
+      // Re-fill text inputs
+      document.querySelectorAll('.field-input').forEach(input => {
+        const q = input.dataset.q;
+        if (q && STATE.answers[q]) input.value = STATE.answers[q];
+      });
+    }
+  } catch (e) { /* ignore */ }
+}
+
+function clearStorage() {
+  try { localStorage.removeItem(CONFIG.STORAGE_KEY); } catch (e) {}
+}
+
+// ─── SCORING ────────────────────────────────────────────────────────
+function calculateScore() {
+  const W = CONFIG.WEIGHTS;
+  let total = 0;
+  let max = 0;
+
+  Object.keys(W).forEach(q => {
+    const weight = W[q];
+    const raw = STATE.rawPoints[q];
+    let qPoints = 0;
+
+    if (Array.isArray(raw)) {
+      // Multi-select: take MAX of selected (highest signal wins)
+      qPoints = raw.length ? Math.max(...raw) : 0;
+    } else if (typeof raw === 'number') {
+      qPoints = raw;
+    }
+
+    total += qPoints * weight;
+    max += 4 * weight; // each question's max raw is 4
+  });
+
+  let tier = 'C';
+  if (total >= CONFIG.TIER_CUTS.A) tier = 'A';
+  else if (total >= CONFIG.TIER_CUTS.B) tier = 'B';
+
+  return { total, max, tier, weights_version: CONFIG.WEIGHTS_VERSION };
+}
+
+// ─── SUBMIT ─────────────────────────────────────────────────────────
+async function handleSubmit() {
+  if (!validateCurrent()) return;
+
+  // Show submitting screen
+  showScreen(STATE.flow.indexOf('submitting'));
+
+  const scoring = calculateScore();
+  const payload = buildPayload(scoring);
+
+  try {
+    const ok = await postToAPI(payload);
+    if (!ok) throw new Error('Submit returned non-OK');
+
+    clearStorage();
+    personalizeSuccess(payload);
+    showScreen(STATE.flow.indexOf('success'));
+    mountCalendar();
+  } catch (err) {
+    console.error('Submit failed:', err);
+    showErrorScreen();
+  }
+}
+
+// Populate the success screen with the user's name + a generated app ID + submit time
+function personalizeSuccess(payload) {
+  // First name from contact form
+  const fullName = (STATE.answers.contact_name || '').trim();
+  const firstName = fullName ? fullName.split(/\s+/)[0] : '';
+
+  const headlineEl = document.getElementById('successHeadline');
+  if (headlineEl) {
+    if (firstName) {
+      // Use textContent on the name node so the typed input can never inject HTML
+      headlineEl.innerHTML = "You're <em>in</em>, ";
+      const nameSpan = document.createElement('span');
+      nameSpan.style.cssText = 'color: var(--cream);';
+      nameSpan.textContent = firstName + '.';
+      headlineEl.appendChild(nameSpan);
+    } else {
+      headlineEl.innerHTML = "You're <em>in</em>.";
+    }
+  }
+
+  // Generate a short application ID for the receipt — partner-facing, friendly format
+  const appId = generateAppId();
+  const receiptId = document.getElementById('receiptAppId');
+  if (receiptId) receiptId.textContent = appId;
+
+  // Format submit time for the receipt — local time, short format
+  const receiptTime = document.getElementById('receiptTime');
+  if (receiptTime) {
+    const now = new Date();
+    const opts = { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' };
+    receiptTime.textContent = now.toLocaleString(undefined, opts);
+  }
+
+  // Stash app ID into the payload's meta for the API record (does not block UI)
+  if (payload && payload.meta) payload.meta.client_application_id = appId;
+
+  // Re-trigger CSS animations: clone the success node, replace it.
+  // This guarantees check + fade-up animations play fresh on every submit.
+  const successEl = document.querySelector('[data-screen="success"]');
+  if (successEl) {
+    const clone = successEl.cloneNode(true);
+    successEl.parentNode.replaceChild(clone, successEl);
+    // Re-register in screens lookup
+    screens.success = clone;
+  }
+}
+
+function generateAppId() {
+  // Format: AGY-YYMMDD-XXXX (XXXX = 4 random uppercase chars)
+  const now = new Date();
+  const yy = String(now.getFullYear()).slice(-2);
+  const mm = String(now.getMonth() + 1).padStart(2, '0');
+  const dd = String(now.getDate()).padStart(2, '0');
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // no I/O/0/1 to avoid confusion
+  let suffix = '';
+  for (let i = 0; i < 4; i++) {
+    suffix += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return `AGY-${yy}${mm}${dd}-${suffix}`;
+}
+
+function buildPayload(scoring) {
+  return {
+    track: 'agency',
+    submitted_at: new Date().toISOString(),
+    completion_seconds: Math.round((Date.now() - STATE.startTime) / 1000),
+    answers: { ...STATE.answers },
+    scoring,
+    meta: {
+      user_agent: navigator.userAgent,
+      referrer: document.referrer || null,
+      url: window.location.href,
+      utm_source: getQueryParam('utm_source'),
+      utm_medium: getQueryParam('utm_medium'),
+      utm_campaign: getQueryParam('utm_campaign'),
+      utm_content: getQueryParam('utm_content'),
+      utm_term: getQueryParam('utm_term'),
+    },
+  };
+}
+
+function getQueryParam(name) {
+  const params = new URLSearchParams(window.location.search);
+  return params.get(name);
+}
+
+async function postToAPI(payload) {
+  const headers = { 'Content-Type': 'application/json' };
+  if (CONFIG.AUTH_HEADER && CONFIG.AUTH_HEADER.name && CONFIG.AUTH_HEADER.value) {
+    headers[CONFIG.AUTH_HEADER.name] = CONFIG.AUTH_HEADER.value;
+  }
+
+  const res = await fetch(CONFIG.API_ENDPOINT, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify(payload),
+  });
+
+  return res.ok;
+}
+
+function showErrorScreen() {
+  // Inject error screen if not present
+  if (!screens.error) return;
+  STATE.flow.push('error'); // ensure it exists in flow
+  Object.values(screens).forEach(s => s.classList.remove('active'));
+  screens.error.classList.add('active');
+  $progressFill.style.width = '95%';
+}
+
+async function handleRetry() {
+  showScreen(STATE.flow.indexOf('contact'));
+}
+
+// ─── CALENDAR EMBED ─────────────────────────────────────────────────
+function mountCalendar() {
+  const mount = document.getElementById('calendarMount');
+  if (!mount) return;
+
+  if (CONFIG.CALENDAR_EMBED_URL) {
+    mount.innerHTML = `
+      <iframe
+        src="${CONFIG.CALENDAR_EMBED_URL}"
+        style="width:100%; height:560px; border:none; border-radius:10px;"
+        title="Schedule a call">
+      </iframe>
+    `;
+  }
+  // else: keep placeholder visible
+}
+
+// ─── BOOT ───────────────────────────────────────────────────────────
+init();
+
+</script>
+</body>
+</html>
