@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voice AI — Referral Spot Sheet for Account Managers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green:#1FD96B;
+    --green-dk:#0C7A43;
+    --ink:#0A1410;
+    --slate:#475247;
+    --line:#E3EAE5;
+    --paper:#FFFFFF;
+    --wash:#F4F8F5;
+    --wash-green:#EAFBF1;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  body{
+    font-family:'Archivo',sans-serif;
+    color:var(--ink);
+    background:#DDE6E0;
+    line-height:1.45;
+    padding:32px 16px;
+  }
+  .page{
+    max-width:880px;margin:0 auto;background:var(--paper);
+    border-radius:18px;overflow:hidden;
+    box-shadow:0 24px 60px rgba(10,20,16,.16);
+  }
+
+  /* HEADER */
+  .hd{
+    background:var(--ink);color:#fff;padding:26px 36px 24px;
+    position:relative;overflow:hidden;
+  }
+  .hd::after{content:"";position:absolute;right:-60px;top:-60px;width:240px;height:240px;
+    background:radial-gradient(circle at center,rgba(31,217,107,.32),transparent 65%);}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:15px;letter-spacing:.04em;text-transform:uppercase;color:#fff;position:relative;z-index:1;}
+  .brand .dot{width:11px;height:11px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px rgba(31,217,107,.22);}
+  .brand .x{color:var(--green);}
+  h1{font-weight:900;font-size:30px;line-height:1.05;letter-spacing:-.02em;margin-top:14px;position:relative;z-index:1;}
+  .sub{color:#A9C7B5;font-size:14px;font-weight:500;margin-top:7px;max-width:600px;position:relative;z-index:1;}
+
+  /* SECTIONS */
+  .body{padding:30px 36px 8px;}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-bottom:26px;}
+  .kick{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--green-dk);margin-bottom:10px;display:flex;align-items:center;gap:7px;}
+  .kick::before{content:"";width:16px;height:3px;background:var(--green);border-radius:2px;}
+  h2{font-size:18px;font-weight:800;letter-spacing:-.01em;margin-bottom:8px;}
+
+  .lede{font-size:15.5px;color:var(--slate);font-weight:500;}
+  .lede b{color:var(--ink);font-weight:700;}
+
+  /* what it handles */
+  .caps{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .cap{background:var(--wash);border:1px solid var(--line);border-radius:11px;padding:12px 13px;}
+  .cap .t{font-weight:800;font-size:13.5px;}
+  .cap .d{font-size:12px;color:var(--slate);margin-top:3px;font-weight:500;line-height:1.4;}
+
+  /* how it works steps */
+  .steps{counter-reset:s;display:flex;flex-direction:column;gap:9px;}
+  .step{display:flex;gap:12px;align-items:flex-start;}
+  .step .n{counter-increment:s;flex:none;width:24px;height:24px;border-radius:50%;background:var(--green);color:var(--ink);
+    font-weight:900;font-size:12px;display:grid;place-items:center;}
+  .step .n::before{content:counter(s);}
+  .step .tx{font-size:13.5px;padding-top:2px;}
+  .step .tx b{font-weight:800;}
+  .step .tx span{color:var(--slate);font-weight:500;}
+
+  /* who it's for */
+  .for-markers{display:flex;flex-direction:column;gap:7px;margin-bottom:12px;}
+  .mk{display:flex;gap:9px;font-size:13.5px;font-weight:600;align-items:flex-start;}
+  .mk::before{content:"✓";color:var(--green-dk);font-weight:900;flex:none;}
+  .verticals{font-size:12px;color:var(--slate);font-weight:500;}
+  .verticals b{color:var(--ink);font-weight:700;}
+
+  /* IDENTIFY block */
+  .spot{background:var(--wash-green);border:1.5px solid #BDEED0;border-radius:14px;padding:20px 22px;margin-bottom:24px;}
+  .spot h2{color:var(--green-dk);}
+  .spot .hint{font-size:13px;color:var(--slate);font-weight:500;margin-bottom:13px;}
+  .signals{display:grid;grid-template-columns:1fr 1fr;gap:8px 22px;}
+  .sig{display:flex;gap:9px;font-size:13px;font-weight:600;align-items:flex-start;line-height:1.35;}
+  .sig::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--green);margin-top:5px;}
+  .sig i{font-style:normal;color:var(--slate);font-weight:500;}
+
+  /* SAY block */
+  .say{border:1.5px solid var(--line);border-radius:14px;padding:20px 22px;margin-bottom:24px;}
+  .say h2{margin-bottom:4px;}
+  .say .hint{font-size:13px;color:var(--slate);font-weight:500;margin-bottom:15px;}
+  .line{margin-bottom:13px;}
+  .line:last-child{margin-bottom:0;}
+  .ltag{font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--green-dk);margin-bottom:4px;}
+  .quote{font-size:14px;font-weight:600;color:var(--ink);border-left:3px solid var(--green);padding:3px 0 3px 13px;line-height:1.45;}
+  .quote em{font-style:italic;color:var(--slate);font-weight:500;}
+
+  /* footer */
+  .ft{background:var(--ink);color:#fff;padding:18px 36px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;}
+  .ft .rule{font-size:13px;font-weight:600;max-width:520px;}
+  .ft .rule b{color:var(--green);}
+  .ft .cta{font-size:12px;font-weight:800;background:var(--green);color:var(--ink);padding:9px 15px;border-radius:8px;white-space:nowrap;}
+
+  @media (max-width:680px){
+    .row,.caps,.signals{grid-template-columns:1fr;}
+    h1{font-size:24px;}
+  }
+  @media print{
+    body{background:#fff;padding:0;}
+    .page{box-shadow:none;border-radius:0;max-width:100%;}
+    .hd::after{display:none;}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="hd">
+    <div class="brand"><span class="dot"></span>SALES<span class="x">AI</span> &nbsp;·&nbsp; VOICE AI</div>
+    <h1>The Referral Spot Sheet</h1>
+    <div class="sub">A one-page field guide for account managers — what Voice AI does, who it's for, what to listen for in your book of clients, and exactly what to say to flag a referral.</div>
+  </div>
+
+  <div class="body">
+
+    <!-- WHAT IT IS -->
+    <div style="margin-bottom:24px;">
+      <div class="kick">What it is</div>
+      <p class="lede">A <b>Voice AI agent</b> is software that answers and makes phone calls in a natural, human-sounding voice — and actually gets things done on the call. Not a phone tree. It talks like a person, understands what the caller wants, and <b>books the appointment, qualifies the lead, and follows up — 24/7, on every call.</b></p>
+    </div>
+
+    <div class="row">
+      <!-- WHAT IT HANDLES -->
+      <div>
+        <div class="kick">What it handles</div>
+        <div class="caps">
+          <div class="cap"><div class="t">Inbound + qualification</div><div class="d">Every call answered on the first ring, caller's need understood and qualified live.</div></div>
+          <div class="cap"><div class="t">Booking &amp; scheduling</div><div class="d">Drops the job or meeting straight onto the calendar during the call.</div></div>
+          <div class="cap"><div class="t">Outbound follow-up</div><div class="d">Calls web leads back in seconds, chases no-shows, revives aging leads.</div></div>
+          <div class="cap"><div class="t">Tier-1 support</div><div class="d">Answers FAQs — hours, pricing, status — and routes the rest to a human.</div></div>
+        </div>
+      </div>
+
+      <!-- HOW IT WORKS -->
+      <div>
+        <div class="kick">How it works</div>
+        <div class="steps">
+          <div class="step"><div class="n"></div><div class="tx"><b>Connect</b> <span>— point their number (or overflow / after-hours) at the agent.</span></div></div>
+          <div class="step"><div class="n"></div><div class="tx"><b>Configure</b> <span>— it learns their services, pricing, FAQs, booking &amp; qualifying rules.</span></div></div>
+          <div class="step"><div class="n"></div><div class="tx"><b>Converse</b> <span>— natural voice, real back-and-forth, understands intent.</span></div></div>
+          <div class="step"><div class="n"></div><div class="tx"><b>Act</b> <span>— books the calendar, qualifies, logs to CRM, texts confirmation.</span></div></div>
+          <div class="step"><div class="n"></div><div class="tx"><b>Hand off</b> <span>— escalates to a human when it should, with full context.</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WHO IT'S FOR -->
+    <div style="margin-bottom:24px;">
+      <div class="kick">Who it's for</div>
+      <div class="for-markers">
+        <div class="mk">Revenue is won or lost <b>&nbsp;on the phone and on inbound leads</b></div>
+        <div class="mk">Appointment / job-based — <b>&nbsp;they make money when something gets booked</b></div>
+        <div class="mk">Spending on ads or lead gen but <b>&nbsp;leaking at the phone or on slow follow-up</b></div>
+      </div>
+      <div class="verticals"><b>Best-fit verticals:</b> home services (HVAC, roofing, pest, plumbing, electrical), med/dental/aesthetics, legal, real estate &amp; property mgmt, auto, financial &amp; insurance, and any multi-location operator.</div>
+    </div>
+
+    <!-- IDENTIFY -->
+    <div class="spot">
+      <div class="kick">Step 1 — Identify</div>
+      <h2>Listen for these in your accounts</h2>
+      <div class="hint">If a client has said any of this — or you've seen it — they're a referral. You don't need to diagnose; you just need to flag it.</div>
+      <div class="signals">
+        <div class="sig"><i>"We can't keep up with the phones" / front desk is slammed</i></div>
+        <div class="sig"><i>Calls hitting voicemail after hours, weekends, or at lunch</i></div>
+        <div class="sig"><i>Hiring, training, or churning through reception or a call center</i></div>
+        <div class="sig"><i>Slow to call web leads back (a speed-to-lead problem)</i></div>
+        <div class="sig"><i>Spending on ads / SEO but conversion feels soft</i></div>
+        <div class="sig"><i>Seasonal call spikes they can't staff for</i></div>
+        <div class="sig"><i>No-shows piling up, no follow-up on open quotes</i></div>
+        <div class="sig"><i>Multiple locations handling the phone inconsistently</i></div>
+      </div>
+    </div>
+
+    <!-- SAY -->
+    <div class="say">
+      <div class="kick">Step 2 — Say</div>
+      <h2>The 3-line talk track</h2>
+      <div class="hint">You're making an introduction, not a pitch. Probe → frame → hand off. Keep it casual.</div>
+
+      <div class="line">
+        <div class="ltag">Probe</div>
+        <div class="quote">"Quick one — when a customer calls and nobody picks up, or a lead fills out your form at 9pm, <em>what actually happens to that?</em>"</div>
+      </div>
+      <div class="line">
+        <div class="ltag">Frame</div>
+        <div class="quote">"There's a tool we work with — a voice AI that answers every call and follows up on every lead instantly, in a natural voice, and books it right on the calendar. A lot of [their type of business] are using it to stop leaking revenue at the phone."</div>
+      </div>
+      <div class="line">
+        <div class="ltag">Hand off</div>
+        <div class="quote">"Want me to connect you with the team that runs it? No pressure — just a quick look at what it'd catch for you."</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="ft">
+    <div class="rule">One rule: <b>spot it and flag it.</b> If they lean in, send the referral to the SalesAI team — we take it from there.</div>
+    <div class="cta">REFER → SalesAI</div>
+  </div>
+
+</div>
+</body>
+</html>
