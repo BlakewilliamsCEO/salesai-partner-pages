@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>REVI · Discovery Questionnaire</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#111114;
+    --body:#2b2b2e;
+    --dark:#141618;
+    --muted:#6e7075;
+    --muted-dk:#b9bbbe;
+    --fill:#f5f5f6;
+    --fill-focus:#ffffff;
+    --line:#e2e2e6;
+    --line-dk:#2c2f33;
+    --white:#ffffff;
+    --page:#ffffff;
+    --display:'Archivo',-apple-system,BlinkMacSystemFont,sans-serif;
+    --text:'Raleway',-apple-system,BlinkMacSystemFont,sans-serif;
+    --maxw:920px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{
+    margin:0;background:var(--page);color:var(--body);
+    font-family:var(--text);font-size:16px;line-height:1.6;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  }
+  ::selection{background:var(--ink);color:#fff}
+
+  /* ---------- header ---------- */
+  .site-header{
+    position:sticky;top:0;z-index:50;background:rgba(20,22,24,.96);
+    backdrop-filter:saturate(140%) blur(8px);border-bottom:1px solid var(--line-dk);
+  }
+  .bar{
+    max-width:1180px;margin:0 auto;padding:0 24px;height:62px;
+    display:flex;align-items:center;gap:24px;
+  }
+  .wordmark{font-family:var(--display);font-weight:900;letter-spacing:.18em;
+    color:#fff;font-size:20px;text-decoration:none;flex:0 0 auto}
+  .wordmark span{color:var(--muted-dk)}
+  .nav{display:flex;gap:4px;margin-left:8px;flex:1 1 auto;overflow:auto;scrollbar-width:none}
+  .nav::-webkit-scrollbar{display:none}
+  .nav a{
+    font-family:var(--display);font-size:11px;font-weight:600;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--muted-dk);text-decoration:none;
+    padding:8px 12px;border-radius:999px;white-space:nowrap;transition:color .2s,background .2s;
+  }
+  .nav a:hover{color:#fff}
+  .nav a.active{color:#fff;background:rgba(255,255,255,.08)}
+  .nav a b{color:#fff;font-weight:800;margin-right:7px}
+  .actions{display:flex;gap:8px;flex:0 0 auto}
+  .btn{
+    font-family:var(--display);font-size:11px;font-weight:700;letter-spacing:.12em;
+    text-transform:uppercase;cursor:pointer;border-radius:999px;padding:9px 16px;
+    border:1px solid var(--line-dk);background:transparent;color:#fff;transition:.2s;white-space:nowrap;
+  }
+  .btn:hover{background:#fff;color:var(--dark);border-color:#fff}
+  .btn.solid{background:#fff;color:var(--dark);border-color:#fff}
+  .btn.solid:hover{background:var(--muted-dk);border-color:var(--muted-dk)}
+  .progress{height:2px;background:transparent;position:sticky;top:62px;z-index:49}
+  .progress > i{display:block;height:100%;width:0;background:#fff;transition:width .1s linear}
+
+  /* ---------- hero ---------- */
+  .hero{background:var(--dark);color:#fff;position:relative;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;
+    background:radial-gradient(120% 90% at 85% -10%,rgba(255,255,255,.07),transparent 55%);
+    pointer-events:none}
+  .hero-inner{max-width:var(--maxw);margin:0 auto;padding:96px 24px 0}
+  .eyebrow{font-family:var(--display);font-size:12px;font-weight:700;letter-spacing:.34em;
+    text-transform:uppercase;color:var(--muted-dk)}
+  .hero h1{
+    font-family:var(--display);font-weight:800;text-transform:uppercase;
+    font-size:clamp(2.7rem,8vw,5.8rem);line-height:.92;letter-spacing:-.01em;
+    margin:18px 0 0;color:#fff;
+  }
+  .hero h1 em{font-style:normal;color:var(--muted-dk)}
+  .lede{max-width:560px;margin:26px 0 0;font-size:18px;line-height:1.55;color:#e6e7e9;font-weight:400}
+  .lede b{color:#fff;font-weight:600}
+  .meta-row{
+    display:flex;flex-wrap:wrap;gap:14px;margin:38px 0 0;padding:22px 0 0;border-top:1px solid var(--line-dk);
+  }
+  .meta-field{flex:1 1 220px;min-width:180px}
+  .meta-field label{display:block;font-family:var(--display);font-size:10.5px;font-weight:700;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--muted-dk);margin-bottom:8px}
+  .meta-field input{
+    width:100%;background:transparent;border:0;border-bottom:1.5px solid var(--line-dk);
+    color:#fff;font-family:var(--text);font-size:16px;padding:6px 2px;transition:border-color .2s;
+  }
+  .meta-field input::placeholder{color:#5d6064}
+  .meta-field input:focus{outline:none;border-color:#fff}
+  .tagline{
+    margin-top:64px;padding:18px 24px;border-top:1px solid var(--line-dk);
+    text-align:center;font-family:var(--display);font-size:11.5px;font-weight:700;
+    letter-spacing:.26em;text-transform:uppercase;color:var(--muted-dk);
+    max-width:none;margin-left:calc(50% - 50vw);width:100vw;
+  }
+  .tagline strong{color:#fff;letter-spacing:.26em}
+  .tagline .dot{color:#5d6064;margin:0 12px}
+
+  /* ---------- how it works ---------- */
+  .how{max-width:var(--maxw);margin:0 auto;padding:64px 24px 8px}
+  .kicker{font-family:var(--display);font-size:12px;font-weight:700;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--ink);margin:0 0 18px}
+  .how p{margin:0 0 16px;color:var(--body);font-size:16.5px;max-width:680px}
+  .callout{
+    margin:26px 0 0;padding:20px 22px;background:var(--dark);color:#fff;border-radius:8px;
+    display:flex;gap:16px;align-items:flex-start;
+  }
+  .callout svg{flex:0 0 auto;margin-top:2px}
+  .callout p{margin:0;color:#e6e7e9;font-size:15px}
+  .callout a{color:#fff;font-weight:600;text-decoration:underline;text-underline-offset:2px}
+  .fineprint{margin-top:22px;font-size:14px;color:var(--muted);font-style:italic}
+
+  /* ---------- section divider ---------- */
+  .divider{background:var(--dark);color:#fff;margin-top:64px}
+  .divider-inner{max-width:var(--maxw);margin:0 auto;padding:54px 24px}
+  .divider .num{font-family:var(--display);font-weight:800;font-size:13px;letter-spacing:.3em;color:var(--muted-dk)}
+  .divider h2{font-family:var(--display);font-weight:800;text-transform:uppercase;
+    font-size:clamp(2rem,5.5vw,3.4rem);line-height:1;letter-spacing:-.01em;margin:14px 0 0;color:#fff}
+  .divider .sub{margin:16px 0 0;color:var(--muted-dk);font-size:16px;max-width:560px}
+  .divider .tags{margin:22px 0 0;display:flex;flex-wrap:wrap;gap:10px}
+  .divider .tags span{font-family:var(--display);font-size:10.5px;font-weight:700;letter-spacing:.16em;
+    text-transform:uppercase;color:#d6d7da;border:1px solid var(--line-dk);border-radius:999px;padding:6px 13px}
+
+  /* ---------- questions ---------- */
+  .section-body{max-width:var(--maxw);margin:0 auto;padding:8px 24px 0}
+  .group{padding:40px 0 8px}
+  .group-label{
+    display:flex;align-items:center;gap:16px;margin:0 0 26px;
+    font-family:var(--display);font-size:12px;font-weight:700;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--ink);
+  }
+  .group-label::after{content:"";flex:1;height:1px;background:var(--line)}
+  .q{margin:0 0 28px}
+  .q-head{display:flex;gap:12px;align-items:baseline;margin:0 0 11px}
+  .q-num{font-family:var(--display);font-weight:800;font-size:14px;color:var(--ink);
+    letter-spacing:.02em;flex:0 0 auto;min-width:34px}
+  .q-text{font-family:var(--text);font-weight:600;font-size:16.5px;color:var(--ink);line-height:1.4}
+  .field{
+    width:100%;background:var(--fill);border:1px solid var(--line);border-radius:6px;
+    font-family:var(--text);font-size:15.5px;color:var(--body);line-height:1.6;
+    padding:13px 15px;transition:border-color .18s,background .18s,box-shadow .18s;resize:vertical;
+  }
+  textarea.field{min-height:74px}
+  textarea.field.tall{min-height:104px}
+  input.field{height:48px}
+  .field::placeholder{color:#a7a8ad}
+  .field:focus{outline:none;border-color:var(--ink);background:var(--fill-focus);
+    box-shadow:0 0 0 3px rgba(20,22,24,.10)}
+  .share{margin:9px 2px 0;font-size:13px;color:var(--muted);display:flex;align-items:center;gap:7px}
+  .share b{color:var(--ink);font-weight:600}
+
+  /* sub-field groups (contacts / urls) */
+  .subgrid{display:grid;gap:16px}
+  .subfield label{display:block;font-family:var(--display);font-size:10.5px;font-weight:700;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+
+  /* access cards */
+  .access-intro{font-style:italic;color:var(--muted);font-size:14.5px;margin:2px 0 20px}
+  .acard{border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:0 0 18px;background:#fff}
+  .acard-top{background:var(--dark);color:#fff;padding:15px 20px;display:flex;align-items:baseline;gap:11px}
+  .acard-top .t{font-family:var(--display);font-weight:800;letter-spacing:.06em;font-size:15px;text-transform:uppercase}
+  .acard-top .s{color:var(--muted-dk);font-size:13px}
+  .acard-body{padding:20px}
+  ol.steps{margin:0;padding:0;list-style:none;counter-reset:s}
+  ol.steps li{counter-increment:s;position:relative;padding:0 0 12px 36px;font-size:14.5px;color:var(--body)}
+  ol.steps li::before{content:counter(s);position:absolute;left:0;top:-1px;
+    font-family:var(--display);font-weight:800;font-size:11px;color:#fff;background:var(--ink);
+    width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+  .bizid{margin:16px 0 0;padding:12px 16px;background:var(--fill);border:1px dashed var(--line);
+    border-radius:6px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .bizid .k{font-family:var(--display);font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .bizid .v{font-family:'Archivo';font-weight:800;font-size:18px;letter-spacing:.04em;color:var(--ink)}
+  .grant{margin:18px 0 0}
+  .grant .glabel{font-family:var(--display);font-size:10.5px;font-weight:700;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--muted);margin:0 0 12px}
+  .checks{display:flex;flex-wrap:wrap;gap:10px}
+  .check{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:999px;
+    padding:8px 15px 8px 12px;cursor:pointer;font-size:14px;color:var(--ink);transition:.16s;user-select:none}
+  .check:hover{border-color:#c2c3c7}
+  .check input{appearance:none;-webkit-appearance:none;width:17px;height:17px;border:1.5px solid #b6b7bb;
+    border-radius:5px;display:grid;place-content:center;cursor:pointer;transition:.16s;flex:0 0 auto}
+  .check input::after{content:"";width:9px;height:9px;border-radius:2px;transform:scale(0);transition:transform .14s;
+    box-shadow:inset 0 0 0 9px var(--ink)}
+  .check input:checked{border-color:var(--ink)}
+  .check input:checked::after{transform:scale(1)}
+  .check:has(input:checked){border-color:var(--ink);background:var(--fill)}
+  .gid label{display:block;font-family:var(--display);font-size:10.5px;font-weight:700;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+  .addnote{font-size:14px;color:var(--muted);padding:14px 18px;border:1px dashed var(--line);border-radius:8px}
+  .addnote b{color:var(--ink)}
+
+  /* ---------- footer ---------- */
+  .endbar{max-width:var(--maxw);margin:0 auto;padding:48px 24px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+  .endbar .btn{border-color:var(--line);color:var(--ink)}
+  .endbar .btn:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .endbar .btn.solid{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .endbar .btn.solid:hover{background:#000}
+  footer.thanks{background:var(--dark);color:#fff;text-align:center}
+  .thanks-inner{max-width:var(--maxw);margin:0 auto;padding:72px 24px}
+  .thanks .eyebrow{color:var(--muted-dk)}
+  .thanks h3{font-family:var(--display);font-weight:800;text-transform:uppercase;
+    font-size:clamp(1.8rem,5vw,2.8rem);margin:14px 0 0;letter-spacing:-.01em}
+  .thanks p{max-width:520px;margin:18px auto 0;color:#dadbdd;font-size:16px}
+  .thanks .links{margin:30px 0 0;display:flex;justify-content:center;gap:8px 22px;flex-wrap:wrap;
+    font-family:var(--display);font-size:13px;font-weight:600;letter-spacing:.04em}
+  .thanks .links a{color:#fff;text-decoration:none;border-bottom:1px solid transparent;transition:.2s}
+  .thanks .links a:hover{border-color:#fff}
+  .thanks .rule{margin:34px auto 0;width:46px;height:2px;background:var(--line-dk)}
+  .thanks .legal{margin:24px 0 0;font-family:var(--display);font-size:10.5px;font-weight:700;
+    letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+
+  .saved-toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);
+    background:var(--ink);color:#fff;font-family:var(--display);font-size:12px;font-weight:600;
+    letter-spacing:.08em;text-transform:uppercase;padding:12px 20px;border-radius:999px;opacity:0;
+    transition:.25s;pointer-events:none;z-index:80}
+  .saved-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+  @media (max-width:640px){
+    .bar{gap:12px;padding:0 16px}
+    .nav{display:none}
+    .hero-inner{padding-top:64px}
+    .section-body,.how,.divider-inner,.hero-inner,.thanks-inner{padding-left:18px;padding-right:18px}
+  }
+
+  /* ---------- print ---------- */
+  @media print{
+    @page{margin:14mm}
+    .site-header,.progress,.actions,.endbar,.saved-toast{display:none !important}
+    body{font-size:11pt}
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .hero,.divider,.acard-top,.callout,footer.thanks,.acard-top .t{color:#fff !important}
+    .hero,.divider,.callout,footer.thanks{background:var(--dark) !important}
+    .tagline{width:auto;margin-left:0}
+    .field{background:#fafafa !important;border:1px solid #ccc !important;box-shadow:none !important}
+    .q,.acard{break-inside:avoid}
+    .divider{break-before:auto}
+    .hero-inner{padding-top:8px}
+    .how{padding-top:24px}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="bar">
+    <a class="wordmark" href="#top">RE<span>VI</span></a>
+    <nav class="nav" id="nav">
+      <a href="#sec-01"><b>01</b>Logistics</a>
+      <a href="#sec-02"><b>02</b>Brand &amp; Business</a>
+      <a href="#sec-03"><b>03</b>Marketing</a>
+      <a href="#sec-04"><b>04</b>Goals</a>
+    </nav>
+    <div class="actions">
+      <button class="btn" id="dl">Download answers</button>
+      <button class="btn solid" id="pr">Print / PDF</button>
+    </div>
+  </div>
+</header>
+<div class="progress"><i id="bar"></i></div>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="eyebrow">Client Intake</div>
+      <h1>Discovery<br>Question<em>naire</em></h1>
+      <p class="lede">This is the start of something beautiful. <b>Tell us everything</b> — the more we know your business, the harder we can swing for you.</p>
+      <div class="meta-row">
+        <div class="meta-field">
+          <label for="m_for">Prepared for</label>
+          <input id="m_for" type="text" placeholder="Company name" data-export="Prepared for" />
+        </div>
+        <div class="meta-field">
+          <label for="m_by">Prepared by</label>
+          <input id="m_by" type="text" placeholder="Revi · revivideo.com" data-export="Prepared by" />
+        </div>
+        <div class="meta-field">
+          <label for="m_date">Date</label>
+          <input id="m_date" type="date" data-export="Date" />
+        </div>
+      </div>
+    </div>
+    <div class="tagline">
+      <strong>Production That Produces.</strong><span class="dot">·</span>Video<span class="dot">·</span>Web<span class="dot">·</span>Ad Buying
+    </div>
+  </section>
+
+  <!-- HOW THIS WORKS -->
+  <section class="how">
+    <p class="kicker">How this works</p>
+    <p>We use this discovery questionnaire to accelerate the get-to-know-you process — and to let our entire team know your business inside and out. Please provide as much information as possible.</p>
+    <p>We don’t just use this to learn about you up front; we’ll rely on it throughout our partnership.</p>
+    <div class="callout">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2 4 5v6c0 5 3.4 8.4 8 11 4.6-2.6 8-6 8-11V5l-8-3Z" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      <p>Throughout this form we’ll ask you to share information and account access. When sharing, please use <a href="mailto:braden@revivideo.com">braden@revivideo.com</a> &amp; <a href="mailto:jared@revivideo.com">jared@revivideo.com</a>.</p>
+    </div>
+    <p class="fineprint">Answer any applicable questions. If a question isn’t applicable, feel free to leave it blank.</p>
+  </section>
+
+  <!-- SECTIONS RENDER HERE -->
+  <div id="sections"></div>
+
+  <div class="endbar">
+    <button class="btn" id="dl2">Download answers</button>
+    <button class="btn solid" id="pr2">Print / Save as PDF</button>
+  </div>
+</main>
+
+<footer class="thanks">
+  <div class="thanks-inner">
+    <div class="eyebrow">That’s everything</div>
+    <h3>Thank you.</h3>
+    <p>Thank you so much for your help as we get things started. We’re beyond excited about the opportunity to work with you — and the potential of this partnership.</p>
+    <div class="links">
+      <a href="mailto:braden@revivideo.com">braden@revivideo.com</a>
+      <a href="mailto:jared@revivideo.com">jared@revivideo.com</a>
+      <a href="https://revivideo.com">revivideo.com</a>
+    </div>
+    <div class="rule"></div>
+    <div class="legal">Production That Produces · © 2026 Revi · All Rights Reserved</div>
+  </div>
+</footer>
+
+<div class="saved-toast" id="toast">Answers downloaded</div>
+
+<script>
+const DATA = [
+  { sec:"01", title:"Logistics", sub:"The essentials — who we talk to, and the access we need to get to work.", tags:["Housekeeping","Requested Access"],
+    groups:[
+      { label:"Housekeeping", items:[
+        { type:"contacts", n:"1.1", q:"Points of Contact", fields:["Main point of contact","Creative decision maker","Advertising decision maker"] },
+        { n:"1.2", q:`Who is our team's point of contact, and what are their roles on the account?` },
+        { n:"1.3", q:`Are there any unique approval processes for creative or paid media (i.e., legal team, CEO, committee approval, etc.)?` },
+        { type:"urls", n:"1.4", q:"Website & relevant URLs", fields:[
+            {label:"Main website URL", short:true},
+            {label:"Relevant URLs (landing pages, notable press, etc.)", short:false} ] },
+      ]},
+      { label:"Requested Access", items:[ { type:"access", n:"1.5", q:"Account Access" } ]},
+    ]},
+  { sec:"02", title:"Your Brand & Business", sub:"The story, the voice, and the product behind it all.", tags:["Branding","Messaging","Product"],
+    groups:[
+      { label:"Branding", items:[
+        { n:"2.1", q:`Does your brand have a style guide to share with us?` },
+        { n:"2.2", q:`What is your brand's elevator pitch?` },
+        { n:"2.3", q:`What does your brand stand for?` },
+        { n:"2.4", q:`Can you compare your branding / culture to other known companies? (Aesthetically, lifestyle, personality, etc.)` },
+      ]},
+      { label:"Messaging", items:[
+        { n:"2.5", q:`What are your brand's key messages?` },
+        { n:"2.6", q:`What message seems to be the most compelling to your average buyer?` },
+        { n:"2.7", q:`What tone of voice does your company have? (e.g., light-hearted, serious, authoritative, funny, etc.)` },
+        { n:"2.8", q:`What results can your customers expect?` },
+        { n:"2.9", q:`What do you want your customers to think of your brand?` },
+        { n:"2.10", q:`If you had 10 seconds to sell your product to someone on the street, how would you do it?` },
+      ]},
+      { label:"Product", items:[
+        { n:"2.11", q:`Describe the product — how does it work?` },
+        { n:"2.12", q:`What is your unique value proposition?` },
+        { n:"2.13", q:`Is there any tech or science in the product? If so, do you have any patents or intellectual property associated with it?` },
+        { n:"2.14", q:`Does your product make any particular claims or require compliance documentation?` },
+        { n:"2.15", q:`What is the Manufacturer's Suggested Retail Price (MSRP) / Manufacturer's Advertised Price (MAP)?`, short:true },
+        { n:"2.16", q:`What are the most common pain points your product solves?` },
+        { n:"2.17", q:`What are the top 5 reasons someone would NOT buy your product?`, tall:true },
+        { n:"2.18", q:`Where can we find product feedback?` },
+        { n:"2.19", q:`What is your relationship like with your customers?` },
+        { n:"2.20", q:`Who do you consider your top 3–5 competitors?` },
+        { n:"2.21", q:`Why would someone buy your brand or product over your competitors?` },
+        { n:"2.22", q:`Are there additional products, or changes to the main product, planned in the next 6–12 months?` },
+        { n:"2.23", q:`What senses does your product / service trigger that could lead to an emotional experience?` },
+        { n:"2.24", q:`Is your product / service more of a want or a need? Why?` },
+      ]},
+    ]},
+  { sec:"03", title:"Marketing", sub:"Who you reach, how you reach them, and the numbers that matter.", tags:["Audience","Practices","Metrics & KPIs"],
+    groups:[
+      { label:"Audience", items:[
+        { n:"3.1", q:`What are the common characteristics of your best customers?` },
+        { n:"3.2", q:`Do you have any market research data relating to your product or audiences that you can share with us?`, share:true },
+        { n:"3.3", q:`Have you noticed any significant differences between consumers who are “browsing” vs “buying”?` },
+        { n:"3.4", q:`Do you have any information about the needs of the customer journey that can be shared with us?` },
+        { n:"3.5", q:`What is the consideration period of your target buyers?` },
+        { n:"3.6", q:`What demographics do you sell best to (income level, geographic region, gender breakdown, age, lifestyle)? Be thorough!`, tall:true },
+        { n:"3.7", q:`What demographics do you WISH you sold better to?` },
+        { n:"3.8", q:`How frequently do customers come back or refer a friend?` },
+      ]},
+      { label:"Practices", items:[
+        { n:"3.9", q:`What are your current marketing practices (i.e., digital advertising, TV, email, direct mail, trade shows, etc.)?` },
+        { n:"3.10", q:`What are your current sales channels (i.e., website, Amazon, retail, affiliates, etc.)?` },
+        { n:"3.11", q:`What types of marketing or messages have you found to be least successful?` },
+        { n:"3.12", q:`Does your company have existing marketing assets (graphics, previous ads, videos, etc.) that you can share with us?`, share:true },
+        { n:"3.13", q:`What would be keywords or questions a potential customer would search for?` },
+        { n:"3.14", q:`Are there any geographical or demographic limits on sales of your product or its advertising (i.e., cannot sell to particular countries or states, cannot sell to individuals under age 21, etc.)?` },
+        { n:"3.15", q:`Do you have a current marketing funnel or lead-nurturing process?` },
+      ]},
+      { label:"Metrics & KPIs", items:[
+        { n:"3.16", q:`How long have you been in business?`, short:true },
+        { n:"3.17", q:`What is your current monthly revenue?`, short:true },
+        { n:"3.18", q:`What percentage of revenue comes from each distribution channel? (Refer to your sales channels above.)` },
+        { n:"3.19", q:`Do you have reports from other channels (i.e., retail partners) that we can't easily access?`, share:true },
+        { n:"3.20", q:`What revenue seasonality does your business have?` },
+        { n:"3.21", q:`What is your average order value (AOV) for a first purchase, and overall?`, short:true },
+        { n:"3.22", q:`What is your current customer acquisition cost (CAC — new paying customers only)?`, short:true },
+        { n:"3.23", q:`What is your current cost per acquisition (CPA — general cost per sale or action)?`, short:true },
+        { n:"3.24", q:`What is the lifetime value (LTV) of a customer?`, short:true },
+        { n:"3.25", q:`What are your Costs of Goods Sold (COGS)?`, short:true },
+        { n:"3.26", q:`What is your profit margin? Does it vary by product?` },
+        { n:"3.27", q:`What is your break-even point on return on ad spend (ROAS)?`, short:true },
+        { n:"3.28", q:`What is your break-even point on return on investment (ROI)?`, short:true },
+        { n:"3.29", q:`If you had to choose, would you prefer to profitably acquire new customers slowly, or grow the brand and topline revenue rapidly?` },
+      ]},
+    ]},
+  { sec:"04", title:"Goals", sub:"Where we're headed together — and how we'll know it's working.", tags:["Priorities","Success","KPIs"],
+    groups:[
+      { label:"", items:[
+        { n:"4.1", q:`What are the top priorities / goals for your company this year?` },
+        { n:"4.2", q:`What does a successful partnership with us look like for you?` },
+        { n:"4.3", q:`What Key Performance Indicators do you plan to look at closely to measure the partnership's success?` },
+        { n:"4.4", q:`What is the biggest hurdle your business may experience in increasing sales growth?` },
+        { n:"4.5", q:`What KPI goals are required to increase the monthly advertising budget?` },
+        { n:"4.6", q:`Please provide any additional information not included in this document relevant to a successful partnership.`, tall:true },
+      ]},
+    ]},
+];
+
+const REG = []; // export registry: {label, get}
+const esc = s => s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let uid = 0;
+
+function fieldEl(label, {short=false, tall=false, placeholder="Type your answer…"}={}){
+  const id = "f"+(uid++);
+  const el = document.createElement(short ? "input" : "textarea");
+  el.className = "field" + (tall?" tall":"");
+  el.id = id;
+  if(short){ el.type="text"; el.placeholder=placeholder; }
+  else { el.placeholder=placeholder; }
+  el.setAttribute("data-export", label);
+  REG.push({label, get:()=>el.value.trim()});
+  return el;
+}
+
+function renderItem(it){
+  const wrap = document.createElement("div");
+  wrap.className = "q";
+
+  if(it.type === "contacts"){
+    wrap.innerHTML = `<div class="q-head"><span class="q-num">${it.n}</span><span class="q-text">${esc(it.q)}</span></div>`;
+    const grid = document.createElement("div"); grid.className="subgrid";
+    it.fields.forEach(lbl=>{
+      const sf=document.createElement("div"); sf.className="subfield";
+      sf.innerHTML=`<label>${esc(lbl)}</label>`;
+      sf.appendChild(fieldEl(it.n+" "+lbl,{short:true, placeholder:"Name · role · email"}));
+      grid.appendChild(sf);
+    });
+    wrap.appendChild(grid);
+    return wrap;
+  }
+
+  if(it.type === "urls"){
+    wrap.innerHTML = `<div class="q-head"><span class="q-num">${it.n}</span><span class="q-text">${esc(it.q)}</span></div>`;
+    const grid=document.createElement("div"); grid.className="subgrid";
+    it.fields.forEach(f=>{
+      const sf=document.createElement("div"); sf.className="subfield";
+      sf.innerHTML=`<label>${esc(f.label)}</label>`;
+      sf.appendChild(fieldEl(it.n+" "+f.label,{short:f.short, placeholder:f.short?"https://":"Type your answer…"}));
+      grid.appendChild(sf);
+    });
+    wrap.appendChild(grid);
+    return wrap;
+  }
+
+  if(it.type === "access"){
+    wrap.appendChild(buildAccess(it));
+    return wrap;
+  }
+
+  // standard question
+  wrap.innerHTML = `<div class="q-head"><span class="q-num">${it.n}</span><span class="q-text">${esc(it.q)}</span></div>`;
+  wrap.appendChild(fieldEl(it.n+" "+it.q,{short:it.short, tall:it.tall}));
+  if(it.share){
+    const s=document.createElement("div"); s.className="share";
+    s.innerHTML=`<svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="m22 2-11 11M22 2l-7 20-4-9-9-4 20-7Z" stroke="#6e7075" stroke-width="1.6" stroke-linejoin="round"/></svg><span>Share with <b>braden@revivideo.com</b> &amp; <b>jared@revivideo.com</b></span>`;
+    wrap.appendChild(s);
+  }
+  return wrap;
+}
+
+function buildAccess(it){
+  const box=document.createElement("div");
+  box.innerHTML = `<div class="q-head"><span class="q-num">${it.n}</span><span class="q-text">${esc(it.q)}</span></div>
+    <p class="access-intro">If you’re unsure about any of these steps, let us know and we’ll walk you through it.</p>`;
+
+  // META card
+  const meta=document.createElement("div"); meta.className="acard";
+  meta.innerHTML=`
+    <div class="acard-top"><span class="t">Meta</span><span class="s">Facebook &amp; Instagram</span></div>
+    <div class="acard-body">
+      <ol class="steps">
+        <li>In Business Manager, open <b>Business Settings</b>.</li>
+        <li>Under the <b>Users</b> dropdown, click <b>Partners</b>.</li>
+        <li>Click the blue <b>Add</b> button, then “Give a partner access to your assets.”</li>
+        <li>Enter our Business ID (below).</li>
+        <li>Select each asset, then assign permissions — preferably <b>Full Control</b>.</li>
+      </ol>
+      <div class="bizid"><span class="k">Our Business ID</span><span class="v">134630467807717</span></div>
+      <div class="grant">
+        <div class="glabel">Please grant access to</div>
+        <div class="checks" id="meta-checks"></div>
+      </div>
+    </div>`;
+  box.appendChild(meta);
+  const checks = meta.querySelector("#meta-checks");
+  ["Page","Ad Account","Pixel","Catalog","Instagram Account"].forEach(name=>{
+    const id="c"+(uid++);
+    const lab=document.createElement("label"); lab.className="check";
+    lab.innerHTML=`<input type="checkbox" id="${id}"><span>${name}</span>`;
+    checks.appendChild(lab);
+    const cb=lab.querySelector("input");
+    REG.push({label:"Meta access — "+name, get:()=>cb.checked?"✓ granted":""});
+  });
+
+  // GOOGLE card
+  const g=document.createElement("div"); g.className="acard";
+  g.innerHTML=`
+    <div class="acard-top"><span class="t">Google Ads</span><span class="s">Manager (MCC) request</span></div>
+    <div class="acard-body">
+      <p style="margin:0 0 16px;font-size:14.5px;color:var(--body)">Share your Customer ID — the 10-digit number in the top-right corner of your Google Ads account. We’ll send an access request from our Manager account.</p>
+      <div class="gid"><label>Google Ads Customer ID</label></div>
+    </div>`;
+  box.appendChild(g);
+  g.querySelector(".gid").appendChild(fieldEl("Google Ads Customer ID",{short:true, placeholder:"123-456-7890"}));
+
+  const add=document.createElement("div"); add.className="addnote";
+  add.innerHTML=`<b>+</b> For any additional platforms — analytics, email, etc. — send us access or ask for step-by-step instructions and we’ll get you sorted.`;
+  box.appendChild(add);
+  return box;
+}
+
+// build the document
+const mount = document.getElementById("sections");
+DATA.forEach(section=>{
+  const div=document.createElement("section");
+  div.id="sec-"+section.sec;
+  div.innerHTML=`
+    <div class="divider"><div class="divider-inner">
+      <div class="num">Section ${section.sec}</div>
+      <h2>${esc(section.title)}</h2>
+      <p class="sub">${esc(section.sub)}</p>
+      <div class="tags">${section.tags.map(t=>`<span>${esc(t)}</span>`).join("")}</div>
+    </div></div>`;
+  const body=document.createElement("div"); body.className="section-body";
+  section.groups.forEach(gp=>{
+    const g=document.createElement("div"); g.className="group";
+    if(gp.label){ const h=document.createElement("div"); h.className="group-label"; h.textContent=gp.label; g.appendChild(h); }
+    gp.items.forEach(it=> g.appendChild(renderItem(it)));
+    body.appendChild(g);
+  });
+  div.appendChild(body);
+  mount.appendChild(div);
+});
+
+// ---- progress bar + active nav ----
+const bar=document.getElementById("bar");
+const navlinks=[...document.querySelectorAll("#nav a")];
+const secEls=()=>navlinks.map(a=>document.querySelector(a.getAttribute("href")));
+function onScroll(){
+  const h=document.documentElement;
+  const max=h.scrollHeight-h.clientHeight;
+  bar.style.width=(max>0?(h.scrollTop/max*100):0)+"%";
+  const y=h.scrollTop+120; let active=-1;
+  secEls().forEach((s,i)=>{ if(s&&s.offsetTop<=y) active=i; });
+  navlinks.forEach((a,i)=>a.classList.toggle("active",i===active));
+}
+document.addEventListener("scroll",onScroll,{passive:true});
+window.addEventListener("resize",onScroll); onScroll();
+
+// ---- print: auto-grow textareas so content prints fully ----
+function growForPrint(){
+  document.querySelectorAll("textarea.field").forEach(t=>{
+    t.dataset.h=t.style.height; t.style.height="auto"; t.style.height=t.scrollHeight+"px";
+  });
+}
+function restoreAfterPrint(){
+  document.querySelectorAll("textarea.field").forEach(t=>{ t.style.height=t.dataset.h||""; });
+}
+window.addEventListener("beforeprint",growForPrint);
+window.addEventListener("afterprint",restoreAfterPrint);
+const doPrint=()=>window.print();
+document.getElementById("pr").onclick=doPrint;
+document.getElementById("pr2").onclick=doPrint;
+
+// ---- download answers as a text file ----
+function buildText(){
+  const val=id=>{const e=document.getElementById(id);return e?e.value.trim():"";};
+  const forName=val("m_for");
+  const lines=[];
+  lines.push("REVI — DISCOVERY QUESTIONNAIRE");
+  lines.push("Production That Produces · revivideo.com");
+  lines.push("");
+  if(forName) lines.push("Prepared for: "+forName);
+  if(val("m_by")) lines.push("Prepared by: "+val("m_by"));
+  if(val("m_date")) lines.push("Date: "+val("m_date"));
+  lines.push("=".repeat(54));
+  // REG holds rendered form fields in document order
+  let ri=0;
+  DATA.forEach(sec=>{
+    lines.push(""); lines.push(`SECTION ${sec.sec} — ${sec.title.toUpperCase()}`); lines.push("-".repeat(54));
+    sec.groups.forEach(gp=>{
+      if(gp.label){ lines.push(""); lines.push("["+gp.label+"]"); }
+      gp.items.forEach(it=>{
+        if(it.type==="contacts"||it.type==="urls"){
+          lines.push(""); lines.push(it.n+"  "+it.q);
+          it.fields.forEach(f=>{ const r=REG[ri++]; lines.push("   • "+r.label.replace(it.n+" ","")+": "+(r.get()||"—")); });
+        } else if(it.type==="access"){
+          lines.push(""); lines.push(it.n+"  Account Access");
+          for(let k=0;k<5;k++){ const r=REG[ri++]; lines.push("   • "+r.label+": "+(r.get()||"—")); }
+          const r=REG[ri++]; lines.push("   • "+r.label+": "+(r.get()||"—"));
+        } else {
+          const r=REG[ri++]; lines.push(""); lines.push(it.n+"  "+it.q); lines.push("   "+(r.get()||"—"));
+        }
+      });
+    });
+  });
+  return {text:lines.join("\n"), forName};
+}
+function download(){
+  const {text,forName}=buildText();
+  const blob=new Blob([text],{type:"text/plain;charset=utf-8"});
+  const a=document.createElement("a");
+  const safe=(forName||"client").replace(/[^a-z0-9]+/gi,"-").toLowerCase();
+  a.href=URL.createObjectURL(blob);
+  a.download=`revi-discovery-${safe}.txt`;
+  document.body.appendChild(a); a.click(); a.remove();
+  URL.revokeObjectURL(a.href);
+  const t=document.getElementById("toast"); t.classList.add("show"); setTimeout(()=>t.classList.remove("show"),1900);
+}
+document.getElementById("dl").onclick=download;
+document.getElementById("dl2").onclick=download;
+</script>
+</body>
+</html>
