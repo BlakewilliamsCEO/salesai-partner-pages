@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Partner Enterprise Value Calculator · Conversion AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0A1E32;
+  --navy-2:#0E2A44;
+  --navy-3:#13344f;
+  --cream:#F3EFE6;
+  --paper:#FBF9F4;
+  --card:#FFFFFF;
+  --coral:#EF5B40;
+  --coral-soft:#fbe2dc;
+  --sky:#5EA7CB;
+  --sky-deep:#3d86ac;
+  --ink:#0A1E32;
+  --muted:#5B7185;
+  --muted-2:#8aa0b1;
+  --line:#e4ddcf;
+  --line-navy:rgba(255,255,255,.12);
+  --ok:#3a9b6e;
+  --shadow:0 1px 2px rgba(10,30,50,.04),0 8px 28px rgba(10,30,50,.06);
+  --shadow-lg:0 2px 4px rgba(10,30,50,.06),0 20px 50px rgba(10,30,50,.12);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',system-ui,sans-serif;
+  background:var(--cream);
+  color:var(--ink);
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+.mono{font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.16em;font-size:11px;font-weight:600}
+.wrap{max-width:1240px;margin:0 auto;padding:0 24px}
+
+/* ---------- HEADER ---------- */
+header{
+  background:radial-gradient(120% 140% at 80% -10%,#15395a 0%,var(--navy-2) 38%,var(--navy) 100%);
+  color:#fff;position:relative;overflow:hidden;
+}
+header::after{
+  content:"";position:absolute;right:-90px;top:-90px;width:300px;height:300px;
+  border:1px solid rgba(255,255,255,.10);transform:rotate(45deg);border-radius:34px;
+}
+header::before{
+  content:"";position:absolute;right:6px;top:6px;width:120px;height:120px;
+  background:#fff;transform:rotate(45deg);border-radius:18px;opacity:.96;
+  box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+.head-inner{position:relative;z-index:2;padding:30px 0 46px}
+.brandbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:46px}
+.wordmark{font-family:'Archivo',sans-serif;font-weight:800;font-size:26px;letter-spacing:-.02em}
+.wordmark .b{color:#fff}
+.wordmark .l{color:var(--sky)}
+.pill{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.22);
+  border-radius:999px;padding:7px 14px;color:#cfe0ec}
+.pill .dot{width:7px;height:7px;border-radius:50%;background:var(--coral)}
+.eyebrow{color:var(--sky);margin-bottom:14px;display:block}
+h1{font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(32px,5vw,54px);
+  line-height:1.02;letter-spacing:-.02em;max-width:18ch}
+h1 .u{position:relative;white-space:nowrap}
+h1 .u::after{content:"";position:absolute;left:0;right:0;bottom:.06em;height:3px;background:var(--coral);border-radius:2px}
+.sub{margin-top:18px;max-width:64ch;color:#c4d4e0;font-size:16px}
+
+/* ---------- LAYOUT ---------- */
+main{padding:34px 0 60px;position:relative;z-index:3}
+.grid{display:grid;grid-template-columns:minmax(0,400px) minmax(0,1fr);gap:24px;align-items:start;margin-top:-28px}
+@media(max-width:900px){.grid{grid-template-columns:1fr;margin-top:-18px}}
+
+.panel{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}
+.controls{position:sticky;top:18px}
+@media(max-width:900px){.controls{position:static}}
+.sec{padding:20px 22px;border-bottom:1px solid var(--line)}
+.sec:last-child{border-bottom:none}
+.sec-head{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.step-no{width:22px;height:22px;border-radius:6px;background:var(--navy);color:#fff;
+  display:grid;place-items:center;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;flex:none}
+.sec-title{font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;letter-spacing:-.01em}
+
+/* scenario cards */
+.scen{display:flex;flex-direction:column;gap:10px}
+.scard{border:1.5px solid var(--line);border-radius:13px;padding:14px 15px;cursor:pointer;
+  transition:border-color .15s,background .15s,transform .12s;position:relative;background:var(--paper)}
+.scard:hover{border-color:var(--sky)}
+.scard .stop{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.scard h4{font-family:'Archivo',sans-serif;font-weight:700;font-size:15px;letter-spacing:-.01em}
+.scard p{font-size:12.5px;color:var(--muted);margin-top:5px;line-height:1.45}
+.cut-tag{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:12px;
+  background:var(--coral-soft);color:#c1422c;border-radius:6px;padding:4px 8px;white-space:nowrap}
+.radio{width:18px;height:18px;border-radius:50%;border:2px solid var(--muted-2);flex:none;display:grid;place-items:center}
+.radio::after{content:"";width:8px;height:8px;border-radius:50%;background:transparent;transition:background .15s}
+.scard.active{background:var(--navy);border-color:var(--navy);transform:translateY(-1px);box-shadow:var(--shadow-lg)}
+.scard.active h4{color:#fff}
+.scard.active p{color:#aebfcc}
+.scard.active .radio{border-color:var(--coral)}
+.scard.active .radio::after{background:var(--coral)}
+.scard.active .cut-tag{background:rgba(239,91,64,.22);color:#ffb3a1}
+
+/* segmented */
+.seg{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;background:var(--paper);border:1px solid var(--line);
+  border-radius:11px;padding:5px}
+.seg button{border:none;background:transparent;padding:9px 6px;border-radius:8px;cursor:pointer;
+  font-family:'Inter',sans-serif;font-weight:600;font-size:13px;color:var(--muted);transition:.14s}
+.seg button .pr{display:block;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;opacity:.7;margin-top:2px}
+.seg button.active{background:var(--navy);color:#fff}
+.seg button.active .pr{opacity:.85;color:var(--sky)}
+
+/* sliders */
+.slider-row{margin-top:6px}
+.slabel{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:9px}
+.slabel .lab{font-size:13px;font-weight:600;color:var(--ink)}
+.slabel .val{font-family:'Archivo',sans-serif;font-weight:800;font-size:20px;letter-spacing:-.01em}
+.slabel .val small{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;color:var(--muted);letter-spacing:.04em}
+.field-note{font-size:11.5px;color:var(--muted);margin-top:8px;line-height:1.4}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:99px;
+  background:var(--line);outline:none;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;
+  background:var(--coral);border:3px solid #fff;box-shadow:0 2px 8px rgba(239,91,64,.45);cursor:pointer}
+input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--coral);
+  border:3px solid #fff;box-shadow:0 2px 8px rgba(239,91,64,.45);cursor:pointer}
+.ticks{display:flex;justify-content:space-between;margin-top:7px;font-family:'JetBrains Mono',monospace;
+  font-size:10px;color:var(--muted-2);letter-spacing:.04em}
+#servicePriceWrap{display:none}
+#servicePriceWrap.show{display:block}
+.seg.disabled{opacity:.4;pointer-events:none;filter:grayscale(.3)}
+/* editable / bi-directional fields */
+.edit{cursor:text;outline:none;border-radius:5px;transition:background .12s,box-shadow .12s;
+  text-decoration:underline;text-decoration-style:dotted;text-decoration-thickness:1.5px;text-underline-offset:5px;
+  text-decoration-color:rgba(94,167,203,.55)}
+.edit:hover{text-decoration-color:var(--coral)}
+.edit:focus{text-decoration:none;background:rgba(94,167,203,.16);box-shadow:0 0 0 2px var(--sky);padding:0 4px;margin:0 -4px}
+.hero-card .edit:focus{background:rgba(94,167,203,.28)}
+.edit-hint{font-size:11px;color:var(--muted);margin-top:10px;display:flex;align-items:center;gap:6px}
+.edit-hint .d{color:var(--coral);font-size:9px}
+
+/* ---------- RESULTS ---------- */
+.results{display:flex;flex-direction:column;gap:20px}
+
+.hero-card{background:radial-gradient(120% 160% at 85% 0%,#15395a 0%,var(--navy-2) 45%,var(--navy) 100%);
+  color:#fff;border-radius:18px;padding:26px 28px;position:relative;overflow:hidden;box-shadow:var(--shadow-lg)}
+.hero-card::after{content:"";position:absolute;right:-50px;bottom:-60px;width:200px;height:200px;
+  border:1px solid rgba(255,255,255,.10);transform:rotate(45deg);border-radius:26px}
+.hero-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px}
+.hero-eyebrow{color:var(--sky)}
+.scen-chip{font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:600;letter-spacing:.1em;
+  text-transform:uppercase;background:rgba(94,167,203,.18);color:#bfe0f0;border-radius:6px;padding:5px 9px}
+.hero-num{font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(42px,7vw,68px);
+  line-height:1;letter-spacing:-.03em;margin:8px 0 4px}
+.hero-num .cur{color:var(--sky);font-size:.5em;vertical-align:.32em;margin-right:.04em}
+.hero-label{color:#c4d4e0;font-size:14px}
+.hero-label b{color:#fff;font-weight:600}
+.hero-split{display:flex;gap:26px;flex-wrap:wrap;margin-top:22px;padding-top:20px;border-top:1px solid var(--line-navy);position:relative;z-index:2}
+.hsplit{min-width:120px}
+.hsplit .k{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-2)}
+.hsplit .v{font-family:'Archivo',sans-serif;font-weight:800;font-size:24px;letter-spacing:-.01em;margin-top:4px}
+.hsplit .v small{font-size:12px;color:#9fb4c4;font-weight:500;font-family:'Inter'}
+
+/* stat grid */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:1080px){.stats{grid-template-columns:repeat(2,1fr)}}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 17px;box-shadow:var(--shadow)}
+.stat .k{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.stat .v{font-family:'Archivo',sans-serif;font-weight:800;font-size:26px;letter-spacing:-.015em;margin-top:7px;color:var(--ink)}
+.stat .s{font-size:12px;color:var(--muted);margin-top:3px}
+.stat .v .cur{color:var(--coral);font-size:.62em;vertical-align:.18em}
+
+/* ramp */
+.ramp-card{padding:22px 24px}
+.card-head{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:6px}
+.card-head h3{font-family:'Archivo',sans-serif;font-weight:700;font-size:18px;letter-spacing:-.01em}
+.card-head .meta{font-size:12.5px;color:var(--muted)}
+.card-head .meta b{color:var(--coral);font-weight:700}
+.chart-wrap{margin-top:14px;width:100%;overflow:hidden}
+.legend{display:flex;gap:18px;flex-wrap:wrap;margin-top:12px;font-size:12px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.legend i{width:11px;height:11px;border-radius:3px;display:inline-block}
+
+/* comparison */
+.cmp-card{padding:22px 24px}
+.cmp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
+@media(max-width:680px){.cmp-grid{grid-template-columns:1fr}}
+.cmp{border:1.5px solid var(--line);border-radius:13px;padding:16px;position:relative;background:var(--paper);transition:.15s}
+.cmp.active{border-color:var(--coral);background:#fff;box-shadow:var(--shadow)}
+.cmp .badge{position:absolute;top:-9px;left:14px;font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;background:var(--coral);color:#fff;border-radius:5px;padding:3px 7px;display:none}
+.cmp.active .badge{display:inline-block}
+.cmp h5{font-family:'Archivo',sans-serif;font-weight:700;font-size:14px;letter-spacing:-.01em}
+.cmp .pct{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-top:2px}
+.cmp .big{font-family:'Archivo',sans-serif;font-weight:900;font-size:30px;letter-spacing:-.02em;margin-top:12px;color:var(--ink)}
+.cmp .big .cur{color:var(--coral);font-size:.6em;vertical-align:.18em}
+.cmp .sm{font-size:12px;color:var(--muted);margin-top:4px}
+.cmp.active .big{color:var(--navy)}
+
+/* assumptions / footer */
+.assume{background:var(--navy);color:#c4d4e0;border-radius:16px;padding:20px 24px;font-size:13px;line-height:1.6}
+.assume h4{color:#fff;font-family:'Archivo',sans-serif;font-weight:700;font-size:14px;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.assume .dia{color:var(--coral)}
+.assume ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:6px 28px}
+@media(max-width:680px){.assume ul{grid-template-columns:1fr}}
+.assume li{padding-left:16px;position:relative}
+.assume li::before{content:"◆";color:var(--sky);position:absolute;left:0;font-size:9px;top:5px}
+.assume b{color:#fff;font-weight:600}
+
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:flex-end;margin-bottom:4px}
+.btn{font-family:'Inter';font-weight:600;font-size:13px;border-radius:10px;padding:10px 16px;cursor:pointer;border:1px solid var(--line);background:#fff;color:var(--ink);transition:.14s}
+.btn:hover{border-color:var(--navy)}
+.btn.primary{background:var(--coral);border-color:var(--coral);color:#fff}
+.btn.primary:hover{background:#e04a30}
+
+footer{padding:26px 0 40px;color:var(--muted);font-size:12px}
+.foot-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  border-top:1px solid var(--line);padding-top:18px}
+.foot-inner .mono{color:var(--muted)}
+
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
+
+@media print{
+  header::before,header::after,.toolbar,footer{display:none}
+  body{background:#fff}
+  .controls{position:static}
+  .panel,.stat,.hero-card,.assume,.cmp{box-shadow:none}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap head-inner">
+    <div class="brandbar">
+      <div class="wordmark"><span class="b">big</span><span class="l">leap</span></div>
+      <div class="pill"><span class="dot"></span><span class="mono">Partner Program · Conversion AI</span></div>
+    </div>
+    <span class="eyebrow mono">Reseller &amp; Referral Economics</span>
+    <h1>Size the <span class="u">enterprise value</span> in your book.</h1>
+    <p class="sub">Pick how you partner, set your deal size, and slide in the ICP-fit accounts already signaling intent. See your monthly and annual cut build across the whole population — onboarding six accounts a month.</p>
+  </div>
+</header>
+
+<main>
+<div class="wrap">
+  <div class="toolbar">
+    <button class="btn" onclick="window.print()">Print / Save PDF</button>
+    <button class="btn primary" id="resetBtn">Reset</button>
+  </div>
+
+  <div class="grid">
+
+    <!-- ============ CONTROLS ============ -->
+    <div class="panel controls">
+
+      <div class="sec">
+        <div class="sec-head"><span class="step-no">1</span><span class="sec-title">How you partner</span></div>
+        <div class="scen" id="scenList">
+
+          <div class="scard active" data-scen="reseller_full">
+            <div class="stop">
+              <h4>Full Reseller</h4>
+              <span class="cut-tag">Keep service $</span>
+            </div>
+            <p>You resell <b>and</b> deliver the service yourself. You set the price and keep all of the service revenue; SalesAI keeps the platform.</p>
+            <div style="display:flex;justify-content:flex-end;margin-top:10px"><span class="radio"></span></div>
+          </div>
+
+          <div class="scard" data-scen="reseller_serviced">
+            <div class="stop">
+              <h4>Reseller — we service</h4>
+              <span class="cut-tag">20% of deal</span>
+            </div>
+            <p>You resell, SalesAI delivers the service and collects the service revenue. You earn 20% of total deal value.</p>
+            <div style="display:flex;justify-content:flex-end;margin-top:10px"><span class="radio"></span></div>
+          </div>
+
+          <div class="scard" data-scen="referral">
+            <div class="stop">
+              <h4>Referral</h4>
+              <span class="cut-tag">10% of deal</span>
+            </div>
+            <p>You introduce the account. SalesAI runs everything. You earn 10% of total deal value.</p>
+            <div style="display:flex;justify-content:flex-end;margin-top:10px"><span class="radio"></span></div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-head"><span class="step-no">2</span><span class="sec-title">Typical deal size</span></div>
+
+        <div class="slider-row">
+          <div class="slabel">
+            <span class="lab">Platform capacity <span style="color:var(--muted);font-weight:500">(Volume)</span></span>
+            <span class="val" id="volVal">$400<small>/mo</small></span>
+          </div>
+          <input type="range" id="vol" min="400" max="2000" step="100" value="400">
+          <div class="ticks"><span>$400 · 2k min</span><span>10k+ min</span></div>
+        </div>
+
+        <div style="margin-top:20px">
+          <div class="slabel"><span class="lab">Impact plan <span style="color:var(--muted);font-weight:500">(Strategic support)</span></span></div>
+          <div class="seg" id="impactSeg">
+            <button data-tier="core">Core<span class="pr">$800/mo</span></button>
+            <button data-tier="advised" class="active">Advised<span class="pr">$1,600/mo</span></button>
+            <button data-tier="managed">Managed<span class="pr">$2,600/mo</span></button>
+          </div>
+          <p class="field-note" id="impactNote" style="display:none">In Full Reseller you deliver the service yourself, so SalesAI's Impact tier doesn't apply — set your price below.</p>
+        </div>
+
+        <div id="servicePriceWrap" style="margin-top:20px">
+          <div class="slabel">
+            <span class="lab">Your service price <span style="color:var(--muted);font-weight:500">(you set it)</span></span>
+            <span class="val" id="svcVal">$1,600<small>/mo</small></span>
+          </div>
+          <input type="range" id="svc" min="800" max="6000" step="100" value="1600">
+          <div class="ticks"><span>$800</span><span>$6,000/mo</span></div>
+          <p class="field-note">As a full reseller you charge what you want for the service layer — this is the revenue you keep per account.</p>
+        </div>
+
+        <div class="field-note" id="dealNote" style="margin-top:14px;font-weight:500;color:var(--ink)"></div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-head"><span class="step-no">3</span><span class="sec-title">Your book</span></div>
+
+        <div class="slider-row">
+          <div class="slabel">
+            <span class="lab">ICP-fit accounts showing intent</span>
+            <span class="val" id="acctVal">60<small> accts</small></span>
+          </div>
+          <input type="range" id="acct" min="6" max="300" step="1" value="60">
+          <div class="ticks"><span>6</span><span>300</span></div>
+          <p class="field-note">The accounts in your base that fit the home-services ICP and are signaling intent today.</p>
+        </div>
+
+        <div class="slider-row" style="margin-top:20px">
+          <div class="slabel">
+            <span class="lab">Accounts activated per month</span>
+            <span class="val" id="rateVal">6<small>/mo</small></span>
+          </div>
+          <input type="range" id="rate" min="1" max="20" step="1" value="6">
+          <div class="ticks"><span>1</span><span>20</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ============ RESULTS ============ -->
+    <div class="results">
+
+      <div class="hero-card">
+        <div class="hero-top">
+          <span class="hero-eyebrow mono">Total Enterprise Value · Annual</span>
+          <span class="scen-chip" id="scenChip">Full Reseller</span>
+        </div>
+        <div class="hero-num"><span class="cur">$</span><span id="heroArr">0</span></div>
+        <div class="hero-label">Your annual partner revenue once the whole book is live — <b id="heroAccts">60 accounts</b> as annual agreements.</div>
+        <div class="hero-split">
+          <div class="hsplit">
+            <div class="k">Your MRR (ramped)</div>
+            <div class="v"><span style="color:var(--sky)">$</span><span id="heroMrr">0</span></div>
+          </div>
+          <div class="hsplit">
+            <div class="k">Per account</div>
+            <div class="v" id="perAcct">$0<small> /yr</small></div>
+          </div>
+          <div class="hsplit">
+            <div class="k">Total book value</div>
+            <div class="v" id="bookArr">$0<small> ARR</small></div>
+          </div>
+        </div>
+        <div class="edit-hint" style="position:relative;z-index:2;margin-top:16px;color:#9fb4c4">
+          <span class="d">◆</span> Tip: type a target into the <b style="color:#cfe0ec;font-weight:600">annual value</b>, <b style="color:#cfe0ec;font-weight:600">MRR</b>, or <b style="color:#cfe0ec;font-weight:600">account</b> figures and it back-solves the rest.
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="k">Accounts</div>
+          <div class="v" id="stAccts">60</div>
+          <div class="s">ICP + intent</div>
+        </div>
+        <div class="stat">
+          <div class="k">Time to full book</div>
+          <div class="v" id="stMonths">10 mo</div>
+          <div class="s" id="stRamp">at 6 / month</div>
+        </div>
+        <div class="stat">
+          <div class="k">Your Year-1 cash</div>
+          <div class="v"><span class="cur">$</span><span id="stY1">0</span></div>
+          <div class="s">ramp-adjusted</div>
+        </div>
+        <div class="stat">
+          <div class="k">Your run-rate</div>
+          <div class="v"><span class="cur">$</span><span id="stRun">0</span></div>
+          <div class="s">MRR, fully live</div>
+        </div>
+      </div>
+
+      <div class="panel ramp-card">
+        <div class="card-head">
+          <h3>How your revenue builds</h3>
+          <div class="meta">Adding <b id="rampRate">6</b> accounts/mo · fully ramped in <b id="rampMonths">10</b> months</div>
+        </div>
+        <div class="chart-wrap" id="chart"></div>
+        <div class="legend">
+          <span><i style="background:var(--coral)"></i> Your monthly revenue (MRR)</span>
+          <span><i style="background:var(--sky)"></i> Accounts live</span>
+        </div>
+      </div>
+
+      <div class="panel cmp-card">
+        <div class="card-head">
+          <h3>Compare all three models</h3>
+          <div class="meta">Same deal size &amp; book — annual value to you</div>
+        </div>
+        <div class="cmp-grid" id="cmpGrid">
+          <div class="cmp" data-scen="reseller_full">
+            <span class="badge">Selected</span>
+            <h5>Full Reseller</h5>
+            <div class="pct">Keep service revenue</div>
+            <div class="big"><span class="cur">$</span><span class="cmp-arr">0</span></div>
+            <div class="sm"><span class="cmp-mrr">$0</span>/mo · <span class="cmp-per">$0</span>/acct/yr</div>
+          </div>
+          <div class="cmp" data-scen="reseller_serviced">
+            <span class="badge">Selected</span>
+            <h5>Reseller — we service</h5>
+            <div class="pct">20% of deal value</div>
+            <div class="big"><span class="cur">$</span><span class="cmp-arr">0</span></div>
+            <div class="sm"><span class="cmp-mrr">$0</span>/mo · <span class="cmp-per">$0</span>/acct/yr</div>
+          </div>
+          <div class="cmp" data-scen="referral">
+            <span class="badge">Selected</span>
+            <h5>Referral</h5>
+            <div class="pct">10% of deal value</div>
+            <div class="big"><span class="cur">$</span><span class="cmp-arr">0</span></div>
+            <div class="sm"><span class="cmp-mrr">$0</span>/mo · <span class="cmp-per">$0</span>/acct/yr</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="assume">
+        <h4><span class="dia">◆</span> How this is calculated</h4>
+        <ul>
+          <li><b>Deal value</b> = Volume (platform) + Impact (service) monthly subscription.</li>
+          <li><b>Full Reseller:</b> you keep the service price you set, per account.</li>
+          <li><b>Reseller — we service:</b> 20% of total deal value to you.</li>
+          <li><b>Referral:</b> 10% of total deal value to you.</li>
+          <li><b>Enterprise value</b> is the whole population converted, valued as annual agreements (MRR × 12).</li>
+          <li><b>Year-1 cash</b> accounts for the ramp — not every account is live all year.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
+</main>
+
+<footer>
+  <div class="wrap foot-inner">
+    <div class="wordmark" style="font-size:18px"><span class="b" style="color:var(--navy)">big</span><span class="l">leap</span></div>
+    <span class="mono">Partner Enterprise Value Calculator · Conversion AI · Annual agreement basis</span>
+  </div>
+</footer>
+
+<script>
+const IMPACT = {core:800, advised:1600, managed:2600};
+const SHARE  = {reseller_serviced:0.20, referral:0.10};
+const SCEN_LABEL = {reseller_full:'Full Reseller', reseller_serviced:'Reseller — we service', referral:'Referral'};
+
+const state = {scen:'reseller_full', vol:400, tier:'advised', svc:1600, acct:60, rate:6};
+
+/* ---------- formatting ---------- */
+const fmt = n => '$' + Math.round(n).toLocaleString('en-US');
+const plain = n => Math.round(n).toLocaleString('en-US');
+function compact(n){
+  if(n>=1e6) return (n/1e6).toFixed(n>=1e7?1:2).replace(/\.0+$/,'')+'M';
+  if(n>=1e3) return (n/1e3).toFixed(n>=1e5?0:1).replace(/\.0$/,'')+'K';
+  return Math.round(n).toLocaleString('en-US');
+}
+
+/* ---------- core economics ---------- */
+function perDealMRR(scen){
+  const impact = IMPACT[state.tier];
+  const total  = state.vol + impact;          // standard customer deal value
+  if(scen==='reseller_full')     return state.svc;            // partner keeps their service price
+  if(scen==='reseller_serviced') return SHARE.reseller_serviced * total;
+  return SHARE.referral * total;
+}
+function customerMRR(scen){
+  // total the end customer pays (book size)
+  if(scen==='reseller_full') return state.vol + state.svc;
+  return state.vol + IMPACT[state.tier];
+}
+function calc(scen){
+  const per = perDealMRR(scen);
+  const fullMRR = per * state.acct;
+  const months = Math.ceil(state.acct / state.rate);
+  // year-1 ramp-adjusted realized revenue
+  let y1 = 0;
+  for(let m=1;m<=12;m++){ y1 += Math.min(state.acct, m*state.rate) * per; }
+  return {
+    per, perARR: per*12,
+    fullMRR, fullARR: fullMRR*12,
+    months, y1,
+    bookMRR: customerMRR(scen)*state.acct,
+    bookARR: customerMRR(scen)*state.acct*12
+  };
+}
+
+/* ---------- count-up animation ---------- */
+const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let editingEl = null;            // element currently being typed into (skip overwriting it)
+function tween(el, to, formatter){
+  if(!el || el===editingEl) return;
+  const from = parseFloat(el.dataset.v||'0');
+  el.dataset.v = to;
+  if(reduce || Math.abs(to-from) < 1){ el.textContent = formatter(to); return; }
+  const dur=480, t0=performance.now();
+  function step(t){
+    const p=Math.min(1,(t-t0)/dur);
+    const e=1-Math.pow(1-p,3);
+    el.textContent = formatter(from+(to-from)*e);
+    if(p<1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+function setText(el, txt){ if(el && el!==editingEl) el.textContent = txt; }
+
+/* ---------- bi-directional back-solve ---------- */
+function setAcct(a){
+  a = Math.max(6, Math.round(a));
+  state.acct = a;
+  const sl = document.getElementById('acct');
+  sl.max = Math.max(300, a);          // grow the slider if a target pushes past the default ceiling
+  sl.value = a;
+}
+function setRateFromMonths(m){
+  m = Math.max(1, Math.round(m));
+  const r = Math.min(state.acct, Math.max(1, Math.ceil(state.acct / m)));
+  state.rate = r;
+  document.getElementById('rate').value = r;
+}
+function parseNum(str){
+  if(str==null) return NaN;
+  str = (''+str).trim().replace(/[$,\s]/g,'');
+  let mult = 1;
+  if(/m$/i.test(str)){ mult=1e6; str=str.slice(0,-1); }
+  else if(/k$/i.test(str)){ mult=1e3; str=str.slice(0,-1); }
+  const n = parseFloat(str);
+  return isNaN(n) ? NaN : n*mult;
+}
+function selectAll(el){
+  const r=document.createRange(); r.selectNodeContents(el);
+  const s=getSelection(); s.removeAllRanges(); s.addRange(r);
+}
+function makeEditable(el, commit){
+  if(!el) return;
+  el.classList.add('edit');
+  el.setAttribute('contenteditable','true');
+  el.setAttribute('inputmode','decimal');
+  el.setAttribute('role','textbox');
+  el.setAttribute('tabindex','0');
+  el.setAttribute('title','Click to type a target');
+  el.addEventListener('focus', ()=>{ editingEl=el; setTimeout(()=>selectAll(el),0); });
+  el.addEventListener('keydown', e=>{
+    if(e.key==='Enter'){ e.preventDefault(); el.blur(); }
+    if(e.key==='Escape'){ e.preventDefault(); editingEl=null; el.blur(); render(); }
+  });
+  el.addEventListener('blur', ()=>{
+    const v = parseNum(el.textContent);
+    editingEl = null;
+    if(!isNaN(v) && v>0) commit(v);
+    render();
+  });
+}
+
+/* ---------- chart ---------- */
+function drawChart(){
+  const r = calc(state.scen);
+  const per = r.per;
+  const totalMonths = Math.max(12, r.months);
+  const view = Math.min(totalMonths + 1, 30);
+  const W=820, H=240, padL=8, padR=8, padT=18, padB=26;
+  const plotW = W-padL-padR, plotH = H-padT-padB;
+  const maxMRR = Math.max(per*state.acct, 1);
+  const bw = plotW/view;
+  let bars='', gx='';
+  for(let m=1;m<=view;m++){
+    const live = Math.min(state.acct, m*state.rate);
+    const mrr = live*per;
+    const h = (mrr/maxMRR)*plotH;
+    const x = padL + (m-1)*bw + bw*0.16;
+    const w = bw*0.68;
+    const y = padT+plotH-h;
+    const full = live>=state.acct;
+    bars += `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${w.toFixed(1)}" height="${Math.max(0,h).toFixed(1)}" rx="3"
+      fill="${full?'#EF5B40':'#f2876f'}"><title>Month ${m}: ${live} live · ${fmt(mrr)}/mo</title></rect>`;
+  }
+  // gridlines
+  for(let i=0;i<=3;i++){
+    const y=padT+plotH-(plotH*i/3);
+    gx += `<line x1="${padL}" x2="${W-padR}" y1="${y}" y2="${y}" stroke="#e4ddcf" stroke-width="1"/>`;
+    gx += `<text x="${padL}" y="${y-5}" font-family="JetBrains Mono,monospace" font-size="9" fill="#8aa0b1">${'$'+compact(maxMRR*i/3)}</text>`;
+  }
+  // month labels (sparse)
+  let xl='';
+  const stepLab = view>16?6:(view>10?3:2);
+  for(let m=1;m<=view;m+=stepLab){
+    const x = padL+(m-1)*bw+bw/2;
+    xl += `<text x="${x.toFixed(1)}" y="${H-8}" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="#8aa0b1">M${m}</text>`;
+  }
+  // full-ramp marker
+  let marker='';
+  if(r.months<=view){
+    const mx = padL+(r.months-1)*bw+bw/2;
+    marker = `<line x1="${mx.toFixed(1)}" x2="${mx.toFixed(1)}" y1="${padT-6}" y2="${padT+plotH}" stroke="#5EA7CB" stroke-width="1.5" stroke-dasharray="4 3"/>
+      <text x="${mx.toFixed(1)}" y="${padT-9}" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" font-weight="700" fill="#3d86ac">FULL · M${r.months}</text>`;
+  }
+  document.getElementById('chart').innerHTML =
+    `<svg viewBox="0 0 ${W} ${H}" width="100%" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Monthly revenue ramp">
+       ${gx}${bars}${marker}${xl}
+     </svg>`;
+}
+
+/* ---------- render ---------- */
+function render(){
+  // labels
+  document.getElementById('volVal').innerHTML = fmt(state.vol)+'<small>/mo</small>';
+  document.getElementById('svcVal').innerHTML = fmt(state.svc)+'<small>/mo</small>';
+  document.getElementById('acctVal').innerHTML = state.acct+'<small> accts</small>';
+  document.getElementById('rateVal').innerHTML = state.rate+'<small>/mo</small>';
+
+  const impact = IMPACT[state.tier];
+  document.getElementById('dealNote').innerHTML =
+    state.scen==='reseller_full'
+      ? `Customer pays <b>${fmt(state.vol)}</b> platform + <b>${fmt(state.svc)}</b> your service = <b>${fmt(state.vol+state.svc)}/mo</b>. <span style="color:var(--muted)">Platform changes book size, not your cut.</span>`
+      : `Total deal value: <b>${fmt(state.vol)}</b> + <b>${fmt(impact)}</b> = <b>${fmt(state.vol+impact)}/mo</b> per account.`;
+
+  // Impact tier is inert in Full Reseller (partner sets own price) — disable so it isn't a dead control
+  const fullReseller = state.scen==='reseller_full';
+  document.getElementById('impactSeg').classList.toggle('disabled', fullReseller);
+  document.getElementById('impactNote').style.display = fullReseller ? 'block' : 'none';
+
+  const r = calc(state.scen);
+
+  // hero
+  document.getElementById('scenChip').textContent = SCEN_LABEL[state.scen];
+  document.getElementById('heroAccts').textContent = state.acct+' accounts';
+  tween(document.getElementById('heroArr'), r.fullARR, v=>plain(v));
+  tween(document.getElementById('heroMrr'), r.fullMRR, v=>plain(v));
+  document.getElementById('perAcct').innerHTML = fmt(r.perARR)+'<small> /yr</small>';
+  document.getElementById('bookArr').innerHTML = fmt(r.bookARR)+'<small> ARR</small>';
+
+  // stats
+  setText(document.getElementById('stAccts'), state.acct);
+  setText(document.getElementById('stMonths'), r.months+' mo');
+  document.getElementById('stRamp').textContent = 'at '+state.rate+' / month';
+  tween(document.getElementById('stY1'), r.y1, v=>plain(v));
+  tween(document.getElementById('stRun'), r.fullMRR, v=>plain(v));
+
+  // ramp meta
+  document.getElementById('rampRate').textContent = state.rate;
+  document.getElementById('rampMonths').textContent = r.months;
+
+  // comparison
+  document.querySelectorAll('#cmpGrid .cmp').forEach(c=>{
+    const sc = c.dataset.scen;
+    const rr = calc(sc);
+    c.classList.toggle('active', sc===state.scen);
+    c.querySelector('.cmp-arr').textContent = plain(rr.fullARR);
+    c.querySelector('.cmp-mrr').textContent = fmt(rr.fullMRR);
+    c.querySelector('.cmp-per').textContent = fmt(rr.perARR);
+  });
+
+  drawChart();
+}
+
+/* ---------- interactions ---------- */
+document.querySelectorAll('#scenList .scard').forEach(card=>{
+  card.addEventListener('click',()=>{
+    state.scen = card.dataset.scen;
+    document.querySelectorAll('#scenList .scard').forEach(c=>c.classList.toggle('active', c===card));
+    document.getElementById('servicePriceWrap').classList.toggle('show', state.scen==='reseller_full');
+    render();
+  });
+});
+document.querySelectorAll('#impactSeg button').forEach(b=>{
+  b.addEventListener('click',()=>{
+    state.tier=b.dataset.tier;
+    document.querySelectorAll('#impactSeg button').forEach(x=>x.classList.toggle('active',x===b));
+    render();
+  });
+});
+const bind=(id,key,fn)=>{const el=document.getElementById(id);el.addEventListener('input',()=>{state[key]=+el.value;fn&&fn();render();});};
+bind('vol','vol');
+bind('svc','svc');
+bind('acct','acct');
+bind('rate','rate');
+
+/* ---- bi-directional editable outputs (type a target, it back-solves) ---- */
+// Accounts <-> MRR <-> ARR triangle pivots on account count (per-deal value is fixed by scenario + deal size)
+makeEditable(document.getElementById('heroArr'),  v => setAcct(v / (perDealMRR(state.scen)*12)) );
+makeEditable(document.getElementById('heroMrr'),  v => setAcct(v / perDealMRR(state.scen)) );
+makeEditable(document.getElementById('stAccts'),  v => setAcct(v) );
+// Time-to-full-book <-> activations/month (accounts fixed)
+makeEditable(document.getElementById('stMonths'), v => setRateFromMonths(v) );
+
+document.querySelectorAll('#cmpGrid .cmp').forEach(c=>{
+  c.addEventListener('click',()=>{ document.querySelector(`#scenList .scard[data-scen="${c.dataset.scen}"]`).click(); });
+});
+
+document.getElementById('resetBtn').addEventListener('click',()=>{
+  Object.assign(state,{scen:'reseller_full',vol:400,tier:'advised',svc:1600,acct:60,rate:6});
+  document.getElementById('vol').value=400;
+  document.getElementById('svc').value=1600;
+  const sl=document.getElementById('acct'); sl.max=300; sl.value=60;
+  document.getElementById('rate').value=6;
+  document.querySelectorAll('#scenList .scard').forEach(c=>c.classList.toggle('active',c.dataset.scen==='reseller_full'));
+  document.querySelectorAll('#impactSeg button').forEach(x=>x.classList.toggle('active',x.dataset.tier==='advised'));
+  document.getElementById('servicePriceWrap').classList.remove('show');
+  render();
+});
+
+// init service price visibility for default scenario
+document.getElementById('servicePriceWrap').classList.toggle('show', state.scen==='reseller_full');
+render();
+window.addEventListener('resize',()=>drawChart());
+</script>
+</body>
+</html>
