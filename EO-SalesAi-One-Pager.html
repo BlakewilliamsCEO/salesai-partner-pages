@@ -4,186 +4,130 @@
   @page { size: 8.5in 11in; margin: 0; }
 
   :root {
-    --bg:      #0B100D;
-    --panel:   #141A16;
-    --line:    #242C27;
-    --green:   #5FD98D;
-    --green-d: #2E7F52;
-    --ink:     #FFFFFF;
-    --mute:    #9AA5A0;
-    --dim:     #6B7671;
-    --gap:     27px;
+    --violet:   #6D3DF5;
+    --violet-d: #5322D4;
+    --lav:      #F1ECFE;
+    --lav-line: #DED2FB;
+    --cream:    #FAF4EA;
+    --grey-bg:  #F3F3F6;
+    --green:    #3ECF7E;
+    --green-d:  #23A85F;
+    --ink:      #0C0C11;
+    --body:     #55555F;
+    --mute:     #86868F;
+    --line:     #E5E3EC;
+    --gap:      21px;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    background: #333;
-    font-family: 'Inter', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-  }
+  body { background: #d9d9de; font-family: 'Inter', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
 
   .sheet {
-    width: 8.5in;
-    height: 11in;
-    margin: 0 auto;
+    width: 8.5in; height: 11in; margin: 0 auto;
     padding: 0.42in 0.5in 0.34in;
-    background: var(--bg);
-    background-image: radial-gradient(circle, rgba(95,217,141,0.13) 1px, transparent 1px);
-    background-size: 13px 13px;
-    background-position: top right;
-    color: var(--ink);
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    overflow: hidden;
+    background: #fff; color: var(--ink);
+    display: flex; flex-direction: column;
+    position: relative; overflow: hidden;
   }
   .sheet::before {
-    content: "";
-    position: absolute; inset: 0;
-    background: linear-gradient(105deg, var(--bg) 52%, rgba(11,16,13,0.86) 100%);
-    pointer-events: none;
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3.6in;
+    background: linear-gradient(180deg, #E7DEFB 0%, #F4F0FD 46%, #FFFFFF 100%);
   }
   .sheet > * { position: relative; z-index: 1; }
 
-  /* ---------- header ---------- */
-  .head {
-    display: flex; align-items: center; justify-content: space-between;
-    padding-bottom: 11px; border-bottom: 1px solid var(--line);
-  }
-  .lockup {
-    border: 1px dashed var(--green-d); border-radius: 5px;
-    padding: 8px 15px; font-size: 12px; font-weight: 600;
-    letter-spacing: 0.01em; color: var(--mute);
-  }
-  .eyebrow {
-    font-size: 8.5px; letter-spacing: 0.16em; text-transform: uppercase;
-    color: var(--mute); font-weight: 600;
-  }
+  /* header */
+  .head { display: flex; align-items: center; justify-content: space-between;
+          padding-bottom: 11px; border-bottom: 1px solid var(--lav-line); }
+  .lockup { border: 1px dashed #B9A8EC; border-radius: 5px; padding: 8px 15px;
+            font-size: 12px; font-weight: 600; color: #7A6BA6; }
+  .eyebrow { font-size: 8.5px; letter-spacing: 0.15em; text-transform: uppercase;
+             color: var(--body); font-weight: 700; }
 
-  /* ---------- hero ---------- */
+  /* hero */
   .hero { padding: var(--gap) 0; }
-  .kick {
-    font-size: 9px; letter-spacing: 0.19em; text-transform: uppercase;
-    color: var(--green); font-weight: 700; margin-bottom: 9px;
-  }
-  h1, .bigsec {
-    font-size: 34px; line-height: 1.05; font-weight: 800;
-    letter-spacing: -0.034em; max-width: 7.1in;
-  }
+  .kick { font-size: 9px; letter-spacing: 0.19em; text-transform: uppercase;
+          color: var(--violet); font-weight: 800; margin-bottom: 9px; }
+  h1, .bigsec { font-size: 34px; line-height: 1.05; font-weight: 800; letter-spacing: -0.035em; }
+  h1 em { font-style: normal; color: var(--violet); }
   .bigsec { margin-bottom: 13px; }
-  h1 em { font-style: italic; color: var(--green); }
-  .sub {
-    margin-top: 11px; font-size: 11.5px; line-height: 1.55;
-    color: var(--mute); max-width: 6.3in;
-  }
+  .sub { margin-top: 11px; font-size: 11.5px; line-height: 1.55; color: var(--body); max-width: 6.2in; }
 
-  /* ---------- stats ---------- */
-  .stats {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
-    margin-top: var(--gap);
-    padding: 12px 0 13px; border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-  }
-  .stat .big {
-    font-size: 25px; font-weight: 800; letter-spacing: -0.028em;
-    color: var(--green); line-height: 1;
-  }
-  .stat .lbl {
-    margin-top: 7px; font-size: 9px; font-weight: 700;
-    letter-spacing: 0.07em; text-transform: uppercase; color: var(--ink);
-  }
-  .stat .txt { margin-top: 4px; font-size: 9.5px; line-height: 1.42; color: var(--dim); }
+  /* offer — black contrast panel */
+  .offer { background: var(--ink); color: #fff; border-radius: 13px;
+           padding: 15px 20px; display: flex; align-items: center; gap: 20px; }
+  .offer .kicker { font-size: 8.5px; letter-spacing: 0.16em; text-transform: uppercase;
+                   font-weight: 700; color: var(--green); }
+  .offer .big { font-size: 22px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.12; margin-top: 4px; }
+  .offer .rule { width: 1px; align-self: stretch; background: rgba(255,255,255,.16); }
+  .offer .r { font-size: 10px; line-height: 1.55; color: #D5D5DC; }
+  .offer .r strong { color: #fff; font-weight: 700; }
+  .offer .r .hl { color: var(--green); font-weight: 800; }
 
-  /* ---------- capability row ---------- */
-  .does { display: grid; grid-template-columns: repeat(4, 1fr); gap: 13px; padding: var(--gap) 0 0; }
-  .does h3 {
-    font-size: 10.5px; font-weight: 700; letter-spacing: -0.01em;
-    padding-left: 9px; border-left: 2px solid var(--green);
-  }
-  .does p { margin-top: 5px; padding-left: 11px; font-size: 9.5px; line-height: 1.45; color: var(--dim); }
-
-  /* ---------- offer band — the signature ---------- */
-  .offer {
-    background: var(--green); color: #08110B;
-    border-radius: 9px; padding: 13px 18px;
-    display: flex; align-items: center; gap: 19px;
-  }
-  .offer .l { flex: 0 0 auto; }
-  .offer .kicker {
-    font-size: 8.5px; letter-spacing: 0.16em; text-transform: uppercase;
-    font-weight: 700; opacity: 0.62;
-  }
-  .offer .big {
-    font-size: 22px; font-weight: 800; letter-spacing: -0.028em;
-    line-height: 1.1; margin-top: 3px;
-  }
-  .offer .rule { width: 1px; align-self: stretch; background: rgba(8,17,11,0.22); }
-  .offer .r { font-size: 10px; line-height: 1.5; font-weight: 500; }
-  .offer .r strong { font-weight: 800; }
-
-  /* ---------- pricing ---------- */
+  /* pricing */
   .pricing { padding-top: var(--gap); }
-  .sec {
-    font-size: 13.5px; letter-spacing: 0.05em; text-transform: uppercase;
-    color: var(--green); font-weight: 800; margin-bottom: 9px;
-  }
+  .sec { font-size: 13.5px; letter-spacing: 0.045em; text-transform: uppercase;
+         color: var(--violet); font-weight: 800; margin-bottom: 9px; }
   .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 11px; }
-  .plan {
-    background: var(--panel); border: 1px solid var(--line);
-    border-radius: 8px; padding: 12px 13px;
-  }
-  .plan.pop { border-color: var(--green); }
-  .plan .nm { font-size: 12px; font-weight: 700; letter-spacing: -0.01em; }
-  .plan .tag { margin-top: 2px; font-size: 8.5px; font-style: italic; color: var(--dim); }
-  .plan .pr { margin-top: 9px; font-size: 19px; font-weight: 800; letter-spacing: -0.03em; }
+  .plan { border-radius: 11px; padding: 13px 14px; border: 1px solid transparent; }
+  .plan.a { background: var(--grey-bg); }
+  .plan.b { background: var(--lav); border-color: var(--violet); }
+  .plan.c { background: var(--cream); }
+  .plan .nm { font-size: 12.5px; font-weight: 700; letter-spacing: -0.015em; }
+  .plan .tag { margin-top: 2px; font-size: 8.5px; color: var(--mute); }
+  .plan .pr { margin-top: 9px; font-size: 20px; font-weight: 800; letter-spacing: -0.035em; }
   .plan .pr span { font-size: 9.5px; font-weight: 500; color: var(--mute); letter-spacing: 0; }
-  .plan .ft { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--line);
-              font-size: 9px; line-height: 1.45; color: var(--dim); }
+  .plan .ft { margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(12,12,17,.09);
+              font-size: 9px; line-height: 1.45; color: var(--body); }
 
-  .lines { margin-top: 11px; display: grid; grid-template-columns: 1fr 1fr; gap: 11px; }
-  .line {
-    background: var(--panel); border: 1px solid var(--line);
-    border-radius: 8px; padding: 10px 13px;
-    display: flex; justify-content: space-between; align-items: baseline; gap: 10px;
-  }
+  .lines { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; }
+  .line { background: var(--grey-bg); border-radius: 10px; padding: 11px 14px;
+          display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
   .line .k { font-size: 9.5px; font-weight: 700; }
-  .line .k em { font-style: normal; font-weight: 500; color: var(--dim); }
-  .line .v { font-size: 10px; font-weight: 700; color: var(--green); white-space: nowrap; }
-  .note { margin-top: 8px; font-size: 8.5px; color: var(--dim); }
+  .line .k em { font-style: normal; font-weight: 500; color: var(--mute); }
+  .line .v { font-size: 10px; font-weight: 800; color: var(--violet); white-space: nowrap; }
+  .line .v.free { color: var(--green-d); }
+  .note { margin-top: 9px; font-size: 8.5px; color: var(--mute); }
 
-  /* ---------- start + cta ---------- */
+  /* capabilities */
+  .does { display: grid; grid-template-columns: repeat(4, 1fr); gap: 13px; padding: var(--gap) 0 0; }
+  .does h3 { font-size: 10.5px; font-weight: 700; letter-spacing: -0.012em;
+             padding-left: 9px; border-left: 2.5px solid var(--violet); }
+  .does p { margin-top: 5px; padding-left: 11px; font-size: 9.5px; line-height: 1.45; color: var(--body); }
+
+  /* stats */
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+           margin-top: var(--gap); padding: 13px 0 14px;
+           border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .stat .big { font-size: 26px; font-weight: 800; letter-spacing: -0.035em; line-height: 1; }
+  .stat .big em { font-style: normal; color: var(--violet); }
+  .stat .lbl { margin-top: 7px; font-size: 9px; font-weight: 700; letter-spacing: 0.07em;
+               text-transform: uppercase; color: var(--ink); }
+  .stat .txt { margin-top: 4px; font-size: 9.5px; line-height: 1.42; color: var(--mute); }
+
+  /* footer */
   .foot { margin-top: auto; padding-top: 0; }
   .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; }
   .step { display: flex; gap: 9px; align-items: flex-start; }
-  .num {
-    flex: 0 0 auto; width: 17px; height: 17px; border-radius: 50%;
-    border: 1px solid var(--green); color: var(--green);
-    font-size: 9px; font-weight: 700; display: flex;
-    align-items: center; justify-content: center;
-  }
-  .step p { font-size: 9.5px; line-height: 1.45; color: var(--mute); }
+  .num { flex: 0 0 auto; width: 18px; height: 18px; border-radius: 50%;
+         background: var(--violet); color: #fff; font-size: 9px; font-weight: 800;
+         display: flex; align-items: center; justify-content: center; }
+  .step p { font-size: 9.5px; line-height: 1.45; color: var(--body); }
   .step p b { color: var(--ink); font-weight: 700; }
 
-  .cta {
-    margin-top: 12px; padding-top: 11px; border-top: 1px solid var(--line);
-    display: flex; align-items: center; justify-content: space-between; gap: 16px;
-  }
-  .cta .txt { font-size: 15px; font-weight: 800; letter-spacing: -0.022em; }
-  .cta .url { font-size: 11px; color: var(--green); font-weight: 600; margin-top: 2px; }
-  .btn {
-    background: var(--green); color: #08110B; border-radius: 6px;
-    padding: 10px 20px; font-size: 11px; font-weight: 800; white-space: nowrap;
-  }
-  .src {
-    margin-top: 11px; font-size: 7.5px; line-height: 1.5; color: #4E5854;
-    display: flex; justify-content: space-between; gap: 16px;
-  }
-  .tbd { color: var(--green-d); border-bottom: 1px dashed var(--green-d); }
+  .cta { margin-top: 13px; padding-top: 12px; border-top: 1px solid var(--line);
+         display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .cta .txt { font-size: 16px; font-weight: 800; letter-spacing: -0.03em; }
+  .cta .url { font-size: 11px; color: var(--violet); font-weight: 700; margin-top: 2px; }
+  .btn { background: var(--violet); color: #fff; border-radius: 999px;
+         padding: 11px 22px; font-size: 11px; font-weight: 700; white-space: nowrap; }
+
+  .src { margin-top: 11px; font-size: 7.5px; line-height: 1.5; color: #9B9BA4;
+         display: flex; justify-content: space-between; gap: 16px; }
+  .tbd { color: var(--violet); border-bottom: 1px dashed var(--violet); }
 
   @media print {
     body { background: none; }
-    .sheet { margin: 0; box-shadow: none; }
+    .sheet { margin: 0; }
     * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   }
 </style>
@@ -208,7 +152,7 @@
     </div>
     <div class="rule"></div>
     <div class="r">
-      The 5,000 minutes/month tier — <strong>$800/mo</strong> — waived for your first 90 days. A <strong>$2,400 value</strong>.<br>
+      The 5,000 minutes/month tier — <strong>$800/mo</strong> — waived for your first 90 days. A <span class="hl">$2,400 value</span>.<br>
       Plus a complimentary Moment Audit and SalesAi workshops on your chapter's learning calendar.
     </div>
   </div>
@@ -216,19 +160,19 @@
   <div class="pricing">
     <div class="sec">Step 1 — Choose your impact plan</div>
     <div class="plans">
-      <div class="plan">
+      <div class="plan a">
         <div class="nm">Impact Core</div>
         <div class="tag">You run it. We equip you.</div>
         <div class="pr">$800 <span>/ month</span></div>
         <div class="ft">Customer-built agents, 24-hour SLA, 5 concurrent calls, 10 annual service credits.</div>
       </div>
-      <div class="plan pop">
+      <div class="plan b">
         <div class="nm">Impact Advised</div>
         <div class="tag">Shared ownership. Expert guidance.</div>
         <div class="pr">$1,600 <span>/ month</span></div>
         <div class="ft">Up to 3 agents built and managed, named Impact Manager, 12-hour SLA, 10 concurrent calls, 40 credits.</div>
       </div>
-      <div class="plan">
+      <div class="plan c">
         <div class="nm">Impact Managed</div>
         <div class="tag">We run it. You realize results.</div>
         <div class="pr">$2,600 <span>/ month</span></div>
@@ -237,10 +181,10 @@
     </div>
 
     <div class="sec" style="margin-top:var(--gap)">Step 2 — Add your volume</div>
-    <div class="lines" style="margin-top:0">
+    <div class="lines">
       <div class="line">
         <div class="k">Voice &mdash; 5,000 minutes / month</div>
-        <div class="v">Free your first 3 months</div>
+        <div class="v free">Free your first 3 months</div>
       </div>
       <div class="line">
         <div class="k">SMS <em>(optional)</em> &mdash; 5,000 texts / month</div>
@@ -251,27 +195,15 @@
   </div>
 
   <div class="does">
-    <div>
-      <h3>Answers every call</h3>
-      <p>Nights, weekends, holidays, and the third simultaneous ring your team can't get to.</p>
-    </div>
-    <div>
-      <h3>Qualifies on your criteria</h3>
-      <p>A conversation, not a menu tree. It gets to whether this is a real opportunity.</p>
-    </div>
-    <div>
-      <h3>Books on your calendar</h3>
-      <p>Straight into your scheduler, with the context your team needs before they show up.</p>
-    </div>
-    <div>
-      <h3>Reworks dead leads</h3>
-      <p>The list nobody has touched in six months becomes a booked calendar.</p>
-    </div>
+    <div><h3>Answers every call</h3><p>Nights, weekends, holidays, and the third simultaneous ring your team can't get to.</p></div>
+    <div><h3>Qualifies on your criteria</h3><p>A conversation, not a menu tree. It gets to whether this is a real opportunity.</p></div>
+    <div><h3>Books on your calendar</h3><p>Straight into your scheduler, with the context your team needs before they show up.</p></div>
+    <div><h3>Reworks dead leads</h3><p>The list nobody has touched in six months becomes a booked calendar.</p></div>
   </div>
 
   <div class="stats">
     <div class="stat">
-      <div class="big">28% &rarr; 46%</div>
+      <div class="big">28% <em>&rarr;</em> 46%</div>
       <div class="lbl">Response rate</div>
       <div class="txt">Same team, same list. Eighteen points, with no performance drift between campaigns.</div>
     </div>
@@ -290,18 +222,12 @@
   <div class="foot">
     <h2 class="bigsec">How to get started</h2>
     <div class="steps">
-      <div class="step">
-        <div class="num">1</div>
-        <p><b>Book your Moment Audit.</b> <span class="tbd">[duration TBD]</span> with a SalesAi strategist.</p>
-      </div>
-      <div class="step">
-        <div class="num">2</div>
-        <p><b>See your gaps.</b> Where calls are dropping, and what that's worth annually.</p>
-      </div>
-      <div class="step">
-        <div class="num">3</div>
-        <p><b>Go live in <span class="tbd">[TBD]</span> days.</b> No new headcount, no rip-and-replace.</p>
-      </div>
+      <div class="step"><div class="num">1</div>
+        <p><b>Book your Moment Audit.</b> <span class="tbd">[duration TBD]</span> with a SalesAi strategist.</p></div>
+      <div class="step"><div class="num">2</div>
+        <p><b>See your gaps.</b> Where calls are dropping, and what that's worth annually.</p></div>
+      <div class="step"><div class="num">3</div>
+        <p><b>Go live in <span class="tbd">[TBD]</span> days.</b> No new headcount, no rip-and-replace.</p></div>
     </div>
 
     <div class="cta">
