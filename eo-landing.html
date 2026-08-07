@@ -1,0 +1,508 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SalesAi × EO — Member Offer</title>
+<style>
+  :root {
+    --violet:  #6D3DF5;
+    --green:   #5FDE8F;
+    --green-d: #34C36B;
+    --ink:     #0C0C11;
+    --body:    #55555F;
+    --mute:    #8E8E99;
+    --field:   #EDF0F7;
+    --lav:     #F1ECFE;
+    --cream:   #FAF4EA;
+    --grey-bg: #F3F3F6;
+    --line:    #E5E3EC;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+    color: var(--ink); background: #fff; -webkit-font-smoothing: antialiased;
+    letter-spacing: -0.011em;
+  }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 40px; }
+
+  /* ---------- nav ---------- */
+  nav { position: relative; z-index: 3; }
+  .nav-in { display: flex; align-items: center; justify-content: space-between; padding: 22px 0; }
+  .brand { display: flex; align-items: center; gap: 10px; }
+  .mk { width: 27px; height: 27px; border: 2.6px solid var(--green-d); border-radius: 7px; position: relative; }
+  .mk::after { content:""; position:absolute; right:-2.6px; top:6px; width:11px; height:2.6px; background: var(--green-d); }
+  .bn { font-size: 21px; font-weight: 800; letter-spacing: -0.035em; }
+  .nav-links { display: flex; gap: 30px; font-size: 15px; font-weight: 500; }
+  .nav-links a { color: var(--ink); text-decoration: none; }
+  .nav-right { display: flex; align-items: center; gap: 20px; }
+  .login { font-size: 15px; font-weight: 500; }
+  .pill-dark { background: var(--ink); color: #fff; border-radius: 999px;
+               padding: 11px 21px; font-size: 14px; font-weight: 700; text-decoration: none; }
+
+  /* ---------- hero ---------- */
+  .hero-bg {
+    background: linear-gradient(168deg, #FFFFFF 0%, #F6F2FD 34%, #EDE4FB 68%, #F7F4FE 100%);
+    position: relative;
+  }
+  .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+          padding: 58px 0 84px; }
+
+  .eo-tag { display: inline-flex; align-items: center; gap: 11px; margin-bottom: 22px; }
+  .eo-slot { border: 1px dashed #A992E8; border-radius: 6px; padding: 7px 13px;
+             font-size: 11px; font-weight: 700; color: #6A5AA0; background: rgba(255,255,255,.55); }
+  .eo-tag .lb { font-size: 11px; font-weight: 800; letter-spacing: 0.16em;
+                text-transform: uppercase; color: var(--violet); }
+
+  h1 { font-size: 60px; line-height: 1.02; font-weight: 800; letter-spacing: -0.042em; }
+  h1 em { font-style: normal; color: var(--violet); }
+  .lede { margin-top: 22px; font-size: 18px; line-height: 1.5; color: var(--body); max-width: 30em; }
+
+  .ticks { margin-top: 34px; display: flex; flex-direction: column; gap: 17px; }
+  .tick { display: flex; align-items: flex-start; gap: 14px; font-size: 16.5px; font-weight: 500; }
+  .arw { flex: 0 0 auto; width: 23px; height: 23px; border-radius: 50%;
+         border: 1.6px solid var(--violet); color: var(--violet);
+         display: flex; align-items: center; justify-content: center; font-size: 12px; margin-top: 1px; }
+  .tick b { font-weight: 700; }
+
+  /* ---------- form ---------- */
+  .card { background: #fff; border-radius: 26px; padding: 40px 38px 34px;
+          box-shadow: 0 20px 60px rgba(52,26,110,.10); }
+  .card h2 { font-size: 22px; font-weight: 800; letter-spacing: -0.032em; }
+  .card .cs { margin-top: 7px; font-size: 13.5px; color: var(--body); line-height: 1.5; margin-bottom: 24px; }
+
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .fld { width: 100%; background: var(--field); border: 1px solid transparent; border-radius: 11px;
+         padding: 17px 18px; font-size: 15px; font-family: inherit; color: var(--ink);
+         margin-bottom: 14px; outline: none; letter-spacing: -0.011em; }
+  .fld::placeholder { color: #9AA0AE; }
+  .fld:focus { border-color: var(--violet); background: #fff; box-shadow: 0 0 0 3px rgba(109,61,245,.13); }
+  .row2 .fld { margin-bottom: 14px; }
+
+  .phone { display: flex; gap: 10px; }
+  .cc { flex: 0 0 92px; background: var(--field); border-radius: 11px; display: flex;
+        align-items: center; justify-content: center; gap: 7px; font-size: 15px; margin-bottom: 14px; }
+  .cc .cv { font-size: 10px; color: #6C7280; }
+  .phone .fld { flex: 1; }
+
+  select.fld { appearance: none; color: #9AA0AE;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8'><path d='M1 1l5 5 5-5' stroke='%236C7280' stroke-width='1.8' fill='none' stroke-linecap='round'/></svg>");
+    background-repeat: no-repeat; background-position: right 18px center; padding-right: 44px; }
+  select.fld:valid { color: var(--ink); }
+
+  .submit-row { display: flex; justify-content: flex-end; margin-top: 10px; }
+  .submit { background: var(--green); color: var(--ink); border: none; border-radius: 11px;
+            padding: 16px 32px; font-size: 16px; font-weight: 800; font-family: inherit;
+            letter-spacing: -0.018em; cursor: pointer; }
+  .submit:hover { background: var(--green-d); }
+  .fineprint { margin-top: 16px; font-size: 11.5px; line-height: 1.5; color: var(--mute); }
+
+  /* ---------- offer strip ---------- */
+  .offer-strip { background: var(--ink); color: #fff; }
+  .offer-in { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; padding: 40px 0; }
+  .os { text-align: center; }
+  .os .n { font-size: 30px; font-weight: 800; letter-spacing: -0.038em; }
+  .os .n em { font-style: normal; color: var(--green); }
+  .os .t { margin-top: 10px; font-size: 13px; line-height: 1.5; color: #B9B9C4; max-width: 15em; margin-left: auto; margin-right: auto; }
+
+  /* ---------- sections ---------- */
+  section { padding: 84px 0; }
+  .center { text-align: center; max-width: 26em; margin: 0 auto 32px; }
+  .center .aud { margin-bottom: 14px; }
+  h3.sect { font-size: 38px; line-height: 1.12; font-weight: 800; letter-spacing: -0.038em; }
+  .sect-sub { margin-top: 14px; font-size: 16px; color: var(--body); line-height: 1.55; }
+
+  .cards3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .c { border-radius: 18px; padding: 26px 24px; }
+  .c.a { background: var(--grey-bg); }
+  .c.b { background: var(--lav); box-shadow: inset 0 0 0 1.5px var(--violet); }
+  .c.c { background: var(--cream); }
+  .c .nm { font-size: 17px; font-weight: 800; letter-spacing: -0.025em; }
+  .c .tg { margin-top: 4px; font-size: 12.5px; color: var(--mute); }
+  .c .pr { margin-top: 16px; font-size: 32px; font-weight: 800; letter-spacing: -0.04em; }
+  .c .pr span { font-size: 14px; font-weight: 500; color: var(--mute); letter-spacing: -0.01em; }
+  .c ul { margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(12,12,17,.1); list-style: none; }
+  .c li { font-size: 13px; line-height: 1.5; color: var(--body); padding-left: 16px; position: relative; margin-bottom: 6px; }
+  .c li::before { content: ""; position: absolute; left: 0; top: 7px; width: 6px; height: 6px;
+                  border-radius: 50%; background: var(--violet); }
+
+  .vol { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 18px; }
+  .v { background: var(--grey-bg); border-radius: 14px; padding: 22px 24px;
+       display: flex; justify-content: space-between; align-items: baseline; gap: 14px; }
+  .v .k { font-size: 15px; font-weight: 700; }
+  .v .k em { font-style: normal; font-weight: 500; color: var(--mute); }
+  .v .p { font-size: 15px; font-weight: 800; color: var(--violet); white-space: nowrap; }
+  .v .p.free { color: var(--green-d); }
+  .volnote { margin-top: 16px; font-size: 13px; color: var(--mute); }
+
+  .start-panel {
+    background: var(--ink); color: #fff; border-radius: 26px;
+    padding: 58px 60px 62px;
+  }
+  .start-panel .sect { text-align: center; margin-bottom: 46px; }
+  .start-panel .steps { gap: 44px; }
+  .start-panel .st h4 { color: #fff; }
+  .start-panel .st p { color: #B4B4C0; }
+  .start-panel .tbd { color: var(--green); border-bottom-color: var(--green); }
+
+  .panel-cta { margin-top: 46px; padding-top: 38px; border-top: 1px solid rgba(255,255,255,.14);
+               text-align: center; }
+  .panel-cta .b-green { display: inline-block; padding: 16px 34px; font-size: 16px; }
+  .pc-note { margin-top: 14px; font-size: 13px; color: #8E8E9B; }
+
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+  .st .num { width: 34px; height: 34px; border-radius: 50%; background: var(--violet); color: #fff;
+             font-size: 15px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+  .st h4 { margin-top: 16px; font-size: 18px; font-weight: 800; letter-spacing: -0.028em; }
+  .st p { margin-top: 8px; font-size: 14.5px; line-height: 1.55; color: var(--body); }
+
+  /* ---------- chapter leadership ---------- */
+  .lead-bg { background: #FBFAFD; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .lead-head { max-width: 40em; margin-bottom: 32px; }
+  .aud { font-size: 11.5px; font-weight: 800; letter-spacing: 0.17em; text-transform: uppercase;
+         color: var(--violet); margin-bottom: 16px; }
+  .lead-head .sect-sub { max-width: 34em; }
+
+  .vid {
+    position: relative; width: 100%; aspect-ratio: 16 / 9;
+    border-radius: 18px; overflow: hidden; margin-bottom: 20px;
+    background: linear-gradient(150deg, #EFE9FD 0%, #F6F3FC 48%, #E9F5EE 100%);
+    border: 1.5px dashed #C3B4EE;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 24px;
+  }
+  .vid .play {
+    width: 78px; height: 78px; border-radius: 50%; background: var(--violet);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 10px 30px rgba(109,61,245,.30); margin-bottom: 20px;
+  }
+  .vid .play svg { margin-left: 4px; }
+  .vid .vh { font-size: 21px; font-weight: 800; letter-spacing: -0.03em; }
+  .vid .vp { margin-top: 8px; font-size: 14.5px; color: var(--body); max-width: 30em; line-height: 1.5; }
+  .vid .spec {
+    position: absolute; bottom: 16px; right: 18px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase;
+    color: #9B8ACB; background: rgba(255,255,255,.7); padding: 5px 10px; border-radius: 6px;
+  }
+  .vid-cap { font-size: 12.5px; color: var(--mute); margin-bottom: 44px; }
+
+  .tiles6 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .t { border-radius: 18px; padding: 26px 24px 22px; display: flex; flex-direction: column; }
+  .t1 { background: var(--lav); }
+  .t2 { background: #E7F6EC; }
+  .t3 { background: var(--cream); }
+  .t4 { background: #E9EFFA; }
+  .t5 { background: var(--grey-bg); }
+  .t6 { background: var(--ink); color: #fff; }
+  .t .fmt { font-size: 11px; font-weight: 800; letter-spacing: 0.11em; text-transform: uppercase; color: var(--mute); }
+  .t6 .fmt { color: var(--green); }
+  .t h4 { margin-top: 11px; font-size: 20px; font-weight: 800; letter-spacing: -0.032em; line-height: 1.15; }
+  .t p { margin-top: 11px; font-size: 14px; line-height: 1.55; color: var(--body); }
+  .t6 p { color: #B9B9C4; }
+  .t .lv { margin-top: 14px; padding-top: 13px; border-top: 1px solid rgba(12,12,17,.1);
+           font-size: 12.5px; line-height: 1.5; color: var(--mute); }
+  .t6 .lv { border-top-color: rgba(255,255,255,.16); color: #9A9AA6; }
+  .t .tcta { margin-top: auto; padding-top: 18px; font-size: 14px; font-weight: 700;
+             color: var(--violet); text-decoration: none; }
+  .t .tcta.dark { color: var(--green); }
+
+  .lead-panel { margin-top: 40px; }
+
+  /* ---------- closing ---------- */
+  .b-green { background: var(--green); color: var(--ink); border-radius: 999px; padding: 14px 28px;
+             font-size: 15px; font-weight: 700; text-decoration: none; }
+
+  footer { background: var(--ink); color: #fff; padding: 46px 0; }
+  .ft-in { display: flex; justify-content: space-between; align-items: center; gap: 30px; flex-wrap: wrap; }
+  .ft-in .bn { color: #fff; }
+  .ft-note { font-size: 11.5px; line-height: 1.6; color: #8E8E9B; max-width: 46em; margin-top: 24px; }
+  .tbd { color: var(--violet); border-bottom: 1px dashed var(--violet); }
+  footer .tbd { color: var(--green); border-color: var(--green); }
+
+  .reviewer { background: #FFF8E1; border-top: 1px solid #F0E0A8; padding: 26px 0; font-size: 13px; line-height: 1.65; color: #6B5A20; }
+  .reviewer b { color: #4A3E12; }
+
+  @media (max-width: 980px) {
+    .hero { grid-template-columns: 1fr; gap: 44px; padding: 40px 0 56px; }
+    h1 { font-size: 44px; }
+    .nav-links, .login { display: none; }
+    .cards3, .steps, .vol, .offer-in, .tiles6 { grid-template-columns: 1fr; }
+    .start-panel { padding: 36px 26px 40px; border-radius: 20px; }
+    .start-panel .steps { gap: 30px; }
+    .panel-cta { margin-top: 32px; padding-top: 28px; }
+    .wrap { padding: 0 22px; }
+  }
+</style>
+
+<nav>
+  <div class="wrap nav-in">
+    <div class="brand"><div class="mk"></div><div class="bn">SalesAi</div></div>
+    <div class="nav-links">
+      <a href="#offer">The Offer</a><a href="#pricing">Pricing</a><a href="#wiify">The Partnership</a><a href="#start">How It Works</a><a href="#chapter">For Chapters</a>
+    </div>
+    <div class="nav-right">
+      <div class="login">Log in</div>
+      <a class="pill-dark" href="#form">Talk to an expert</a>
+    </div>
+  </div>
+</nav>
+
+<div class="hero-bg">
+  <div class="wrap hero">
+
+    <div>
+      <div class="eo-tag">
+        <div class="eo-slot">EO Logo &nbsp;|&nbsp; Sales Ai logo</div>
+        <div class="lb">Member Offer</div>
+      </div>
+
+      <h1>Three months of voice, <em>on us.</em></h1>
+
+      <p class="lede">SalesAi answers every inbound call, qualifies the caller, and books the appointment — 24/7, in your brand's voice. Then it goes back and works the leads your team gave up on.</p>
+
+      <div class="ticks">
+        <div class="tick"><div class="arw">&rarr;</div><div><b>5,000 minutes a month, free for 90 days</b> — a $2,400 value</div></div>
+        <div class="tick"><div class="arw">&rarr;</div><div><b>A complimentary Moment Audit</b> — see what your missed calls cost annually</div></div>
+        <div class="tick"><div class="arw">&rarr;</div><div><b>Workshops for your chapter</b> — on your learning calendar</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="form">
+      <h2>Book your Moment Audit</h2>
+      <p class="cs">Tell us where to reach you and pick a time. Your three free months are applied at signup — no code, no negotiation.</p>
+
+      <div class="row2">
+        <input class="fld" type="text" placeholder="First Name">
+        <input class="fld" type="text" placeholder="Last Name">
+      </div>
+
+      <input class="fld" type="email" placeholder="Work Email Address*" required>
+
+      <div class="phone">
+        <div class="cc">&#127482;&#127480; <span class="cv">&#9660;</span></div>
+        <input class="fld" type="tel" placeholder="+1 (555) 555-5555">
+      </div>
+
+      <input class="fld" type="text" placeholder="Company Website">
+
+      <select class="fld" required>
+        <option value="" disabled selected>Your EO Chapter*</option>
+        <option>EO Indiana</option>
+        <option>EO Chicago</option>
+        <option>EO Atlanta</option>
+        <option>EO Dallas</option>
+        <option>EO Nashville</option>
+        <option>EO Denver</option>
+        <option>EO Detroit</option>
+        <option>EO Kansas City</option>
+        <option>Other / not listed</option>
+      </select>
+
+      <div class="submit-row"><button class="submit">Pick a Time</button></div>
+
+      <p class="fineprint">Available to active EO members. One offer per company. Your chapter is used to route you to the right team and to credit the referral — nothing is shared back to your chapter leadership.</p>
+    </div>
+
+  </div>
+</div>
+
+<div class="offer-strip">
+  <div class="wrap offer-in">
+    <div class="os"><div class="n"><em>$2,400</em></div><div class="t">Value of the three free months at the 5,000-minute tier</div></div>
+    <div class="os"><div class="n">28% <em>&rarr;</em> 46%</div><div class="t">Response rate lift — same team, same list, no performance drift</div></div>
+    <div class="os"><div class="n">3.7<em>&times;</em></div><div class="t">More lead responses year over year, one headcount saved</div></div>
+    <div class="os"><div class="n"><em>24/7</em></div><div class="t">Nights, weekends, holidays, and the third simultaneous ring</div></div>
+  </div>
+</div>
+
+<section id="wiify">
+  <div class="wrap">
+    <div class="center">
+      <div class="aud">EO &times; SalesAi</div>
+      <h3 class="sect">What's in it for you.</h3>
+      <p class="sect-sub">The partnership in full — where it came from, what EO negotiated on your behalf, and what it actually means for your business.</p>
+    </div>
+
+    <div class="vid" role="img" aria-label="Video placeholder: partnership introduction">
+      <div class="play">
+        <svg width="26" height="30" viewBox="0 0 26 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M25 15L0.999999 29.2894L1 0.710581L25 15Z" fill="white"/>
+        </svg>
+      </div>
+      <div class="vh">Start here.</div>
+      <div class="vp">The whole partnership in one place — why EO brought SalesAi in, what every member gets, what a voice agent does for a business like yours, and how to take advantage of it.</div>
+      <div class="spec">Video &middot; 16:9</div>
+    </div>
+    <div class="vid-cap">Placeholder — partnership introduction. Replace with embedded player (1920&times;1080, poster frame required).</div>
+  </div>
+</section>
+
+<section id="pricing" style="padding-top:0">
+  <div class="wrap">
+    <div class="center">
+      <div class="aud">For EO Members</div>
+      <h3 class="sect">EO Exclusive Pricing.<br>Nothing to negotiate.</h3>
+      <p class="sect-sub">Choose how much you want to own. Your first three months of voice come off the top.</p>
+    </div>
+
+    <div class="vid" role="img" aria-label="Video placeholder: product explainer">
+      <div class="play">
+        <svg width="26" height="30" viewBox="0 0 26 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M25 15L0.999999 29.2894L1 0.710581L25 15Z" fill="white"/>
+        </svg>
+      </div>
+      <div class="vh">See what you're actually buying.</div>
+      <div class="vp">A walkthrough of how an agent gets built, how it connects to your calendar and CRM, and what happens on a live call.</div>
+      <div class="spec">Video &middot; 16:9</div>
+    </div>
+    <div class="vid-cap">Placeholder — product explainer. Replace with embedded player (1920&times;1080, poster frame required).</div>
+
+    <div class="cards3">
+      <div class="c a">
+        <div class="nm">Impact Core</div><div class="tg">You run it. We equip you.</div>
+        <div class="pr">$800 <span>/ month</span></div>
+        <ul><li>Customer-built agents using SalesAi tools</li><li>24-hour response SLA</li><li>5 concurrent calls</li><li>10 annual service credits</li></ul>
+      </div>
+      <div class="c b">
+        <div class="nm">Impact Advised</div><div class="tg">Shared ownership. Expert guidance.</div>
+        <div class="pr">$1,600 <span>/ month</span></div>
+        <ul><li>Up to 3 agents built and managed by SalesAi</li><li>Named Impact Manager</li><li>12-hour priority SLA</li><li>10 concurrent calls, 40 credits</li></ul>
+      </div>
+      <div class="c c">
+        <div class="nm">Impact Managed</div><div class="tg">We run it. You realize results.</div>
+        <div class="pr">$2,600 <span>/ month</span></div>
+        <ul><li>Unlimited agents built and managed</li><li>Proactive monthly optimization</li><li>2-hour priority SLA</li><li>15 concurrent calls, unlimited credits</li></ul>
+      </div>
+    </div>
+
+    <div class="vol">
+      <div class="v"><div class="k">Voice &mdash; 5,000 minutes / month</div><div class="p free">Free your first 3 months</div></div>
+      <div class="v"><div class="k">SMS <em>(optional)</em> &mdash; 5,000 texts / month</div><div class="p">$150 / mo</div></div>
+    </div>
+    <p class="volnote">Higher volume available — priced at your Moment Audit. Service credits fund agent builds, CRM integration, and tuning: 5-credit bundle $1,000, 10% off at 15+.</p>
+  </div>
+</section>
+
+<section id="start" style="padding-top:0">
+  <div class="wrap">
+    <div class="start-panel">
+      <h3 class="sect">How to get started</h3>
+      <div class="steps">
+        <div class="st"><div class="num">1</div><h4>Book your Moment Audit</h4>
+          <p><span class="tbd">[duration TBD]</span> with a SalesAi strategist. Bring your call volume and your calendar.</p></div>
+        <div class="st"><div class="num">2</div><h4>See your gaps</h4>
+          <p>Where calls are dropping today, and what that's worth to you annually.</p></div>
+        <div class="st"><div class="num">3</div><h4>Go live in <span class="tbd">[TBD]</span> days</h4>
+          <p>No new headcount, no rip-and-replace. Your three free months start when your agent does.</p></div>
+      </div>
+      <div class="panel-cta">
+        <a class="b-green" href="#form">Book your Moment Audit</a>
+        <div class="pc-note">Takes about a minute. Your three free months are applied at signup.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="lead-bg" id="chapter">
+  <div class="wrap" style="padding-top:84px;padding-bottom:84px">
+    <div class="lead-head">
+      <div class="aud">For chapter leadership</div>
+      <h3 class="sect">Add us to your learning<br>or event calendar.</h3>
+      <p class="sect-sub">Six sessions your chapter can book, drawn from what we've already delivered. These are AI education sessions, not product demos — free to the chapter, no speaker fee, no sponsorship ask, and nothing sold from the stage.</p>
+    </div>
+
+    <div class="vid" role="img" aria-label="Video placeholder: chapter session preview">
+      <div class="play">
+        <svg width="26" height="30" viewBox="0 0 26 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M25 15L0.999999 29.2894L1 0.710581L25 15Z" fill="white"/>
+        </svg>
+      </div>
+      <div class="vh">You can see an overview of what our sessions are like, before you book one.</div>
+      <div class="vp">A look inside an EO chapter room — how members participate, and what they walk out with.</div>
+      <div class="spec">Video &middot; 16:9</div>
+    </div>
+    <div class="vid-cap">Placeholder — replace with embedded player (1920&times;1080, poster frame required).</div>
+
+    <div class="tiles6">
+
+      <div class="t t6">
+        <div class="fmt">New for EO &middot; Live working session</div>
+        <h4>The Six-Step Growth Framework</h4>
+        <p>Most AI conversations start with the tool and work backward to a problem. This one starts with the business. Members run their own company through six steps in the room and leave knowing where AI actually creates growth for them — and where it won't.</p>
+        <div class="lv">Live working session, not a talk. Built and delivered by Blake Williams, who runs the EO partnership at SalesAi.</div>
+        <a class="tcta dark" href="#chapter-form">Book this session &rarr;</a>
+      </div>
+
+      <div class="t t1">
+        <div class="fmt">Built for EO</div>
+        <h4>Win the Moment</h4>
+        <p>Written for a room of entrepreneurs, not a room of buyers. Cuts through the AI hype cycle and gives your members a way to think about where this actually belongs in their business — and where it doesn't.</p>
+        <div class="lv">The only session in the library built specifically for EO. Start here if your chapter hasn't done an AI session before.</div>
+        <a class="tcta" href="#chapter-form">Book a planning call &rarr;</a>
+      </div>
+
+      <div class="t t2">
+        <div class="fmt">Short format</div>
+        <h4>AI Education Session</h4>
+        <p>The condensed version. A grounded walk through what AI agents do, what they cost, and what has to be true in your business before they work. Fits a lunch slot or the back half of a chapter meeting.</p>
+        <div class="lv">Already been in front of EO audiences. Lowest lift on your calendar.</div>
+        <a class="tcta" href="#chapter-form">Book a planning call &rarr;</a>
+      </div>
+
+      <div class="t t3">
+        <div class="fmt">Full length</div>
+        <h4>Ai-Driven Growth</h4>
+        <p>How to prepare for and adopt AI agents — the extended treatment, with room for the readiness questions most owners get stuck on. More depth on sequencing, cost, and what to do first.</p>
+        <div class="lv">Same material as the short session with room to breathe. Better for a dedicated learning event.</div>
+        <a class="tcta" href="#chapter-form">Book a planning call &rarr;</a>
+      </div>
+
+      <div class="t t4">
+        <div class="fmt">Working session</div>
+        <h4>Creating Your Ai Thought Partner</h4>
+        <p>The most-delivered session in the library, most recently at AI Indy. Hands-on: members build something they keep using after they leave the room, rather than watching a demo of someone else's.</p>
+        <div class="lv">Tailored per audience. Tell us what your chapter runs and we'll shape the variant.</div>
+        <a class="tcta" href="#chapter-form">Book a planning call &rarr;</a>
+      </div>
+
+      <div class="t t5">
+        <div class="fmt">Virtual</div>
+        <h4>Webinar Series</h4>
+        <p>A standing catalog of virtual sessions, refreshed monthly. Useful for filling a gap between in-person meetings, reaching members who travel, or testing appetite before you give up a calendar slot.</p>
+        <div class="lv">No room to book and no travel. The easiest way to put something in front of your chapter this month.</div>
+        <a class="tcta" href="#chapter-form">Book a planning call &rarr;</a>
+      </div>
+
+    </div>
+
+    <div class="start-panel lead-panel" id="chapter-form">
+      <h3 class="sect">Learning calendars fill about six weeks out.</h3>
+      <div class="steps">
+        <div class="st"><div class="num">1</div><h4>Book the planning call</h4>
+          <p>Time with Blake Williams, who runs the EO partnership at SalesAi. Bring your calendar and what your chapter is working through right now.</p></div>
+        <div class="st"><div class="num">2</div><h4>Collaborate on your session</h4>
+          <p>We shape it around your room — which session, what gets covered, who presents. You sign off before anything goes on a calendar.</p></div>
+        <div class="st"><div class="num">3</div><h4>Hold the session six weeks later</h4>
+          <p>Lock the date on the call and we build backward from it. Six weeks is typical, not a rule — we can move faster if your calendar can.</p></div>
+      </div>
+      <div class="panel-cta">
+        <a class="b-green" href="#form">Book a planning call</a>
+        <div class="pc-note">No speaker fee, no sponsorship ask, and nothing sold from the stage.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="ft-in">
+      <div class="brand"><div class="mk"></div><div class="bn">SalesAi</div></div>
+      <div style="font-size:13px;color:#8E8E9B">An EO Strategic Partner Member Benefit</div>
+    </div>
+    <p class="ft-note">Response rate and lead response figures: SalesAi platform data, <span class="tbd">[date range]</span>. Pricing current as of <span class="tbd">[date]</span>. Offer available to active EO members; the three free months apply to the 5,000 minutes/month voice tier and do not include the Impact plan fee or SMS packages.</p>
+  </div>
+</footer>
+
+<div class="reviewer">
+  <div class="wrap">
+    <b>Build notes.</b> Chapter dropdown is populated with placeholders — swap in Russell's full US chapter list. The form is markup only; wire the fields to HubSpot with hidden <b>utm_source</b>, <b>utm_medium</b>, <b>utm_campaign</b>, and a chapter property, or the EO referral split has no attribution behind it. "Pick a Time" implies the scheduler loads on submit rather than a thank-you page — confirm that's the flow. Two placeholders still open: Moment Audit duration and go-live days. <b>Tiles are built against the real EO Presentation Library.</b> Runtimes are not shown on any tile. A learning chair matches a session to a slot before anything else, so expect that to be the first question on every planning call. Also open: who presents the five library sessions, and whether "Win the Moment" is out of draft. Both videos are placeholders — the partnership introduction, the product explainer above the pricing tiles, and the session overview in the chapter section — each runs roughly 650px tall at full grid width, so three of them commit a large share of the page to assets that do not exist yet. The Six-Step Growth Framework is Blake's to build — it is on the page before the deck exists, so it needs a real runtime and an outline before a chair can book it. <b>Pricing headline now reads "EO Exclusive Pricing" while the rates shown are the public ones</b> — the exclusive element is the three free months, so a member who checks salesai.com/pricing will see the same numbers. Worth a look before Erik reviews. "AI Impact — Ai-Driven Growth" is folded into the Ai-Driven Growth tile as a variant rather than shown separately, since it is a third cut of the same material. The chapter-leadership CTA currently points at the member form; chapter leaders should get their own scheduler so planning calls don't land in the Moment Audit queue.
+  </div>
+</div>
