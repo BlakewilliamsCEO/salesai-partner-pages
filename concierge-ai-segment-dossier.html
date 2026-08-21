@@ -1,0 +1,786 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Concierge AI segment investigation dossier — category definition, the graveyard, competitive whitespace, sizing, unit economics, and a five-gate test. Conditional go.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="author" content="SalesAi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Concierge AI — Segment Investigation Dossier">
+<meta property="og:description" content="Research package: the intersection is empty, three funded companies just died in it, and retention is the whole business.">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>%F0%9F%97%82%EF%B8%8F</text></svg>">
+<title>Concierge AI — Segment Dossier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+
+<style>
+  /* --- minimal reset --- */
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; }
+  img, svg, video { max-width: 100%; height: auto; display: block; }
+  h1, h2, h3, h4, p, ul, ol, blockquote, figure { margin: 0; }
+  ul, ol { padding: 0; }
+  table { border-collapse: collapse; }
+
+  :root {
+    --ground:        #F2F3F5;
+    --panel:         #FFFFFF;
+    --panel-sunk:    #E9EBEE;
+    --ink:           #161D26;
+    --ink-soft:      #3E4A58;
+    --ink-faint:     #6B7887;
+    --rule:          #D2D7DE;
+    --rule-strong:   #B3BBC5;
+    --accent:        #1D5A87;
+    --accent-soft:   #E2ECF3;
+    --signal-go:     #256B4C;
+    --signal-go-bg:  #DFEDE6;
+    --signal-work:   #9A6410;
+    --signal-work-bg:#F4E9D4;
+    --signal-stop:   #96382D;
+    --signal-stop-bg:#F4DFDC;
+    --shadow:        0 1px 2px rgba(22,29,38,.06), 0 6px 20px -12px rgba(22,29,38,.22);
+    --f-display: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+    --f-body: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+    --f-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--f-body);
+    font-size: 17px;
+    line-height: 1.62;
+    -webkit-font-smoothing: antialiased;
+  }
+  .sheet { max-width: 1080px; margin: 0 auto; padding: 0 24px 96px; }
+  p { margin: 0 0 16px; max-width: 66ch; }
+  ul, ol { margin: 0 0 16px; padding-left: 20px; max-width: 66ch; }
+  li { margin-bottom: 7px; }
+  li::marker { color: var(--accent); }
+  a { color: var(--accent); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+  strong { font-weight: 600; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  h1 {
+    font-family: var(--f-display); font-weight: 700;
+    font-size: clamp(38px, 6vw, 58px); line-height: 1.02;
+    letter-spacing: -.025em; margin: 0 0 18px; text-wrap: balance;
+  }
+  h2 {
+    font-family: var(--f-display); font-weight: 600;
+    font-size: 13px; letter-spacing: .17em; text-transform: uppercase;
+    color: var(--accent); margin: 0 0 6px; padding-bottom: 10px;
+    border-bottom: 1px solid var(--rule);
+  }
+  h3 {
+    font-family: var(--f-display); font-weight: 600;
+    font-size: 27px; line-height: 1.2; letter-spacing: -.018em;
+    margin: 22px 0 14px; text-wrap: balance; max-width: 24ch;
+  }
+  h4 {
+    font-family: var(--f-display); font-weight: 600;
+    font-size: 18px; letter-spacing: -.01em; margin: 24px 0 10px;
+  }
+  section { margin: 0 0 58px; }
+  .eyebrow {
+    font-family: var(--f-mono); font-size: 11.5px; font-weight: 500;
+    letter-spacing: .16em; text-transform: uppercase;
+    color: var(--ink-faint); margin: 0 0 20px;
+  }
+  .sec-n {
+    font-family: var(--f-mono); font-size: 12px; color: var(--ink-faint);
+    letter-spacing: .1em; margin: 0 0 4px;
+  }
+
+  /* masthead */
+  .masthead { padding-top: 72px; margin-bottom: 54px; }
+  .standfirst { font-size: 20px; line-height: 1.5; color: var(--ink-soft); max-width: 62ch; margin: 0 0 26px; }
+  .meta-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 14px 26px; padding-top: 20px; border-top: 1px solid var(--rule);
+    font-family: var(--f-mono); font-size: 12.5px;
+  }
+  .meta-grid dt { color: var(--ink-faint); letter-spacing: .09em; text-transform: uppercase; font-size: 10.5px; margin-bottom: 3px; }
+  .meta-grid dd { margin: 0; color: var(--ink-soft); }
+
+  /* doc actions */
+  .doc-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; padding-top: 20px; border-top: 1px solid var(--rule); }
+  .doc-actions a {
+    display: inline-flex; align-items: center; gap: 9px;
+    font-family: var(--f-mono); font-size: 12px; font-weight: 500;
+    letter-spacing: .02em; text-decoration: none;
+    padding: 9px 15px; border-radius: 7px;
+    border: 1px solid var(--rule-strong); background: var(--panel); color: var(--ink-soft);
+    transition: border-color .12s ease, color .12s ease, background .12s ease;
+  }
+  .doc-actions a:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+  .doc-actions a.primary { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+  .doc-actions a.primary:hover { background: var(--panel); }
+  .doc-actions svg { width: 14px; height: 14px; flex: none; stroke: currentColor; fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  .doc-actions .hint { flex-basis: 100%; margin: 2px 0 0; font-family: var(--f-mono); font-size: 10.5px; color: var(--ink-faint); }
+  @media print { .doc-actions { display: none; } }
+
+  /* tables */
+  .scroll { overflow-x: auto; margin: 24px 0 12px; border: 1px solid var(--rule); border-radius: 8px; background: var(--panel); box-shadow: var(--shadow); }
+  table { width: 100%; min-width: 540px; font-family: var(--f-mono); font-size: 13.5px; font-variant-numeric: tabular-nums; background: var(--panel); }
+  th, td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  thead th {
+    font-size: 10.5px; letter-spacing: .11em; text-transform: uppercase;
+    font-weight: 600; color: var(--ink-faint); background: var(--panel-sunk);
+    border-bottom: 1px solid var(--rule-strong); white-space: nowrap;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  td:first-child { color: var(--ink); font-weight: 500; }
+  td.num, th.num { text-align: right; }
+  .tcap { font-family: var(--f-mono); font-size: 11px; color: var(--ink-faint); margin: 0 0 24px; letter-spacing: .02em; }
+
+  /* threshold cells */
+  td.k { color: var(--signal-stop); background: var(--signal-stop-bg); }
+  td.i { color: var(--signal-work); background: var(--signal-work-bg); }
+  td.p { color: var(--signal-go);   background: var(--signal-go-bg); font-weight: 600; }
+
+  /* chips + dots */
+  .chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--f-mono); font-size: 10.5px; font-weight: 500;
+    letter-spacing: .08em; text-transform: uppercase;
+    padding: 3px 9px; border-radius: 20px; white-space: nowrap;
+  }
+  .chip::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; flex: none; }
+  .chip.go   { color: var(--signal-go);   background: var(--signal-go-bg); }
+  .chip.work { color: var(--signal-work); background: var(--signal-work-bg); }
+  .chip.work::before { border-radius: 1px; transform: rotate(45deg); }
+  .chip.stop { color: var(--signal-stop); background: var(--signal-stop-bg); }
+  .chip.stop::before { border-radius: 1px; }
+  .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 7px; vertical-align: baseline; }
+  .dot.g { background: var(--signal-go); }
+  .dot.y { background: var(--signal-work); }
+  .dot.r { background: var(--signal-stop); }
+  .yes { color: var(--signal-go); font-weight: 600; }
+  .no  { color: var(--signal-stop); }
+  .part{ color: var(--signal-work); }
+
+  /* key findings */
+  .finds { display: grid; gap: 12px; margin: 26px 0 10px; counter-reset: f; }
+  .find {
+    display: grid; grid-template-columns: 40px minmax(0,1fr); gap: 0 16px;
+    background: var(--panel); border: 1px solid var(--rule);
+    border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0;
+    padding: 18px 20px; box-shadow: var(--shadow);
+  }
+  .find::before {
+    counter-increment: f; content: counter(f);
+    font-family: var(--f-display); font-size: 26px; font-weight: 700;
+    color: var(--accent); line-height: 1;
+  }
+  .find p { margin: 0; max-width: 62ch; font-size: 16px; }
+  .find p + p { margin-top: 9px; }
+
+  /* callouts */
+  .call {
+    background: var(--accent-soft); border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0; padding: 20px 22px; margin: 26px 0;
+  }
+  .call.warn { background: var(--signal-stop-bg); border-left-color: var(--signal-stop); }
+  .call .lab {
+    font-family: var(--f-mono); font-size: 10.5px; font-weight: 600;
+    letter-spacing: .14em; text-transform: uppercase; color: var(--accent);
+    display: block; margin-bottom: 9px;
+  }
+  .call.warn .lab { color: var(--signal-stop); }
+  .call p:last-child { margin-bottom: 0; }
+  .call .big {
+    font-family: var(--f-display); font-weight: 600;
+    font-size: clamp(19px, 2.6vw, 25px); line-height: 1.3;
+    letter-spacing: -.018em; max-width: 30ch; margin-bottom: 0;
+  }
+
+  /* definition */
+  .defn {
+    background: var(--panel); border: 1px solid var(--rule-strong);
+    border-radius: 8px; padding: 24px 26px; margin: 24px 0;
+    box-shadow: var(--shadow); max-width: 74ch;
+  }
+  .defn .core {
+    font-family: var(--f-display); font-weight: 600; font-size: 20px;
+    line-height: 1.36; letter-spacing: -.014em; margin-bottom: 16px; max-width: none;
+  }
+  .defn p { font-size: 16px; color: var(--ink-soft); max-width: none; }
+  .defn .unit {
+    margin: 16px 0 0; padding-top: 14px; border-top: 1px solid var(--rule);
+    font-family: var(--f-display); font-weight: 600; font-size: 17px; color: var(--ink);
+  }
+
+  /* stats */
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px,1fr)); gap: 12px; margin: 24px 0; }
+  .stat { background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; padding: 16px 18px; box-shadow: var(--shadow); }
+  .stat-n { font-family: var(--f-display); font-weight: 700; font-size: 32px; line-height: 1.05; letter-spacing: -.02em; color: var(--accent); }
+  .stat-l { font-family: var(--f-mono); font-size: 11.5px; color: var(--ink-faint); margin-top: 6px; line-height: 1.45; }
+
+  /* gates */
+  .gate { background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; padding: 20px 22px; margin: 14px 0; box-shadow: var(--shadow); }
+  .gate-h { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 14px; margin-bottom: 10px; }
+  .gate-h .n { font-family: var(--f-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+  .gate-h h4 { margin: 0; font-size: 19px; }
+  .gate p { font-size: 16px; }
+
+  /* quote */
+  blockquote {
+    border-left: 3px solid var(--rule-strong); padding: 4px 0 4px 20px;
+    margin: 22px 0; font-size: 19px; line-height: 1.5; font-style: italic;
+    color: var(--ink-soft); max-width: 62ch;
+  }
+  blockquote cite { display: block; margin-top: 10px; font-family: var(--f-mono); font-size: 11.5px; font-style: normal; color: var(--ink-faint); letter-spacing: .03em; }
+
+  /* unknowns */
+  .unk { counter-reset: u; list-style: none; padding: 0; max-width: none; }
+  .unk li {
+    counter-increment: u; position: relative; padding-left: 42px;
+    margin-bottom: 14px; max-width: 68ch;
+  }
+  .unk li::before {
+    content: counter(u, decimal-leading-zero); position: absolute; left: 0; top: 2px;
+    font-family: var(--f-mono); font-size: 12px; font-weight: 500; color: var(--accent);
+  }
+
+  /* sources */
+  .sources { font-size: 14px; color: var(--ink-soft); }
+  .sources h4 { font-size: 13px; font-family: var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint); margin: 22px 0 8px; }
+  .sources p { max-width: none; line-height: 1.75; }
+
+  .foot { margin-top: 60px; padding-top: 22px; border-top: 1px solid var(--rule); font-family: var(--f-mono); font-size: 11.5px; color: var(--ink-faint); line-height: 1.7; }
+  .foot p { max-width: 80ch; }
+
+  @media (max-width: 620px) {
+    .masthead { padding-top: 40px; }
+    .find { grid-template-columns: 1fr; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="sheet">
+
+  <header class="masthead">
+    <p class="eyebrow">SalesAi · Segment Investigation · 21 August 2026</p>
+    <h1>Concierge AI</h1>
+    <p class="standfirst">A permissioned agent that carries the cognitive load of running a household and a career: it makes the calls, takes the calls, holds the family's shared context, and closes the loop without being asked.</p>
+    <dl class="meta-grid">
+      <div><dt>Prepared for</dt><dd>Blake, Megan, George</dd></div>
+      <div><dt>Purpose</dt><dd>Weekend package ahead of Sunday regroup and Monday/Tuesday sessions</dd></div>
+      <div><dt>Status</dt><dd>Research complete. Recommendation is a <em>conditional</em> go — conditions in §8.</dd></div>
+    </dl>
+    <div class="doc-actions">
+      <a class="primary" id="claudeLink" href="https://claude.ai/new" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v6m0 0 3-3m-3 3L9 6"/><path d="M4 13a8 8 0 0 0 16 0"/><path d="M7 20h10"/></svg>
+        Open in Claude
+      </a>
+      <a href="concierge-ai-segment-dossier.md" download="concierge-ai-segment-dossier.md">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11m0 0 4-4m-4 4-4-4"/><path d="M4 18h16"/></svg>
+        Download .md
+      </a>
+      <p class="hint">Markdown version — for your notes, or to drop into any AI assistant.</p>
+    </div>
+  </header>
+
+  <section>
+    <p class="sec-n">§ 0</p>
+    <h2>The one-page version</h2>
+    <p>We picked <strong>Concierge AI</strong> — a permissioned agent that carries the cognitive load of running a household and a career.</p>
+    <h3>What the research says, in four sentences</h3>
+
+    <div class="finds">
+      <div class="find"><p><strong>The intersection we identified is genuinely empty.</strong> Nobody combines outbound task-completing voice + shared multi-person household state + enterprise-grade security. Verified across ~60 products. Not one has two of the three.</p></div>
+      <div class="find"><p><strong>It is empty because three well-funded companies just died trying, not because nobody noticed.</strong> Yohana (Panasonic, $149–249/mo) shut down Jan 30, 2026. Milo shut down Jan 2026. Maple is winding down Dec 2026. And Simple AI — a YC company that shipped <em>literally this product</em> for consumers in Dec 2024 — raised $14M in Feb 2026 and used it to walk away from consumer entirely and sell voice agents into B2B, including debt collection.</p></div>
+      <div class="find"><p><strong>Our COGS are fine and our retention is the whole ballgame.</strong> Gross margin lands at 80–88% at $59–99/mo. But AI apps retain 36% worse than non-AI apps, and at benchmark retention with benchmark CAC this business has an LTV/CAC of ~0.9–1.5×. The infrastructure is not the risk. The churn is.</p></div>
+      <div class="find"><p><strong>The head of this market is being eaten in real time and the tail is not.</strong> On Aug 10, 2026 — eleven days ago — OpenTable, Resy and Yelp launched in-chat reservations inside ChatGPT. Google is rolling free agentic calling for home repair, beauty and pet care to all US users this summer. Anywhere a clean API exists, the platforms will own it for free. <strong>Where no API will ever exist — insurance appeals, school forms, pediatric intake, contractors, specialty medical, billing disputes — nobody is coming.</strong></p></div>
+    </div>
+
+    <div class="call">
+      <span class="lab">The recommendation</span>
+      <p>Go, but not at the product we described in the meeting. Run the test against the <em>long tail</em> positioning, price at $59–99 with the value denominated in dollars recovered rather than hours saved, and make <strong>week-8 retention the gate</strong>, not signup volume.</p>
+      <p class="big">That is the same play Blake ran at Watsco. Let them have the reservation. Go where they ain't.</p>
+    </div>
+  </section>
+
+  <section>
+    <p class="sec-n">§ 1</p>
+    <h2>Category: Concierge AI</h2>
+    <p><strong>Blake's call, and we're running with it.</strong> One flag, one mitigation, then we move on.</p>
+
+    <div class="defn">
+      <p class="core">Concierge AI is a persistent, permissioned agent that carries the cognitive labor of running a household and a career — anticipating what needs to happen, deciding among options, transacting with the outside world by phone and email, and monitoring until it's done.</p>
+      <p>Unlike a <strong>chatbot</strong>, it isn't summoned; it holds continuous context across a family's calendars, inboxes and commitments and initiates without being prompted.</p>
+      <p>Unlike a <strong>scheduling tool</strong>, it doesn't display and de-conflict a calendar you maintain; it <em>makes the calls</em> — to the pediatrician, the dealership, the insurer, the school — completes the paperwork, confirms, re-books, and resolves the conflict instead of surfacing it.</p>
+      <p>Unlike a <strong>human assistant</strong>, it runs continuously at software cost, holds every prior detail in durable memory, works across multiple household members at once, and requires no briefing overhead.</p>
+      <p class="unit">Its unit of work is not a message, a meeting, or an hour. It is a resolved obligation.</p>
+    </div>
+
+    <p><strong>The one flag on the name:</strong> "AI concierge" as a search term is currently dominated by hotel-tech. Nearly every top result is hotel front-desk software. Straight SEO spend on the bare phrase gets donated to that category.</p>
+    <p><strong>Mitigation, not a rename:</strong> own <strong>"Concierge AI"</strong> as the brand-level category (capital C, capital A, as a proper noun — the way "Sales AI" works), and buy the demand under the terms people actually search: <em>AI personal assistant, AI executive assistant, life admin, AI that makes phone calls for you</em>. Those are capture pages that funnel to the Concierge AI positioning. We name the category; we rent the traffic.</p>
+
+    <h3>The vocabulary that goes in ads and landing pages</h3>
+    <p>These have real provenance and they test well because people already use them about themselves.</p>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Phrase</th><th>Source / provenance</th><th>Use it for</th></tr></thead>
+        <tbody>
+          <tr><td>"Life admin"</td><td>Elizabeth Emens, Columbia Law, <em>Life Admin</em> (2019). Owned commercially only by Duckbill.</td><td>Gender-neutral, professional-compatible. <strong>Our lead phrase.</strong></td></tr>
+          <tr><td>"Mental load"</td><td>Emma, <em>You Should've Asked</em> (2017), viral comic → book</td><td>Highest recognition among the family audience. High resonance, zero ownership.</td></tr>
+          <tr><td>"Cognitive labor"</td><td>Daminger, <em>American Sociological Review</em> (2019)</td><td>This is our product architecture <em>and</em> our ad copy.</td></tr>
+          <tr><td>"The anticipation gap"</td><td>Coined independently twice in May 2026, unowned</td><td>The mechanism term. Explains why we're not a chatbot. Free to take.</td></tr>
+          <tr><td>"The second shift"</td><td>Hochschild (1989)</td><td>One use, in a manifesto or founder letter. Too academic for performance ads.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p><strong>The Daminger framework is worth internalizing.</strong> Cognitive labor breaks into four parts: <em>anticipating</em> needs, <em>identifying</em> options, <em>deciding</em>, and <em>monitoring</em> to completion. Women disproportionately carry <strong>anticipation and monitoring</strong> — and those are precisely the two components that no software has ever touched. Calendars do identification and decision support. Nothing anticipates. Nothing monitors.</p>
+
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Cognitive labor component</th><th>Chatbot</th><th>Scheduling tool</th><th>Human VA</th><th>Concierge AI</th></tr></thead>
+        <tbody>
+          <tr><td>Anticipation</td><td class="no">✗</td><td class="no">✗</td><td class="part">partial (needs briefing)</td><td class="yes">core</td></tr>
+          <tr><td>Identification</td><td class="yes">✓ if asked</td><td class="no">✗</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+          <tr><td>Decision</td><td class="part">advisory</td><td class="part">de-confliction only</td><td class="yes">✓ delegated</td><td class="yes">✓ within policy</td></tr>
+          <tr><td>Monitoring</td><td class="no">✗</td><td class="part">reminders only</td><td class="yes">✓</td><td class="yes">core</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tcap">The product spec and the positioning grid in one.</p>
+
+    <div class="call">
+      <span class="lab">The single best citation we have</span>
+      <p>Weeks, Kowalewska &amp; Ruppanner, <em>Socius</em>, Oct 2025, n=2,133 partnered US parents: <strong>women's employment and earnings reduce their physical household labor but not their cognitive burden.</strong> High-earning mothers carry identical mental load to lower-earning ones. Mothers report responsibility for 13.72 cognitive tasks vs fathers' 8.18 — 68% more.</p>
+      <p>Read that again, because it's the whole thesis: <strong>you can already buy your way out of the physical labor.</strong> Nannies, cleaners, meal kits, Instacart — a $2,250–5,900/month market that works. There is no product that buys you out of the cognitive layer.</p>
+    </div>
+  </section>
+
+  <section>
+    <p class="sec-n">§ 2</p>
+    <h2>The graveyard — read this before Monday</h2>
+    <p>This is the part I'd want to know before spending a dollar. Every serious attempt at this exact product has died or fled in the last 14 months.</p>
+
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Company</th><th>Backing</th><th>Price</th><th>Outcome</th></tr></thead>
+        <tbody>
+          <tr><td>Yohana</td><td>Panasonic</td><td>launched $149–249/mo</td><td><strong>Shut down Jan 30, 2026.</strong> 4.5 years, ~140 employees, 3,000 families, 50,000 tasks completed, claimed 8–10 hrs/wk saved. Led by Yoky Matsuoka (ex-Google X). Panasonic cited "a comprehensive assessment of the business environment."</td></tr>
+          <tr><td>Milo</td><td>OpenAI-backed (Converge)</td><td>—</td><td><strong>Shut down Jan 2026.</strong> Founder Avni Patel Thompson: <em>"The technology is simply too early to be reliable in any useful way… promising demos but disappointing production and scale."</em> And: <em>"Too early is still wrong."</em></td></tr>
+          <tr><td>Maple</td><td>ex-Shopify execs</td><td>$3–5/mo</td><td>Team acqui-hired by Wander July 2026. <strong>Service dies Dec 31, 2026</strong>; family data deleted.</td></tr>
+          <tr><td>Poke (Interaction Co.)</td><td>$25M, General Catalyst, $300M post</td><td>—</td><td>100M+ messages in 3 months. <strong>Acquired by Cognition July 2026.</strong> Co-founder: it <em>"had been expensive to run, making it difficult to turn a profit."</em></td></tr>
+          <tr><td>Simple AI</td><td>YC S24, then $14M Feb 2026</td><td>consumer app</td><td><strong>Built our exact product.</strong> Their own copy: <em>"can make AI powered phone calls on your behalf… wait on hold and navigate phone trees."</em> Shipped Dec 2024. <strong>Raised $14M Feb 2026 and pivoted entirely to B2B voice agents for sales, support and debt collection.</strong> No consumer product on their site today.</td></tr>
+          <tr><td>Facebook M</td><td>Meta</td><td>—</td><td>Dead Jan 2018. Humans handled ~70% of requests. Never scaled economically.</td></tr>
+          <tr><td>Hello Alfred</td><td>$40M Series B</td><td>—</td><td>Consumer in-home concierge → pivoted to B2B multifamily property partnerships.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p><strong>The pattern, stated plainly:</strong> not one of these died from lack of demand. They died from (a) human labor economics at consumer price points — M, Yohana, Alfred; (b) reliability collapse from over-broad scope — Milo; or (c) consumer CAC/retention that didn't clear — Poke, Simple AI.</p>
+
+    <div class="call warn">
+      <span class="lab">Simple AI is the one that should keep us honest</span>
+      <p>They are not a cautionary tale about the idea. They built it, ran it ~14 months with YC's backing and real users, and then their investors funded them to leave — for the <em>exact adjacent segment we were also considering yesterday</em>, including debt collection. Either consumer CAC/retention didn't work, or B2B ACVs were 100× better. <strong>Finding out which is the highest-value phone call anyone on this team can make next week.</strong></p>
+      <p>We are the fourth entrant to this idea in 24 months. The prior three are gone. That doesn't kill it — the AI-native cost structure genuinely didn't exist when Yohana launched in 2021 — but <strong>the burden of proof sits on us, and "we can do it cheaper because it's AI" is a cost-side answer to what looks like a demand-side failure.</strong></p>
+    </div>
+  </section>
+
+  <section>
+    <p class="sec-n">§ 3</p>
+    <h2>Who's actually in the space — and the empty intersection</h2>
+
+    <h3>The hypothesis test</h3>
+    <p>Blake's hypothesis was: <em>nobody combines (1) outbound voice that completes real tasks + (2) shared multi-person household coordination + (3) enterprise-grade security.</em></p>
+    <p><strong>Verified across ~60 products. It holds. Nothing has two green cells.</strong></p>
+
+    <div class="scroll">
+      <table>
+        <thead><tr><th></th><th>(1) Outbound task voice</th><th>(2) Multi-person household</th><th>(3) Enterprise-grade security</th></tr></thead>
+        <tbody>
+          <tr><td>Google (Ask for Me / I/O 2026)</td><td class="yes">✅ narrow verticals, free</td><td class="no">✗</td><td class="yes">✅ but no consumer contract</td></tr>
+          <tr><td>Alexa+ ($19.99/mo, free w/ Prime)</td><td class="no">✗ API-only bookings</td><td class="part">⚠ device-account, not person</td><td class="part">⚠</td></tr>
+          <tr><td>ChatGPT ($20–200/mo)</td><td class="no">✗ browser agent, no calls</td><td class="part">⚠ <strong>hiring for it</strong></td><td class="part">⚠</td></tr>
+          <tr><td>Ohai.ai ($9.99–29.99/mo)</td><td class="no">✗ text/email/scan only</td><td class="yes">✅ "Circles," cross-household</td><td class="no">✗</td></tr>
+          <tr><td>Duckbill ($49–350/mo)</td><td class="part">⚠ humans make the calls</td><td class="no">✗</td><td class="no">✗</td></tr>
+          <tr><td>Assindo ($20–70/mo)</td><td class="yes">✅ inbound + outbound</td><td class="no">✗</td><td class="no">✗</td></tr>
+          <tr><td>HeyRobyn ($25/mo)</td><td class="yes">✅</td><td class="no">✗</td><td class="no">✗</td></tr>
+          <tr><td>Skylight / Hearth / Cozi ($3–7/mo)</td><td class="no">✗</td><td class="yes">✅</td><td class="no">✗</td></tr>
+          <tr><td>Simple AI</td><td class="part">✅ → left consumer</td><td class="no">✗</td><td class="yes">✅ now B2B</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tcap">An independent 2026 survey of 45 AI assistants: "None of the 45 products listed explicitly mention the capability to make outbound phone calls on behalf of users." A separate 68-company voice-agent market map found 64 of 68 target business operations.</p>
+
+    <h3>But here's where the hypothesis is weaker than it looks</h3>
+    <p><strong>Pillar (2) is a commodity, not a differentiator.</strong> Ohai already ships cross-household shared coordination — divorced parents, grandparents, nannies — at $29.99/mo, run by Care.com's founder with a celebrity-mother cap table. Cozi claims 12M users at $39/<em>year</em>. There are a dozen free family calendar apps. <strong>If our pitch includes "and a shared family calendar," we're competing with free.</strong> Household coordination is our retention substrate and our data moat. It is not the wedge.</p>
+    <p><strong>Pillar (1) has a half-life of about 12 months.</strong> DialMCP launched a hosted MCP server that places compliant calls from the user's own verified caller ID, with system-enforced AI disclosure, calling-window limits and DNC handling — <strong>free during pilot</strong>. AgentPhone (YC) and AgentCall are commoditizing agent phone numbers. Voice COGS are already $0.06/min. Anyone can bolt outbound calling onto a family app by Q2 2027. <strong>What's defensible isn't "we can call" — it's "we know Dr. Chen's office needs the insurance card number and the pre-visit form 48 hours ahead, and that Maya's soccer runs long on Thursdays."</strong> That's accumulated household state, not voice capability.</p>
+    <p><strong>Pillar (3) does not sell to consumers.</strong> There is no evidence any parent has ever chosen a household assistant on security grounds. SOC 2 sells to procurement. It becomes decisive only in a <strong>B2B2C channel</strong> — see §6.</p>
+
+    <h3>The actual whitespace, narrowed</h3>
+    <p>Every consumer call product is either <strong>inbound-only</strong> (Pixel Call Assist, Robokiller, Truecaller — free to ~$5/mo) or <strong>outbound-only</strong> (Google, HeyRobyn). Only Assindo does both, for one person, with no household model and no security story.</p>
+    <div class="call">
+      <span class="lab">Nobody closes the loop</span>
+      <p>Your agent calls the dentist to book. The dentist's office calls back to confirm. Your agent answers <em>that</em> call, recognizes the context, confirms, and writes it to the family calendar so your spouse sees it without being told.</p>
+      <p class="big">Outbound + inbound + shared memory. One agent, one number, one context.</p>
+    </div>
+
+    <h3>The two clocks running against us</h3>
+    <p><strong>Aug 10, 2026 — eleven days ago:</strong> OpenAI's release notes announce restaurant reservations in ChatGPT with <strong>OpenTable (worldwide), Resy (US) and Yelp (US/Canada)</strong>, on all plans. Discovery and availability are in-chat; the final booking still hands off to the provider today, and the Apps SDK spec lists full in-chat completion as a near-term expansion. <strong>The single most demo-able use case for a consumer calling agent just got absorbed into a product 900M people already use, at no incremental cost — and the hand-off is closing, not widening.</strong></p>
+    <p><strong>Summer 2026:</strong> Google expanded agentic calling at I/O (May 19) to <strong>home repair, beauty and pet care</strong>. Business calling is rolling out <strong>free to all US Search users</strong>, with higher limits for AI Pro and Ultra. Google has Search, Android, and — per Google Cloud's CEO — <strong>Gemini-powered Siri later this year.</strong></p>
+    <p>Restaurants are also legislating against agent calls: New York's Restaurant Reservation Anti-Piracy Act fines up to $1,000/violation/day; Philadelphia followed; Illinois is moving. Reservation bots drove no-show rates 4× higher than legitimate diners.</p>
+    <div class="call warn">
+      <span class="lab">Conclusion</span>
+      <p class="big">Every category with a clean API is going to the platforms, for free. Plan accordingly.</p>
+    </div>
+  </section>
+
+  <section>
+    <p class="sec-n">§ 4</p>
+    <h2>Segment definition and sizing</h2>
+    <p>Blake's scope: <em>wide — families of prosumers and busy professionals who want enterprise-grade life concierge management.</em> Here's what that actually is, bottom-up from Census CPS ASEC 2025 and BLS 2025 — verified from source spreadsheets, not analyst reports.</p>
+
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Segment</th><th class="num">Households</th><th>Verified?</th></tr></thead>
+        <tbody>
+          <tr><td>All US households</td><td class="num">134.8M</td><td><span class="chip go">Census HINC-06</span></td></tr>
+          <tr><td>Households $150k+</td><td class="num">35.2M (26.1%)</td><td><span class="chip go">Verified</span></td></tr>
+          <tr><td>Households $200k+</td><td class="num">21.5M (16.0%)</td><td><span class="chip go">Verified</span></td></tr>
+          <tr><td>Families with children &lt;18, income $150k+</td><td class="num">12.8M</td><td><span class="chip go">Census FINC-03</span></td></tr>
+          <tr><td>Families with children &lt;18, income $200k+</td><td class="num">8.2M</td><td><span class="chip go">Verified</span></td></tr>
+          <tr><td>Dual-earner married-couple families with children &lt;18</td><td class="num">15.0M</td><td><span class="chip go">BLS Table 4</span></td></tr>
+          <tr><td><strong>Tier A beachhead: dual-earner + kids + $150k+</strong></td><td class="num"><strong>~7.9M ± 0.8M</strong></td><td><span class="chip work">Estimate</span></td></tr>
+          <tr><td>Solo professionals $150k+</td><td class="num">2.9M</td><td><span class="chip go">Verified</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tcap">Tier A is an estimate because Census discontinued the exact cross-tab after 2017.</p>
+
+    <h3>Two findings that should change how we scope this</h3>
+    <p><strong>The solo-professional leg is a rounding error.</strong> One-person households are 29% of all US households (39.7M) but only <strong>7.3% of them earn $150k+ — 2.9M</strong>. And they generate a fraction of the life-admin volume: no shared calendar, no kids' activities, no dependent intake paperwork. George's use case is real and I feel it too, but it is not a second growth leg. <strong>Lead family, reach solo.</strong></p>
+    <p><strong>The honest time-savings number is much smaller than the pitch wants.</strong> BLS American Time Use Survey 2025: "household management" is <strong>0.17 hours/day</strong> population-wide — 10 minutes — with only 18.6% of people doing any on a given day. "Telephone calls, mail and email" adds ~11 min/day. Total addressable time sink by the government's own diary instrument: <strong>~20–25 min per adult per day</strong>, roughly 2.5 hrs/week.</p>
+    <p>Meanwhile the Skylight/Harris survey that everyone cites claims parents spend <strong>30.4 hrs/week</strong> on family scheduling. That survey sells family calendars, and its internal math doesn't close (primary caregivers claim 75% of the load, non-primary claim 56% — 131%).</p>
+
+    <div class="call warn">
+      <span class="lab">Messaging constraint</span>
+      <p>Use ATUS for sizing. Use Skylight for felt pain and messaging only. And <strong>never put "saves you 10 hours a week" on a landing page</strong> — it's contradicted by federal data and it's the kind of claim that gets torn apart in a comment section.</p>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="stat-n">17.5</div><div class="stat-l">weekly communications a family receives about kids' activities</div></div>
+      <div class="stat"><div class="stat-n">11.5</div><div class="stat-l">weekly activities per child</div></div>
+      <div class="stat"><div class="stat-n">$11.3B</div><div class="stat-l">theoretical ceiling at 100% penetration — a sanity bound, nothing more</div></div>
+    </div>
+  </section>
+
+  <section>
+    <p class="sec-n">§ 5</p>
+    <h2>Unit economics — the good news and the bad news</h2>
+
+    <h3>The good news: COGS work</h3>
+    <p>Full 2026 cost stack, built from published vendor pricing. Blended household (50% low / 35% medium / 15% heavy usage).</p>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Price</th><th class="num">Blended COGS</th><th class="num">Gross profit</th><th class="num">Gross margin</th></tr></thead>
+        <tbody>
+          <tr><td>$39/mo</td><td class="num">$10.26</td><td class="num">$28.74</td><td class="num">73.7%</td></tr>
+          <tr><td>$59/mo</td><td class="num">$10.98</td><td class="num">$48.02</td><td class="num"><strong>81.4%</strong></td></tr>
+          <tr><td>$99/mo</td><td class="num">$12.42</td><td class="num">$86.58</td><td class="num"><strong>87.5%</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tcap">Voice is $0.072/min all-in ($0.060 compute + $0.012 telephony). A medium household burns ~51 voice minutes/month. This is genuinely cheap.</p>
+
+    <h4>Four cost findings that matter</h4>
+    <ol>
+      <li><strong>Vendor stack choice is worth 3× on margin.</strong> Self-hosted (LiveKit OSS + Deepgram + Haiku + Telnyx) = $0.030/min. Premium managed (Vapi + ElevenLabs v3 + frontier LLM) = $0.149/min. At heavy usage that's the difference between 67% and <strong>−5%</strong> gross margin at $39.</li>
+      <li><strong>Background monitoring is the silent killer.</strong> Naïve 15-minute polling costs $5.62–11.88/household/month — 14–30% of a $39 plan — <em>for households that never place a call</em>. Event-driven Gmail/Calendar <code>watch</code> + a nano-class triage gate + prompt caching brings it to ~$3.80. <strong>This is a week-one architecture decision that determines whether the business works.</strong> George — this one's yours.</li>
+      <li><strong>Adverse selection is structural.</strong> Breakeven talk time is 7.4 hrs/mo at $39, 12 hrs/mo at $59. One subscriber who has the agent sit on hold with an insurer for 90 minutes burns $6.48 in a single call — 17% of a $39 month. <strong>The users who most value delegating a 90-minute hold are the users who destroy the economics.</strong> Ship metered tiers or a hard fair-use cap from launch. Never ship "unlimited."</li>
+      <li><strong>Google API access is free today and is an unhedged liability.</strong> Gmail and Calendar have published, <em>non-raisable</em> daily thresholds and explicit statements that billing arrives "later in 2026 with 90 days' notice." Ceiling is ~64,000 households per Cloud project on Gmail, ~20,000 on Calendar. Architect for multi-project sharding from day one.</li>
+    </ol>
+
+    <p><strong>Compliance is cheaper than folklore says.</strong> The "$50,000 Google CASA assessment" number circulating in this space is a myth — actual Google-empanelled assessor pricing is <strong>$540–$1,800/yr (Tier 2), from ~$4,500/yr (Tier 3)</strong>. Note $4,500 is TAC Security's list price as Google's low-cost partner; other labs run $5–8k+ for Tier 3. Total compliance run-rate (SOC 2 + CASA + counsel) is ~$77k/yr — $0.64/household/month at 10k subs, $0.06 at 100k. <strong>But it's a hard floor before subscriber #1, which is what makes sub-10,000-subscriber scale structurally unprofitable.</strong></p>
+    <p><em>Scope-minimization lever worth an explicit architecture decision:</em> Calendar scopes are classified <em>sensitive</em>; Gmail read/modify are <em>restricted</em> and are what pull us into CASA plus annual re-audit. If email coordination can ship on a forwarding address or <code>gmail.metadata</code>, the CASA obligation may be avoidable entirely.</p>
+
+    <h3>The bad news: retention is the whole business</h3>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Benchmark</th><th>Figure</th><th>Source</th></tr></thead>
+        <tbody>
+          <tr><td>AI apps vs traditional, 12-month retention</td><td><strong>36% worse</strong></td><td>RevenueCat SoSA 2026, 115k+ apps</td></tr>
+          <tr><td>AI app 12-mo payer retention (monthly plans)</td><td>6.1% vs 9.5% non-AI</td><td>same</td></tr>
+          <tr><td>AI app annual retention</td><td>21.1% vs 30.7% non-AI</td><td>same</td></tr>
+          <tr><td>Trial→paid, hard paywall @ D35</td><td>10.7% median (freemium: 2.1%)</td><td>same</td></tr>
+          <tr><td>AI apps trial→paid</td><td>8.5% vs 5.6% non-AI (+52%)</td><td>Creem</td></tr>
+          <tr><td>US households paying for <em>any</em> AI</td><td><strong>~2–3%</strong>, avg $20/mo lasting 7 months</td><td>BofA Institute; PNC</td></tr>
+          <tr><td>Fully-loaded CAC per paid install, productivity</td><td>$2 / <strong>$6</strong> / $14</td><td>SemNexus 2026</td></tr>
+          <tr><td>Meta all-industry CPA</td><td><strong>$38.19</strong>, up 38% YoY</td><td>2026 benchmarks</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="call warn">
+      <span class="lab">The AI subscription paradox</span>
+      <p class="big">AI products acquire better and monetize better per user, and retain far worse. Novelty converts. Habit doesn't form.</p>
+    </div>
+
+    <p><strong>Derived CAC per paying household: $120 low / $250 expected / $450 high.</strong> I'd discount toward the high end for this product specifically — onboarding demands a phone number, Gmail OAuth <em>and</em> Calendar OAuth before first value, which is a heavier trust wall than any app in the benchmark cohort.</p>
+
+    <div class="scroll">
+      <table>
+        <thead><tr><th>CAC</th><th class="num">Payback</th><th class="num">LTV @ 8-mo payer life</th><th class="num">LTV/CAC</th></tr></thead>
+        <tbody>
+          <tr><td>$120</td><td class="num">2.5 mo</td><td class="num">$384</td><td class="num p">3.2×</td></tr>
+          <tr><td><strong>$250 (expected)</strong></td><td class="num">5.2 mo</td><td class="num">$384</td><td class="num i">1.54×</td></tr>
+          <tr><td>$450</td><td class="num">9.4 mo</td><td class="num">$384</td><td class="num k">0.85× — value-destroying</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tcap">At $39/mo: expected CAC → 8.7-month payback, LTV/CAC 0.92×. And 8 months of payer life is generous — the AI-app benchmark implies ~5 months, dropping LTV/CAC at $59 to 0.96×.</p>
+
+    <div class="call warn">
+      <span class="lab">Bottom line</span>
+      <p class="big">Gross margin at 80–88% is not the problem. The model breaks on CAC and retention. $39 doesn't work. $59 is the floor. $99 is where the model is comfortable.</p>
+    </div>
+
+    <h3>The pricing insight that reconciles everything</h3>
+    <p>Look at what's alive and what's dead, and the pattern isn't about features — <strong>it's about whether the value is denominated in dollars or in convenience.</strong></p>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Framing</th><th>Price band</th><th>Examples</th></tr></thead>
+        <tbody>
+          <tr><td>Convenience ("save time, reduce stress")</td><td>$5–30/mo</td><td>Ohai $9.99–29.99 · Assindo $20–70 · Skylight $6.58 · Cozi $3.25 · Hearth $7.20</td></tr>
+          <tr><td>Measurable dollars recovered</td><td><strong>$100–292/mo</strong></td><td><strong>Pine AI $99.90 / $174.90 / $291.60</strong> billed annually — negotiate bills, cancel subscriptions, dispute charges. Metered by credits. <span class="chip go">Alive and growing</span></td></tr>
+          <tr><td>The death zone</td><td>$149–249/mo selling time</td><td><strong>Yohana.</strong> <span class="chip stop">Dead</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>Duckbill runs $49 / $99 / $169 / $350 with <em>humans</em> doing the work (200+ trained operators, ~4–20 tasks/mo depending on tier) — that's the price ladder at which a life-admin product is currently alive, and it's a human-labor gross margin business. <strong>Our AI-native argument is that we serve the $99–169 band at 87% software margin where Duckbill serves it at labor margin.</strong> That's the real business.</p>
+    <p><strong>But we only get to charge $99 if the customer can point at a number.</strong> "It found the $340 duplicate charge on your insurance EOB and got it reversed" prices at $99. "It saved you time" prices at $19 and churns in seven months.</p>
+  </section>
+
+  <section>
+    <p class="sec-n">§ 6</p>
+    <h2>Sales AI's right to win</h2>
+    <p>Honest inventory.</p>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Requirement</th><th>Our position</th></tr></thead>
+        <tbody>
+          <tr><td><span class="dot g"></span>Full-duplex outbound voice at production quality</td><td><strong>Core competence.</strong> This is the whole company.</td></tr>
+          <tr><td><span class="dot g"></span>Inbound call handling / screening</td><td>We already do this for businesses</td></tr>
+          <tr><td><span class="dot g"></span>Telephony + number provisioning at scale</td><td>Existing</td></tr>
+          <tr><td><span class="dot g"></span>SOC 2 Type II</td><td><strong>Already in hand.</strong> No consumer competitor has this.</td></tr>
+          <tr><td><span class="dot g"></span>Compliance function + audit discipline</td><td>Existing — genuinely rare in consumer AI</td></tr>
+          <tr><td><span class="dot y"></span>Calendar + email connectors</td><td>Exist for B2B; consumer OAuth + CASA is different work</td></tr>
+          <tr><td><span class="dot y"></span>MCP integration</td><td>Exists, but not as a consumer front-end</td></tr>
+          <tr><td><span class="dot g"></span>~18 deployable agent types</td><td>Reusable across the task taxonomy</td></tr>
+          <tr><td><span class="dot r"></span><strong>Shared multi-person household state model</strong></td><td><strong>Doesn't exist. Has to be built.</strong> This is the moat and the work.</td></tr>
+          <tr><td><span class="dot r"></span><strong>Proactive/anticipatory monitoring layer</strong></td><td>Doesn't exist. Event-driven architecture, week-one decision.</td></tr>
+          <tr><td><span class="dot r"></span>Consumer-grade onboarding (&lt;15 min to first value)</td><td>George's point stands: the product is too complex today</td></tr>
+          <tr><td><span class="dot r"></span>Consumer PLG / self-serve billing</td><td>Doesn't exist</td></tr>
+          <tr><td><span class="dot r"></span>Consumer brand, creator/UGC motion</td><td>Doesn't exist</td></tr>
+          <tr><td><span class="dot r"></span>Consumer CAC competence</td><td><strong>Unproven. This is the real risk.</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p><strong>What we have that the consumer field doesn't:</strong> production voice reliability, SOC 2, a compliance function, and B2B-grade audit discipline. In a market where the FCC brought AI-generated voices under TCPA in Feb 2024, where roughly a dozen states require all-party consent to record phone calls — CA, CT, DE, FL, IL, MD, MA, MT, NV, NH, PA, WA, with Michigan contested and Connecticut's requirement arising under its civil statute — covering about a third of the US population and our densest target markets, and where a Chicago company settled at $4.2M for recording 5,000 calls without consent — <strong>a two-person YC startup cannot safely ship this and we can.</strong></p>
+    <p><strong>What we don't have is the thing that actually kills consumer companies: the ability to acquire and retain a consumer cheaply.</strong> That is exactly what the test in §7 exists to find out, and it should be the only thing we're trying to learn.</p>
+
+    <h3>George's question — "do we have a way in?"</h3>
+    <p>It's the right question and it has a good answer. <strong>The B2B2C channel is where our SOC 2 stops being decoration and starts being the reason we win</strong>, and it happens to be the motion we already know how to run.</p>
+    <ul>
+      <li><strong>Employers</strong> — a benefit. Megan's Slack analogy from the meeting was right: "the company buys it for all employees." A CHRO buying a mental-load benefit for working parents is a procurement conversation with a compliance review. That's our home turf.</li>
+      <li><strong>Concierge medicine / direct primary care</strong> — already sells "we handle it for you," already has patients paying $150–300/mo, already needs HIPAA-adjacent rigor.</li>
+      <li><strong>Wealth management and family offices</strong> — clients already expect concierge service; the advisor needs a defensible vendor.</li>
+      <li><strong>Watsco-style distribution partners</strong> — the same long-tail logic Blake ran: find the aggregator sitting on 100,000+ relationships nobody is serving with an offer.</li>
+    </ul>
+    <div class="call">
+      <span class="lab">The real strategic point</span>
+      <p class="big">Consumer PLG is how we validate the product. B2B2C may be how we actually distribute it.</p>
+      <p>And it means we don't have to win a paid-acquisition war against OpenAI's brand — which we would lose.</p>
+    </div>
+  </section>
+
+  <section>
+    <p class="sec-n">§ 7</p>
+    <h2>The credible test</h2>
+    <p>Blake's ask in the meeting was bigger than this one segment: <em>"can I design the framework of what a credible test would be… a wave that we continuously go through to keep pushing into new TAMs."</em> So this is written twice — the reusable gate structure, then this segment instantiated in it.</p>
+
+    <h3>7.1 · The reusable framework: five gates</h3>
+    <p>Every segment we ever consider runs the same gauntlet. Each gate has a <strong>kill / iterate / promote</strong> threshold set <em>before</em> the test runs. No opinions after the fact.</p>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Gate</th><th>Question</th><th>Instrument</th><th>Duration</th><th class="num">Cost</th></tr></thead>
+        <tbody>
+          <tr><td>1. Signal</td><td>Does this pain exist at volume, and does anyone pay for relief today?</td><td>Desk research + 15 customer interviews</td><td>1 wk</td><td class="num">~$0</td></tr>
+          <tr><td>2. Story</td><td>Can we say it in a way that makes a stranger stop?</td><td>12–20 ad creatives × 3 message angles</td><td>1 wk</td><td class="num">$3–5k</td></tr>
+          <tr><td>3. Sell</td><td>Will they enter a credit card at our price, before the product exists?</td><td>Real Stripe checkout → waitlist, refund immediately</td><td>2–3 wks</td><td class="num">$12–20k</td></tr>
+          <tr><td>4. Stick</td><td>Do they still use it at week 8?</td><td>Concierge MVP, humans behind the curtain, 25–50 households</td><td>8–12 wks</td><td class="num">$30–60k</td></tr>
+          <tr><td>5. Scale</td><td>Does CAC hold as we spend 10×?</td><td>Channel expansion</td><td>8 wks</td><td class="num">$100k+</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="call warn">
+      <span class="lab">The discipline that makes this different</span>
+      <p><strong>Gate 3 is not the finish line.</strong> Almost everybody stops at "people entered a card, validated!" — and that is exactly the mistake that produced Poke, Milo and Simple AI's exit. <strong>Gate 4 is the gate.</strong> Blake's line in the meeting — <em>"until we let data come back to us to validate, none of it means shit"</em> — applies hardest to the data that takes eight weeks to arrive.</p>
+    </div>
+
+    <h3>7.2 · This segment, instantiated</h3>
+
+    <div class="gate">
+      <div class="gate-h"><span class="n">Gate 2 · Week 1</span><h4>Story</h4></div>
+      <p>Three message angles, tested head-to-head.</p>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Angle</th><th>Copy direction</th><th>Hypothesis</th></tr></thead>
+          <tbody>
+            <tr><td>A. Dollars recovered</td><td>"It found the $340 you were overcharged and got it back."</td><td>Prices at $99. Pine AI proves it.</td></tr>
+            <tr><td>B. The cognitive layer</td><td>"You already outsourced the cleaning. Nobody's ever taken the <em>remembering</em>."</td><td>Weeks et al. thesis. Highest defensibility, unproven in market.</td></tr>
+            <tr><td>C. Closed loop</td><td>"It calls the dentist. The dentist calls back. It answers. Your husband sees it on the calendar."</td><td>Our actual whitespace. Best demo.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Kill any angle below 0.9% CTR. Promote the top two to Gate 3.</p>
+    </div>
+
+    <div class="gate">
+      <div class="gate-h"><span class="n">Gate 3 · Weeks 2–4</span><h4>Sell</h4></div>
+      <p>Real landing → real Stripe checkout → card captured → immediate refund + waitlist confirmation ("we're releasing in 60–90 days, you're in the first cohort, you have not been charged"). Blake has run exactly this motion at Glow's Lighting.</p>
+      <p>Test matrix: 2 winning angles × 3 price points (<strong>$59 / $99 / $149</strong>) × 2 audiences (dual-income parents 35–54 $150k+; solo professional 30–45). <strong>Do not test $39.</strong> The economics say it can't clear CAC, so a $39 winner would be a false positive that costs us a year.</p>
+      <p>Budget: $15–20k paid media (Meta primary — this audience is there and CPM is $14.19; Google search on capture terms secondary), plus $3–5k UGC creative at ~$175/video.</p>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Metric</th><th>Kill</th><th>Iterate</th><th>Promote</th></tr></thead>
+          <tbody>
+            <tr><td>Landing → checkout start</td><td class="k">&lt;4%</td><td class="i">4–8%</td><td class="p">&gt;8%</td></tr>
+            <tr><td>Checkout start → card entered</td><td class="k">&lt;25%</td><td class="i">25–45%</td><td class="p">&gt;45%</td></tr>
+            <tr><td>CAC per card, at $99/mo</td><td class="k">&gt;$300</td><td class="i">$150–300</td><td class="p">&lt;$150</td></tr>
+            <tr><td>Price elasticity</td><td class="k">$59 wins by &gt;2×</td><td class="i">mixed</td><td class="p">$99 within 1.3× of $59</td></tr>
+            <tr><td>Can they name the task?</td><td class="k">vague</td><td class="i">mixed</td><td class="p">&gt;60% name a specific task</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>That last one matters more than it looks. If people sign up for a <em>feeling</em> rather than a <em>task</em>, they churn at week 6. Ask on the confirmation page: "What's the first thing you'd have it do?"</p>
+    </div>
+
+    <div class="gate">
+      <div class="gate-h"><span class="n">Gate 4 · Weeks 5–16</span><h4>Stick — this is the real test</h4></div>
+      <p>Take 25–50 of the Gate 3 cards, charge them for real, and deliver with <strong>humans behind the curtain plus our existing voice stack</strong> — Wizard of Oz. We are not building product yet. We are measuring whether a household that has this for eight weeks still wants it.</p>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Metric</th><th>Kill</th><th>Iterate</th><th>Promote</th></tr></thead>
+          <tbody>
+            <tr><td>Week-4 active (≥1 task)</td><td class="k">&lt;60%</td><td class="i">60–75%</td><td class="p">&gt;75%</td></tr>
+            <tr><td><strong>Week-8 active</strong></td><td class="k">&lt;45%</td><td class="i">45–65%</td><td class="p">&gt;65%</td></tr>
+            <tr><td>Tasks/household/month by week 8</td><td class="k">&lt;3</td><td class="i">3–6</td><td class="p">&gt;6</td></tr>
+            <tr><td>Voluntary churn, months 1–2</td><td class="k">&gt;20%/mo</td><td class="i">10–20%</td><td class="p">&lt;10%/mo</td></tr>
+            <tr><td>Task completion rate</td><td class="k">&lt;70%</td><td class="i">70–85%</td><td class="p">&gt;85%</td></tr>
+            <tr><td>Would-be-very-disappointed (Sean Ellis)</td><td class="k">&lt;25%</td><td class="i">25–40%</td><td class="p">&gt;40%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Sub-10%/month churn is the number the entire business hangs on.</strong> At benchmark AI-app churn (~21%/mo) this is a value-destroying business at any price we can charge. At 8% it works. There is no third answer and no amount of Gate 3 enthusiasm substitutes for it.</p>
+      <p><strong>Data we should collect because it doesn't exist anywhere:</strong> how many admin calls a household actually places per month, and minutes on hold per call. There is no public dataset on this. Our beta cohort would generate genuinely proprietary market data — worth something in a fundraise regardless of the outcome.</p>
+    </div>
+
+    <div class="call">
+      <span class="lab">7.3 · Total</span>
+      <p class="big">~$50–85k and 16 weeks to a real answer.</p>
+      <p>Gates 2–4. Weekly readouts. Pre-committed thresholds. If Gate 3 fails we've spent $20k and three weeks to avoid a year.</p>
+    </div>
+  </section>
+
+  <section>
+    <p class="sec-n">§ 8</p>
+    <h2>Recommendation</h2>
+    <p><strong>Conditional go.</strong> Four conditions, all of which change what we test from what we described yesterday.</p>
+    <ol>
+      <li><strong>Price at $99, test $59 and $149 as boundaries. Never test $39.</strong> The economics say $39 doesn't clear CAC. A $39 winner is a false positive.</li>
+      <li><strong>Denominate value in dollars, not hours.</strong> Pine AI charges $99.90 because it produces an invoice. Yohana charged $249 for time and died. And the ATUS data means we cannot honestly claim big hour savings anyway.</li>
+      <li><strong>Position on the long tail, not the head.</strong> Restaurants and anything with a clean API belong to OpenAI and Google now, for free. Insurance appeals, school and camp paperwork, pediatric intake, contractors, specialty medical scheduling, billing disputes — no API will ever exist there, no platform will build one, and persistence through IVR trees and hold queues is exactly what we're good at. <strong>This is the Watsco play.</strong></li>
+      <li><strong>Make Gate 4 week-8 retention the decision</strong>, and don't let anyone declare victory at Gate 3.</li>
+    </ol>
+    <p><strong>And run the B2B2C channel discovery in parallel</strong> — 5 conversations with employers, concierge medicine practices and wealth advisors during the same 16 weeks. It costs nothing but calendar time, and it tests the one channel where our SOC 2 is worth something and where we don't have to outbid OpenAI for attention.</p>
+
+    <h3>Roles for Monday/Tuesday</h3>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Workstream</th><th>Owner</th><th>Question to answer</th></tr></thead>
+        <tbody>
+          <tr><td>Message &amp; creative</td><td>Megan</td><td>Which of the three angles survives? Can we write copy that makes a stranger stop, without the "10 hours a week" claim? Build the Gate 2 creative matrix.</td></tr>
+          <tr><td>Architecture &amp; feasibility</td><td>George</td><td>Event-driven vs polling (the $3.80 vs $11.88 decision). Can Gmail ship on non-restricted scopes to dodge CASA? What does the household state model actually look like? What's the shortest path to 15-minutes-to-first-value?</td></tr>
+          <tr><td>Economics, test design, channel</td><td>Blake</td><td>Lock the thresholds. Stand up the Gate 3 funnel. Start the B2B2C conversations. And make the Simple AI call.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <p class="sec-n">§ 9</p>
+    <h2>What we don't know, and shouldn't pretend to</h2>
+    <p>Flagging these so nobody puts them in a deck as facts.</p>
+    <ol class="unk">
+      <li><strong>Why Simple AI actually left consumer.</strong> Highest-value unknown in this document. One conversation closes it.</li>
+      <li><strong>Keyword volume.</strong> No public source gave real search volumes for any of these terms. 30 minutes in Ahrefs/Semrush on <em>AI personal assistant, life admin, AI that makes phone calls, mental load app</em> before committing media budget.</li>
+      <li><strong>Admin calls per household per month.</strong> No public dataset exists. Our usage model is derived from a German time-use study (n=617) and dental/medical call-duration proxies. Instrument the beta.</li>
+      <li><strong>Agent-call answer rates.</strong> 86% of calls from unknown numbers already go unanswered, and 46% of <em>legitimate</em> business calls go unanswered. Our agent calling from an unrecognized number inherits that problem. Unmeasured and material.</li>
+      <li><strong>Duckbill's actual health.</strong> $33M in Sept 2023, nothing since, domain migrated to <code>.one</code>. Three years on a Series A. Check headcount on LinkedIn.</li>
+      <li><strong>Ohai's paid conversion.</strong> "Thousands of families in beta" was the number in Aug 2025 and it's still the number. Their Aug 2025 round didn't disclose an amount.</li>
+      <li><strong>The Tier A sizing (~7.9M) is an estimate.</strong> Census discontinued the exact cross-tab in 2017. Everything else in §4 is verified.</li>
+      <li><strong>No visible community groundswell.</strong> I couldn't surface waitlists, Reddit threads or search-trend evidence of consumer demand for this. That's an unknown, not a negative — but the <em>absence</em> of any visible demand signal for a category this obvious, four years into the LLM era, deserves a minute of thought.</li>
+      <li><strong>Two-party consent is a product constraint, not just legal boilerplate.</strong> In the all-party-consent states, real-time transcription counts as recording, and guidance suggests a natural (non-AI) voice must request consent <em>before</em> the AI interaction begins. That's awkward for a fully autonomous agent and it needs a design answer, not a footnote. Note also that the standard 50-state surveys <strong>disagree with each other</strong> on Michigan, Connecticut and Oregon — don't let anyone treat "twelve states" as settled law. Get counsel before launch, not after.</li>
+      <li><strong>Verification note.</strong> Every load-bearing number in this document was re-checked against a primary source. Nothing came back wrong. Three got softened after checking: Yohana's price is <em>launch</em> pricing from 2021–22, not verified end-of-life pricing; ChatGPT's restaurant integration is in-chat <em>discovery</em> with a booking hand-off rather than full end-to-end booking (for now); and the all-party-consent state list is contested at the edges per above.</li>
+    </ol>
+  </section>
+
+  <section class="sources">
+    <h2>Sources</h2>
+
+    <h4>Category &amp; vocabulary</h4>
+    <p><a href="https://journals.sagepub.com/doi/10.1177/0003122419859007">Daminger, <em>ASR</em> 2019</a> · <a href="https://journals.sagepub.com/doi/10.1177/23780231251384527">Weeks, Kowalewska &amp; Ruppanner, <em>Socius</em> 2025</a> · <a href="https://link.springer.com/article/10.1007/s00737-024-01490-w">Aviv et al., <em>Archives of Women's Mental Health</em> 2025</a> · <a href="https://www.law.columbia.edu/news/archive/elizabeth-emens-invisible-work-everyday-life">Emens, <em>Life Admin</em></a> · <a href="https://menlovc.com/perspective/2025-the-state-of-consumer-ai/">Menlo Ventures, State of Consumer AI</a> · <a href="https://www.gartner.com/en/newsroom/press-releases/2025-10-20-gartner-identifies-the-top-strategic-technology-trends-for-2026">Gartner 2026 Trends</a> · <a href="https://www.cbinsights.com/research/ai-agent-market-map/">CB Insights AI Agent Market Map</a> · <a href="https://www.producthunt.com/categories/ai-chief-of-staff">Product Hunt: AI Chief of Staff</a> · <a href="https://natesnewsletter.substack.com/p/consumer-ai-anticipation-gap">Nate's Newsletter: the anticipation gap</a></p>
+
+    <h4>Competitive landscape</h4>
+    <p><a href="https://www.channelnews.com.au/panasonics-ai-ambitions-stumble-as-consumer-apps-hit-delays-and-closures/">Yohana shutdown</a> · <a href="https://www.geekwire.com/2022/yohana-expands-beyond-seattle-bringing-personal-assistant-service-for-families-to-los-angeles/">Yohana pricing, GeekWire</a> · <a href="https://joinmilo.substack.com/p/hellogoodbye">Milo shutdown — Avni Patel Thompson, Jan 12 2026</a> · <a href="https://alphamothers.com/resources/maple-family-assistant-shutting-down-alternatives">Maple shutdown</a> · <a href="https://www.businesswire.com/news/home/20260210526354/en/Simple-AI-Announces-$14M-from-First-Harmonic-and-Y-Combinator-to-Build-Voice-AI-Agents-That-Sell">Simple AI $14M / B2B pivot</a> · <a href="https://www.ycombinator.com/launches/MOM-simple-ai-ai-phone-assistant-for-consumers">Simple AI original YC consumer launch</a> · <a href="https://techcrunch.com/2026/07/24/why-cognition-bought-poke-ai-personality-is-becoming-a-competitive-advantage/">Cognition acquires Poke</a> · <a href="https://www.ohai.ai/how-it-works/">Ohai.ai pricing</a> · <a href="https://www.prnewswire.com/news-releases/ohaiai-raises-strategic-investment-led-by-muse-capital-celebrity-and-executive-mothers-to-save-parents-hours-of-mental-load-302533511.html">Ohai funding</a> · <a href="https://www.getduckbill.com/pricing">Duckbill pricing</a> · <a href="https://www.finsmes.com/2023/09/duckbill-raises-33m-in-seed-and-series-a-funding.html">Duckbill $33M</a> · <a href="https://www.19pine.ai/pricing">Pine AI pricing</a> · <a href="https://assindo.com/">Assindo pricing</a> · <a href="https://blog.google/products-and-platforms/products/search/search-io-2026/">Google Search at I/O 2026</a> · <a href="https://techcrunch.com/2025/01/30/googles-ask-for-me-feature-calls-businesses-on-your-behalf-to-inquire-about-services-pricing/">Google "Ask for Me"</a> · <a href="https://blog.google/products/pixel/pixel-call-assist-call-notes-tips/">Pixel Call Assist</a> · <a href="https://www.aboutamazon.com/news/devices/alexa-plus-international-launch">Alexa+ pricing</a> · <a href="https://help.openai.com/en/articles/11752874-chatgpt-agent">ChatGPT agent</a> · <a href="https://techcrunch.com/2026/07/11/openai-bets-on-families-as-chatgpt-goes-deeper-into-households/">OpenAI hiring for families</a> · <a href="https://help.openai.com/en/articles/6825453-chatgpt-release-notes">ChatGPT × OpenTable/Resy/Yelp — release notes, Aug 10 2026</a> · <a href="https://blog.yelp.com/news/yelp-chatgpt-integration/">Yelp's announcement</a> · <a href="https://developers.openai.com/apps-sdk/guides/restaurant-reservation-conversion-spec">Apps SDK restaurant reservation spec</a> · <a href="https://blog.google/products-and-platforms/products/search/deep-search-business-calling-google-search/">Google business calling rollout</a> · <a href="https://www.macrumors.com/2026/04/22/google-gemini-powered-siri-2026/">Gemini-powered Siri</a> · <a href="https://dialmcp.com/">DialMCP</a> · <a href="https://www.usecarly.com/blog/complete-list-ai-assistants-2026/">45-assistant survey</a> · <a href="https://agentvoice.com/blog/ai-voice-agents-funding-market-map/">68-company voice agent market map</a> · <a href="https://techcrunch.com/2018/01/08/facebook-is-shutting-down-its-standalone-personal-assistant-m/">Facebook M shutdown</a> · <a href="https://helloalfred.com/property-partners/">Hello Alfred B2B pivot</a></p>
+
+    <h4>Sizing &amp; demand</h4>
+    <p><a href="https://www.census.gov/data/tables/2025/demo/cps/hinc-06.html">Census HINC-06 2025</a> · <a href="https://www.census.gov/data/tables/time-series/demo/income-poverty/cps-hinc/hinc-01.html">Census HINC-01 2025</a> · <a href="https://www.census.gov/data/tables/time-series/demo/income-poverty/cps-finc/finc-03.html">Census FINC-03 2025</a> · <a href="https://www.bls.gov/news.release/famee.nr0.htm">BLS Employment Characteristics of Families 2025</a> · <a href="https://www.bls.gov/news.release/atus.t01.htm">BLS ATUS 2025 Table 1</a> · <a href="https://www.forbes.com/sites/kimelsesser/2024/07/29/what-is-parental-mental-load-managing-a-household-is-worth-38-trillion-in-economic-value-survey-says/">Skylight/Harris mental load survey</a> · <a href="https://www.care.com/c/how-much-does-child-care-cost/">Care.com 2026 Cost of Care</a> · <a href="https://www.pewresearch.org/internet/2026/06/17/americans-and-ai-2026-chatbots-smart-devices-and-views-on-impact/">Pew, Americans and AI 2026</a> · <a href="https://www.npr.org/2026/06/04/nx-s1-5791661/chatgpt-gemini-claude-subscription-revenue-openai">NPR on AI subscription penetration</a> · <a href="https://chainstoreage.com/accenture-customers-trust-ai-agents-perform-these-tasks-them">Accenture agentic commerce trust</a> · <a href="https://www.a16z.news/p/top-100-gen-ai-consumer-apps-march">a16z Top 100 Gen AI Consumer Apps</a></p>
+
+    <h4>Unit economics</h4>
+    <p><a href="https://www.revenuecat.com/state-of-subscription-apps">RevenueCat State of Subscription Apps 2026</a> · <a href="https://www.revenuecat.com/blog/growth/subscription-app-trends-benchmarks-2026">RevenueCat benchmarks</a> · <a href="https://www.creem.io/blog/ai-app-retention-paradox-churn-2026">Creem: the AI app retention paradox</a> · <a href="https://www.lennysnewsletter.com/p/monthly-churn-benchmarks">Lenny Rachitsky, churn benchmarks</a> · <a href="https://www.lennysnewsletter.com/p/what-is-a-good-free-to-paid-conversion">Lenny Rachitsky, free-to-paid conversion</a> · <a href="https://developers.openai.com/api/docs/pricing">OpenAI API pricing</a> · <a href="https://ai.google.dev/gemini-api/docs/pricing">Gemini API pricing</a> · <a href="https://deepgram.com/pricing">Deepgram pricing</a> · <a href="https://livekit.com/pricing">LiveKit pricing</a> · <a href="https://telnyx.com/pricing/elastic-sip">Telnyx SIP</a> · <a href="https://www.twilio.com/en-us/voice/pricing/us">Twilio voice US</a> · <a href="https://developers.google.com/workspace/gmail/api/reference/quota">Gmail API quota</a> · <a href="https://developers.google.com/workspace/calendar/api/guides/quota">Calendar API quota</a> · <a href="https://developers.google.com/identity/protocols/oauth2/production-readiness/restricted-scope-verification">Google restricted-scope verification</a> · <a href="https://deepstrike.io/blog/google-casa-security-assessment-2025">CASA cost reality</a> · <a href="https://sprinto.com/blog/soc-2-compliance-cost/">SOC 2 cost</a> · <a href="https://www.get-ryze.ai/blog/meta-ads-cost-benchmarks-by-industry-2026">Meta ads benchmarks 2026</a> · <a href="https://semnexus.com/the-2026-mobile-app-cac-benchmark-report-by-vertical">Mobile app CAC by vertical 2026</a> · <a href="https://influee.co/blog/ugc-price">UGC creator rates</a> · <a href="https://stripe.com/pricing">Stripe pricing</a></p>
+
+    <h4>Regulatory</h4>
+    <p><a href="https://www.henson-legal.com/ai-voice-compliance">FCC AI voice / TCPA</a> · <a href="https://leginfo.legislature.ca.gov/faces/billTextClient.xhtml?bill_id=201720180SB1001">California SB 1001</a> · <a href="https://legiscan.com/CA/text/AB2905/id/3022093">California AB 2905 text</a> · <a href="https://www.justia.com/50-state-surveys/recording-phone-calls-and-conversations/">Call recording laws by state — Justia</a> · <a href="https://www.recordinglaw.com/party-two-party-consent-states/">RecordingLaw's differing list</a> · <a href="https://blog.resy.com/newsroom/resy-and-partners-support-the-restaurant-reservation-anti-piracy-act/">Restaurant Reservation Anti-Piracy Act</a> · <a href="https://www.cooley.com/news/insight/2025/2025-10-21-ai-chatbots-at-the-crossroads-navigating-new-laws-and-compliance-risks">Cooley on 2026 chatbot disclosure laws</a></p>
+  </section>
+
+  <div class="foot">
+    <p>SalesAi segment investigation · prepared 21 August 2026 · internal.</p>
+    <p>Figures are sourced as cited above. The Tier A household estimate is modelled, not measured. Penetration and LTV figures are models, not forecasts. Status is as of 21 August 2026 and moving weekly.</p>
+  </div>
+
+</div>
+
+<script>
+  // Build the Claude hand-off link against wherever this page is actually hosted.
+  (function () {
+    var a = document.getElementById('claudeLink');
+    if (!a) return;
+    var md = new URL('concierge-ai-segment-dossier.md', window.location.href).href;
+    var prompt = 'Read this SalesAi segment investigation dossier on Concierge AI and help me work through it:\n'
+      + md + '\n\n'
+      + 'It covers the category definition, a graveyard of failed competitors, the competitive whitespace, '
+      + 'bottom-up sizing, unit economics, and a five-gate test plan. The recommendation is a conditional go. '
+      + 'Start by summarising the argument and the conditions, then stress-test the weakest parts of the case.';
+    a.href = 'https://claude.ai/new?q=' + encodeURIComponent(prompt);
+  })();
+</script>
+
+</body>
+</html>
