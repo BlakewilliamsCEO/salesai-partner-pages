@@ -237,6 +237,7 @@ function render(){
       +  '<p class="sub">We use this to issue your code and prepare your quote.</p>'
       +  '<label class="f"><span>Your name</span><input class="f" id="f_name" autocomplete="name" placeholder="First and last" value="'+esc(A.name)+'"></label>'
       +  '<label class="f"><span>Work email</span><input class="f" id="f_email" type="email" inputmode="email" autocomplete="email" placeholder="you@yourcompany.com" value="'+esc(A.email)+'"></label>'
+      +  '<label class="f"><span>Cell phone</span><input class="f" id="f_phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(555) 123-4567" value="'+esc(A.phone)+'"></label>'
       +  '<label class="f"><span>Company name</span><input class="f" id="f_company" autocomplete="organization" placeholder="Legal or trading name" value="'+esc(A.company)+'"></label>'
       +  '<label class="f"><span>Company address</span><textarea class="f" id="f_addr" autocomplete="street-address" placeholder="Street, city, state, ZIP">'+esc(A.address)+'</textarea></label>'
       +  '<div class="err" id="err"></div>';
@@ -342,6 +343,8 @@ nextB.addEventListener('click', function(){
     if(!A.name)    return showErr('We need a name for the quote.');
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(A.email)) return showErr('That email doesn’t look right.');
     if(/(gmail|yahoo|hotmail|outlook|icloud|aol)\./i.test(A.email)) return showErr('Please use your work email — the credit is issued to the business.');
+    A.phone = document.getElementById('f_phone').value.trim();
+    if(A.phone.replace(/\D/g,'').length < 10) return showErr('We need a mobile number we can reach you on.');
     if(!A.company) return showErr('Company name is required.');
     if(!A.address) return showErr('We need the company address for the quote.');
     save();
