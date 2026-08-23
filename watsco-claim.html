@@ -57,6 +57,7 @@ h1{margin:12px 0 0;font-size:clamp(28px,7.4vw,38px)}
 .opt.sel .tick{border-color:var(--mint);background:var(--mint)}
 .tick svg{opacity:0;transition:.14s ease}
 .opt.sel .tick svg{opacity:1}
+.opt.multi .tick{border-radius:6px}
 
 label.f{display:block;margin-top:18px}
 label.f span{display:block;font-size:12.5px;font-weight:600;letter-spacing:.4px;color:var(--mut);margin-bottom:8px}
@@ -147,24 +148,29 @@ var CAL_URL   = "https://cal.com/blake-williams-salesai/30min";
 var CHECK = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#06210F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
 
 var STEPS = [
-  {k:'q', id:'revenue', kicker:'Question 1 of 9', q:'Revenue in the last 12 months?',
+  {k:'q', id:'revenue', kicker:'Question 1 of 11', q:'Revenue in the last 12 months?',
    o:['Under $1M','$1M – $3M','$3M – $5M','$5M – $10M','$10M – $25M','$25M+']},
-  {k:'q', id:'employees', kicker:'Question 2 of 9', q:'How many employees?',
+  {k:'q', id:'employees', kicker:'Question 2 of 11', q:'How many employees?',
    o:['1 – 5','6 – 15','16 – 30','31 – 75','76 – 150','150+']},
-  {k:'q', id:'fsm', kicker:'Question 3 of 9', q:'Which field service software do you run?',
+  {k:'q', id:'fsm', kicker:'Question 3 of 11', q:'Which field service software do you run?',
    o:['ServiceTitan','Housecall Pro','FieldEdge','Jobber','Successware','Something else or none']},
-  {k:'q', id:'crm', kicker:'Question 4 of 9', q:'Which CRM do you run?',
+  {k:'q', id:'crm', kicker:'Question 4 of 11', q:'Which CRM do you run?',
    o:['HubSpot','Salesforce','GoHighLevel','Pipedrive','Zoho','Something else or none']},
-  {k:'q', id:'trucks', kicker:'Question 5 of 9', q:'How many trucks in the fleet?',
+  {k:'q', id:'trucks', kicker:'Question 5 of 11', q:'How many trucks in the fleet?',
    o:['1 – 3','4 – 8','9 – 20','21 – 50','51 – 100','100+']},
-  {k:'q', id:'calls', kicker:'Question 6 of 9', q:'Average inbound calls per day?',
+  {k:'q', id:'calls', kicker:'Question 6 of 11', q:'Average inbound calls per day?',
    o:['Under 20','20 – 50','50 – 100','100 – 250','250 – 500','500+']},
-  {k:'q', id:'texts', kicker:'Question 7 of 9', q:'Average texts per day?',
+  {k:'q', id:'texts', kicker:'Question 7 of 11', q:'Average texts per day?',
    o:['We don’t text','Under 20','20 – 50','50 – 150','150 – 400','400+']},
-  {k:'q', id:'age', kicker:'Question 8 of 9', q:'How long has the business been running?',
+  {k:'q', id:'age', kicker:'Question 8 of 11', q:'How long has the business been running?',
    o:['Under 2 years','2 – 5 years','6 – 10 years','11 – 25 years','26 – 50 years','50+ years']},
-  {k:'q', id:'locations', kicker:'Question 9 of 9', q:'How many locations?',
+  {k:'q', id:'locations', kicker:'Question 9 of 11', q:'How many locations?',
    o:['1','2 – 3','4 – 10','11 – 25','26 – 50','50+']},
+  {k:'multi', id:'use_cases', kicker:'Question 10 of 11', q:'Where would you put an agent first?',
+   sub:'Select all that apply.',
+   o:['Inbound calls','Outbound calls','Live transfer','Tier 1 support','Booking meetings','Nurture and follow-up']},
+  {k:'q', id:'ai_tool', kicker:'Question 11 of 11', q:'Which AI do you use most for business?',
+   o:['ChatGPT','Claude','Perplexity','Gemini','Copilot','None yet']},
   {k:'contact'},
   {k:'code'},
   {k:'calendar'},
@@ -222,7 +228,19 @@ function render(){
   nextB.disabled = false;
   var h = '';
 
-  if(s.k==='q'){
+  if(s.k==='multi'){
+    var picked = A[s.id] || [];
+    h += '<div class="kicker">'+s.kicker+'</div><h1 class="disp">'+s.q+'</h1>'
+      +  '<p class="sub">'+s.sub+'</p><div class="opts">';
+    for(var n=0;n<s.o.length;n++){
+      var on = picked.indexOf(s.o[n])>-1 ? ' sel' : '';
+      h += '<button class="opt multi'+on+'" data-v="'+esc(s.o[n])+'"><span class="tick">'+CHECK+'</span>'+esc(s.o[n])+'</button>';
+    }
+    h += '</div>';
+    nextB.disabled = picked.length===0;
+  }
+
+  else if(s.k==='q'){
     h += '<div class="kicker">'+s.kicker+'</div><h1 class="disp">'+s.q+'</h1><div class="opts">';
     for(var n=0;n<s.o.length;n++){
       var sel = A[s.id]===s.o[n] ? ' sel' : '';
@@ -294,10 +312,20 @@ function render(){
   var opts = main.querySelectorAll('.opt');
   for(var n=0;n<opts.length;n++){
     opts[n].addEventListener('click', function(){
+      var st = STEPS[i], v = this.getAttribute('data-v');
+      if(st.k==='multi'){
+        var cur = A[st.id] || [];
+        var at = cur.indexOf(v);
+        if(at>-1){ cur.splice(at,1); this.classList.remove('sel'); }
+        else { cur.push(v); this.classList.add('sel'); }
+        A[st.id] = cur; save();
+        nextB.disabled = cur.length===0;
+        return;
+      }
       var all = main.querySelectorAll('.opt');
       for(var m=0;m<all.length;m++) all[m].classList.remove('sel');
       this.classList.add('sel');
-      A[STEPS[i].id] = this.getAttribute('data-v');
+      A[st.id] = v;
       save();
       nextB.disabled = false;
       setTimeout(function(){ if(i < STEPS.length-1){ i++; save(); render(); } }, 190);
@@ -334,6 +362,7 @@ nextB.addEventListener('click', function(){
   var s = STEPS[i];
 
   if(s.k==='q' && !A[s.id]) return;
+  if(s.k==='multi' && (!A[s.id] || !A[s.id].length)) return;
 
   if(s.k==='contact'){
     A.name    = document.getElementById('f_name').value.trim();
