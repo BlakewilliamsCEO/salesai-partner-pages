@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="theme-color" content="#0A0C10">
+<title>Claim your Watsco dealer credit — SalesAi</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@700;900&family=Inter+Tight:wght@400;500;600;700&display=swap">
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#0A0C10; --card:#141519; --line:rgba(255,255,255,.12); --line2:rgba(255,255,255,.20);
+  --fg:#FFFFFF; --mut:rgba(255,255,255,.58); --mut2:rgba(255,255,255,.40);
+  --mint:#3EDE6F; --mint-d:#21B873; --purple:#B98BF7; --orange:#F69315;
+  --nav:60px;
+}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);
+  font-family:"Inter Tight",system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+body{min-height:100svh;display:flex;flex-direction:column}
+.disp{font-family:Roboto,Arial,sans-serif;font-weight:900;letter-spacing:-.03em;line-height:1.02}
+
+/* ---------- chrome ---------- */
+header{position:fixed;inset:0 0 auto 0;height:var(--nav);z-index:50;background:#000;
+  border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;
+  gap:12px;padding:0 16px}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.brand img{width:30px;height:30px;border-radius:50%;flex:none;box-shadow:0 0 0 1px rgba(255,255,255,.18)}
+.brand b{font-size:13px;font-weight:600;white-space:nowrap}
+.clock{text-align:right;line-height:1;white-space:nowrap}
+.clock i{display:block;font-style:normal;font-size:9px;font-weight:600;letter-spacing:1.3px;
+  text-transform:uppercase;color:var(--mut2)}
+.clock s{display:block;text-decoration:none;font-size:14px;font-weight:700;color:var(--orange);
+  font-variant-numeric:tabular-nums;margin-top:4px}
+
+.bar{position:fixed;top:var(--nav);left:0;right:0;height:3px;background:rgba(255,255,255,.08);z-index:49}
+.bar i{display:block;height:100%;width:0;background:var(--mint);transition:width .4s cubic-bezier(.16,1,.3,1)}
+
+main{flex:1;padding:calc(var(--nav) + 30px) 18px 130px;max-width:640px;margin:0 auto;width:100%}
+
+/* ---------- steps ---------- */
+.step{display:none;animation:in .34s cubic-bezier(.16,1,.3,1)}
+.step.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.kicker{font-size:11px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--mut2)}
+h1{margin:12px 0 0;font-size:clamp(28px,7.4vw,38px)}
+.sub{margin-top:10px;font-size:16px;line-height:1.5;color:var(--mut)}
+
+.opts{display:flex;flex-direction:column;gap:10px;margin-top:26px}
+.opt{display:flex;align-items:center;gap:13px;width:100%;text-align:left;cursor:pointer;
+  background:var(--card);border:1px solid var(--line);border-radius:13px;padding:17px 18px;
+  color:var(--fg);font-size:16.5px;font-weight:500;font-family:inherit;transition:.14s ease}
+.opt:hover{border-color:var(--line2);background:#191a1f}
+.opt.sel{border-color:var(--mint);background:rgba(62,222,111,.10)}
+.tick{width:20px;height:20px;border-radius:50%;border:1.6px solid var(--line2);flex:none;
+  display:flex;align-items:center;justify-content:center;transition:.14s ease}
+.opt.sel .tick{border-color:var(--mint);background:var(--mint)}
+.tick svg{opacity:0;transition:.14s ease}
+.opt.sel .tick svg{opacity:1}
+
+label.f{display:block;margin-top:18px}
+label.f span{display:block;font-size:12.5px;font-weight:600;letter-spacing:.4px;color:var(--mut);margin-bottom:8px}
+input.f,textarea.f{width:100%;background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:15px 16px;color:var(--fg);font-size:16.5px;font-family:inherit;transition:.14s ease}
+input.f:focus,textarea.f:focus{outline:none;border-color:var(--mint);background:#191a1f}
+input.f::placeholder,textarea.f::placeholder{color:rgba(255,255,255,.28)}
+textarea.f{min-height:88px;resize:vertical;line-height:1.45}
+.err{margin-top:9px;font-size:13.5px;color:#FF8A6B;display:none}
+.err.on{display:block}
+
+/* ---------- code screen ---------- */
+.codebox{margin-top:26px;background:linear-gradient(180deg,rgba(62,222,111,.12),rgba(62,222,111,.04));
+  border:1px solid rgba(62,222,111,.42);border-radius:16px;padding:26px 22px;text-align:center}
+.codebox i{display:block;font-style:normal;font-size:11px;font-weight:700;letter-spacing:1.6px;
+  text-transform:uppercase;color:var(--mint-d)}
+.code{margin-top:14px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:clamp(24px,7vw,34px);
+  font-weight:700;letter-spacing:.10em;color:var(--mint);word-break:break-all}
+.copy{margin-top:18px;width:100%;height:50px;border-radius:12px;border:1px solid rgba(62,222,111,.5);
+  background:transparent;color:var(--mint);font:600 15.5px/1 "Inter Tight",sans-serif;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:9px;transition:.14s ease}
+.copy:hover{background:rgba(62,222,111,.10)}
+.copy.done{background:var(--mint);color:#06210F;border-color:var(--mint)}
+
+.divider{margin:28px 0 0;padding-top:26px;border-top:1px solid var(--line)}
+
+/* ---------- calendar / handoff ---------- */
+.frame{margin-top:22px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}
+.frame iframe{display:block;width:100%;height:640px;border:0}
+.note{margin-top:16px;font-size:13.5px;line-height:1.55;color:var(--mut2)}
+
+.summary{margin-top:22px;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.summary div{display:flex;justify-content:space-between;gap:16px;padding:13px 16px;font-size:14.5px;
+  border-bottom:1px solid var(--line)}
+.summary div:last-child{border-bottom:0}
+.summary dt{color:var(--mut2)}
+.summary dd{margin:0;text-align:right;font-weight:600}
+
+/* ---------- footer nav ---------- */
+footer{position:fixed;inset:auto 0 0 0;z-index:50;background:linear-gradient(180deg,rgba(10,12,16,0),var(--bg) 34%);
+  padding:22px 18px max(20px,env(safe-area-inset-bottom));display:flex;gap:12px;
+  max-width:640px;margin:0 auto}
+.btn{flex:1;height:54px;border-radius:13px;border:0;font:700 16.5px/1 "Inter Tight",sans-serif;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px;
+  text-decoration:none;transition:.14s ease}
+.next{background:var(--mint);color:#06210F}
+.next:hover{background:#35c862}
+.next[disabled]{opacity:.34;cursor:not-allowed}
+.back{flex:0 0 54px;background:transparent;border:1px solid var(--line);color:var(--mut)}
+.back:hover{border-color:var(--line2);color:var(--fg)}
+.back.hide{display:none}
+
+@media (min-width:700px){ main{padding-top:calc(var(--nav) + 46px)} }
+@media (prefers-reduced-motion:reduce){ .step{animation:none} }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <img src="watsco-deck/blake.jpg" alt="">
+    <b>Watsco Dealer Program</b>
+  </div>
+  <div class="clock"><i>Ends midnight ET</i><s id="cd">&mdash;</s></div>
+</header>
+<div class="bar"><i id="prog"></i></div>
+
+<main id="main"></main>
+
+<footer>
+  <button class="btn back hide" id="back" aria-label="Back">
+    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </button>
+  <button class="btn next" id="next">Continue</button>
+</footer>
+
+<script>
+/* ============================================================
+   INTEGRATION POINT — set this to your HubSpot form / Zapier
+   catch hook / Formspree endpoint. Empty = answers stay local.
+   ============================================================ */
+var ENDPOINT = "";
+
+var QUOTE_URL = "";   // e.g. PandaDoc / DocuSign link
+var PAY_URL   = "";   // e.g. Stripe payment link
+var CAL_URL   = "https://cal.com/blake-williams-salesai/30min";
+
+var CHECK = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#06210F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
+
+var STEPS = [
+  {k:'q', id:'revenue', kicker:'Question 1 of 9', q:'Revenue in the last 12 months?',
+   o:['Under $1M','$1M – $3M','$3M – $5M','$5M – $10M','$10M – $25M','$25M+']},
+  {k:'q', id:'employees', kicker:'Question 2 of 9', q:'How many employees?',
+   o:['1 – 5','6 – 15','16 – 30','31 – 75','76 – 150','150+']},
+  {k:'q', id:'fsm', kicker:'Question 3 of 9', q:'Which field service software do you run?',
+   o:['ServiceTitan','Housecall Pro','FieldEdge','Jobber','Successware','Something else or none']},
+  {k:'q', id:'crm', kicker:'Question 4 of 9', q:'Which CRM do you run?',
+   o:['HubSpot','Salesforce','GoHighLevel','Pipedrive','Zoho','Something else or none']},
+  {k:'q', id:'trucks', kicker:'Question 5 of 9', q:'How many trucks in the fleet?',
+   o:['1 – 3','4 – 8','9 – 20','21 – 50','51 – 100','100+']},
+  {k:'q', id:'calls', kicker:'Question 6 of 9', q:'Average inbound calls per day?',
+   o:['Under 20','20 – 50','50 – 100','100 – 250','250 – 500','500+']},
+  {k:'q', id:'texts', kicker:'Question 7 of 9', q:'Average texts per day?',
+   o:['We don’t text','Under 20','20 – 50','50 – 150','150 – 400','400+']},
+  {k:'q', id:'age', kicker:'Question 8 of 9', q:'How long has the business been running?',
+   o:['Under 2 years','2 – 5 years','6 – 10 years','11 – 25 years','26 – 50 years','50+ years']},
+  {k:'q', id:'locations', kicker:'Question 9 of 9', q:'How many locations?',
+   o:['1','2 – 3','4 – 10','11 – 25','26 – 50','50+']},
+  {k:'contact'},
+  {k:'code'},
+  {k:'calendar'},
+  {k:'quote'},
+  {k:'payment'}
+];
+
+var A = {};
+try { A = JSON.parse(localStorage.getItem('watsco_claim') || '{}'); } catch(e){ A = {}; }
+var i = 0;
+try { i = Math.min(parseInt(localStorage.getItem('watsco_step')||'0',10)||0, STEPS.length-1); } catch(e){ i = 0; }
+
+var main = document.getElementById('main');
+var nextB = document.getElementById('next');
+var backB = document.getElementById('back');
+var prog  = document.getElementById('prog');
+
+function save(){
+  try{
+    localStorage.setItem('watsco_claim', JSON.stringify(A));
+    localStorage.setItem('watsco_step', String(i));
+  }catch(e){}
+}
+function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g, function(c){
+  return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+
+function makeCode(){
+  if(A.code) return A.code;
+  var seed = (A.company||'') + '|' + (A.email||'') + '|' + Date.now();
+  var h = 5381;
+  for(var n=0;n<seed.length;n++){ h = ((h<<5) + h + seed.charCodeAt(n)) >>> 0; }
+  var AL = '23456789ABCDEFGHJKLMNPQRSTUVWXYZ', a='', b='';
+  for(var n=0;n<4;n++){ a += AL[(h >>> (n*5)) % 32]; }
+  var h2 = (h * 2654435761) >>> 0;
+  for(var n=0;n<4;n++){ b += AL[(h2 >>> (n*5)) % 32]; }
+  A.code = 'WV-' + a + '-' + b;
+  save();
+  return A.code;
+}
+
+function post(){
+  if(!ENDPOINT) { console.log('[claim] no ENDPOINT set — payload:', A); return; }
+  try{
+    fetch(ENDPOINT, {method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(Object.assign({submitted_at:new Date().toISOString()}, A))}).catch(function(){});
+  }catch(e){}
+}
+
+function render(){
+  var s = STEPS[i];
+  prog.style.width = Math.round((i/(STEPS.length-1))*100) + '%';
+  backB.classList.toggle('hide', i===0);
+  nextB.style.display = '';
+  nextB.textContent = 'Continue';
+  nextB.disabled = false;
+  var h = '';
+
+  if(s.k==='q'){
+    h += '<div class="kicker">'+s.kicker+'</div><h1 class="disp">'+s.q+'</h1><div class="opts">';
+    for(var n=0;n<s.o.length;n++){
+      var sel = A[s.id]===s.o[n] ? ' sel' : '';
+      h += '<button class="opt'+sel+'" data-v="'+esc(s.o[n])+'"><span class="tick">'+CHECK+'</span>'+esc(s.o[n])+'</button>';
+    }
+    h += '</div>';
+    nextB.disabled = !A[s.id];
+  }
+
+  else if(s.k==='contact'){
+    h += '<div class="kicker">Almost there</div><h1 class="disp">Where should the credit go?</h1>'
+      +  '<p class="sub">We use this to issue your code and prepare your quote.</p>'
+      +  '<label class="f"><span>Your name</span><input class="f" id="f_name" autocomplete="name" placeholder="First and last" value="'+esc(A.name)+'"></label>'
+      +  '<label class="f"><span>Work email</span><input class="f" id="f_email" type="email" inputmode="email" autocomplete="email" placeholder="you@yourcompany.com" value="'+esc(A.email)+'"></label>'
+      +  '<label class="f"><span>Company name</span><input class="f" id="f_company" autocomplete="organization" placeholder="Legal or trading name" value="'+esc(A.company)+'"></label>'
+      +  '<label class="f"><span>Company address</span><textarea class="f" id="f_addr" autocomplete="street-address" placeholder="Street, city, state, ZIP">'+esc(A.address)+'</textarea></label>'
+      +  '<div class="err" id="err"></div>';
+    nextB.textContent = 'Generate my code';
+  }
+
+  else if(s.k==='code'){
+    var c = makeCode();
+    h += '<div class="kicker">Your dealer credit</div><h1 class="disp">Here’s your code.</h1>'
+      +  '<p class="sub">It’s locked to '+esc(A.company||'your company')+' and holds your rate until the deadline.</p>'
+      +  '<div class="codebox"><i>SalesAi dealer code</i><div class="code" id="thecode">'+esc(c)+'</div>'
+      +  '<button class="copy" id="cpy"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>Copy to clipboard</span></button></div>'
+      +  '<div class="divider"><label class="f" style="margin-top:0"><span>Enter your Watsco custom code</span>'
+      +  '<input class="f" id="f_wcode" placeholder="From your Watsco rep" value="'+esc(A.watsco_code)+'" autocapitalize="characters"></label>'
+      +  '<div class="err" id="err"></div></div>';
+    nextB.textContent = 'Submit code';
+  }
+
+  else if(s.k==='calendar'){
+    h += '<div class="kicker">Step 1 of 3</div><h1 class="disp">Book your launch date.</h1>'
+      +  '<p class="sub">Thirty minutes. Bring your FSM login and how you want calls handled. You go live four days after kickoff.</p>'
+      +  '<div class="frame"><iframe src="'+CAL_URL+'?embed=true" title="Book your kickoff" loading="lazy"></iframe></div>'
+      +  '<p class="note">Trouble loading? <a href="'+CAL_URL+'" target="_blank" rel="noopener" style="color:var(--mint)">Open the calendar in a new tab</a>.</p>';
+    nextB.textContent = 'I’ve booked it';
+  }
+
+  else if(s.k==='quote'){
+    h += '<div class="kicker">Step 2 of 3</div><h1 class="disp">Sign your quote.</h1>'
+      +  '<p class="sub">Same package, member price. Nothing here is a trial or a stripped-down tier.</p>'
+      +  '<div class="summary">'
+      +  '<div><dt>Standard package</dt><dd>$2,000 / mo</dd></div>'
+      +  '<div><dt>Watsco dealer program</dt><dd style="color:var(--orange)">&minus;$1,650 / mo</dd></div>'
+      +  '<div><dt>Your price</dt><dd style="color:var(--mint);font-size:19px">$350 / mo</dd></div>'
+      +  '<div><dt>Included</dt><dd>Unlimited agents<br>2,000 voice minutes<br>5,000 texts</dd></div>'
+      +  '<div><dt>Your code</dt><dd style="font-family:ui-monospace,Menlo,monospace">'+esc(A.code||'')+'</dd></div>'
+      +  '</div>'
+      +  (QUOTE_URL ? '' : '<p class="note">Your quote is prepared from these answers and sent to '+esc(A.email||'your email')+' the same day. Signature is electronic.</p>');
+    nextB.textContent = QUOTE_URL ? 'Open my quote' : 'Continue';
+  }
+
+  else if(s.k==='payment'){
+    h += '<div class="kicker">Step 3 of 3</div><h1 class="disp">Make your first payment.</h1>'
+      +  '<p class="sub">First month only. Month to month after that, no contract.</p>'
+      +  '<div class="summary"><div><dt>Due today</dt><dd style="color:var(--mint);font-size:19px">$350</dd></div>'
+      +  '<div><dt>Then</dt><dd>$350 / mo</dd></div>'
+      +  '<div><dt>Cancel</dt><dd>Any time</dd></div></div>'
+      + (PAY_URL ? '' : '<p class="note">A payment link is sent with your signed quote. Nothing is charged until you sign.</p>');
+    nextB.textContent = PAY_URL ? 'Pay $350' : 'Done';
+  }
+
+  main.innerHTML = h;
+  window.scrollTo(0,0);
+
+  var opts = main.querySelectorAll('.opt');
+  for(var n=0;n<opts.length;n++){
+    opts[n].addEventListener('click', function(){
+      var all = main.querySelectorAll('.opt');
+      for(var m=0;m<all.length;m++) all[m].classList.remove('sel');
+      this.classList.add('sel');
+      A[STEPS[i].id] = this.getAttribute('data-v');
+      save();
+      nextB.disabled = false;
+      setTimeout(function(){ if(i < STEPS.length-1){ i++; save(); render(); } }, 190);
+    });
+  }
+
+  var cpy = document.getElementById('cpy');
+  if(cpy){
+    cpy.addEventListener('click', function(){
+      var txt = document.getElementById('thecode').textContent;
+      var done = function(){
+        cpy.classList.add('done');
+        cpy.querySelector('span').textContent = 'Copied';
+        setTimeout(function(){ cpy.classList.remove('done'); cpy.querySelector('span').textContent='Copy to clipboard'; }, 2200);
+      };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(txt).then(done, function(){ fallback(txt, done); });
+      } else { fallback(txt, done); }
+    });
+  }
+  function fallback(txt, cb){
+    var t=document.createElement('textarea'); t.value=txt; t.setAttribute('readonly','');
+    t.style.position='absolute'; t.style.left='-9999px'; document.body.appendChild(t);
+    t.select(); try{ document.execCommand('copy'); cb(); }catch(e){} document.body.removeChild(t);
+  }
+}
+
+function showErr(m){
+  var e = document.getElementById('err');
+  if(e){ e.textContent = m; e.classList.add('on'); }
+}
+
+nextB.addEventListener('click', function(){
+  var s = STEPS[i];
+
+  if(s.k==='q' && !A[s.id]) return;
+
+  if(s.k==='contact'){
+    A.name    = document.getElementById('f_name').value.trim();
+    A.email   = document.getElementById('f_email').value.trim();
+    A.company = document.getElementById('f_company').value.trim();
+    A.address = document.getElementById('f_addr').value.trim();
+    if(!A.name)    return showErr('We need a name for the quote.');
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(A.email)) return showErr('That email doesn’t look right.');
+    if(/(gmail|yahoo|hotmail|outlook|icloud|aol)\./i.test(A.email)) return showErr('Please use your work email — the credit is issued to the business.');
+    if(!A.company) return showErr('Company name is required.');
+    if(!A.address) return showErr('We need the company address for the quote.');
+    save();
+  }
+
+  if(s.k==='code'){
+    A.watsco_code = document.getElementById('f_wcode').value.trim().toUpperCase();
+    if(!A.watsco_code) return showErr('Enter the code from your Watsco rep to lock the rate.');
+    save(); post();
+  }
+
+  if(s.k==='quote' && QUOTE_URL){ window.open(QUOTE_URL,'_blank','noopener'); }
+  if(s.k==='payment'){
+    if(PAY_URL){ window.open(PAY_URL,'_blank','noopener'); return; }
+    nextB.textContent = 'All set ✓';
+    nextB.disabled = true;
+    prog.style.width = '100%';
+    return;
+  }
+
+  if(i < STEPS.length-1){ i++; save(); render(); }
+});
+
+backB.addEventListener('click', function(){ if(i>0){ i--; save(); render(); } });
+
+/* countdown — midnight ET, 1 Nov 2026 (still EDT, UTC-4) */
+(function(){
+  var T = Date.parse('2026-11-01T00:00:00-04:00');
+  if(isNaN(T)) T = Date.UTC(2026,10,1,4,0,0);
+  var el = document.getElementById('cd');
+  function p(n){ return (n<10?'0':'')+n; }
+  function tick(){
+    var ms = T - Date.now();
+    if(ms<=0){ el.textContent='Closed'; clearInterval(id); return; }
+    var s=Math.floor(ms/1000), d=Math.floor(s/86400); s-=d*86400;
+    var h=Math.floor(s/3600); s-=h*3600; var m=Math.floor(s/60); s-=m*60;
+    el.textContent = d+'d '+p(h)+':'+p(m)+':'+p(s);
+  }
+  tick(); var id=setInterval(tick,1000);
+})();
+
+render();
+</script>
+</body>
+</html>
