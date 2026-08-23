@@ -39,10 +39,12 @@ nav{position:fixed;inset:0 0 auto 0;height:var(--nav);z-index:100;background:#00
 .ctime.ended{color:rgba(255,255,255,.5);font-size:14px;letter-spacing:.06em}
 .cta:hover{background:#35c862}
 
-.s{height:calc(100svh - var(--nav));min-height:calc(100vh - var(--nav));display:flex;align-items:center;
-   justify-content:center;scroll-snap-align:center;scroll-snap-stop:always;padding:0 clamp(8px,2.2vw,44px)}
-.s img{display:block;width:100%;max-width:calc((100svh - var(--nav) - 6vh) * 16 / 9);max-height:calc(94svh - var(--nav));
+.s{display:flex;align-items:center;justify-content:center;scroll-snap-align:center;scroll-snap-stop:always;
+   padding:2.6vh clamp(8px,2.2vw,44px)}
+.s img{display:block;width:100%;max-width:1680px;max-height:calc(100svh - var(--nav) - 5.2vh);
    object-fit:contain;border-radius:8px;box-shadow:0 30px 90px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.06)}
+.s:first-of-type{padding-top:2.2vh}
+.s:last-of-type{padding-bottom:5vh}
 .js .s img{opacity:0;transform:translateY(18px) scale(.985);
    transition:opacity .6s ease,transform .7s cubic-bezier(.16,1,.3,1)}
 .js .s.in img{opacity:1;transform:none}
@@ -54,8 +56,8 @@ nav{position:fixed;inset:0 0 auto 0;height:var(--nav);z-index:100;background:#00
 @media (max-width:900px){ .me b,.me span{display:none} .sep{display:none} .navR{gap:12px} }
 @media (max-width:640px){
   :root{--nav:60px}
-  html{scroll-snap-type:none} .s{height:auto;min-height:0;padding:10px;scroll-snap-align:none}
-  .s img{max-width:100%;max-height:none}
+  html{scroll-snap-type:none} .s{padding:7px 10px;scroll-snap-align:none}
+  .s img{max-width:100%;max-height:none;border-radius:6px;box-shadow:0 8px 24px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.07)}
   .pill span.lbl{display:none} .pill{padding:0 12px} .cta{padding:0 16px;font-size:14px}
   .clabel{display:none} .ctime{font-size:15px;margin-top:0}
 }
