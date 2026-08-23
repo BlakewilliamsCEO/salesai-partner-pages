@@ -6,14 +6,37 @@
 <meta name="robots" content="noindex, nofollow, noarchive">
 <meta name="theme-color" content="#0A0C10">
 <title>Build a modern front office — SalesAi for Watsco dealers</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap">
 <style>
 *{box-sizing:border-box}
-html{scroll-snap-type:y mandatory;scroll-behavior:smooth;background:#0A0C10}
-body{margin:0;background:#0A0C10;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-.s{height:100svh;min-height:100vh;display:flex;align-items:center;justify-content:center;
-   scroll-snap-align:center;scroll-snap-stop:always;padding:0 clamp(8px,2.2vw,44px)}
-.s img{display:block;width:100%;max-width:calc((100svh - 6vh) * 16 / 9);max-height:94svh;
+:root{--nav:66px}
+html{scroll-snap-type:y mandatory;scroll-behavior:smooth;background:#0A0C10;scroll-padding-top:var(--nav)}
+body{margin:0;padding-top:var(--nav);background:#0A0C10;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+     font-family:"Inter Tight",system-ui,sans-serif}
+
+nav{position:fixed;inset:0 0 auto 0;height:var(--nav);z-index:100;background:#000;
+    border-bottom:1px solid rgba(255,255,255,.10);display:flex;align-items:center;
+    justify-content:space-between;gap:16px;padding:0 clamp(12px,2.2vw,28px)}
+.navL{display:flex;align-items:center;gap:14px;min-width:0}
+.me{display:flex;align-items:center;gap:11px;min-width:0}
+.me img{width:38px;height:38px;border-radius:50%;display:block;flex:none;
+        box-shadow:0 0 0 1px rgba(255,255,255,.18)}
+.me b{display:block;font-size:14px;font-weight:600;color:#fff;line-height:1.2;white-space:nowrap}
+.me span{display:block;font-size:12px;color:rgba(255,255,255,.52);line-height:1.3;white-space:nowrap}
+.sep{width:1px;height:26px;background:rgba(255,255,255,.14);flex:none}
+.pill{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 15px;border-radius:999px;
+      font-size:14px;font-weight:600;text-decoration:none;white-space:nowrap;transition:.18s ease}
+.pill svg{flex:none}
+.cal{color:#fff;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.16)}
+.cal:hover{background:rgba(255,255,255,.16)}
+.li{color:#fff;background:#0A66C2}
+.li:hover{background:#0b5aa8}
+.cta{color:#06210F;background:#3EDE6F;font-weight:700;height:40px;padding:0 20px;font-size:15px}
+.cta:hover{background:#35c862}
+
+.s{height:calc(100svh - var(--nav));min-height:calc(100vh - var(--nav));display:flex;align-items:center;
+   justify-content:center;scroll-snap-align:center;scroll-snap-stop:always;padding:0 clamp(8px,2.2vw,44px)}
+.s img{display:block;width:100%;max-width:calc((100svh - var(--nav) - 6vh) * 16 / 9);max-height:calc(94svh - var(--nav));
    object-fit:contain;border-radius:8px;box-shadow:0 30px 90px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.06)}
 .js .s img{opacity:0;transform:translateY(18px) scale(.985);
    transition:opacity .6s ease,transform .7s cubic-bezier(.16,1,.3,1)}
@@ -22,13 +45,35 @@ body{margin:0;background:#0A0C10;-webkit-font-smoothing:antialiased;overflow-x:h
    z-index:10;color:rgba(255,255,255,.42);font:500 13px/1 "Inter Tight",system-ui,sans-serif;
    font-variant-numeric:tabular-nums;letter-spacing:.06em;pointer-events:none}
 @media (prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  .js .s img{opacity:1!important;transform:none!important;transition:none!important}}
-@media (max-width:640px){ .s{height:auto;min-height:0;padding:10px 10px;scroll-snap-align:none}
-  html{scroll-snap-type:none} .s img{max-width:100%;max-height:none} }
+  html{scroll-behavior:auto} .js .s img{opacity:1!important;transform:none!important;transition:none!important}}
+@media (max-width:900px){ .me b,.me span{display:none} .sep{display:none} }
+@media (max-width:640px){
+  :root{--nav:60px}
+  html{scroll-snap-type:none} .s{height:auto;min-height:0;padding:10px;scroll-snap-align:none}
+  .s img{max-width:100%;max-height:none}
+  .pill span.lbl{display:none} .pill{padding:0 12px} .cta{padding:0 16px;font-size:14px}
+}
 </style>
 </head>
 <body>
+
+<nav>
+  <div class="navL">
+    <div class="me">
+      <img src="watsco-deck/blake.jpg?v=1b5f137360" alt="Blake Williams">
+      <div><b>Blake Williams</b><span>Head of Ecosystems, SalesAi</span></div>
+    </div>
+    <div class="sep"></div>
+    <a class="pill cal" href="https://cal.com/blake-williams-salesai/30min?overlayCalendar=true" target="_blank" rel="noopener">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      <span class="lbl">Book 30 minutes</span></a>
+    <a class="pill li" href="https://www.linkedin.com/in/ecosystem-led-growth-marketing/" target="_blank" rel="noopener">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM2.4 9h5.16v12H2.4zM9.5 9h4.94v1.64h.07c.69-1.24 2.37-2.05 4.06-2.05 4.34 0 5.14 2.68 5.14 6.17V21h-5.16v-5.2c0-1.24-.02-2.84-1.86-2.84-1.87 0-2.15 1.35-2.15 2.75V21H9.5z"/></svg>
+      <span class="lbl">Let&rsquo;s connect</span></a>
+  </div>
+  <a class="pill cta" href="https://salesai.com/watsco" target="_blank" rel="noopener">Claim my Credit</a>
+</nav>
+
 <section class="s" data-n="01"><img src="watsco-deck/01.jpg?v=8dd564cd36" width="2400" height="1350" alt="Slide 01 — Introducing"></section>
 <section class="s" data-n="02"><img src="watsco-deck/02.jpg?v=80ea798664" width="2400" height="1350" alt="Slide 02 — Cover"></section>
 <section class="s" data-n="03"><img src="watsco-deck/03.jpg?v=b29d1d38a8" width="2400" height="1350" alt="Slide 03 — Sound familiar?" loading="lazy" decoding="async"></section>
@@ -51,16 +96,13 @@ body{margin:0;background:#0A0C10;-webkit-font-smoothing:antialiased;overflow-x:h
   if(!('IntersectionObserver' in window)) return;
   d.classList.add('js');
   function arm(){
-    var secs=[].slice.call(document.querySelectorAll('.s'));
     var io=new IntersectionObserver(function(es){
       es.forEach(function(e){
-        if(e.isIntersecting){
-          e.target.classList.add('in');
-          if(e.intersectionRatio>0.5) c.textContent=e.target.dataset.n+' / 15';
-        }
+        if(e.isIntersecting){ e.target.classList.add('in');
+          if(e.intersectionRatio>0.5) c.textContent=e.target.dataset.n+' / 15'; }
       });
     },{threshold:[0.15,0.55]});
-    secs.forEach(function(s){io.observe(s)});
+    [].forEach.call(document.querySelectorAll('.s'),function(s){io.observe(s)});
   }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',arm); else arm();
 })();
