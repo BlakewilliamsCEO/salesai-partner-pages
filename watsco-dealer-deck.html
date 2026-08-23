@@ -79,7 +79,7 @@ nav{position:fixed;inset:0 0 auto 0;height:var(--nav);z-index:100;background:#00
   </div>
   <div class="navR">
     <div class="clock">
-      <span class="clabel">Offer ends in</span>
+      <span class="clabel">Ends midnight ET</span>
       <span class="ctime" id="cd">&mdash;</span>
     </div>
     <a class="pill cta" href="https://salesai.com/watsco" target="_blank" rel="noopener">Claim my Credit</a>
@@ -121,8 +121,10 @@ nav{position:fixed;inset:0 0 auto 0;height:var(--nav);z-index:100;background:#00
 </script>
 <script>
 (function(){
-  // Local midnight at the start of 1 Nov 2026 — i.e. the end of 31 Oct in the viewer's own timezone.
-  var TARGET = new Date(2026, 10, 1, 0, 0, 0).getTime();
+  // Midnight ET at the start of 1 Nov 2026. That Sunday is the DST changeover, but the
+  // switch happens at 02:00, so midnight is still EDT (UTC-4). Fixed offset, not viewer-local.
+  var TARGET = Date.parse('2026-11-01T00:00:00-04:00');
+  if (isNaN(TARGET)) TARGET = Date.UTC(2026, 10, 1, 4, 0, 0);
   var el = document.getElementById('cd');
   if(!el) return;
   function p(n){ return (n<10?'0':'') + n; }
