@@ -32,6 +32,11 @@ nav{position:fixed;inset:0 0 auto 0;height:var(--nav);z-index:100;background:#00
 .li{color:#fff;background:#0A66C2}
 .li:hover{background:#0b5aa8}
 .cta{color:#06210F;background:#3EDE6F;font-weight:700;height:40px;padding:0 20px;font-size:15px}
+.navR{display:flex;align-items:center;gap:18px}
+.clock{display:flex;flex-direction:column;align-items:flex-end;line-height:1;white-space:nowrap}
+.clabel{font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.46)}
+.ctime{margin-top:6px;font-size:17px;font-weight:700;color:#F69315;font-variant-numeric:tabular-nums;letter-spacing:.01em}
+.ctime.ended{color:rgba(255,255,255,.5);font-size:14px;letter-spacing:.06em}
 .cta:hover{background:#35c862}
 
 .s{height:calc(100svh - var(--nav));min-height:calc(100vh - var(--nav));display:flex;align-items:center;
@@ -46,12 +51,13 @@ nav{position:fixed;inset:0 0 auto 0;height:var(--nav);z-index:100;background:#00
    font-variant-numeric:tabular-nums;letter-spacing:.06em;pointer-events:none}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto} .js .s img{opacity:1!important;transform:none!important;transition:none!important}}
-@media (max-width:900px){ .me b,.me span{display:none} .sep{display:none} }
+@media (max-width:900px){ .me b,.me span{display:none} .sep{display:none} .navR{gap:12px} }
 @media (max-width:640px){
   :root{--nav:60px}
   html{scroll-snap-type:none} .s{height:auto;min-height:0;padding:10px;scroll-snap-align:none}
   .s img{max-width:100%;max-height:none}
   .pill span.lbl{display:none} .pill{padding:0 12px} .cta{padding:0 16px;font-size:14px}
+  .clabel{display:none} .ctime{font-size:15px;margin-top:0}
 }
 </style>
 </head>
@@ -71,7 +77,13 @@ nav{position:fixed;inset:0 0 auto 0;height:var(--nav);z-index:100;background:#00
       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM2.4 9h5.16v12H2.4zM9.5 9h4.94v1.64h.07c.69-1.24 2.37-2.05 4.06-2.05 4.34 0 5.14 2.68 5.14 6.17V21h-5.16v-5.2c0-1.24-.02-2.84-1.86-2.84-1.87 0-2.15 1.35-2.15 2.75V21H9.5z"/></svg>
       <span class="lbl">Let&rsquo;s connect</span></a>
   </div>
-  <a class="pill cta" href="https://salesai.com/watsco" target="_blank" rel="noopener">Claim my Credit</a>
+  <div class="navR">
+    <div class="clock">
+      <span class="clabel">Offer ends in</span>
+      <span class="ctime" id="cd">&mdash;</span>
+    </div>
+    <a class="pill cta" href="https://salesai.com/watsco" target="_blank" rel="noopener">Claim my Credit</a>
+  </div>
 </nav>
 
 <section class="s" data-n="01"><img src="watsco-deck/01.jpg?v=8dd564cd36" width="2400" height="1350" alt="Slide 01 — Introducing"></section>
@@ -105,6 +117,26 @@ nav{position:fixed;inset:0 0 auto 0;height:var(--nav);z-index:100;background:#00
     [].forEach.call(document.querySelectorAll('.s'),function(s){io.observe(s)});
   }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',arm); else arm();
+})();
+</script>
+<script>
+(function(){
+  // Local midnight at the start of 1 Nov 2026 — i.e. the end of 31 Oct in the viewer's own timezone.
+  var TARGET = new Date(2026, 10, 1, 0, 0, 0).getTime();
+  var el = document.getElementById('cd');
+  if(!el) return;
+  function p(n){ return (n<10?'0':'') + n; }
+  function tick(){
+    var ms = TARGET - Date.now();
+    if(ms <= 0){ el.textContent = 'Offer closed'; el.className = 'ctime ended'; clearInterval(id); return; }
+    var s = Math.floor(ms/1000);
+    var d = Math.floor(s/86400); s -= d*86400;
+    var h = Math.floor(s/3600);  s -= h*3600;
+    var m = Math.floor(s/60);    s -= m*60;
+    el.textContent = d + 'd ' + p(h) + ':' + p(m) + ':' + p(s);
+  }
+  tick();
+  var id = setInterval(tick, 1000);
 })();
 </script>
 </body>
