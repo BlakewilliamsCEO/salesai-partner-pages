@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="theme-color" content="#0A0C10">
+<title>Debt Collection Insights — Foundation Sprint</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap">
+<style>
+*{box-sizing:border-box}
+html{scroll-snap-type:y mandatory;scroll-behavior:smooth;background:#0A0C10}
+body{margin:0;background:#0A0C10;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.s{display:flex;align-items:center;justify-content:center;scroll-snap-align:center;scroll-snap-stop:always;
+   padding:2.6vh clamp(8px,2.2vw,44px)}
+.s img{display:block;width:100%;max-width:1680px;max-height:calc(100svh - 5.2vh);object-fit:contain;
+   border-radius:8px;box-shadow:0 30px 90px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.06)}
+.js .s img{opacity:0;transform:translateY(18px) scale(.985);
+   transition:opacity .6s ease,transform .7s cubic-bezier(.16,1,.3,1)}
+.js .s.in img{opacity:1;transform:none}
+.count{position:fixed;right:max(18px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));
+   z-index:10;color:rgba(255,255,255,.42);font:500 13px/1 "Inter Tight",system-ui,sans-serif;
+   font-variant-numeric:tabular-nums;letter-spacing:.06em;pointer-events:none}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}
+  .js .s img{opacity:1!important;transform:none!important;transition:none!important}}
+@media (max-width:640px){html{scroll-snap-type:none}.s{padding:7px 10px;scroll-snap-align:none}
+  .s img{max-width:100%;max-height:none;border-radius:6px}}
+</style>
+</head>
+<body>
+<section class="s" data-n="01"><img src="dc-slides/01.jpg?v=578a7a9ab5" width="2400" height="1350" alt="Slide 01 — A chain, not a segment"></section>
+<section class="s" data-n="02"><img src="dc-slides/02.jpg?v=ba1b545c84" width="2400" height="1350" alt="Slide 02 — Corrections"></section>
+<section class="s" data-n="03"><img src="dc-slides/03.jpg?v=423e044188" width="2400" height="1350" alt="Slide 03 — Yale evidence" loading="lazy" decoding="async"></section>
+<section class="s" data-n="04"><img src="dc-slides/04.jpg?v=5cdde30bba" width="2400" height="1350" alt="Slide 04 — Reconciliation" loading="lazy" decoding="async"></section>
+<section class="s" data-n="05"><img src="dc-slides/05.jpg?v=e6fbd797fa" width="2400" height="1350" alt="Slide 05 — Hypothesis" loading="lazy" decoding="async"></section>
+<section class="s" data-n="06"><img src="dc-slides/06.jpg?v=4edc42343a" width="2400" height="1350" alt="Slide 06 — The chain test" loading="lazy" decoding="async"></section>
+<section class="s" data-n="07"><img src="dc-slides/07.jpg?v=71eb9df45d" width="2400" height="1350" alt="Slide 07 — The middle" loading="lazy" decoding="async"></section>
+<section class="s" data-n="08"><img src="dc-slides/08.jpg?v=f33eaa058c" width="2400" height="1350" alt="Slide 08 — Both ends" loading="lazy" decoding="async"></section>
+<section class="s" data-n="09"><img src="dc-slides/09.jpg?v=ba18da0a92" width="2400" height="1350" alt="Slide 09 — Voice of the customer" loading="lazy" decoding="async"></section>
+<section class="s" data-n="10"><img src="dc-slides/10.jpg?v=9c2fcef71a" width="2400" height="1350" alt="Slide 10 — Adoption" loading="lazy" decoding="async"></section>
+<section class="s" data-n="11"><img src="dc-slides/11.jpg?v=35c63008df" width="2400" height="1350" alt="Slide 11 — Field" loading="lazy" decoding="async"></section>
+<section class="s" data-n="12"><img src="dc-slides/12.jpg?v=4cfb08f3d6" width="2400" height="1350" alt="Slide 12 — Where it clears" loading="lazy" decoding="async"></section>
+<section class="s" data-n="13"><img src="dc-slides/13.jpg?v=e1f1fb95ef" width="2400" height="1350" alt="Slide 13 — Recommendation" loading="lazy" decoding="async"></section>
+<div class="count" id="c">01 / 13</div>
+<script>
+(function(){var d=document.documentElement,c=document.getElementById('c');
+if(!('IntersectionObserver' in window))return;d.classList.add('js');
+function arm(){var io=new IntersectionObserver(function(es){es.forEach(function(e){
+if(e.isIntersecting){e.target.classList.add('in');
+if(e.intersectionRatio>0.5)c.textContent=e.target.dataset.n+' / 13';}});},{threshold:[0.15,0.55]});
+[].forEach.call(document.querySelectorAll('.s'),function(s){io.observe(s)});}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',arm);else arm();})();
+</script>
+</body>
+</html>
