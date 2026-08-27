@@ -1,0 +1,1162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="description" content="Interactive prototype — SalesAi partner activation from any AI assistant.">
+<meta property="og:title" content="SalesAi MCP Connector — prototype">
+<meta property="og:description" content="Click through the full partner path: connect, provision, call a live agent, go to production.">
+<style>html{background:#fff}body{margin:0}</style>
+<title>SalesAi MCP Connector</title>
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+:root{
+  --lav-deep:#DFD8FB; --lav-mid:#EEE9FE; --lav-pale:#F8F6FF;
+  --white:#FFF; --ink:#151222; --ink-2:#5B5573; --ink-3:#8C86A3;
+  --line:#E8E3F6; --line-2:#D8D1EE;
+  --purple:#6D4AE0; --purple-dark:#5936C9; --purple-soft:#F0EBFE;
+  --green:#12C08A; --green-soft:#E2F8F1; --green-ink:#077956;
+  --near-black:#12101B;
+  --code-bg:#16141F; --code-ink:#B9B3CC; --code-hi:#5BE3B0;
+  --sh-sm:0 1px 2px rgba(21,18,34,.05);
+  --sh-lg:0 4px 8px rgba(21,18,34,.04), 0 32px 64px -24px rgba(60,40,140,.28);
+  /* claude.ai preview surface */
+  --cl-bg:#F5F4EE; --cl-card:#FFFDF9; --cl-ink:#1F1E1B; --cl-ink-2:#6B6862;
+  --cl-line:#E4E1D8; --cl-accent:#C96442; --cl-warn:#FBF3E4; --cl-warn-line:#EAD9B8; --cl-warn-ink:#8A6320;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--white);color:var(--ink-2);
+  font-family:"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+p{margin:0}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+input{font:inherit}
+:focus-visible{outline:2px solid var(--purple);outline-offset:3px;border-radius:4px}
+
+/* ---------- announcement + nav ---------- */
+.announce{background:var(--near-black);color:#CFC9E4;display:flex;justify-content:center;align-items:center;
+  gap:14px;flex-wrap:wrap;padding:9px 20px;font-size:13px;font-weight:500}
+.announce b{color:var(--white);font-weight:700}
+.announce .chip{background:rgba(255,255,255,.12);color:var(--white);padding:3px 11px;border-radius:99px;font-size:12px;font-weight:600}
+.nav{display:flex;align-items:center;gap:28px;max-width:1180px;margin:0 auto;padding:20px 28px}
+.brand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:19px;color:var(--ink);letter-spacing:-.02em}
+.navlinks{display:flex;gap:26px;margin-left:16px}
+.navlinks a{color:var(--ink-2);text-decoration:none;font-size:14.5px;font-weight:500}
+.navlinks a:hover{color:var(--ink)}
+.navlinks a.on{color:var(--purple);font-weight:700}
+.navright{margin-left:auto;display:flex;align-items:center;gap:16px}
+.navright a{color:var(--ink-2);text-decoration:none;font-size:14.5px;font-weight:600}
+.btn-dark{background:var(--near-black);color:var(--white);padding:10px 19px;border-radius:99px;
+  font-size:14px;font-weight:700;text-decoration:none;display:inline-block}
+.btn-dark:hover{background:#241F38}
+@media (max-width:980px){.navlinks,.navright a:not(.btn-dark){display:none}}
+
+/* ---------- hero ---------- */
+.hero{background:
+    radial-gradient(900px 420px at 50% -60px, var(--lav-deep) 0%, rgba(223,216,251,0) 72%),
+    linear-gradient(180deg, var(--lav-mid) 0%, var(--lav-pale) 46%, var(--white) 100%);
+  padding:34px 24px 0}
+.hero-in{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:22px;text-align:center}
+.stack{display:flex;align-items:center;justify-content:center;height:96px}
+.tile{width:60px;height:60px;border-radius:15px;display:grid;place-items:center;background:var(--white);margin:0 -9px;
+  box-shadow:0 6px 18px -6px rgba(40,25,90,.35), 0 1px 2px rgba(40,25,90,.2)}
+.tile:nth-child(1){transform:rotate(-9deg) scale(.86)}
+.tile:nth-child(2){transform:rotate(-6deg) scale(.92)}
+.tile:nth-child(3){transform:rotate(-3deg) scale(.97)}
+.tile.hero-tile{width:82px;height:82px;border-radius:20px;background:var(--green);transform:none;margin:0 -6px;z-index:2;
+  box-shadow:0 12px 30px -8px rgba(18,192,138,.55), 0 1px 3px rgba(20,60,50,.3)}
+.tile:nth-child(5){transform:rotate(3deg) scale(.97)}
+.tile:nth-child(6){transform:rotate(6deg) scale(.92)}
+.tile:nth-child(7){transform:rotate(9deg) scale(.86)}
+h1{margin:0;color:var(--ink);font-weight:800;font-size:clamp(34px,5.4vw,60px);line-height:1.03;
+  letter-spacing:-.035em;text-wrap:balance;max-width:17ch}
+h1 i{font-style:italic;font-weight:800;color:var(--purple)}
+.sub{font-size:18px;color:var(--ink-2);max-width:58ch;text-wrap:balance}
+.trial{display:inline-flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:center;background:var(--white);
+  border:1px solid var(--line-2);border-radius:99px;padding:9px 10px 9px 18px;font-size:14.5px;font-weight:600;
+  color:var(--ink);box-shadow:var(--sh-sm)}
+.trial .badge{background:var(--green-soft);color:var(--green-ink);border-radius:99px;padding:4px 11px;
+  font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase}
+
+/* ---------- connector card ---------- */
+.shell{max-width:1180px;margin:44px auto 0;padding:0 24px}
+.card{background:var(--white);border:1px solid var(--line);border-radius:24px;box-shadow:var(--sh-lg);overflow:hidden}
+.rail{display:flex;align-items:center;gap:8px;padding:14px 16px;flex-wrap:wrap;border-bottom:1px solid var(--line);
+  background:linear-gradient(180deg,#FCFBFF,var(--white))}
+.tab{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:99px;font-size:14px;
+  font-weight:600;color:var(--ink-2);white-space:nowrap;transition:background .15s,color .15s}
+.tab:hover{background:var(--purple-soft);color:var(--ink)}
+.tab.on{background:var(--near-black);color:var(--white);box-shadow:var(--sh-sm)}
+.tab.on:hover{background:var(--near-black);color:var(--white)}
+.modes{margin-left:auto;display:flex;gap:4px;background:var(--lav-mid);border-radius:99px;padding:4px}
+.mode{display:inline-flex;align-items:center;gap:7px;padding:6px 15px;border-radius:99px;font-size:13px;font-weight:700;color:var(--ink-3)}
+.mode.on{background:var(--white);color:var(--ink);box-shadow:var(--sh-sm)}
+
+.steps{display:grid;grid-template-columns:repeat(3,1fr);background:var(--line)}
+.steps[data-n="2"]{grid-template-columns:repeat(2,1fr)}
+.step{background:var(--white);padding:30px 28px 28px;display:flex;flex-direction:column;gap:11px;min-height:276px}
+.step + .step{border-left:1px solid var(--line)}
+.num{width:28px;height:28px;border-radius:99px;display:grid;place-items:center;background:var(--lav-mid);color:var(--ink);
+  font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:13px;font-weight:600}
+.step h3{margin:8px 0 0;color:var(--ink);font-size:19px;font-weight:700;letter-spacing:-.018em;line-height:1.28;
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.step h3 .mk{width:22px;height:22px;border-radius:6px;background:var(--green);display:grid;place-items:center;flex:0 0 auto}
+.step p{font-size:14.5px;color:var(--ink-2);line-height:1.55}
+.step .foot{margin-top:auto;padding-top:20px}
+@media (max-width:860px){
+  .steps,.steps[data-n="2"]{grid-template-columns:1fr}
+  .step + .step{border-left:0;border-top:1px solid var(--line)}
+  .step{min-height:0}
+}
+
+.urlfield{display:flex;align-items:center;gap:10px;width:100%;background:var(--lav-pale);
+  border:1px solid var(--line-2);border-radius:11px;padding:11px 12px 11px 15px}
+.urlfield code{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:13.5px;color:var(--ink);
+  overflow-x:auto;white-space:nowrap;flex:1;scrollbar-width:thin}
+.copy{flex:0 0 auto;width:32px;height:32px;border-radius:8px;display:grid;place-items:center;color:var(--ink-3);
+  background:var(--white);border:1px solid var(--line-2);transition:.15s}
+.copy:hover{color:var(--purple);border-color:var(--purple)}
+.copy.done{color:var(--green);border-color:var(--green);background:var(--green-soft)}
+
+.prompt{position:relative;background:var(--code-bg);border-radius:13px;padding:16px 46px 16px 18px;
+  font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12.6px;line-height:1.72;color:var(--code-ink);
+  white-space:pre-wrap;overflow-x:auto;text-align:left}
+.prompt em{font-style:normal;color:var(--code-hi)}
+.prompt .dim{color:#6E6885}
+.prompt .copy{position:absolute;top:11px;right:11px;background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.14);color:#9A93AE}
+.prompt .copy:hover{color:var(--code-hi);border-color:var(--code-hi)}
+.prompt .copy.done{color:var(--code-hi);border-color:var(--code-hi);background:rgba(91,227,176,.14)}
+
+.btn-ghost{display:inline-flex;align-items:center;gap:9px;padding:11px 18px;border-radius:11px;
+  border:1px solid var(--line-2);background:var(--white);color:var(--ink);font-size:14.5px;font-weight:600;
+  text-decoration:none;box-shadow:var(--sh-sm);transition:.15s}
+.btn-ghost:hover{border-color:var(--purple);color:var(--purple)}
+.btn-primary{display:inline-flex;align-items:center;gap:9px;padding:12px 22px;border-radius:11px;background:var(--purple);
+  color:var(--white);font-size:14.5px;font-weight:700;text-decoration:none;
+  box-shadow:0 8px 20px -8px rgba(109,74,224,.7);transition:.15s}
+.btn-primary:hover{background:var(--purple-dark)}
+
+.undercard{display:flex;justify-content:center;align-items:center;gap:20px;flex-wrap:wrap;padding:20px 24px 0;
+  font-size:14px;color:var(--ink-3)}
+.undercard a{color:var(--ink-2);text-decoration:none;font-weight:600;display:inline-flex;align-items:center;gap:6px}
+.undercard a:hover{color:var(--purple)}
+.dot{color:var(--line-2)}
+
+/* ---------- packs ---------- */
+.packs{max-width:1180px;margin:0 auto;padding:64px 24px 76px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center}
+.packs h2{margin:0;color:var(--ink);font-size:27px;font-weight:800;letter-spacing:-.028em;text-wrap:balance}
+.packs h2 i{font-style:italic;color:var(--purple)}
+.packrow{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:18px}
+.pack{display:inline-flex;align-items:center;gap:10px;padding:11px 17px;border-radius:99px;background:var(--white);
+  border:1px solid var(--line-2);box-shadow:var(--sh-sm);font-size:14.5px;font-weight:600;color:var(--ink);transition:.15s}
+.pack:hover{border-color:var(--purple);color:var(--purple);transform:translateY(-1px)}
+.pack .pk{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;font-weight:600;color:var(--ink-3);letter-spacing:.04em}
+.pack:hover .pk{color:var(--purple)}
+
+/* ---------- prototype note ---------- */
+.proto{max-width:1180px;margin:0 auto;padding:0 24px 56px}
+.proto-in{border:1px dashed var(--line-2);border-radius:14px;background:var(--lav-pale);padding:16px 20px;
+  font-size:13.5px;color:var(--ink-3);display:flex;gap:12px;align-items:flex-start}
+.proto-in b{color:var(--ink-2);font-weight:700}
+
+/* ---------- claude connector modal preview ---------- */
+.overlay{position:fixed;inset:0;z-index:60;background:rgba(16,12,32,.55);backdrop-filter:blur(3px);
+  display:none;align-items:center;justify-content:center;padding:24px}
+.overlay.open{display:flex}
+.win{width:100%;max-width:660px;background:var(--cl-bg);border-radius:16px;overflow:hidden;
+  box-shadow:0 40px 90px -20px rgba(10,6,30,.6);border:1px solid rgba(0,0,0,.16)}
+.winbar{display:flex;align-items:center;gap:12px;padding:11px 14px;background:#EDEBE3;border-bottom:1px solid var(--cl-line)}
+.dots{display:flex;gap:6px;flex:0 0 auto}
+.dots i{width:11px;height:11px;border-radius:99px;display:block}
+.urlpill{flex:1;background:#FFFDF9;border:1px solid var(--cl-line);border-radius:8px;padding:5px 12px;
+  font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;color:var(--cl-ink-2);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.prevchip{background:var(--purple-soft);color:var(--purple);border-radius:99px;padding:3px 10px;font-size:10.5px;
+  font-weight:700;letter-spacing:.09em;text-transform:uppercase;flex:0 0 auto}
+.xbtn{flex:0 0 auto;width:26px;height:26px;border-radius:7px;display:grid;place-items:center;color:var(--cl-ink-2)}
+.xbtn:hover{background:rgba(0,0,0,.07);color:var(--cl-ink)}
+.winbody{padding:34px 26px 38px;display:grid;place-items:center}
+.dialog{width:100%;max-width:470px;background:var(--cl-card);border:1px solid var(--cl-line);border-radius:14px;
+  padding:24px;display:flex;flex-direction:column;gap:16px;box-shadow:0 8px 26px -14px rgba(31,30,27,.3)}
+.dialog h4{margin:0;font-size:19px;font-weight:700;color:var(--cl-ink);letter-spacing:-.015em}
+.warn{background:var(--cl-warn);border:1px solid var(--cl-warn-line);border-radius:9px;padding:11px 13px;
+  font-size:12.8px;line-height:1.5;color:var(--cl-warn-ink);display:flex;gap:9px;align-items:flex-start}
+.warn a{color:var(--cl-warn-ink);font-weight:700}
+.fld{display:flex;flex-direction:column;gap:6px}
+.fld label{font-size:12.5px;font-weight:600;color:var(--cl-ink-2)}
+.fld input{background:#FFF;border:1px solid var(--cl-line);border-radius:9px;padding:10px 12px;font-size:14px;
+  color:var(--cl-ink);font-family:"IBM Plex Mono",ui-monospace,monospace;width:100%}
+.fld input:focus{outline:2px solid var(--cl-accent);outline-offset:1px;border-color:transparent}
+.adv{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:var(--cl-ink-2);padding:2px 0}
+.adv:hover{color:var(--cl-ink)}
+.dlgfoot{display:flex;justify-content:flex-end;gap:10px;padding-top:4px}
+.cl-ghost{padding:9px 17px;border-radius:9px;border:1px solid var(--cl-line);background:#FFF;color:var(--cl-ink);font-size:14px;font-weight:600}
+.cl-ghost:hover{background:#F3F1EA}
+.cl-primary{padding:9px 21px;border-radius:9px;background:var(--cl-accent);color:#FFF;font-size:14px;font-weight:700}
+.cl-primary:hover{background:#B25636}
+.okwrap{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;padding:8px 0 2px}
+.okmark{width:46px;height:46px;border-radius:99px;background:var(--green-soft);display:grid;place-items:center}
+.okwrap h4{font-size:18px}
+.okwrap p{font-size:13.8px;color:var(--cl-ink-2);max-width:34ch;line-height:1.55}
+
+/* ---------- flow screens ---------- */
+.win.wide{max-width:840px}
+.winbody.flush{padding:0;display:block}
+.backbtn{flex:0 0 auto;width:26px;height:26px;border-radius:7px;display:none;place-items:center;color:var(--cl-ink-2)}
+.backbtn.show{display:grid}
+.backbtn:hover{background:rgba(0,0,0,.07);color:var(--cl-ink)}
+
+/* salesai auth surface */
+.auth{background:linear-gradient(180deg,var(--lav-mid),var(--white));padding:36px 26px 42px;display:grid;place-items:center}
+.authcard{width:100%;max-width:440px;background:var(--white);border:1px solid var(--line);border-radius:16px;
+  padding:26px;display:flex;flex-direction:column;gap:15px;box-shadow:var(--sh-sm)}
+.authhead{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
+.authhead h4{margin:0;font-size:20px;font-weight:800;color:var(--ink);letter-spacing:-.022em}
+.authhead p{font-size:13.8px;color:var(--ink-2);max-width:36ch;line-height:1.5}
+.logomark{width:40px;height:40px;border-radius:11px;background:var(--green);display:grid;place-items:center}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+@media (max-width:560px){.row2{grid-template-columns:1fr}}
+.f{display:flex;flex-direction:column;gap:5px}
+.f label{font-size:12px;font-weight:700;color:var(--ink-2);letter-spacing:.01em}
+.f input,.f select{background:var(--white);border:1px solid var(--line-2);border-radius:9px;padding:10px 11px;
+  font-size:14px;color:var(--ink);width:100%;font-family:inherit}
+.f input:focus,.f select:focus{outline:2px solid var(--purple);outline-offset:1px;border-color:transparent}
+.tiernote{display:flex;gap:9px;align-items:flex-start;background:var(--green-soft);border-radius:9px;padding:10px 12px;
+  font-size:12.4px;line-height:1.5;color:var(--green-ink)}
+.tiernote b{font-weight:800}
+.wfull{width:100%;justify-content:center}
+.finetext{font-size:11.6px;color:var(--ink-3);text-align:center;line-height:1.5}
+
+/* consent */
+.scopes{display:flex;flex-direction:column;gap:0;border:1px solid var(--line);border-radius:11px;overflow:hidden}
+.scope{display:flex;gap:11px;align-items:flex-start;padding:12px 14px;font-size:13.4px;color:var(--ink-2);line-height:1.45}
+.scope + .scope{border-top:1px solid var(--line)}
+.scope b{display:block;color:var(--ink);font-size:13.6px;font-weight:700}
+.scope svg{flex:0 0 auto;margin-top:2px;color:var(--green)}
+.handshake{display:flex;align-items:center;justify-content:center;gap:14px;padding:2px 0 4px}
+.hs{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;border:1px solid var(--line)}
+.hsdots{display:flex;gap:4px}
+.hsdots i{width:5px;height:5px;border-radius:99px;background:var(--line-2);display:block}
+
+/* provisioning */
+.prov{display:flex;flex-direction:column;gap:0;border:1px solid var(--line);border-radius:11px;overflow:hidden}
+.provrow{display:flex;gap:11px;align-items:center;padding:12px 14px;font-size:13.6px;color:var(--ink-3)}
+.provrow + .provrow{border-top:1px solid var(--line)}
+.provrow .ic{width:19px;height:19px;flex:0 0 auto;display:grid;place-items:center}
+.provrow.on{color:var(--ink)}
+.provrow.done{color:var(--ink)}
+.provrow .meta{margin-left:auto;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11.5px;color:var(--ink-3);white-space:nowrap}
+.spin{width:15px;height:15px;border-radius:99px;border:2px solid var(--line-2);border-top-color:var(--purple);animation:sp .7s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+/* claude chat */
+.chat{background:#FAF9F5;display:flex;flex-direction:column;height:520px}
+.chattop{display:flex;align-items:center;gap:9px;padding:11px 16px;border-bottom:1px solid var(--cl-line);
+  font-size:13.5px;font-weight:700;color:var(--cl-ink)}
+.connchip{margin-left:auto;display:inline-flex;align-items:center;gap:6px;background:var(--green-soft);color:var(--green-ink);
+  border-radius:99px;padding:4px 10px;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.chatscroll{flex:1;overflow-y:auto;padding:20px 18px;display:flex;flex-direction:column;gap:16px}
+.msg{max-width:88%;font-size:14.2px;line-height:1.6}
+.msg.user{align-self:flex-end;background:#EFEDE4;border:1px solid var(--cl-line);border-radius:14px 14px 4px 14px;
+  padding:11px 14px;color:var(--cl-ink)}
+.msg.ai{align-self:flex-start;color:var(--cl-ink-2);display:flex;flex-direction:column;gap:11px}
+.msg.ai b{color:var(--cl-ink)}
+.tool{display:flex;align-items:center;gap:10px;background:#FFFDF9;border:1px solid var(--cl-line);border-radius:10px;
+  padding:9px 12px;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11.8px;color:var(--cl-ink-2)}
+.tool .nm{color:var(--cl-ink);font-weight:600}
+.tool .res{margin-left:auto;color:var(--green-ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:46%}
+.agentcard{background:var(--green-soft);border:1px solid #B7E9D6;border-radius:13px;padding:16px;display:flex;
+  flex-direction:column;gap:12px}
+.agentcard .anm{font-family:"Plus Jakarta Sans",sans-serif;font-size:15.5px;font-weight:800;color:#0A5F45;letter-spacing:-.015em}
+.agentline{display:flex;align-items:center;gap:9px;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12.6px;color:#0A5F45}
+.agentline .lbl{color:#3E8A72;min-width:58px}
+.callnow{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--green);color:#fff;
+  border-radius:10px;padding:10px 16px;font-family:"Plus Jakarta Sans",sans-serif;font-size:13.8px;font-weight:700;align-self:flex-start}
+.callnow:hover{background:#0DA576}
+.chatinput{border-top:1px solid var(--cl-line);padding:12px 16px 14px;display:flex;gap:10px;align-items:center}
+.chatinput .box{flex:1;background:#FFFDF9;border:1px solid var(--cl-line);border-radius:11px;padding:11px 13px;
+  font-size:13.6px;color:#A8A49A}
+.chatinput .send{width:34px;height:34px;border-radius:9px;background:var(--cl-accent);color:#fff;display:grid;place-items:center;flex:0 0 auto}
+.restart{display:flex;justify-content:center;padding:0 16px 16px}
+.restart button{font-size:12.5px;font-weight:700;color:var(--cl-ink-2);display:inline-flex;align-items:center;gap:7px}
+.restart button:hover{color:var(--cl-accent)}
+
+
+/* ---------- chat: streaming, discovery, call ---------- */
+.chat{height:560px}
+.msg{opacity:0;transform:translateY(6px);animation:rise .34s cubic-bezier(.2,.7,.3,1) forwards}
+@keyframes rise{to{opacity:1;transform:none}}
+.typing{align-self:flex-start;display:inline-flex;gap:4px;padding:10px 2px}
+.typing i{width:6px;height:6px;border-radius:99px;background:#C3BFB4;display:block;animation:bob 1.1s ease-in-out infinite}
+.typing i:nth-child(2){animation-delay:.16s}
+.typing i:nth-child(3){animation-delay:.32s}
+@keyframes bob{0%,60%,100%{opacity:.35;transform:translateY(0)}30%{opacity:1;transform:translateY(-4px)}}
+
+.tool{opacity:0;animation:rise .3s ease forwards}
+.tool .res{opacity:0;transition:opacity .25s}
+.tool.settled .res{opacity:1}
+.tool .tspin{width:12px;height:12px;border-radius:99px;border:2px solid var(--cl-line);border-top-color:var(--cl-accent);
+  animation:sp .7s linear infinite;flex:0 0 auto}
+.tool.settled .tspin{display:none}
+.tool .tok{display:none;color:var(--green);flex:0 0 auto}
+.tool.settled .tok{display:block}
+
+/* quick replies — the prototype is clickable, not a movie */
+.qr{display:flex;flex-wrap:wrap;gap:8px;align-self:flex-end;justify-content:flex-end;max-width:88%}
+.qr button{background:#FFFDF9;border:1px solid var(--cl-line);border-radius:99px;padding:8px 15px;font-size:13.4px;
+  font-weight:600;color:var(--cl-ink);transition:.15s;box-shadow:0 1px 2px rgba(31,30,27,.04)}
+.qr button:hover{border-color:var(--cl-accent);color:var(--cl-accent);transform:translateY(-1px)}
+.qlabel{align-self:flex-end;font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#A8A49A}
+
+/* authentic claude composer */
+.composer{border-top:1px solid var(--cl-line);padding:12px 16px 14px;background:#FAF9F5}
+.cbox{background:#FFFDF9;border:1px solid var(--cl-line);border-radius:14px;box-shadow:0 1px 3px rgba(31,30,27,.05);
+  display:flex;flex-direction:column;overflow:hidden}
+.cbox textarea{border:0;background:none;resize:none;outline:none;padding:13px 15px 4px;font:inherit;font-size:14px;
+  color:var(--cl-ink);min-height:44px;max-height:110px;font-family:"Plus Jakarta Sans",sans-serif}
+.cbox textarea::placeholder{color:#A8A49A}
+.crow{display:flex;align-items:center;gap:7px;padding:6px 9px 9px}
+.cbtn{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;color:#8C887E;transition:.15s;flex:0 0 auto}
+.cbtn:hover{background:#F1EFE7;color:var(--cl-ink)}
+.cmodel{margin-left:auto;display:inline-flex;align-items:center;gap:5px;padding:6px 9px;border-radius:8px;
+  font-size:12.6px;font-weight:600;color:#6B6862;transition:.15s}
+.cmodel:hover{background:#F1EFE7;color:var(--cl-ink)}
+.csend{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;flex:0 0 auto;transition:.15s}
+.csend.live{background:var(--cl-accent);color:#fff}
+.csend.live:hover{background:#B25636}
+.csend.idle{background:#E7E4DB;color:#B4B0A6;cursor:not-allowed}
+
+/* ---------- the call ---------- */
+.callwrap{position:absolute;inset:0;z-index:5;background:linear-gradient(170deg,#12101B,#241F38 60%,#1A1729);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;padding:26px;
+  animation:rise .3s ease forwards;opacity:0}
+.callhead{text-align:center;display:flex;flex-direction:column;align-items:center;gap:7px}
+.callwho{color:#fff;font-size:19px;font-weight:800;letter-spacing:-.02em}
+.callnum{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:13px;color:#9A93AE}
+.callstat{font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green);
+  display:inline-flex;align-items:center;gap:7px}
+.callstat.ringing{color:#C0B8E0}
+.callstat .pip{width:6px;height:6px;border-radius:99px;background:currentColor;animation:pulse 1.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.35}50%{opacity:1}}
+.wave{display:flex;align-items:center;justify-content:center;gap:3px;height:44px;margin:20px 0 4px}
+.wave i{width:3px;border-radius:99px;background:var(--green);display:block;height:6px;opacity:.85}
+.wave.live i{animation:wv .9s ease-in-out infinite}
+@keyframes wv{0%,100%{height:5px}50%{height:var(--h,20px)}}
+.calltime{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:26px;color:#fff;font-variant-numeric:tabular-nums;
+  letter-spacing:.02em}
+.transcript{width:100%;max-width:420px;margin-top:20px;display:flex;flex-direction:column;gap:9px;
+  max-height:150px;overflow-y:auto}
+.tline{font-size:13.4px;line-height:1.5;opacity:0;animation:rise .3s ease forwards;display:flex;gap:9px}
+.tline .who{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10.5px;font-weight:600;letter-spacing:.06em;
+  text-transform:uppercase;flex:0 0 52px;padding-top:3px}
+.tline.agent .who{color:var(--green)}
+.tline.agent{color:#DCD7EC}
+.tline.you .who{color:#8C86A3}
+.tline.you{color:#9A93AE}
+.endcall{margin-top:22px;display:inline-flex;align-items:center;gap:9px;background:#E5484D;color:#fff;border-radius:99px;
+  padding:11px 22px;font-size:14px;font-weight:700;transition:.15s}
+.endcall:hover{background:#CC3B40}
+
+/* post-call receipt + the wall */
+.receipt{background:#FFFDF9;border:1px solid var(--cl-line);border-radius:13px;padding:15px;display:flex;
+  flex-direction:column;gap:11px}
+.rrow{display:flex;align-items:center;gap:10px;font-size:13.4px;color:var(--cl-ink-2)}
+.rrow .rv{margin-left:auto;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12.6px;color:var(--cl-ink);
+  font-variant-numeric:tabular-nums}
+.meter{height:6px;border-radius:99px;background:#EDEAE1;overflow:hidden}
+.meter i{display:block;height:100%;border-radius:99px;background:var(--green);width:0;transition:width 1.1s cubic-bezier(.2,.7,.3,1)}
+.wall{background:var(--purple-soft);border:1px solid #DDD2FB;border-radius:13px;padding:15px;display:flex;
+  flex-direction:column;gap:10px}
+.wall h5{margin:0;font-size:14.5px;font-weight:800;color:var(--ink);letter-spacing:-.015em}
+.wall p{font-size:13.2px;color:var(--ink-2);line-height:1.5}
+.wallbtn{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;background:var(--purple);color:#fff;
+  border-radius:10px;padding:10px 17px;font-size:13.6px;font-weight:700;transition:.15s}
+.wallbtn:hover{background:var(--purple-dark)}
+@media (prefers-reduced-motion:reduce){
+  .msg,.tool,.callwrap,.tline{animation:none;opacity:1;transform:none}
+  .wave.live i,.typing i,.callstat .pip{animation:none}
+}
+
+/* ---------- checkout ---------- */
+.co{background:linear-gradient(180deg,var(--lav-mid),var(--white));padding:26px;min-height:520px}
+.co-in{max-width:760px;margin:0 auto;display:grid;grid-template-columns:1fr 268px;gap:22px;align-items:start}
+@media (max-width:760px){.co-in{grid-template-columns:1fr}}
+.co-head{grid-column:1/-1;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;margin-bottom:2px}
+.co-head h4{margin:0;font-size:21px;font-weight:800;color:var(--ink);letter-spacing:-.024em}
+.co-head p{font-size:13.8px;color:var(--ink-2);max-width:44ch;line-height:1.5}
+.grp{display:flex;flex-direction:column;gap:9px;margin-bottom:20px}
+.grp > .gl{display:flex;align-items:baseline;gap:8px}
+.gl b{font-size:13px;font-weight:800;color:var(--ink);letter-spacing:-.01em}
+.gl span{font-size:11.5px;color:var(--ink-3);font-weight:600}
+.opts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+@media (max-width:560px){.opts{grid-template-columns:1fr}}
+.opt{background:var(--white);border:1.5px solid var(--line-2);border-radius:11px;padding:12px 13px;text-align:left;
+  display:flex;flex-direction:column;gap:3px;transition:.14s;position:relative}
+.opt:hover{border-color:var(--purple);transform:translateY(-1px)}
+.opt.on{border-color:var(--purple);background:var(--purple-soft);box-shadow:0 0 0 3px rgba(109,74,224,.1)}
+.opt .on-t{font-size:13.6px;font-weight:800;color:var(--ink);letter-spacing:-.015em}
+.opt .on-p{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12.4px;color:var(--purple);font-weight:600}
+.opt .on-s{font-size:11.4px;color:var(--ink-3);line-height:1.35}
+.opt .pick{position:absolute;top:9px;right:9px;width:15px;height:15px;border-radius:99px;display:none;
+  place-items:center;background:var(--purple);color:#fff}
+.opt.on .pick{display:grid}
+
+.card-f{display:flex;flex-direction:column;gap:9px}
+.cardbox{background:var(--white);border:1px solid var(--line-2);border-radius:11px;padding:12px 13px;display:flex;
+  flex-direction:column;gap:9px}
+.cardrow{display:flex;gap:9px}
+.cardrow .f{flex:1}
+.f input.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;letter-spacing:.04em}
+.brands{display:flex;gap:5px;margin-left:auto}
+.brands i{width:26px;height:17px;border-radius:3px;display:block;background:var(--line-2)}
+
+/* summary rail */
+.sum{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:17px;display:flex;
+  flex-direction:column;gap:11px;box-shadow:var(--sh-sm);position:sticky;top:0}
+.sum h5{margin:0;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.sline{display:flex;align-items:baseline;gap:10px;font-size:13.2px;color:var(--ink-2)}
+.sline .sv{margin-left:auto;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12.8px;color:var(--ink);
+  font-variant-numeric:tabular-nums}
+.srule{height:1px;background:var(--line);margin:3px 0}
+.stotal{display:flex;align-items:baseline;gap:10px}
+.stotal b{font-size:13.4px;color:var(--ink);font-weight:800}
+.stotal .sv{margin-left:auto;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:20px;font-weight:600;
+  color:var(--ink);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.sfine{font-size:11.3px;color:var(--ink-3);line-height:1.45}
+.paybtn{width:100%;justify-content:center;margin-top:2px}
+.paybtn[disabled]{opacity:.55;cursor:not-allowed}
+
+/* success */
+.done{min-height:520px;display:grid;place-items:center;padding:30px;background:linear-gradient(180deg,var(--green-soft),var(--white));position:relative;overflow:hidden}
+.done-in{display:flex;flex-direction:column;align-items:center;gap:13px;text-align:center;max-width:400px;z-index:2}
+.bigtick{width:64px;height:64px;border-radius:99px;background:var(--green);display:grid;place-items:center;color:#fff;
+  animation:pop .5s cubic-bezier(.2,1.4,.4,1) forwards;transform:scale(.4);opacity:0}
+@keyframes pop{to{transform:scale(1);opacity:1}}
+.done-in h4{margin:0;font-size:23px;font-weight:800;color:var(--ink);letter-spacing:-.028em}
+.done-in p{font-size:14.2px;color:var(--ink-2);line-height:1.55}
+.rcpt{width:100%;background:var(--white);border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;
+  flex-direction:column;gap:8px;text-align:left}
+.conf{position:absolute;width:8px;height:13px;border-radius:2px;top:-20px;animation:fall linear forwards;z-index:1}
+@keyframes fall{to{transform:translateY(560px) rotate(var(--r,540deg));opacity:0}}
+@media (prefers-reduced-motion:reduce){.bigtick{animation:none;transform:none;opacity:1}.conf{display:none}}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important}.spin{animation:none}}
+</style>
+
+<div class="announce">
+  <span><b>New</b> · The SalesAi MCP is live for partners — build a client agent from any assistant</span>
+  <span class="chip">Read the docs</span>
+</div>
+
+<nav class="nav">
+  <div class="brand">
+    <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><rect width="26" height="26" rx="7" fill="#12C08A"/><path d="M8 16.5c1.6 1.2 3 1.7 4.6 1.7 2.2 0 3.4-1 3.4-2.3 0-1.4-1.3-1.9-3.6-2.4-2.6-.6-4.2-1.5-4.2-3.6C8.2 7.6 10.1 6 13 6c1.8 0 3.2.5 4.4 1.4" stroke="#fff" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+    SalesAi
+  </div>
+  <div class="navlinks">
+    <a href="#">Product</a><a href="#">Use Cases</a><a href="#">Integrations</a><a href="#" class="on">Partners</a><a href="#">About Us</a>
+  </div>
+  <div class="navright"><a href="#">Login</a><a href="#" class="btn-dark">Talk to an agent</a></div>
+</nav>
+
+<header class="hero">
+  <div class="hero-in">
+    <div class="stack" id="stack" aria-hidden="true"></div>
+    <h1 id="h1"></h1>
+    <p class="sub" id="sub"></p>
+    <div class="trial">
+      <span>Connect the MCP and get a 3-day sandbox</span>
+      <span class="badge">100 free minutes</span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <div class="card">
+    <div class="rail">
+      <div id="tabs" style="display:flex;gap:8px;flex-wrap:wrap"></div>
+      <div class="modes">
+        <button class="mode on" data-mode="mcp"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 8l-4 4 4 4M17 8l4 4-4 4M14 5l-4 14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"/></svg>MCP</button>
+        <button class="mode" data-mode="cli"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7l4 5-4 5M12 17h8" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>CLI</button>
+      </div>
+    </div>
+    <div class="steps" id="steps"></div>
+  </div>
+  <div class="undercard">
+    <span id="hint"></span><span class="dot">·</span><a href="#">Docs</a><span class="dot">·</span><a href="#">GitHub</a>
+  </div>
+</div>
+
+<section class="packs">
+  <h2>Or start from a <i>vertical pack</i></h2>
+  <p class="sub">The pack runs discovery — it knows what to ask a dental group that it wouldn't ask an HVAC distributor. You answer in chat, the agent ships.</p>
+  <div class="packrow">
+    <button class="pack">Dental front desk <span class="pk">v2.4</span></button>
+    <button class="pack">HVAC dispatch <span class="pk">v1.9</span></button>
+    <button class="pack">Med spa intake <span class="pk">v1.2</span></button>
+    <button class="pack">Home services follow-up <span class="pk">v3.0</span></button>
+    <button class="pack">Collections <span class="pk">v1.1</span></button>
+    <button class="pack">Build your own <span class="pk">SDK</span></button>
+  </div>
+</section>
+
+<div class="proto">
+  <div class="proto-in">
+    <svg width="16" height="16" viewBox="0 0 24 24" style="flex:0 0 auto;margin-top:3px" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" fill="none"/><path d="M12 8v5M12 16h.01" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+    <span><b>Prototype.</b> Higgsfield's connect-page layout on the SalesAi hero. The seven client tabs, the MCP/CLI toggle, the copy buttons and the Claude connector preview are all live — click through them. Everything else is a placeholder.</span>
+  </div>
+</div>
+
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="Claude connector preview">
+  <div class="win">
+    <div class="winbar">
+      <div class="dots"><i style="background:#F0685E"></i><i style="background:#F5BE4F"></i><i style="background:#61C554"></i></div>
+      <button class="backbtn" id="backbtn" data-back aria-label="Back"><svg width="15" height="15" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></button>
+      <div class="urlpill" id="urlpill">claude.ai/customize/connectors?modal=add-custom-connector</div>
+      <span class="prevchip">Preview</span>
+      <button class="xbtn" data-close aria-label="Close preview"><svg width="15" height="15" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button>
+    </div>
+    <div class="winbody" id="winbody"></div>
+  </div>
+</div>
+
+<script>
+const URL_MCP = 'https://mcp.salesai.com/mcp';
+const MK = '<span class="mk"><svg width="13" height="13" viewBox="0 0 26 26"><path d="M8 16.5c1.6 1.2 3 1.7 4.6 1.7 2.2 0 3.4-1 3.4-2.3 0-1.4-1.3-1.9-3.6-2.4-2.6-.6-4.2-1.5-4.2-3.6C8.2 7.6 10.1 6 13 6c1.8 0 3.2.5 4.4 1.4" stroke="#fff" stroke-width="2.6" stroke-linecap="round" fill="none"/></svg></span>';
+
+const I = {
+  claude:'<svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6L5.6 18.4" stroke="#D97757" stroke-width="2.6" stroke-linecap="round"/></svg>',
+  grok:'<svg width="16" height="16" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="#1A1A1E"/><path d="M9 15l7-7M12.5 8H16v3.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>',
+  chatgpt:'<svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 3.2l7.6 4.4v8.8L12 20.8 4.4 16.4V7.6L12 3.2z" stroke="#0F9D77" stroke-width="1.9" stroke-linejoin="round" fill="none"/><circle cx="12" cy="12" r="3" stroke="#0F9D77" stroke-width="1.9" fill="none"/></svg>',
+  cursor:'<svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 3l8 4.6v8.8L12 21l-8-4.6V7.6L12 3zM12 12l8-4.4M12 12v9M12 12L4 7.6" stroke="#2B2B33" stroke-width="1.7" stroke-linejoin="round" fill="none"/></svg>',
+  code:'<svg width="16" height="16" viewBox="0 0 24 24"><rect x="3.5" y="6" width="17" height="12" rx="2.5" fill="#D2694A"/><path d="M7.5 10.5l2.2 1.8-2.2 1.8M12.5 14.5h4" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>',
+  openclaw:'<svg width="16" height="16" viewBox="0 0 24 24"><path d="M5 19v-7a7 7 0 0114 0v7l-2.3-1.6-2.3 1.6-2.4-1.6-2.4 1.6L7.3 17.4 5 19z" fill="#E5484D"/><circle cx="9.6" cy="11.4" r="1.5" fill="#fff"/><circle cx="14.4" cy="11.4" r="1.5" fill="#fff"/></svg>',
+  hermes:'<svg width="16" height="16" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4" fill="#3B6FE0"/><path d="M8 16V9m8 7V9m-8 3.4h8" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>'
+};
+
+const H1_DEFAULT = 'SalesAi MCP &amp; CLI for <i>any</i> AI';
+const SUB_DEFAULT = "Build, provision and launch a client's voice agent from whatever assistant you already work in.";
+
+const CLIENTS = [
+  { id:'claude', name:'Claude', icon:'claude', h1:H1_DEFAULT, sub:SUB_DEFAULT, steps:[
+      { t:'Copy the '+MK+' SalesAi connector URL', d:'You will paste this into Claude in the next step.', field:URL_MCP },
+      { t:'Go to Claude → Customize', d:'In Claude desktop or claude.ai, go to Customize → Connectors. Name it SalesAi and paste the URL.', ghost:'Open Claude Customize', modal:true },
+      { t:'Connect, sign in and build', d:'Sign in with your partner account, then describe your client. The agent and its number are live in about a minute.', primary:'Build your first agent' }
+  ]},
+  { id:'grok', name:'Grok Bot', icon:'grok', h1:'SalesAi plugin for <i>Grok</i>',
+    sub:'Build and launch client voice agents without leaving Grok.', steps:[
+      { t:'Add '+MK+' SalesAi to Grok', d:'Find SalesAi in Integrations or click the button below. Then click Add and sign in.', ghost:'Add SalesAi to Grok' },
+      { t:'Connect and start building', d:'After signing in, ask Grok to build an agent for your client.', primary:'Start building' }
+  ]},
+  { id:'chatgpt', name:'ChatGPT', icon:'chatgpt', h1:'SalesAi plugin for <i>ChatGPT</i>',
+    sub:'Build and launch client voice agents without leaving ChatGPT.', steps:[
+      { t:'Add '+MK+' SalesAi plugin to ChatGPT', d:'Find SalesAi in the Plugins Directory or click the button below. Then click Add and sign in.', ghost:'Add SalesAi plugin' },
+      { t:'Connect and start building', d:'After signing in, ask ChatGPT to build an agent for your client.', primary:'Start building' }
+  ]},
+  { id:'cursor', name:'Cursor', icon:'cursor', h1:'SalesAi plugin for <i>Cursor</i>',
+    sub:'Build and launch client voice agents without leaving your editor.', steps:[
+      { t:'Add '+MK+' SalesAi plugin to Cursor', d:'Find SalesAi in Customize → Marketplace or click the button below. Then click Add and sign in.', ghost:'Add SalesAi plugin' },
+      { t:'Connect and start building', d:'After signing in, ask Cursor to build an agent for your client.', primary:'Start building' }
+  ]},
+  { id:'code', name:'Claude Code', icon:'code', h1:H1_DEFAULT, sub:SUB_DEFAULT, steps:[
+      { t:'Copy and send this to Claude Code',
+        prompt:'Set up SalesAi for me so I can build and launch client voice agents from here.\n1. Install the CLI: run <em>npm i -g @salesai/cli</em>.\n2. Authenticate: run <em>salesai auth login</em> and complete the sign-in in the\nbrowser it opens.\n3. Install the vertical packs: run <em>npx skills add salesai/packs</em>.\n<span class="dim">Once that is done, let me know when it is ready.</span>',
+        raw:'Set up SalesAi for me so I can build and launch client voice agents from here.\n1. Install the CLI: run `npm i -g @salesai/cli`.\n2. Authenticate: run `salesai auth login` and complete the sign-in in the browser it opens.\n3. Install the vertical packs: run `npx skills add salesai/packs`.\nOnce that is done, let me know when it is ready.' },
+      { t:'Connect and start building', d:'Sign in, then ask Claude Code to build an agent for your client.', primary:'Build your first agent' }
+  ]},
+  { id:'openclaw', name:'OpenClaw', icon:'openclaw', h1:'SalesAi plugin for <i>OpenClaw</i>',
+    sub:'Build and launch client voice agents without leaving OpenClaw.', steps:[
+      { t:'Add '+MK+' SalesAi to OpenClaw', d:'Find SalesAi in the plugin registry or click the button below. Then click Add and sign in.', ghost:'Add SalesAi plugin' },
+      { t:'Connect and start building', d:'After signing in, ask OpenClaw to build an agent for your client.', primary:'Start building' }
+  ]},
+  { id:'hermes', name:'Hermes', icon:'hermes', h1:'SalesAi plugin for <i>Hermes</i>',
+    sub:'Build and launch client voice agents without leaving Hermes.', steps:[
+      { t:'Add '+MK+' SalesAi to Hermes', d:'Open Settings → Connectors, click Add, and paste the SalesAi connector URL.', ghost:'Add SalesAi plugin' },
+      { t:'Connect and start building', d:'After signing in, ask Hermes to build an agent for your client.', primary:'Start building' }
+  ]}
+];
+
+const CLI_STEPS = [
+  { t:'Install the CLI', d:'One global install. Works anywhere Node runs — your machine, a client VM, CI.', field:'npm i -g @salesai/cli' },
+  { t:'Sign in', d:'Authenticates against your partner org and picks the client sub-account you are working in.', field:'salesai auth login' },
+  { t:'Ship an agent', d:'Provisions the number, deploys the agent from a pack, and prints the share link.', field:'salesai agent create --pack dental-front-desk' }
+];
+
+const COPY_SVG='<svg width="15" height="15" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2.5" stroke="currentColor" stroke-width="2" fill="none"/><path d="M5 15V6.5A1.5 1.5 0 016.5 5H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>';
+const DONE_SVG='<svg width="15" height="15" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>';
+const EXT_SVG='<svg width="14" height="14" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 01-1 1H5a1 1 0 01-1-1V7a1 1 0 011-1h5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>';
+const GO_SVG='<svg width="15" height="15" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>';
+
+let active='claude', mode='mcp';
+const $ = id => document.getElementById(id);
+const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const cbtn = v => '<button class="copy" data-copy="'+esc(v)+'" aria-label="Copy">'+COPY_SVG+'</button>';
+
+function renderStack(){
+  const order=['claude','grok','chatgpt','cursor','code','openclaw','hermes'];
+  const bg={claude:'#F2EFE7',grok:'#F4F4F5',chatgpt:'#ECFDF6',cursor:'#F4F4F5',code:'#FFF7ED',openclaw:'#FEF2F2',hermes:'#EEF2FF'};
+  $('stack').innerHTML = order.map((k,i)=>{
+    const big = i===3;
+    return '<div class="tile'+(big?' hero-tile':'')+'"'+(big?'':' style="background:'+bg[k]+'"')+'>'+
+      (big ? '<svg width="34" height="34" viewBox="0 0 26 26"><path d="M8 16.5c1.6 1.2 3 1.7 4.6 1.7 2.2 0 3.4-1 3.4-2.3 0-1.4-1.3-1.9-3.6-2.4-2.6-.6-4.2-1.5-4.2-3.6C8.2 7.6 10.1 6 13 6c1.8 0 3.2.5 4.4 1.4" stroke="#fff" stroke-width="2.2" stroke-linecap="round" fill="none"/></svg>'
+             : I[k].replace('width="16" height="16"','width="26" height="26"')) + '</div>';
+  }).join('');
+}
+
+function renderTabs(){
+  $('tabs').innerHTML = CLIENTS.map(c =>
+    '<button class="tab'+(c.id===active?' on':'')+'" data-client="'+c.id+'">'+I[c.icon]+c.name+'</button>').join('');
+}
+
+function stepHTML(s, i){
+  let foot='';
+  if (s.field)   foot = '<div class="urlfield"><code>'+esc(s.field)+'</code>'+cbtn(s.field)+'</div>';
+  if (s.prompt)  foot = '<div class="prompt">'+s.prompt+cbtn(s.raw)+'</div>';
+  if (s.ghost)   foot = '<button class="btn-ghost"'+(s.modal?' data-openmodal':'')+'>'+EXT_SVG+esc(s.ghost)+'</button>';
+  if (s.primary) foot = '<button class="btn-primary">'+esc(s.primary)+GO_SVG+'</button>';
+  return '<div class="step"><div class="num">'+(i+1)+'</div><h3>'+s.t+'</h3>'+
+         (s.d ? '<p>'+esc(s.d)+'</p>' : '') +
+         '<div class="foot">'+foot+'</div></div>';
+}
+
+function render(){
+  if (mode==='cli'){
+    $('h1').innerHTML = H1_DEFAULT;
+    $('sub').textContent = SUB_DEFAULT;
+    $('steps').dataset.n = 3;
+    $('steps').innerHTML = CLI_STEPS.map(stepHTML).join('');
+    $('hint').textContent = 'Prefer a connector? Switch to MCP for Claude, ChatGPT, Cursor and the rest.';
+  } else {
+    const c = CLIENTS.find(x=>x.id===active);
+    $('h1').innerHTML = c.h1;
+    $('sub').textContent = c.sub;
+    $('steps').dataset.n = c.steps.length;
+    $('steps').innerHTML = c.steps.map(stepHTML).join('');
+    $('hint').textContent = 'Working in a terminal? The CLI is faster for Claude Code and Codex.';
+  }
+}
+
+/* ---- simulated end-to-end flow ---- */
+const CHK='<svg width="16" height="16" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>';
+const LOGO='<span class="logomark"><svg width="22" height="22" viewBox="0 0 26 26"><path d="M8 16.5c1.6 1.2 3 1.7 4.6 1.7 2.2 0 3.4-1 3.4-2.3 0-1.4-1.3-1.9-3.6-2.4-2.6-.6-4.2-1.5-4.2-3.6C8.2 7.6 10.1 6 13 6c1.8 0 3.2.5 4.4 1.4" stroke="#fff" stroke-width="2.4" stroke-linecap="round" fill="none"/></svg></span>';
+const CL_MARK='<svg width="17" height="17" viewBox="0 0 24 24"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6L5.6 18.4" stroke="#D97757" stroke-width="2.6" stroke-linecap="round"/></svg>';
+
+const VERTICALS={dental:['Dental front desk','dental-front-desk','v2.4','Riverside Dental'],
+  hvac:['HVAC dispatch','hvac-dispatch','v1.9','Fulton Heating & Air'],
+  medspa:['Med spa intake','med-spa-intake','v1.2','Lumen Aesthetics'],
+  home:['Home services follow-up','home-services-followup','v3.0','Copperline Exteriors'],
+  collections:['Collections','collections','v1.1','Meridian Recovery']};
+
+let S={ name:'Dana Whitfield', email:'dana@northstarmedia.co', org:'Northstar Media', vert:'dental', size:'11–50' };
+let screen='connector', timers=[];
+
+const URLS={
+  connector:'claude.ai/customize/connectors?modal=add-custom-connector',
+  signup:'auth.salesai.com/signup?client_id=claude&redirect_uri=claude.ai',
+  consent:'auth.salesai.com/oauth/authorize?client_id=claude&scope=agents.write',
+  provision:'auth.salesai.com/oauth/provisioning',
+  checkout:'app.salesai.com/billing/go-live',
+  done:'app.salesai.com/billing/confirmed',
+  chat:'claude.ai/chat/new'
+};
+const BACK={signup:'connector',consent:'signup',chat:'consent',checkout:'chat'};
+
+/* screen 1 — Claude add custom connector */
+const scConnector = () =>
+  '<div class="dialog">'+
+    '<h4>Add custom connector</h4>'+
+    '<div class="warn"><svg width="15" height="15" viewBox="0 0 24 24" style="flex:0 0 auto;margin-top:2px"><path d="M12 4l9 16H3l9-16z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" fill="none"/><path d="M12 10v4M12 17h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>'+
+      '<span>Custom connectors are not verified by Anthropic. Only connect to services you trust. <a href="#">Learn more</a></span></div>'+
+    '<div class="fld"><label for="cn">Name</label><input id="cn" value="SalesAi"></div>'+
+    '<div class="fld"><label for="cu">Remote MCP server URL</label><input id="cu" value="'+URL_MCP+'"></div>'+
+    '<button class="adv"><svg width="12" height="12" viewBox="0 0 24 24"><path d="M8 5l8 7-8 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>Advanced settings</button>'+
+    '<div class="dlgfoot"><button class="cl-ghost" data-close>Cancel</button><button class="cl-primary" data-go="signup">Add</button></div>'+
+  '</div>';
+
+/* screen 2 — SalesAi partner sign-up */
+const scSignup = () =>
+  '<div class="auth"><div class="authcard">'+
+    '<div class="authhead">'+LOGO+'<h4>Create your partner account</h4>'+
+    '<p>Claude is connecting to SalesAi. Sandbox access is instant — no call with us.</p></div>'+
+    '<div class="row2">'+
+      '<div class="f"><label for="sn">Full name</label><input id="sn" value="'+S.name+'"></div>'+
+      '<div class="f"><label for="se">Work email</label><input id="se" value="'+S.email+'"></div>'+
+    '</div>'+
+    '<div class="f"><label for="so">Agency or company</label><input id="so" value="'+S.org+'"></div>'+
+    '<div class="row2">'+
+      '<div class="f"><label for="sv">Primary vertical</label><select id="sv">'+
+        Object.keys(VERTICALS).map(k=>'<option value="'+k+'"'+(k===S.vert?' selected':'')+'>'+VERTICALS[k][0]+'</option>').join('')+
+      '</select></div>'+
+      '<div class="f"><label for="ss">Clients you serve</label><select id="ss">'+
+        ['1–10','11–50','51–200','200+'].map(v=>'<option'+(v===S.size?' selected':'')+'>'+v+'</option>').join('')+
+      '</select></div>'+
+    '</div>'+
+    '<div class="tiernote"><span style="flex:0 0 auto;margin-top:1px">'+CHK+'</span>'+
+      '<span><b>Sandbox tier.</b> 100 free minutes on test numbers. Real numbers and outbound unlock after KYC and brand registration.</span></div>'+
+    '<button class="btn-primary wfull" data-go="consent">Create account and continue'+GO_SVG+'</button>'+
+    '<p class="finetext">By continuing you agree to the SalesAi Partner Terms. Your clients remain yours.</p>'+
+  '</div></div>';
+
+/* screen 3 — OAuth consent */
+const scConsent = () =>
+  '<div class="auth"><div class="authcard">'+
+    '<div class="handshake"><span class="hs" style="background:#F2EFE7">'+CL_MARK+'</span>'+
+      '<span class="hsdots"><i></i><i></i><i></i></span>'+LOGO+'</div>'+
+    '<div class="authhead"><h4>Claude wants to access SalesAi</h4>'+
+      '<p>Signed in as '+S.email+' · '+S.org+'</p></div>'+
+    '<div class="scopes">'+
+      '<div class="scope">'+CHK+'<span><b>Build and update agents</b>Create, edit and deploy voice agents in your client sub-accounts.</span></div>'+
+      '<div class="scope">'+CHK+'<span><b>Provision numbers</b>Assign numbers from your sandbox pool and place test calls.</span></div>'+
+      '<div class="scope">'+CHK+'<span><b>Read call records</b>Transcripts, outcomes and consent history for agents you own.</span></div>'+
+      '<div class="scope">'+CHK+'<span><b>Install vertical packs</b>Pull packs from the SalesAi library into your org.</span></div>'+
+    '</div>'+
+    '<button class="btn-primary wfull" data-go="provision">Authorize SalesAi'+GO_SVG+'</button>'+
+    '<button class="btn-ghost wfull" data-back>Cancel</button>'+
+  '</div></div>';
+
+/* screen 4 — provisioning */
+function provSteps(){
+  const v=VERTICALS[S.vert];
+  return [['Creating partner org',S.org],['Assigning sandbox number pool','3 numbers · isolated'],
+          ['Installing vertical pack',v[1]+' '+v[2]],['Issuing connector token','claude'],
+          ['Activating sandbox','100 minutes']];
+}
+const scProvision = () =>
+  '<div class="auth"><div class="authcard">'+
+    '<div class="authhead">'+LOGO+'<h4>Provisioning your account</h4>'+
+      '<p>This normally takes a few seconds.</p></div>'+
+    '<div class="prov" id="prov">'+ provSteps().map((r,i)=>
+      '<div class="provrow" data-i="'+i+'"><span class="ic"></span><span>'+r[0]+'</span><span class="meta">'+r[1]+'</span></div>').join('') +'</div>'+
+    '<button class="btn-primary wfull" id="provdone" style="display:none" data-go="chat">Return to Claude'+GO_SVG+'</button>'+
+  '</div></div>';
+
+function runProvision(){
+  const rows=[...document.querySelectorAll('#prov .provrow')];
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const finish = () => { const b=$('provdone'); if(b) b.style.display='inline-flex'; };
+  if (reduce){ rows.forEach(r=>{ r.classList.add('done'); r.querySelector('.ic').innerHTML=CHK.replace('16','16'); r.querySelector('.ic').style.color='#12C08A'; }); finish(); return; }
+  rows.forEach((r,i)=>{
+    timers.push(setTimeout(()=>{ r.classList.add('on'); r.querySelector('.ic').innerHTML='<span class="spin"></span>'; }, i*620));
+    timers.push(setTimeout(()=>{ r.classList.remove('on'); r.classList.add('done');
+      const ic=r.querySelector('.ic'); ic.innerHTML=CHK; ic.style.color='#12C08A'; }, i*620+540));
+  });
+  timers.push(setTimeout(finish, rows.length*620+240));
+}
+
+/* screen 5 — Claude chat, played as a sequence rather than rendered at once */
+const PHONE_SVG='<svg width="15" height="15" viewBox="0 0 24 24"><path d="M6.5 4h3l1.5 4-2 1.4a12 12 0 005.6 5.6L16 13l4 1.5v3a2 2 0 01-2.2 2A16 16 0 014.5 6.2 2 2 0 016.5 4z" fill="currentColor"/></svg>';
+const TICK='<svg width="12" height="12" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>';
+
+/* Per-vertical discovery. The point of the demo: the model infers most of it and
+   asks only about the things it genuinely cannot know. */
+const DISCOVERY={
+  dental:[{q:'What happens to a caller with a dental emergency after hours?',a:['Page the on-call dentist','Take details, call back at 8am']},
+          {q:'Do you want it booking straight into the schedule, or requesting?',a:['Book it directly','Request, staff confirms']}],
+  hvac:[{q:'What happens to a no-heat call after hours?',a:['Dispatch on-call tech','Book first slot tomorrow']},
+        {q:'Should it quote the diagnostic fee, or leave price to a human?',a:['Quote the fee','Leave it to a human']}],
+  medspa:[{q:'Should it answer questions about pricing for treatments?',a:['Give the range','Book a consult instead']},
+          {q:'New client intake — how much should it collect up front?',a:['Name and goal only','Full intake form']}],
+  home:[{q:'When a lead goes cold, how many follow-up attempts?',a:['Three over five days','One, then hand off']},
+        {q:'Should it text as well as call?',a:['Call then text','Calls only']}],
+  collections:[{q:'What is the hard stop on contact attempts per week?',a:['Three, FDCPA safe','Seven']},
+               {q:'Should it take payment on the call?',a:['Yes, take payment','Transfer to a human']}]
+};
+const TRANSCRIPTS={
+  dental:[['agent','Good evening, Riverside Dental. This is the front desk — how can I help?'],
+          ['you','Hi, I chipped a tooth and it really hurts.'],
+          ['agent','I am sorry — that sounds painful. Is there bleeding, or swelling in the gum?'],
+          ['you','No bleeding. Just the tooth.'],
+          ['agent','Understood. That is urgent but not an emergency, so I can get you in first thing. Dr. Alvarez has 8:20am tomorrow. Shall I hold it for you?'],
+          ['you','Yes please.'],
+          ['agent','Held. Can I take your name and a mobile number for the reminder?']],
+  hvac:[['agent','Fulton Heating and Air, this is the after-hours desk. What is going on?'],
+        ['you','My furnace has stopped. There is no heat at all.'],
+        ['agent','No heat tonight — I will treat that as urgent. Is anyone in the home elderly, or an infant?'],
+        ['you','My mother is staying with us, she is 81.'],
+        ['agent','Then I am dispatching the on-call technician rather than booking tomorrow. Can I confirm the service address?']],
+  medspa:[['agent','Lumen Aesthetics, good evening. How can I help?'],
+          ['you','I wanted to ask about your laser packages.'],
+          ['agent','Happy to help. Pricing depends on the area treated, so the honest answer is a range — most course-of-six packages sit between eleven and eighteen hundred.'],
+          ['you','That is helpful. Can I see someone first?'],
+          ['agent','Of course. Consults are complimentary. I have Thursday at 2pm or Saturday morning.']],
+  home:[['agent','Hi, this is Copperline Exteriors following up on your quote request.'],
+        ['you','Oh — yes, I got the estimate.'],
+        ['agent','Good. I am not calling to push. I wanted to check whether anything in it was unclear.'],
+        ['you','The gutter line item, honestly.'],
+        ['agent','That covers removal and haul-away as well as the new run. Would it help if I had Marcus call you with the breakdown?']],
+  collections:[['agent','Good afternoon, this is Meridian Recovery calling on a Presidio Health account. Am I speaking with the account holder?'],
+               ['you','Yes, speaking.'],
+               ['agent','Thank you. This call may be recorded. I am required to tell you this is an attempt to collect a debt.'],
+               ['you','I know. I have been meaning to sort it out.'],
+               ['agent','That is all I needed to hear. Would a payment plan be easier than settling in one go?']]
+};
+
+let chatQ=[], chatBusy=false, callTimer=null, callSecs=0, minutesUsed=99;
+let PLAN={fee:1,min:1,txt:1}, chatMode='full';
+
+function chatEl(){ return document.getElementById('chatscroll'); }
+function push(html){ const el=chatEl(); if(!el) return null;
+  const d=document.createElement('div'); d.innerHTML=html; const node=d.firstElementChild;
+  el.appendChild(node); el.scrollTop=el.scrollHeight; return node; }
+function typing(on){ const el=chatEl(); if(!el) return;
+  let t=el.querySelector('.typing');
+  if(on && !t){ push('<div class="typing"><i></i><i></i><i></i></div>'); }
+  if(!on && t){ t.remove(); } }
+function wait(ms){ return new Promise(r=>{ const id=setTimeout(r,ms); timers.push(id); }); }
+const reduced = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const beat = ms => wait(reduced()?0:ms);
+
+const scChat = () => {
+  const v=VERTICALS[S.vert];
+  return '<div class="chat" style="position:relative">'+
+    '<div class="chattop">'+CL_MARK+'Claude'+
+      '<span class="connchip">'+TICK+'SalesAi connected</span></div>'+
+    '<div class="chatscroll" id="chatscroll"></div>'+
+    '<div class="composer"><div class="cbox">'+
+      '<textarea id="cinput" rows="1" placeholder="Reply to Claude…"></textarea>'+
+      '<div class="crow">'+
+        '<button class="cbtn" title="Attach"><svg width="17" height="17" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>'+
+        '<button class="cbtn" title="Settings"><svg width="17" height="17" viewBox="0 0 24 24"><path d="M4 8h10M18 8h2M4 16h4M12 16h8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="16" cy="8" r="2.2" stroke="currentColor" stroke-width="2.2" fill="none"/><circle cx="10" cy="16" r="2.2" stroke="currentColor" stroke-width="2.2" fill="none"/></svg></button>'+
+        '<button class="cmodel">Claude Sonnet 4.5<svg width="13" height="13" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></button>'+
+        '<span class="csend idle" id="csend"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></span>'+
+      '</div>'+
+    '</div></div>'+
+    '<div class="restart"><button data-go="connector"><svg width="13" height="13" viewBox="0 0 24 24"><path d="M4 12a8 8 0 108-8 8 8 0 00-5.7 2.4L4 8.5M4 4v4.5h4.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>Replay from the top</button></div>'+
+  '</div>';
+};
+
+/* --- the sequence --- */
+async function runChat(){
+  if (chatMode==='congrats'){ return runCongrats(); }
+  const v=VERTICALS[S.vert], client=v[3];
+  const disc=DISCOVERY[S.vert];
+  await beat(420);
+  push('<div class="msg user">Build a front desk agent for '+client+'. They miss about 40% of their calls after 5pm and on weekends.</div>');
+  await beat(700); typing(true); await beat(1150); typing(false);
+
+  push('<div class="msg ai"><p>I read <b>'+client.toLowerCase().replace(/[^a-z]+/g,'')+'.com</b> and pulled their hours, services and service area. The <b>'+v[0]+'</b> pack covers after-hours routing and intake, so most of this is already decided.</p>'+
+       '<p>Two things I cannot infer:</p></div>');
+  await beat(520);
+  askDiscovery(0, disc);
+}
+
+function askDiscovery(i, disc){
+  if (i >= disc.length){ buildAgent(); return; }
+  push('<div class="msg ai"><p><b>'+(i+1)+'.</b> '+disc[i].q+'</p></div>');
+  const node = push('<div class="qr">'+disc[i].a.map((a,ix)=>'<button data-ans="'+ix+'">'+a+'</button>').join('')+'</div>');
+  if(!node) return;
+  node.querySelectorAll('button').forEach(b=>{
+    b.addEventListener('click', async ()=>{
+      const chosen=b.textContent; node.remove();
+      push('<div class="msg user">'+chosen+'</div>');
+      await beat(560);
+      askDiscovery(i+1, disc);
+    });
+  });
+}
+
+async function buildAgent(){
+  const v=VERTICALS[S.vert], client=v[3];
+  const num='+1 (317) 555-0142', slug=client.toLowerCase().replace(/[^a-z]+/g,'-'),
+        link='salesai.link/'+slug.slice(0,14);
+  typing(true); await beat(900); typing(false);
+  push('<div class="msg ai"><p>That is everything. Building it now.</p></div>');
+
+  const calls=[['salesai:install_pack',v[1]+' '+v[2]],
+               ['salesai:create_agent',slug.slice(0,16)],
+               ['salesai:provision_number',num],
+               ['salesai:get_share_link',link]];
+  for (const [nm,res] of calls){
+    const t=push('<div class="tool"><span class="tspin"></span><span class="tok">'+TICK+'</span><span class="nm">'+nm+'</span><span class="res">'+res+'</span></div>');
+    await beat(760);
+    if(t) t.classList.add('settled');
+    await beat(180);
+  }
+  await beat(320);
+  const card=push('<div class="msg ai"><div class="agentcard">'+
+      '<div class="anm">'+client+' — Front Desk</div>'+
+      '<div class="agentline"><span class="lbl">Number</span>'+num+'</div>'+
+      '<div class="agentline"><span class="lbl">Share</span>'+link+cbtn(link)+'</div>'+
+      '<div class="agentline"><span class="lbl">Pack</span>'+v[1]+' '+v[2]+'</div>'+
+      '<button class="callnow" id="callnow">'+PHONE_SVG+'Call it now</button>'+
+    '</div>'+
+    '<p>It is live. Send that link to '+client+' and they can hear it from their own phone, with no account.</p></div>');
+  const cb=card&&card.querySelector('#callnow');
+  if(cb) cb.addEventListener('click', ()=>startCall(client,num));
+}
+
+
+async function runCongrats(){
+  const v=VERTICALS[S.vert], client=v[3], num='+1 (317) 555-0142';
+  const t=TIERS, plan=t.fee[PLAN.fee], mins=t.min[PLAN.min], txt=t.txt[PLAN.txt];
+  await beat(360);
+  push('<div class="msg user">Done — payment went through.</div>');
+  await beat(620); typing(true); await beat(1000); typing(false);
+  push('<div class="msg ai"><p><b>Congratulations — '+client+' is live and ready for production.</b></p>'+
+    '<div class="tool settled"><span class="tok">'+TICK+'</span><span class="nm">salesai:upgrade_org</span><span class="res">'+plan[0].toLowerCase()+'</span></div>'+
+    '<div class="tool settled"><span class="tok">'+TICK+'</span><span class="nm">salesai:port_number</span><span class="res">'+num+' · live</span></div>'+
+    '<div class="agentcard">'+
+      '<div class="anm">'+client+' — Front Desk · Live</div>'+
+      '<div class="agentline"><span class="lbl">Number</span>'+num+'</div>'+
+      '<div class="agentline"><span class="lbl">Minutes</span>'+mins[1].toLocaleString()+' / mo</div>'+
+      '<div class="agentline"><span class="lbl">Texts</span>'+txt[1].toLocaleString()+' / mo</div>'+
+      '<div class="agentline"><span class="lbl">Plan</span>'+plan[0]+' · $'+(plan[1]+mins[2]+txt[2]).toLocaleString()+'/mo</div>'+
+    '</div>'+
+    '<p>Outbound is enabled and the number is registered for A2P. Want me to set up the next client, or clone this agent into your other '+VERTICALS[S.vert][0].toLowerCase()+' accounts?</p></div>');
+}
+
+/* --- the call: the permissionless first unit of value --- */
+function startCall(client,num){
+  const host=document.querySelector('.chat'); if(!host) return;
+  const lines=TRANSCRIPTS[S.vert]||[];
+  const bars=Array.from({length:28},(_,i)=>'<i style="--h:'+(9+((i*7)%26))+'px;animation-delay:'+(i*45)+'ms"></i>').join('');
+  const w=document.createElement('div');
+  w.className='callwrap'; w.style.opacity=1;
+  w.innerHTML='<div class="callhead">'+
+      '<div class="callwho">'+client+'</div><div class="callnum">'+num+'</div>'+
+      '<div class="callstat ringing" id="cstat"><span class="pip"></span>Ringing</div></div>'+
+    '<div class="wave" id="cwave">'+bars+'</div>'+
+    '<div class="calltime" id="ctime">0:00</div>'+
+    '<div class="transcript" id="ctrans"></div>'+
+    '<button class="endcall" id="cend">'+PHONE_SVG+'End call</button>';
+  host.appendChild(w);
+  const end=()=>endCall(w);
+  w.querySelector('#cend').addEventListener('click', end);
+
+  callSecs=0;
+  timers.push(setTimeout(()=>{
+    const st=w.querySelector('#cstat');
+    if(st){ st.classList.remove('ringing'); st.innerHTML='<span class="pip"></span>Connected'; }
+    w.querySelector('#cwave').classList.add('live');
+    callTimer=setInterval(()=>{ callSecs++;
+      const t=w.querySelector('#ctime');
+      if(t) t.textContent=Math.floor(callSecs/60)+':'+String(callSecs%60).padStart(2,'0');
+    },1000);
+    timers.push(callTimer);
+    lines.forEach(([who,txt],i)=>{
+      timers.push(setTimeout(()=>{
+        const tr=w.querySelector('#ctrans'); if(!tr) return;
+        const d=document.createElement('div');
+        d.className='tline '+who;
+        d.innerHTML='<span class="who">'+(who==='agent'?'Agent':'Caller')+'</span><span>'+txt+'</span>';
+        tr.appendChild(d); tr.scrollTop=tr.scrollHeight;
+        if(i===lines.length-1) timers.push(setTimeout(end,2600));
+      }, 700+i*2500));
+    });
+  }, reduced()?0:2100));
+}
+
+function endCall(w){
+  if(callTimer){ clearInterval(callTimer); callTimer=null; }
+  const secs=Math.max(callSecs,1);
+  w.remove();
+  minutesUsed = Math.min(100, minutesUsed + Math.ceil(secs/60));
+  const remaining = Math.max(100-minutesUsed,0);
+  push('<div class="msg ai"><div class="receipt">'+
+      '<div class="rrow">'+TICK+'<span>Call completed</span><span class="rv">'+Math.floor(secs/60)+':'+String(secs%60).padStart(2,'0')+'</span></div>'+
+      '<div class="rrow"><span>Sandbox minutes used</span><span class="rv">'+minutesUsed+' / 100</span></div>'+
+      '<div class="meter"><i id="mfill"></i></div>'+
+    '</div>'+
+    '<p>That is the whole loop — brief, build, provision, call. Nothing left the chat.</p></div>');
+  const f=document.getElementById('mfill');
+  if(f) timers.push(setTimeout(()=>{ f.style.width=Math.min(minutesUsed,100)+'%'; },80));
+  timers.push(setTimeout(()=>{
+    const w2=push('<div class="msg ai"><div class="wall">'+
+      '<h5>You have used 100% of your sandbox minutes</h5>'+
+      '<p>The agent still works — it just cannot take another call until you add minutes. Upgrade the sandbox to keep testing, or go live and give '+VERTICALS[S.vert][3]+' a real number.</p>'+
+      '<div style="display:flex;gap:9px;flex-wrap:wrap">'+
+        '<button class="wallbtn" data-go="checkout">Go live'+GO_SVG+'</button>'+
+        '<button class="btn-ghost" data-go="checkout">Upgrade to keep testing</button>'+
+      '</div>'+
+    '</div></div>');
+  }, reduced()?0:1500));
+}
+
+
+/* screen 6 — checkout. Three choices, one running total, pay as you go monthly. */
+const TIERS = {
+  fee:[['Launch',299,'Up to 5 client accounts'],
+       ['Agency',699,'Up to 25 client accounts'],
+       ['Scale',1499,'Unlimited accounts · SSO']],
+  min:[['Starter',1000,99],['Growth',5000,399],['Volume',15000,999]],
+  txt:[['Starter',2500,49],['Growth',10000,149],['Volume',50000,499]]
+};
+const money = n => '$'+n.toLocaleString();
+function planTotal(){
+  return TIERS.fee[PLAN.fee][1] + TIERS.min[PLAN.min][2] + TIERS.txt[PLAN.txt][2];
+}
+const PICK='<span class="pick"><svg width="9" height="9" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></span>';
+
+function optRow(kind, items, render){
+  return '<div class="opts">'+items.map((it,i)=>
+    '<button class="opt'+(PLAN[kind]===i?' on':'')+'" data-tier="'+kind+'" data-i="'+i+'">'+PICK+render(it)+'</button>').join('')+'</div>';
+}
+
+const scCheckout = () =>
+  '<div class="co"><div class="co-in">'+
+    '<div class="co-head">'+LOGO+
+      '<h4>Go live with '+VERTICALS[S.vert][3]+'</h4>'+
+      '<p>Pay as you go, billed monthly. Change tiers or cancel any time — overage is billed at the same rate, never a penalty.</p></div>'+
+
+    '<div>'+
+      '<div class="grp"><div class="gl"><b>Platform</b><span>required · per agency, not per client</span></div>'+
+        optRow('fee', TIERS.fee, t=>'<span class="on-t">'+t[0]+'</span><span class="on-p">'+money(t[1])+'/mo</span><span class="on-s">'+t[2]+'</span>')+
+      '</div>'+
+      '<div class="grp"><div class="gl"><b>Voice minutes</b><span>pooled across every client</span></div>'+
+        optRow('min', TIERS.min, t=>'<span class="on-t">'+t[1].toLocaleString()+' min</span><span class="on-p">'+money(t[2])+'/mo</span><span class="on-s">'+t[0]+'</span>')+
+      '</div>'+
+      '<div class="grp"><div class="gl"><b>Text messages</b><span>A2P registered</span></div>'+
+        optRow('txt', TIERS.txt, t=>'<span class="on-t">'+t[1].toLocaleString()+' texts</span><span class="on-p">'+money(t[2])+'/mo</span><span class="on-s">'+t[0]+'</span>')+
+      '</div>'+
+      '<div class="grp"><div class="gl"><b>Card</b><span>we never store the number</span></div>'+
+        '<div class="cardbox">'+
+          '<div class="f"><label for="ccn">Card number</label><input id="ccn" class="mono" value="4242 4242 4242 4242" inputmode="numeric"></div>'+
+          '<div class="cardrow">'+
+            '<div class="f"><label for="cce">Expiry</label><input id="cce" class="mono" value="09 / 29"></div>'+
+            '<div class="f"><label for="ccc">CVC</label><input id="ccc" class="mono" value="418"></div>'+
+            '<div class="f"><label for="ccz">ZIP</label><input id="ccz" class="mono" value="46032"></div>'+
+          '</div>'+
+        '</div>'+
+      '</div>'+
+    '</div>'+
+
+    '<aside class="sum" id="sum">'+ sumHTML() +'</aside>'+
+  '</div></div>';
+
+function sumHTML(){
+  const f=TIERS.fee[PLAN.fee], m=TIERS.min[PLAN.min], t=TIERS.txt[PLAN.txt];
+  return '<h5>Monthly</h5>'+
+    '<div class="sline">'+f[0]+' platform<span class="sv">'+money(f[1])+'</span></div>'+
+    '<div class="sline">'+m[1].toLocaleString()+' minutes<span class="sv">'+money(m[2])+'</span></div>'+
+    '<div class="sline">'+t[1].toLocaleString()+' texts<span class="sv">'+money(t[2])+'</span></div>'+
+    '<div class="srule"></div>'+
+    '<div class="stotal"><b>Due today</b><span class="sv">'+money(planTotal())+'</span></div>'+
+    '<p class="sfine">Then '+money(planTotal())+' on the 27th of each month. Sandbox minutes you have already used are not billed.</p>'+
+    '<button class="btn-primary paybtn" id="paybtn">Pay '+money(planTotal())+' and go live'+GO_SVG+'</button>'+
+    '<p class="sfine">A2P brand registration starts automatically. Real numbers are usually approved within a business day.</p>';
+}
+
+function repaintSum(){ const el=document.getElementById('sum'); if(el) el.innerHTML=sumHTML(); }
+
+/* screen 7 — payment success */
+const scDone = () => {
+  const f=TIERS.fee[PLAN.fee], m=TIERS.min[PLAN.min], t=TIERS.txt[PLAN.txt];
+  return '<div class="done" id="done"><div class="done-in">'+
+    '<span class="bigtick"><svg width="30" height="30" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></span>'+
+    '<h4>You are live</h4>'+
+    '<p>'+VERTICALS[S.vert][3]+' has a production number, and outbound is enabled across your agency.</p>'+
+    '<div class="rcpt">'+
+      '<div class="sline">'+f[0]+' platform<span class="sv">'+money(f[1])+'</span></div>'+
+      '<div class="sline">'+m[1].toLocaleString()+' minutes<span class="sv">'+money(m[2])+'</span></div>'+
+      '<div class="sline">'+t[1].toLocaleString()+' texts<span class="sv">'+money(t[2])+'</span></div>'+
+      '<div class="srule"></div>'+
+      '<div class="stotal"><b>Charged today</b><span class="sv">'+money(planTotal())+'</span></div>'+
+    '</div>'+
+    '<button class="btn-primary" id="backtochat">Back to Claude'+GO_SVG+'</button>'+
+  '</div></div>';
+};
+
+function celebrate(){
+  const host=document.getElementById('done'); if(!host||reduced()) return;
+  const cols=['#12C08A','#6D4AE0','#F5BE4F','#DFD8FB','#0DA576'];
+  for(let i=0;i<46;i++){
+    const c=document.createElement('span');
+    c.className='conf';
+    c.style.left=(Math.random()*100)+'%';
+    c.style.background=cols[i%cols.length];
+    c.style.setProperty('--r',(Math.random()*900-450)+'deg');
+    c.style.animationDuration=(1.5+Math.random()*1.5)+'s';
+    c.style.animationDelay=(Math.random()*.5)+'s';
+    host.appendChild(c);
+    timers.push(setTimeout(()=>c.remove(),3600));
+  }
+}
+
+const SCREENS={connector:scConnector,signup:scSignup,consent:scConsent,provision:scProvision,chat:scChat,checkout:scCheckout,done:scDone};
+
+function captureSignup(){
+  const g=id=>{const el=$(id);return el?el.value:null};
+  S.name=g('sn')||S.name; S.email=g('se')||S.email; S.org=g('so')||S.org;
+  S.vert=g('sv')||S.vert; S.size=g('ss')||S.size;
+}
+
+function go(next){
+  timers.forEach(clearTimeout); timers=[];
+  if (screen==='signup' && next==='consent') captureSignup();
+  screen=next;
+  $('urlpill').textContent = URLS[next==='provision'?'provision':next];
+  const win=document.querySelector('.win');
+  win.classList.toggle('wide', next==='chat'||next==='checkout'||next==='done');
+  const wb=$('winbody');
+  wb.classList.toggle('flush', next!=='connector');
+  wb.innerHTML = SCREENS[next]();
+  $('backbtn').classList.toggle('show', !!BACK[next]);
+  if (next==='provision') runProvision();
+  if (next==='chat'){ chatBusy=false; if(chatMode==='full') minutesUsed=99; runChat(); }
+  if (next==='done') timers.push(setTimeout(celebrate,220));
+  wb.scrollTop=0;
+}
+
+function openModal(){ go('connector'); $('overlay').classList.add('open'); document.body.style.overflow='hidden'; }
+function closeModal(){ timers.forEach(clearTimeout); timers=[]; $('overlay').classList.remove('open'); document.body.style.overflow=''; }
+
+document.addEventListener('click', e => {
+  const tab = e.target.closest('[data-client]');
+  if (tab){ active=tab.dataset.client; mode='mcp';
+    document.querySelectorAll('.mode').forEach(m=>m.classList.toggle('on', m.dataset.mode==='mcp'));
+    renderTabs(); render(); return; }
+
+  const md = e.target.closest('[data-mode]');
+  if (md){ mode=md.dataset.mode;
+    document.querySelectorAll('.mode').forEach(x=>x.classList.toggle('on', x===md));
+    render(); return; }
+
+  if (e.target.closest('[data-openmodal]')){ openModal(); return; }
+
+  /* checkout: pick a tier, repaint the running total */
+  const tier = e.target.closest('[data-tier]');
+  if (tier){ PLAN[tier.dataset.tier] = +tier.dataset.i;
+    document.querySelectorAll('[data-tier="'+tier.dataset.tier+'"]').forEach(b=>b.classList.toggle('on', b===tier));
+    repaintSum(); return; }
+
+  /* checkout: pay */
+  if (e.target.closest('#paybtn')){
+    const b = e.target.closest('#paybtn');
+    b.disabled = true;
+    b.innerHTML = '<span class="spin" style="border-top-color:#fff;border-color:rgba(255,255,255,.35)"></span>Charging card…';
+    timers.push(setTimeout(()=>go('done'), reduced()?0:1700));
+    return; }
+
+  /* success: back into the conversation, which now congratulates rather than replays */
+  if (e.target.closest('#backtochat')){ chatMode='congrats'; go('chat'); return; }
+
+  const g = e.target.closest('[data-go]');
+  if (g){ if (g.dataset.go==='connector'){ chatMode='full'; PLAN={fee:1,min:1,txt:1}; } go(g.dataset.go); return; }
+
+  const b = e.target.closest('[data-back]');
+  if (b){ const prev=BACK[screen]; if(prev) go(prev); else closeModal(); return; }
+
+  if (e.target.closest('[data-close]')){ closeModal(); return; }
+  if (e.target === $('overlay')){ closeModal(); return; }
+
+  const cp = e.target.closest('[data-copy]');
+  if (cp){
+    const txt = cp.dataset.copy;
+    const done = () => { cp.classList.add('done'); cp.innerHTML=DONE_SVG;
+      setTimeout(()=>{ cp.classList.remove('done'); cp.innerHTML=COPY_SVG; }, 1600); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done).catch(done);
+    else done();
+  }
+});
+document.addEventListener('keydown', e => { if (e.key==='Escape') closeModal(); });
+
+renderStack(); renderTabs(); render();
+</script>
+</body>
+</html>
