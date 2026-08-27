@@ -167,9 +167,9 @@ h1 i{font-style:italic;font-weight:800;color:var(--purple)}
 
 /* ---------- claude connector modal preview ---------- */
 .overlay{position:fixed;inset:0;z-index:60;background:rgba(16,12,32,.55);backdrop-filter:blur(3px);
-  display:none;align-items:center;justify-content:center;padding:24px}
+  display:none;align-items:flex-start;justify-content:center;padding:24px;overflow-y:auto;overscroll-behavior:contain}
 .overlay.open{display:flex}
-.win{width:100%;max-width:660px;background:var(--cl-bg);border-radius:16px;overflow:hidden;
+.win{width:100%;max-width:660px;margin:auto;background:var(--cl-bg);border-radius:16px;overflow:hidden;
   box-shadow:0 40px 90px -20px rgba(10,6,30,.6);border:1px solid rgba(0,0,0,.16)}
 .winbar{display:flex;align-items:center;gap:12px;padding:11px 14px;background:#EDEBE3;border-bottom:1px solid var(--cl-line)}
 .dots{display:flex;gap:6px;flex:0 0 auto}
@@ -433,13 +433,13 @@ h1 i{font-style:italic;font-weight:800;color:var(--purple)}
 .paybtn[disabled]{opacity:.55;cursor:not-allowed}
 
 /* success */
-.done{min-height:520px;display:grid;place-items:center;padding:30px;background:linear-gradient(180deg,var(--green-soft),var(--white));position:relative;overflow:hidden}
-.done-in{display:flex;flex-direction:column;align-items:center;gap:13px;text-align:center;max-width:400px;z-index:2}
+.paydone{min-height:520px;display:grid;place-items:center;padding:30px;background:linear-gradient(180deg,var(--green-soft),var(--white));position:relative;overflow:hidden}
+.paydone-in{display:flex;flex-direction:column;align-items:center;gap:13px;text-align:center;max-width:400px;z-index:2}
 .bigtick{width:64px;height:64px;border-radius:99px;background:var(--green);display:grid;place-items:center;color:#fff;
   animation:pop .5s cubic-bezier(.2,1.4,.4,1) forwards;transform:scale(.4);opacity:0}
 @keyframes pop{to{transform:scale(1);opacity:1}}
-.done-in h4{margin:0;font-size:23px;font-weight:800;color:var(--ink);letter-spacing:-.028em}
-.done-in p{font-size:14.2px;color:var(--ink-2);line-height:1.55}
+.paydone-in h4{margin:0;font-size:23px;font-weight:800;color:var(--ink);letter-spacing:-.028em}
+.paydone-in p{font-size:14.2px;color:var(--ink-2);line-height:1.55}
 .rcpt{width:100%;background:var(--white);border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;
   flex-direction:column;gap:8px;text-align:left}
 .conf{position:absolute;width:8px;height:13px;border-radius:2px;top:-20px;animation:fall linear forwards;z-index:1}
@@ -1047,7 +1047,7 @@ function repaintSum(){ const el=document.getElementById('sum'); if(el) el.innerH
 /* screen 7 — payment success */
 const scDone = () => {
   const f=TIERS.fee[PLAN.fee], m=TIERS.min[PLAN.min], t=TIERS.txt[PLAN.txt];
-  return '<div class="done" id="done"><div class="done-in">'+
+  return '<div class="paydone" id="paydone"><div class="paydone-in">'+
     '<span class="bigtick"><svg width="30" height="30" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></span>'+
     '<h4>You are live</h4>'+
     '<p>'+VERTICALS[S.vert][3]+' has a production number, and outbound is enabled across your agency.</p>'+
@@ -1063,7 +1063,7 @@ const scDone = () => {
 };
 
 function celebrate(){
-  const host=document.getElementById('done'); if(!host||reduced()) return;
+  const host=document.getElementById('paydone'); if(!host||reduced()) return;
   const cols=['#12C08A','#6D4AE0','#F5BE4F','#DFD8FB','#0DA576'];
   for(let i=0;i<46;i++){
     const c=document.createElement('span');
