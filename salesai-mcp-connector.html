@@ -683,10 +683,11 @@ const CLIENTS = [
       { t:'Connect and start building', d:'After signing in, ask Cursor to build an agent for your client.', primary:'Start building' }
   ]},
   { id:'code', name:'Claude Code', icon:'code', h1:H1_DEFAULT, sub:SUB_DEFAULT, steps:[
-      { t:'Copy and send this to Claude Code',
-        prompt:'Set up SalesAi for me so I can build and launch client voice agents from here.\n1. Install the CLI: run <em>npm i -g @salesai/cli</em>.\n2. Authenticate: run <em>salesai auth login</em> and complete the sign-in in the\nbrowser it opens.\n3. Install the vertical packs: run <em>npx skills add salesai/packs</em>.\n<span class="dim">Once that is done, let me know when it is ready.</span>',
-        raw:'Set up SalesAi for me so I can build and launch client voice agents from here.\n1. Install the CLI: run `npm i -g @salesai/cli`.\n2. Authenticate: run `salesai auth login` and complete the sign-in in the browser it opens.\n3. Install the vertical packs: run `npx skills add salesai/packs`.\nOnce that is done, let me know when it is ready.' },
-      { t:'Connect and start building', d:'Sign in, then ask Claude Code to build an agent for your client.', primary:'Build your first agent' }
+      { t:'Add the '+MK+' SalesAi MCP server',
+        d:'Two commands. No install, no package to pull \u2014 Claude Code speaks remote MCP natively.',
+        prompt:'<em>claude mcp add --transport http salesai https://mcp.salesai.com/mcp</em>\n<em>claude mcp login salesai</em>\n<span class="dim">On a phone or over SSH, add --no-browser to the login and paste\nthe redirect URL back.</span>',
+        raw:'claude mcp add --transport http salesai https://mcp.salesai.com/mcp\nclaude mcp login salesai' },
+      { t:'Describe the client and ship', d:'Claude Code reads the project, finds the lead form, and builds the agent and follow-up workflow against its real fields.', primary:'Build your first agent' }
   ]},
   { id:'openclaw', name:'OpenClaw', icon:'openclaw', h1:'SalesAi plugin for <i>OpenClaw</i>',
     sub:'Build and launch client voice agents without leaving OpenClaw.', steps:[
