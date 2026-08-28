@@ -4,35 +4,42 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex, nofollow, noarchive">
-<meta name="description" content="Interactive prototype — SalesAi partner activation from any AI assistant.">
-<meta property="og:title" content="SalesAi MCP Connector — prototype">
-<meta property="og:description" content="Click through the full partner path: connect, provision, call a live agent, go to production.">
+<meta name="description" content="SalesAi headless activation — build a client agent from any assistant.">
+<meta property="og:title" content="SalesAi Headless Activation">
+<meta property="og:description" content="From salesai.com to a live agent with a phone number, without leaving the chat.">
 <style>html{background:#fff}body{margin:0}</style>
-<title>SalesAi MCP Connector</title>
+<title>SalesAi Headless Activation</title>
 </head>
 <body>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,700;1,900&family=Inter+Tight:ital,wght@0,400;0,500;0,600;0,700;1,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 
 <style>
 :root{
-  --lav-deep:#DFD8FB; --lav-mid:#EEE9FE; --lav-pale:#F8F6FF;
-  --white:#FFF; --ink:#151222; --ink-2:#5B5573; --ink-3:#8C86A3;
-  --line:#E8E3F6; --line-2:#D8D1EE;
-  --purple:#6D4AE0; --purple-dark:#5936C9; --purple-soft:#F0EBFE;
-  --green:#12C08A; --green-soft:#E2F8F1; --green-ink:#077956;
-  --near-black:#12101B;
-  --code-bg:#16141F; --code-ink:#B9B3CC; --code-hi:#5BE3B0;
-  --sh-sm:0 1px 2px rgba(21,18,34,.05);
-  --sh-lg:0 4px 8px rgba(21,18,34,.04), 0 32px 64px -24px rgba(60,40,140,.28);
-  /* claude.ai preview surface */
+  /* straight from the logo file and salesai.com */
+  --ink:#0A0C10; --ink-2:#5F6061; --ink-3:#8E8E90;
+  --mint:#3EDE6F; --mint-deep:#21B873; --mint-wash:#E9FBF0;
+  --purple:#955DF1; --purple-wash:#F3ECFE;
+  --blue:#236BD0; --orange:#F69315;
+  --white:#FFF; --paper:#F5F5F7; --line:#EEEEF0; --line-2:#D8D9DD;
+  --cream:#F7F3EA;
+  --lav-1:#EDE7FD; --lav-2:#F6F2FE;
+  --code-bg:#0A0C10; --code-ink:#9FA1A6; --code-hi:#3EDE6F;
+  --sh-sm:0 1px 2px rgba(10,12,16,.06);
+  --sh-lg:0 4px 10px rgba(10,12,16,.04), 0 32px 64px -28px rgba(10,12,16,.22);
+  /* claude.ai preview surface — unchanged, it is meant to look like Claude */
   --cl-bg:#F5F4EE; --cl-card:#FFFDF9; --cl-ink:#1F1E1B; --cl-ink-2:#6B6862;
   --cl-line:#E4E1D8; --cl-accent:#C96442; --cl-warn:#FBF3E4; --cl-warn-line:#EAD9B8; --cl-warn-ink:#8A6320;
+  /* aliases so existing rules keep resolving */
+  --lav-deep:var(--lav-1); --lav-mid:var(--lav-1); --lav-pale:var(--lav-2);
+  --purple-dark:#7B45D8; --purple-soft:var(--purple-wash);
+  --green:var(--mint); --green-soft:var(--mint-wash); --green-ink:#0E7A44;
+  --near-black:var(--ink); --neutral-100:var(--paper);
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--white);color:var(--ink-2);
-  font-family:"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-family:"Inter Tight",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
 p{margin:0}
 button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
@@ -69,14 +76,14 @@ input{font:inherit}
 .tile:nth-child(1){transform:rotate(-9deg) scale(.86)}
 .tile:nth-child(2){transform:rotate(-6deg) scale(.92)}
 .tile:nth-child(3){transform:rotate(-3deg) scale(.97)}
-.tile.hero-tile{width:82px;height:82px;border-radius:20px;background:var(--green);transform:none;margin:0 -6px;z-index:2;
-  box-shadow:0 12px 30px -8px rgba(18,192,138,.55), 0 1px 3px rgba(20,60,50,.3)}
+.tile.hero-tile{width:82px;height:82px;border-radius:20px;background:var(--ink);transform:none;margin:0 -6px;z-index:2;
+  box-shadow:0 12px 30px -8px rgba(10,12,16,.42), 0 1px 3px rgba(10,12,16,.3)}
 .tile:nth-child(5){transform:rotate(3deg) scale(.97)}
 .tile:nth-child(6){transform:rotate(6deg) scale(.92)}
 .tile:nth-child(7){transform:rotate(9deg) scale(.86)}
-h1{margin:0;color:var(--ink);font-weight:800;font-size:clamp(34px,5.4vw,60px);line-height:1.03;
+h1{margin:0;color:var(--ink);font-family:"Roboto",sans-serif;font-weight:900;font-size:clamp(34px,5.4vw,60px);line-height:1.03;
   letter-spacing:-.035em;text-wrap:balance;max-width:17ch}
-h1 i{font-style:italic;font-weight:800;color:var(--purple)}
+h1 i{font-style:italic;font-weight:900;color:var(--purple)}
 .sub{font-size:18px;color:var(--ink-2);max-width:58ch;text-wrap:balance}
 .trial{display:inline-flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:center;background:var(--white);
   border:1px solid var(--line-2);border-radius:99px;padding:9px 10px 9px 18px;font-size:14.5px;font-weight:600;
@@ -106,7 +113,7 @@ h1 i{font-style:italic;font-weight:800;color:var(--purple)}
   font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:13px;font-weight:600}
 .step h3{margin:8px 0 0;color:var(--ink);font-size:19px;font-weight:700;letter-spacing:-.018em;line-height:1.28;
   display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.step h3 .mk{width:22px;height:22px;border-radius:6px;background:var(--green);display:grid;place-items:center;flex:0 0 auto}
+.step h3 .mk{width:22px;height:22px;border-radius:6px;background:var(--ink);display:grid;place-items:center;flex:0 0 auto}
 .step p{font-size:14.5px;color:var(--ink-2);line-height:1.55}
 .step .foot{margin-top:auto;padding-top:20px}
 @media (max-width:860px){
@@ -137,10 +144,10 @@ h1 i{font-style:italic;font-weight:800;color:var(--purple)}
   border:1px solid var(--line-2);background:var(--white);color:var(--ink);font-size:14.5px;font-weight:600;
   text-decoration:none;box-shadow:var(--sh-sm);transition:.15s}
 .btn-ghost:hover{border-color:var(--purple);color:var(--purple)}
-.btn-primary{display:inline-flex;align-items:center;gap:9px;padding:12px 22px;border-radius:11px;background:var(--purple);
-  color:var(--white);font-size:14.5px;font-weight:700;text-decoration:none;
-  box-shadow:0 8px 20px -8px rgba(109,74,224,.7);transition:.15s}
-.btn-primary:hover{background:var(--purple-dark)}
+.btn-primary{display:inline-flex;align-items:center;gap:9px;padding:12px 22px;border-radius:11px;background:var(--mint);
+  color:var(--ink);font-size:14.5px;font-weight:700;text-decoration:none;
+  transition:.15s}
+.btn-primary:hover{background:var(--mint-deep);color:#fff}
 
 .undercard{display:flex;justify-content:center;align-items:center;gap:20px;flex-wrap:wrap;padding:20px 24px 0;
   font-size:14px;color:var(--ink-3)}
@@ -150,7 +157,7 @@ h1 i{font-style:italic;font-weight:800;color:var(--purple)}
 
 /* ---------- packs ---------- */
 .packs{max-width:1180px;margin:0 auto;padding:64px 24px 76px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center}
-.packs h2{margin:0;color:var(--ink);font-size:27px;font-weight:800;letter-spacing:-.028em;text-wrap:balance}
+.packs h2{margin:0;color:var(--ink);font-family:"Roboto",sans-serif;font-size:29px;font-weight:900;letter-spacing:-.028em;text-wrap:balance}
 .packs h2 i{font-style:italic;color:var(--purple)}
 .packrow{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:18px}
 .pack{display:inline-flex;align-items:center;gap:10px;padding:11px 17px;border-radius:99px;background:var(--white);
@@ -201,7 +208,7 @@ h1 i{font-style:italic;font-weight:800;color:var(--purple)}
 .cl-primary{padding:9px 21px;border-radius:9px;background:var(--cl-accent);color:#FFF;font-size:14px;font-weight:700}
 .cl-primary:hover{background:#B25636}
 .okwrap{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;padding:8px 0 2px}
-.okmark{width:46px;height:46px;border-radius:99px;background:var(--green-soft);display:grid;place-items:center}
+.okmark{width:46px;height:46px;border-radius:99px;background:var(--purple-wash);display:grid;place-items:center}
 .okwrap h4{font-size:18px}
 .okwrap p{font-size:13.8px;color:var(--cl-ink-2);max-width:34ch;line-height:1.55}
 
@@ -219,7 +226,7 @@ h1 i{font-style:italic;font-weight:800;color:var(--purple)}
 .authhead{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
 .authhead h4{margin:0;font-size:20px;font-weight:800;color:var(--ink);letter-spacing:-.022em}
 .authhead p{font-size:13.8px;color:var(--ink-2);max-width:36ch;line-height:1.5}
-.logomark{width:40px;height:40px;border-radius:11px;background:var(--green);display:grid;place-items:center}
+.logomark{width:40px;height:40px;border-radius:11px;background:var(--ink);display:grid;place-items:center}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:11px}
 @media (max-width:560px){.row2{grid-template-columns:1fr}}
 .f{display:flex;flex-direction:column;gap:5px}
@@ -238,7 +245,7 @@ h1 i{font-style:italic;font-weight:800;color:var(--purple)}
 .scope{display:flex;gap:11px;align-items:flex-start;padding:12px 14px;font-size:13.4px;color:var(--ink-2);line-height:1.45}
 .scope + .scope{border-top:1px solid var(--line)}
 .scope b{display:block;color:var(--ink);font-size:13.6px;font-weight:700}
-.scope svg{flex:0 0 auto;margin-top:2px;color:var(--green)}
+.scope svg{flex:0 0 auto;margin-top:2px;color:var(--purple)}
 .handshake{display:flex;align-items:center;justify-content:center;gap:14px;padding:2px 0 4px}
 .hs{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;border:1px solid var(--line)}
 .hsdots{display:flex;gap:4px}
@@ -271,14 +278,14 @@ h1 i{font-style:italic;font-weight:800;color:var(--purple)}
   padding:9px 12px;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11.8px;color:var(--cl-ink-2)}
 .tool .nm{color:var(--cl-ink);font-weight:600}
 .tool .res{margin-left:auto;color:var(--green-ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:46%}
-.agentcard{background:var(--green-soft);border:1px solid #B7E9D6;border-radius:13px;padding:16px;display:flex;
+.agentcard{background:var(--lav-2);border:1px solid #DDD2FB;border-radius:13px;padding:16px;display:flex;
   flex-direction:column;gap:12px}
-.agentcard .anm{font-family:"Plus Jakarta Sans",sans-serif;font-size:15.5px;font-weight:800;color:#0A5F45;letter-spacing:-.015em}
-.agentline{display:flex;align-items:center;gap:9px;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12.6px;color:#0A5F45}
-.agentline .lbl{color:#3E8A72;min-width:58px}
-.callnow{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--green);color:#fff;
-  border-radius:10px;padding:10px 16px;font-family:"Plus Jakarta Sans",sans-serif;font-size:13.8px;font-weight:700;align-self:flex-start}
-.callnow:hover{background:#0DA576}
+.agentcard .anm{font-family:"Roboto",sans-serif;font-size:15.5px;font-weight:900;color:var(--ink);letter-spacing:-.015em}
+.agentline{display:flex;align-items:center;gap:9px;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12.6px;color:#4A3A6B}
+.agentline .lbl{color:#8B7BB8;min-width:58px}
+.callnow{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--mint);color:var(--ink);
+  border-radius:10px;padding:10px 16px;font-family:"Inter Tight",sans-serif;font-size:13.8px;font-weight:700;align-self:flex-start}
+.callnow:hover{background:var(--mint-deep);color:#fff}
 .chatinput{border-top:1px solid var(--cl-line);padding:12px 16px 14px;display:flex;gap:10px;align-items:center}
 .chatinput .box{flex:1;background:#FFFDF9;border:1px solid var(--cl-line);border-radius:11px;padding:11px 13px;
   font-size:13.6px;color:#A8A49A}
@@ -319,7 +326,7 @@ h1 i{font-style:italic;font-weight:800;color:var(--purple)}
 .cbox{background:#FFFDF9;border:1px solid var(--cl-line);border-radius:14px;box-shadow:0 1px 3px rgba(31,30,27,.05);
   display:flex;flex-direction:column;overflow:hidden}
 .cbox textarea{border:0;background:none;resize:none;outline:none;padding:13px 15px 4px;font:inherit;font-size:14px;
-  color:var(--cl-ink);min-height:44px;max-height:110px;font-family:"Plus Jakarta Sans",sans-serif}
+  color:var(--cl-ink);min-height:44px;max-height:110px;font-family:"Inter Tight",sans-serif}
 .cbox textarea::placeholder{color:#A8A49A}
 .crow{display:flex;align-items:center;gap:7px;padding:6px 9px 9px}
 .cbtn{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;color:#8C887E;transition:.15s;flex:0 0 auto}
@@ -345,7 +352,7 @@ h1 i{font-style:italic;font-weight:800;color:var(--purple)}
 .callstat .pip{width:6px;height:6px;border-radius:99px;background:currentColor;animation:pulse 1.4s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:.35}50%{opacity:1}}
 .wave{display:flex;align-items:center;justify-content:center;gap:3px;height:44px;margin:20px 0 4px}
-.wave i{width:3px;border-radius:99px;background:var(--green);display:block;height:6px;opacity:.85}
+.wave i{width:3px;border-radius:99px;background:var(--mint);display:block;height:6px;opacity:.85}
 .wave.live i{animation:wv .9s ease-in-out infinite}
 @keyframes wv{0%,100%{height:5px}50%{height:var(--h,20px)}}
 .calltime{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:26px;color:#fff;font-variant-numeric:tabular-nums;
@@ -375,9 +382,9 @@ h1 i{font-style:italic;font-weight:800;color:var(--purple)}
   flex-direction:column;gap:10px}
 .wall h5{margin:0;font-size:14.5px;font-weight:800;color:var(--ink);letter-spacing:-.015em}
 .wall p{font-size:13.2px;color:var(--ink-2);line-height:1.5}
-.wallbtn{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;background:var(--purple);color:#fff;
+.wallbtn{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;background:var(--mint);color:var(--ink);
   border-radius:10px;padding:10px 17px;font-size:13.6px;font-weight:700;transition:.15s}
-.wallbtn:hover{background:var(--purple-dark)}
+.wallbtn:hover{background:var(--mint-deep);color:#fff}
 @media (prefers-reduced-motion:reduce){
   .msg,.tool,.callwrap,.tline{animation:none;opacity:1;transform:none}
   .wave.live i,.typing i,.callstat .pip{animation:none}
@@ -433,9 +440,9 @@ h1 i{font-style:italic;font-weight:800;color:var(--purple)}
 .paybtn[disabled]{opacity:.55;cursor:not-allowed}
 
 /* success */
-.paydone{min-height:520px;display:grid;place-items:center;padding:30px;background:linear-gradient(180deg,var(--green-soft),var(--white));position:relative;overflow:hidden}
+.paydone{min-height:520px;display:grid;place-items:center;padding:30px;background:linear-gradient(180deg,var(--lav-2),var(--white));position:relative;overflow:hidden}
 .paydone-in{display:flex;flex-direction:column;align-items:center;gap:13px;text-align:center;max-width:400px;z-index:2}
-.bigtick{width:64px;height:64px;border-radius:99px;background:var(--green);display:grid;place-items:center;color:#fff;
+.bigtick{width:64px;height:64px;border-radius:99px;background:var(--ink);display:grid;place-items:center;color:#fff;
   animation:pop .5s cubic-bezier(.2,1.4,.4,1) forwards;transform:scale(.4);opacity:0}
 @keyframes pop{to{transform:scale(1);opacity:1}}
 .paydone-in h4{margin:0;font-size:23px;font-weight:800;color:var(--ink);letter-spacing:-.028em}
@@ -445,6 +452,74 @@ h1 i{font-style:italic;font-weight:800;color:var(--purple)}
 .conf{position:absolute;width:8px;height:13px;border-radius:2px;top:-20px;animation:fall linear forwards;z-index:1}
 @keyframes fall{to{transform:translateY(560px) rotate(var(--r,540deg));opacity:0}}
 @media (prefers-reduced-motion:reduce){.bigtick{animation:none;transform:none;opacity:1}.conf{display:none}}
+
+/* ================= home hero — the page you actually land on ================= */
+#home{display:block}
+#connect{display:none}
+body.on-connect #home{display:none}
+body.on-connect #connect{display:block}
+
+.hero-home{position:relative;overflow:hidden;padding:0 0 8px;
+  background:
+    radial-gradient(1100px 520px at 50% -180px, var(--lav-1) 0%, rgba(237,231,253,0) 70%),
+    linear-gradient(180deg,#FBFAFE 0%, var(--white) 60%)}
+.hh-in{max-width:1180px;margin:0 auto;padding:58px 28px 0;text-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:20px}
+.hh-in h1{font-family:"Roboto",sans-serif;font-weight:900;font-size:clamp(38px,6.2vw,68px);
+  line-height:1.02;letter-spacing:-.04em;color:var(--ink);max-width:15ch;text-wrap:balance;margin:0}
+.hh-in h1 em{font-style:italic;font-weight:900;color:var(--ink)}
+.hh-sub{font-size:17.5px;color:var(--ink-2);max-width:60ch;line-height:1.55;margin:0}
+.hh-cta{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:4px}
+.b-mint{display:inline-flex;align-items:center;gap:9px;background:var(--mint);color:var(--ink);
+  border-radius:99px;padding:13px 26px;font-size:15px;font-weight:700;text-decoration:none;
+  transition:.15s}
+.b-mint:hover{background:var(--mint-deep);color:#fff}
+.b-ink{display:inline-flex;align-items:center;gap:9px;background:var(--ink);color:#fff;
+  border-radius:99px;padding:13px 26px;font-size:15px;font-weight:700;text-decoration:none;transition:.15s}
+.b-ink:hover{background:#22252C}
+
+/* agent roster — the grid of named agents on the real hero */
+.roster{margin-top:34px;width:100%;overflow:hidden;
+  -webkit-mask-image:linear-gradient(to right,transparent,#000 9%,#000 91%,transparent);
+          mask-image:linear-gradient(to right,transparent,#000 9%,#000 91%,transparent)}
+.rrow{display:flex;gap:12px;width:max-content;padding:6px 0}
+.rrow + .rrow{margin-top:12px}
+.rrow.a{animation:slideL 46s linear infinite}
+.rrow.b{animation:slideR 52s linear infinite}
+@keyframes slideL{to{transform:translateX(-50%)}}
+@keyframes slideR{from{transform:translateX(-50%)}}
+.agent{display:flex;align-items:center;gap:11px;background:var(--white);border:1px solid var(--line);
+  border-radius:14px;padding:11px 16px 11px 11px;box-shadow:var(--sh-sm);white-space:nowrap;flex:0 0 auto}
+.av{width:38px;height:38px;border-radius:10px;flex:0 0 auto;display:grid;place-items:center;
+  font-family:"Roboto",sans-serif;font-weight:900;font-size:15px;color:#fff;letter-spacing:-.02em}
+.agent .nm{display:block;font-size:14px;font-weight:700;color:var(--ink);letter-spacing:-.01em;line-height:1.2}
+.agent .rl{display:block;font-size:11.5px;color:var(--ink-3);margin-top:2px;line-height:1.2}
+
+/* stats — the dark block under the hero */
+.stats{max-width:1180px;margin:46px auto 0;padding:0 28px}
+.stats-in{background:var(--ink);border-radius:22px;padding:34px 30px;display:grid;
+  grid-template-columns:repeat(4,1fr);gap:26px}
+@media (max-width:860px){.stats-in{grid-template-columns:repeat(2,1fr);gap:24px}}
+.stat .v{font-family:"Roboto",sans-serif;font-weight:900;font-size:38px;color:#fff;letter-spacing:-.035em;line-height:1}
+.stat .l{font-size:12.5px;color:rgba(255,255,255,.55);margin-top:7px;line-height:1.4;max-width:22ch}
+
+/* the handoff — how you get from the site into an assistant */
+.handoff{max-width:1180px;margin:64px auto 0;padding:0 28px 78px}
+.ho-in{background:var(--cream);border-radius:24px;padding:44px 40px;display:flex;flex-direction:column;
+  align-items:center;gap:16px;text-align:center}
+.ho-in h2{margin:0;font-family:"Roboto",sans-serif;font-weight:900;font-size:clamp(26px,3.4vw,36px);
+  line-height:1.1;letter-spacing:-.032em;color:var(--ink);max-width:26ch;text-wrap:balance}
+.ho-in h2 em{font-style:italic;color:var(--purple)}
+.ho-in p{font-size:16px;color:var(--ink-2);max-width:54ch;line-height:1.55}
+.ho-row{display:flex;gap:11px;flex-wrap:wrap;justify-content:center;margin-top:8px}
+.ho-btn{display:inline-flex;align-items:center;gap:10px;background:var(--white);border:1px solid var(--line-2);
+  border-radius:13px;padding:13px 20px;font-size:14.5px;font-weight:700;color:var(--ink);
+  box-shadow:var(--sh-sm);transition:.15s;cursor:pointer}
+.ho-btn:hover{border-color:var(--purple);color:var(--purple);transform:translateY(-1px)}
+.ho-note{font-size:12.5px;color:var(--ink-3);margin-top:6px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.logo{height:26px;width:auto;display:block}
+@media (prefers-reduced-motion:reduce){.rrow.a,.rrow.b{animation:none}}
 
 @media (prefers-reduced-motion:reduce){*{transition:none!important}.spin{animation:none}}
 </style>
@@ -456,15 +531,56 @@ h1 i{font-style:italic;font-weight:800;color:var(--purple)}
 
 <nav class="nav">
   <div class="brand">
-    <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><rect width="26" height="26" rx="7" fill="#12C08A"/><path d="M8 16.5c1.6 1.2 3 1.7 4.6 1.7 2.2 0 3.4-1 3.4-2.3 0-1.4-1.3-1.9-3.6-2.4-2.6-.6-4.2-1.5-4.2-3.6C8.2 7.6 10.1 6 13 6c1.8 0 3.2.5 4.4 1.4" stroke="#fff" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
-    SalesAi
+    <svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448.66 108.52"> <g> <path d="M29.05,0C13.03,0,0,13.03,0,29.05v10.53h68.57v68.57h10.53c16.02,0,29.05-13.03,29.05-29.05V0H29.05ZM80.64,96V27.5H12.15c.78-8.64,8.07-15.43,16.9-15.43h67.02v67.02c0,8.84-6.79,16.12-15.43,16.9h0Z" style="fill: #3ede6f;"/> <path d="M45.9,62.34c-5.04-4.9-11.7-7.61-18.74-7.61h-.39c-7.19.1-13.91,2.99-18.91,8.13-10.34,10.64-10.1,27.7.53,38.05,5.04,4.9,11.7,7.61,18.75,7.61h.39c7.19-.1,13.91-2.99,18.91-8.13s7.7-11.94,7.6-19.13-2.99-13.91-8.13-18.91h-.01ZM41.57,81.42c.05,3.86-1.39,7.5-4.08,10.26-2.68,2.76-6.29,4.31-10.15,4.36h-.21c-3.79,0-7.34-1.44-10.05-4.08-2.76-2.68-4.31-6.29-4.36-10.15s1.39-7.5,4.08-10.26c2.83-2.91,6.59-4.36,10.35-4.36s7.26,1.36,10.06,4.08c2.76,2.68,4.31,6.29,4.36,10.15Z" style="fill: #3ede6f;"/> </g> <g> <path d="M194.27,69.74c0-2.14-.76-3.81-2.27-5.01s-4.18-2.43-7.99-3.71-6.93-2.52-9.35-3.71c-7.87-3.87-11.81-9.18-11.81-15.94,0-3.37.98-6.34,2.94-8.91s4.74-4.58,8.33-6.01,7.62-2.15,12.1-2.15,8.28.78,11.75,2.34,6.16,3.78,8.08,6.66,2.88,6.17,2.88,9.87h-14.61c0-2.48-.76-4.4-2.27-5.76s-3.57-2.04-6.16-2.04-4.68.58-6.2,1.73-2.27,2.62-2.27,4.4c0,1.56.83,2.97,2.5,4.24s4.6,2.57,8.81,3.92,7.65,2.8,10.35,4.36c6.57,3.78,9.85,9,9.85,15.65,0,5.31-2,9.49-6.01,12.52s-9.5,4.55-16.48,4.55c-4.92,0-9.38-.88-13.38-2.65-3.99-1.77-7-4.19-9.01-7.26s-3.03-6.61-3.03-10.62h14.69c0,3.26.84,5.65,2.52,7.2s4.42,2.32,8.2,2.32c2.42,0,4.33-.52,5.74-1.56s2.11-2.51,2.11-4.4v-.03Z" style="fill: #0a0c10;"/> <path d="M241.21,85.89c-.5-.92-.95-2.27-1.34-4.05-2.59,3.26-6.2,4.88-10.85,4.88-4.26,0-7.87-1.29-10.85-3.86-2.98-2.57-4.47-5.81-4.47-9.7,0-4.9,1.81-8.6,5.43-11.1s8.88-3.76,15.77-3.76h4.34v-2.39c0-4.17-1.79-6.25-5.38-6.25-3.34,0-5.01,1.65-5.01,4.95h-14.06c0-4.36,1.86-7.9,5.57-10.63s8.45-4.09,14.21-4.09,10.31,1.4,13.65,4.21,5.05,6.66,5.13,11.56v19.99c.06,4.15.7,7.32,1.92,9.51v.71h-14.06v.02ZM232.41,76.71c1.75,0,3.21-.38,4.36-1.13s1.98-1.6,2.48-2.55v-7.22h-4.09c-4.9,0-7.34,2.2-7.34,6.59,0,1.28.43,2.32,1.29,3.11s1.96,1.19,3.3,1.19h0Z" style="fill: #0a0c10;"/> <path d="M275.98,85.89h-14.11V21.79h14.11v64.1Z" style="fill: #0a0c10;"/> <path d="M306.48,86.73c-6.93,0-12.53-2.07-16.82-6.2-4.28-4.13-6.43-9.51-6.43-16.13v-1.17c0-4.62.86-8.69,2.57-12.23s4.21-6.27,7.49-8.2,7.18-2.9,11.68-2.9c6.34,0,11.35,1.97,15.02,5.91s5.51,9.42,5.51,16.46v5.47h-27.96c.5,2.53,1.6,4.52,3.3,5.97s3.89,2.17,6.59,2.17c4.45,0,7.93-1.56,10.43-4.67l6.43,7.6c-1.75,2.42-4.24,4.35-7.45,5.78s-6.67,2.15-10.37,2.15h.01ZM304.9,50.75c-4.12,0-6.57,2.73-7.34,8.18h14.19v-1.09c.06-2.25-.51-4-1.71-5.24s-2.91-1.86-5.13-1.86h-.01Z" style="fill: #0a0c10;"/> <path d="M354.81,73.21c0-1.2-.63-2.16-1.88-2.88s-3.63-1.47-7.14-2.25-6.4-1.8-8.68-3.07-4.02-2.8-5.22-4.61-1.79-3.88-1.79-6.22c0-4.15,1.71-7.56,5.13-10.25s7.9-4.03,13.44-4.03c5.95,0,10.74,1.35,14.36,4.05s5.43,6.25,5.43,10.64h-14.11c0-3.62-1.91-5.43-5.72-5.43-1.47,0-2.71.41-3.71,1.23s-1.5,1.84-1.5,3.07.61,2.27,1.84,3.05,3.18,1.42,5.86,1.92c2.68.5,5.04,1.1,7.07,1.79,6.79,2.34,10.18,6.52,10.18,12.56,0,4.12-1.83,7.47-5.49,10.06s-8.4,3.88-14.21,3.88c-3.87,0-7.32-.7-10.35-2.09s-5.4-3.28-7.09-5.68-2.55-4.91-2.55-7.55h13.15c.06,2.09.75,3.61,2.09,4.57s3.05,1.44,5.13,1.44c1.92,0,3.36-.39,4.32-1.17s1.44-1.79,1.44-3.05v.02Z" style="fill: #0a0c10;"/> <path d="M410.1,74.54h-20.07l-3.51,11.35h-15.65l22.28-60.76h13.77l22.45,60.76h-15.73l-3.55-11.35h.01ZM393.54,63.23h13.06l-6.55-21.07-6.51,21.07Z" style="fill: #0a0c10;"/> <path d="M433.06,29.1c0-2,.72-3.64,2.17-4.92s3.32-1.92,5.63-1.92,4.19.64,5.63,1.92,2.17,2.92,2.17,4.92-.72,3.64-2.17,4.92-3.32,1.92-5.63,1.92-4.19-.64-5.63-1.92-2.17-2.92-2.17-4.92ZM448,85.89h-14.11v-45.15h14.11v45.15Z" style="fill: #0a0c10;"/> </g> </svg>
+    <span class="sr-only">SalesAi</span>
   </div>
   <div class="navlinks">
     <a href="#">Product</a><a href="#">Use Cases</a><a href="#">Integrations</a><a href="#" class="on">Partners</a><a href="#">About Us</a>
   </div>
-  <div class="navright"><a href="#">Login</a><a href="#" class="btn-dark">Talk to an agent</a></div>
+  <div class="navright"><a href="#">Login</a><a href="#" class="btn-dark">Talk to an Ai Agent</a></div>
 </nav>
 
+
+<div id="home">
+  <header class="hero-home">
+    <div class="hh-in">
+      <h1>Meet your <em>always-on</em> Ai agent team</h1>
+      <p class="hh-sub">Deploy Ai voice &amp; SMS agents that call, text, and follow up across your entire funnel &mdash;
+        capturing leads, delighting customers, and running the busywork 24/7.</p>
+      <div class="hh-cta">
+        <a class="b-mint" href="#">Talk to an Ai Agent</a>
+        <a class="b-ink" href="#">Book a discovery call</a>
+        <button class="ho-btn" data-openconnect style="border-color:var(--purple);color:var(--purple)">
+          <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6L5.6 18.4" stroke="#D97757" stroke-width="2.6" stroke-linecap="round"/></svg> Build one in Claude
+          <span style="background:var(--purple);color:#fff;border-radius:99px;padding:2px 8px;font-size:10.5px;letter-spacing:.06em">NEW</span>
+        </button>
+      </div>
+
+      <div class="roster">
+        <div class="rrow a"><div class="agent"><span class="av" style="background:#0A0C10">J</span><span><span class="nm">Jordan</span><span class="rl">Outbound Follow-Up Agent</span></span></div><div class="agent"><span class="av" style="background:#955DF1">T</span><span><span class="nm">Tom</span><span class="rl">Ai Receptionist Agent</span></span></div><div class="agent"><span class="av" style="background:#236BD0">L</span><span><span class="nm">Lauren</span><span class="rl">Quote Follow-Up Agent</span></span></div><div class="agent"><span class="av" style="background:#21B873">K</span><span><span class="nm">Kayla</span><span class="rl">Dispatch Agent</span></span></div><div class="agent"><span class="av" style="background:#F69315">M</span><span><span class="nm">Mason</span><span class="rl">Re-Engagement Agent</span></span></div><div class="agent"><span class="av" style="background:#5F6061">K</span><span><span class="nm">Kai</span><span class="rl">Onboarding Agent</span></span></div><div class="agent"><span class="av" style="background:#0A0C10">J</span><span><span class="nm">Jordan</span><span class="rl">Outbound Follow-Up Agent</span></span></div><div class="agent"><span class="av" style="background:#955DF1">T</span><span><span class="nm">Tom</span><span class="rl">Ai Receptionist Agent</span></span></div><div class="agent"><span class="av" style="background:#236BD0">L</span><span><span class="nm">Lauren</span><span class="rl">Quote Follow-Up Agent</span></span></div><div class="agent"><span class="av" style="background:#21B873">K</span><span><span class="nm">Kayla</span><span class="rl">Dispatch Agent</span></span></div><div class="agent"><span class="av" style="background:#F69315">M</span><span><span class="nm">Mason</span><span class="rl">Re-Engagement Agent</span></span></div><div class="agent"><span class="av" style="background:#5F6061">K</span><span><span class="nm">Kai</span><span class="rl">Onboarding Agent</span></span></div></div>
+        <div class="rrow b"><div class="agent"><span class="av" style="background:#0A0C10">S</span><span><span class="nm">Sami</span><span class="rl">Renewal Agent</span></span></div><div class="agent"><span class="av" style="background:#955DF1">A</span><span><span class="nm">Archer</span><span class="rl">Referral Agent</span></span></div><div class="agent"><span class="av" style="background:#236BD0">J</span><span><span class="nm">Jack</span><span class="rl">Event Follow-Up Agent</span></span></div><div class="agent"><span class="av" style="background:#21B873">L</span><span><span class="nm">Laurel</span><span class="rl">Survey Agent</span></span></div><div class="agent"><span class="av" style="background:#F69315">M</span><span><span class="nm">Marco</span><span class="rl">Screener Agent</span></span></div><div class="agent"><span class="av" style="background:#5F6061">J</span><span><span class="nm">Juliet</span><span class="rl">Appointment Agent</span></span></div><div class="agent"><span class="av" style="background:#0A0C10">S</span><span><span class="nm">Sami</span><span class="rl">Renewal Agent</span></span></div><div class="agent"><span class="av" style="background:#955DF1">A</span><span><span class="nm">Archer</span><span class="rl">Referral Agent</span></span></div><div class="agent"><span class="av" style="background:#236BD0">J</span><span><span class="nm">Jack</span><span class="rl">Event Follow-Up Agent</span></span></div><div class="agent"><span class="av" style="background:#21B873">L</span><span><span class="nm">Laurel</span><span class="rl">Survey Agent</span></span></div><div class="agent"><span class="av" style="background:#F69315">M</span><span><span class="nm">Marco</span><span class="rl">Screener Agent</span></span></div><div class="agent"><span class="av" style="background:#5F6061">J</span><span><span class="nm">Juliet</span><span class="rl">Appointment Agent</span></span></div></div>
+      </div>
+    </div>
+
+    <div class="stats"><div class="stats-in">
+      <div class="stat"><div class="v">2M+</div><div class="l">Calls handled by our Ai voice agents</div></div><div class="stat"><div class="v">98%</div><div class="l">Client satisfaction across our customer base</div></div><div class="stat"><div class="v">90%</div><div class="l">Hiring cost reduction for teams using our Ai agents</div></div><div class="stat"><div class="v">99.9%</div><div class="l">System uptime, so you have Ai that's always on</div></div>
+    </div></div>
+
+    <div class="handoff"><div class="ho-in">
+      <h2>Or build one <em>without leaving your assistant</em></h2>
+      <p>Connect SalesAi to Claude, ChatGPT or your editor. Describe the client, and the agent
+         and its live phone number are ready in about a minute &mdash; no dashboard, no training call.</p>
+      <div class="ho-row">
+        <button class="ho-btn" data-openconnect><svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6L5.6 18.4" stroke="#D97757" stroke-width="2.6" stroke-linecap="round"/></svg> Build with Claude</button>
+        <button class="ho-btn" data-openconnect>Build with ChatGPT</button>
+        <button class="ho-btn" data-openconnect>Build in Claude Code</button>
+      </div>
+      <p class="ho-note">Partners: 100 free minutes on a 3-day sandbox. No card.</p>
+    </div></div>
+  </header>
+</div>
+
+<div id="connect">
 <header class="hero">
   <div class="hero-in">
     <div class="stack" id="stack" aria-hidden="true"></div>
@@ -511,6 +627,8 @@ h1 i{font-style:italic;font-weight:800;color:var(--purple)}
     <svg width="16" height="16" viewBox="0 0 24 24" style="flex:0 0 auto;margin-top:3px" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" fill="none"/><path d="M12 8v5M12 16h.01" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
     <span><b>Prototype.</b> Higgsfield's connect-page layout on the SalesAi hero. The seven client tabs, the MCP/CLI toggle, the copy buttons and the Claude connector preview are all live — click through them. Everything else is a placeholder.</span>
   </div>
+</div>
+
 </div>
 
 <div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="Claude connector preview">
@@ -740,11 +858,11 @@ function runProvision(){
   const rows=[...document.querySelectorAll('#prov .provrow')];
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const finish = () => { const b=$('provdone'); if(b) b.style.display='inline-flex'; };
-  if (reduce){ rows.forEach(r=>{ r.classList.add('done'); r.querySelector('.ic').innerHTML=CHK.replace('16','16'); r.querySelector('.ic').style.color='#12C08A'; }); finish(); return; }
+  if (reduce){ rows.forEach(r=>{ r.classList.add('done'); r.querySelector('.ic').innerHTML=CHK.replace('16','16'); r.querySelector('.ic').style.color='#0A0C10'; }); finish(); return; }
   rows.forEach((r,i)=>{
     timers.push(setTimeout(()=>{ r.classList.add('on'); r.querySelector('.ic').innerHTML='<span class="spin"></span>'; }, i*620));
     timers.push(setTimeout(()=>{ r.classList.remove('on'); r.classList.add('done');
-      const ic=r.querySelector('.ic'); ic.innerHTML=CHK; ic.style.color='#12C08A'; }, i*620+540));
+      const ic=r.querySelector('.ic'); ic.innerHTML=CHK; ic.style.color='#955DF1'; }, i*620+540));
   });
   timers.push(setTimeout(finish, rows.length*620+240));
 }
@@ -1064,7 +1182,7 @@ const scDone = () => {
 
 function celebrate(){
   const host=document.getElementById('paydone'); if(!host||reduced()) return;
-  const cols=['#12C08A','#6D4AE0','#F5BE4F','#DFD8FB','#0DA576'];
+  const cols=['#0A0C10','#6D4AE0','#F5BE4F','#DFD8FB','#0DA576'];
   for(let i=0;i<46;i++){
     const c=document.createElement('span');
     c.className='conf';
@@ -1155,6 +1273,13 @@ document.addEventListener('click', e => {
   }
 });
 document.addEventListener('keydown', e => { if (e.key==='Escape') closeModal(); });
+
+function showConnect(){ document.body.classList.add('on-connect'); window.scrollTo({top:0,behavior:'instant'}); }
+function showHome(){ document.body.classList.remove('on-connect'); window.scrollTo({top:0,behavior:'instant'}); }
+document.addEventListener('click', e => {
+  if (e.target.closest('[data-openconnect]')){ showConnect(); return; }
+  if (e.target.closest('[data-home]')){ showHome(); return; }
+});
 
 renderStack(); renderTabs(); render();
 </script>
