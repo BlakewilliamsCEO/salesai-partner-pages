@@ -1459,7 +1459,8 @@ async function draftHandoff(ch){
 
 /* --- the call: the permissionless first unit of value --- */
 function startCall(client,num){
-  const host=document.querySelector('.chat'); if(!host) return;
+  // the call mounts into whichever host surface is on screen
+  const host=document.querySelector('.chat, .gptchat, .curwrap'); if(!host) return;
   const lines=TRANSCRIPTS[S.vert]||[];
   const bars=Array.from({length:28},(_,i)=>'<i style="--h:'+(9+((i*7)%26))+'px;animation-delay:'+(i*45)+'ms"></i>').join('');
   const w=document.createElement('div');
@@ -1659,6 +1660,7 @@ function go(next){
 
 function openModal(which){
   if (which && HOSTS[which]) CLIENT = which;
+  resetRun();
   go('connector');
   $('overlay').classList.add('open');
   document.body.style.overflow='hidden';
@@ -1748,7 +1750,8 @@ function clockReset(){
 }
 
 function showConnect(){ document.body.classList.add('on-connect'); clockStart(); window.scrollTo({top:0,behavior:'instant'}); }
-function showHome(){ document.body.classList.remove('on-connect'); clockReset(); window.scrollTo({top:0,behavior:'instant'}); }
+function resetRun(){ chatMode='full'; minutesUsed=99; PLAN={fee:1,min:1,txt:1}; }
+function showHome(){ document.body.classList.remove('on-connect'); resetRun(); clockReset(); window.scrollTo({top:0,behavior:'instant'}); }
 document.addEventListener('click', e => {
   const oc = e.target.closest('[data-openconnect]');
   if (oc){ if (oc.dataset.host && HOSTS[oc.dataset.host]){ CLIENT = oc.dataset.host; active = oc.dataset.host; renderTabs(); render(); }
