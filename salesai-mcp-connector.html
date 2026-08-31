@@ -521,6 +521,24 @@ body.on-connect #connect{display:block}
 .logo{height:26px;width:auto;display:block}
 @media (prefers-reduced-motion:reduce){.rrow.a,.rrow.b{animation:none}}
 
+/* ---------- the clock: first click to live number ---------- */
+.clock{position:fixed;top:14px;right:14px;z-index:90;display:none;align-items:center;gap:9px;
+  background:var(--ink);color:#fff;border-radius:99px;padding:9px 15px 9px 13px;
+  box-shadow:0 10px 30px -10px rgba(10,12,16,.55);font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:14px;font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.clock.on{display:inline-flex}
+.clock .pip{width:7px;height:7px;border-radius:99px;background:var(--mint);flex:0 0 auto;
+  animation:cpulse 1.2s ease-in-out infinite}
+@keyframes cpulse{0%,100%{opacity:.35}50%{opacity:1}}
+.clock .lb{font-family:"Inter Tight",sans-serif;font-size:11px;font-weight:700;letter-spacing:.09em;
+  text-transform:uppercase;color:rgba(255,255,255,.5)}
+.clock.done{background:var(--mint);color:var(--ink)}
+.clock.done .pip{background:var(--ink);animation:none}
+.clock.done .lb{color:rgba(10,12,16,.55)}
+@media (max-width:520px){.clock{top:10px;right:10px;padding:7px 12px 7px 10px;font-size:13px}
+  .clock .lb{display:none}}
+@media (prefers-reduced-motion:reduce){.clock .pip{animation:none}}
+
 @media (prefers-reduced-motion:reduce){*{transition:none!important}.spin{animation:none}}
 </style>
 
@@ -567,9 +585,10 @@ body.on-connect #connect{display:block}
     </div></div>
 
     <div class="handoff"><div class="ho-in">
-      <h2>Or build one <em>without leaving your assistant</em></h2>
-      <p>Connect SalesAi to Claude, ChatGPT or your editor. Describe the client, and the agent
-         and its live phone number are ready in about a minute &mdash; no dashboard, no training call.</p>
+      <h2>Your agency already has <em>Claude open</em></h2>
+      <p>Ten persona accordions and nine prompt blocks is a dashboard problem. Describing what
+         you want isn&rsquo;t &mdash; and it does not get worse on a phone. Connect once, then build a
+         client&rsquo;s agent from wherever you already work and hand over a live number.</p>
       <div class="ho-row">
         <button class="ho-btn" data-openconnect><svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6L5.6 18.4" stroke="#D97757" stroke-width="2.6" stroke-linecap="round"/></svg> Build with Claude</button>
         <button class="ho-btn" data-openconnect>Build with ChatGPT</button>
@@ -630,6 +649,8 @@ body.on-connect #connect{display:block}
 </div>
 
 </div>
+
+<div class="clock" id="clock"><span class="pip"></span><span class="lb">Time to live</span><span id="clocktime">0:00</span></div>
 
 <div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="Claude connector preview">
   <div class="win">
@@ -1006,6 +1027,7 @@ async function buildAgent(){
       '<button class="callnow" id="callnow">'+PHONE_SVG+'Call it now</button>'+
     '</div>'+
     '<p>It is live. Send that link to '+client+' and they can hear it from their own phone, with no account.</p></div>');
+  clockStop();   // the number is on screen — that is 'live'
   const cb=card&&card.querySelector('#callnow');
   if(cb) cb.addEventListener('click', ()=>startCall(client,num));
 }
@@ -1256,7 +1278,7 @@ document.addEventListener('click', e => {
   if (e.target.closest('#backtochat')){ chatMode='congrats'; go('chat'); return; }
 
   const g = e.target.closest('[data-go]');
-  if (g){ if (g.dataset.go==='connector'){ chatMode='full'; PLAN={fee:1,min:1,txt:1}; } go(g.dataset.go); return; }
+  if (g){ if (g.dataset.go==='connector'){ chatMode='full'; PLAN={fee:1,min:1,txt:1}; clockReset(); clockStart(); } go(g.dataset.go); return; }
 
   const b = e.target.closest('[data-back]');
   if (b){ const prev=BACK[screen]; if(prev) go(prev); else closeModal(); return; }
@@ -1275,8 +1297,39 @@ document.addEventListener('click', e => {
 });
 document.addEventListener('keydown', e => { if (e.key==='Escape') closeModal(); });
 
-function showConnect(){ document.body.classList.add('on-connect'); window.scrollTo({top:0,behavior:'instant'}); }
-function showHome(){ document.body.classList.remove('on-connect'); window.scrollTo({top:0,behavior:'instant'}); }
+let clockT0=null, clockIv=null;
+function clockStart(){
+  if (clockT0) return;                       // one run per session
+  clockT0 = Date.now();
+  const el=document.getElementById('clock'), t=document.getElementById('clocktime');
+  el.classList.add('on'); el.classList.remove('done');
+  clockIv = setInterval(()=>{
+    const s=Math.floor((Date.now()-clockT0)/1000);
+    t.textContent = Math.floor(s/60)+':'+String(s%60).padStart(2,'0');
+  }, 250);
+  // deliberately NOT pushed into `timers` — go() clears that on every screen
+  // change, which would silently freeze the clock mid-flow.
+}
+function clockStop(){
+  if (!clockT0 || !clockIv) return;
+  clearInterval(clockIv); clockIv=null;
+  const s=Math.floor((Date.now()-clockT0)/1000);
+  const el=document.getElementById('clock'), t=document.getElementById('clocktime');
+  t.textContent = Math.floor(s/60)+':'+String(s%60).padStart(2,'0');
+  el.classList.add('done');
+  el.querySelector('.lb').textContent = 'Agent live in';
+}
+function clockReset(){
+  if (clockIv) clearInterval(clockIv);
+  clockIv=null; clockT0=null;
+  const el=document.getElementById('clock');
+  el.classList.remove('on','done');
+  el.querySelector('.lb').textContent = 'Time to live';
+  document.getElementById('clocktime').textContent = '0:00';
+}
+
+function showConnect(){ document.body.classList.add('on-connect'); clockStart(); window.scrollTo({top:0,behavior:'instant'}); }
+function showHome(){ document.body.classList.remove('on-connect'); clockReset(); window.scrollTo({top:0,behavior:'instant'}); }
 document.addEventListener('click', e => {
   if (e.target.closest('[data-openconnect]')){ showConnect(); return; }
   if (e.target.closest('[data-home]')){ showHome(); return; }
