@@ -539,6 +539,30 @@ body.on-connect #connect{display:block}
   .clock .lb{display:none}}
 @media (prefers-reduced-motion:reduce){.clock .pip{animation:none}}
 
+/* ---------- drafted handoff: email + text ---------- */
+.draft{background:#FFFDF9;border:1px solid var(--cl-line);border-radius:12px;overflow:hidden}
+.draft + .draft{margin-top:10px}
+.dhead{display:flex;align-items:center;gap:8px;padding:9px 13px;background:#F4F2EA;
+  border-bottom:1px solid var(--cl-line);font-size:11.5px;font-weight:700;letter-spacing:.07em;
+  text-transform:uppercase;color:var(--cl-ink-2)}
+.dhead .to{margin-left:auto;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;
+  letter-spacing:0;text-transform:none;color:#8C887E;overflow:hidden;text-overflow:ellipsis;max-width:52%}
+.dbody{padding:13px}
+.dsubj{font-size:13.6px;font-weight:700;color:var(--cl-ink);margin-bottom:7px}
+.dtext{font-size:13.4px;line-height:1.6;color:var(--cl-ink-2);white-space:pre-wrap}
+.sms{background:#E7F6EC;border:1px solid #C3E8CF;border-radius:14px 14px 14px 4px;padding:11px 13px;
+  font-size:13.6px;line-height:1.5;color:#14331F;white-space:pre-wrap}
+.smsmeta{display:flex;gap:10px;margin-top:7px;font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:10.5px;color:#8C887E}
+.sendrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.sendbtn{display:inline-flex;align-items:center;gap:7px;background:var(--mint);color:var(--ink);
+  border-radius:10px;padding:9px 15px;font-size:13.4px;font-weight:700;transition:.15s}
+.sendbtn:hover{background:var(--mint-deep);color:#fff}
+.editbtn{display:inline-flex;align-items:center;gap:7px;background:#FFFDF9;border:1px solid var(--cl-line);
+  color:var(--cl-ink);border-radius:10px;padding:9px 15px;font-size:13.4px;font-weight:600}
+.editbtn:hover{border-color:var(--cl-accent);color:var(--cl-accent)}
+.sentmark{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:700;color:var(--green-ink)}
+
 @media (prefers-reduced-motion:reduce){*{transition:none!important}.spin{animation:none}}
 </style>
 
@@ -937,6 +961,45 @@ const TRANSCRIPTS={
                ['agent','That is all I needed to hear. Would a payment plan be easier than settling in one go?']]
 };
 
+
+/* The person on the client side, and the handoff an agency actually sends the
+   day an agent goes live. */
+const CONTACTS = {
+  dental:['Dr. Alvarez','alvarez@riversidedental.com','(317) 555-0188'],
+  hvac:['Marcus Fulton','marcus@fultonheating.com','(317) 555-0164'],
+  medspa:['Priya Raman','priya@lumenaesthetics.com','(317) 555-0119'],
+  home:['Dale Copperline','dale@copperlineexteriors.com','(317) 555-0143'],
+  collections:['Renee Ortiz','rortiz@meridianrecovery.com','(317) 555-0127']
+};
+/** GSM-7 fits 160 chars per segment; anything outside it forces UCS-2 at 70. */
+function smsSegments(t){
+  const gsm = /^[A-Za-z0-9@£$¥èéùìòÇØøÅåÆæßÉ !"#¤%&'()*+,\-./:;<=>?¡ÄÖÑÜ§¿äöñüà\n\r]*$/;
+  const uni = !gsm.test(t);
+  const per = uni ? 70 : 160;
+  const n = Math.ceil(t.length / per);
+  return n + ' segment' + (n>1?'s':'') + (uni ? ' \u00b7 unicode' : '');
+}
+
+function handoffCopy(){
+  const v=VERTICALS[S.vert], client=v[3], c=CONTACTS[S.vert],
+        num='+1 (317) 555-0142', me=S.name.split(' ')[0], org=S.org;
+  // "Marcus Fulton" -> Marcus, but "Dr. Alvarez" stays whole.
+  const greet = c[0].startsWith('Dr.') ? c[0] : c[0].split(' ')[0];
+  return {
+    to:c, client, num,
+    subject:'Your after-hours line is live',
+    email:`Hi ${greet},\n\n`+
+      `The after-hours line for ${client} went live today. Anyone calling ${num} outside business `+
+      `hours now reaches an agent that triages the call, escalates anything urgent to you, and books `+
+      `the rest into your first open slot.\n\n`+
+      `Nothing changes on your end — same number your customers already have.\n\n`+
+      `Call it yourself and hear it. If anything sounds off, tell me and I will change it today.\n\n`+
+      `${me}\n${org}`,
+    sms:`Hi ${greet}, your after-hours line is live. Call ${num} and hear it for yourself. `+
+        `Anything urgent still reaches you directly. - ${me}, ${org}`
+  };
+}
+
 let chatQ=[], chatBusy=false, callTimer=null, callSecs=0, minutesUsed=99;
 let PLAN={fee:1,min:1,txt:1}, chatMode='full';
 
@@ -1049,7 +1112,62 @@ async function runCongrats(){
       '<div class="agentline"><span class="lbl">Texts</span>'+txt[1].toLocaleString()+' / mo</div>'+
       '<div class="agentline"><span class="lbl">Plan</span>'+plan[0]+' · $'+(plan[1]+mins[2]+txt[2]).toLocaleString()+'/mo</div>'+
     '</div>'+
-    '<p>Outbound is enabled and the number is registered for A2P. Want me to set up the next client, or clone this agent into your other '+VERTICALS[S.vert][0].toLowerCase()+' accounts?</p></div>');
+    '<p>Outbound is enabled and the number is registered for A2P.</p></div>');
+
+  await beat(700); typing(true); await beat(1100); typing(false);
+  const c = CONTACTS[S.vert];
+  push('<div class="msg ai"><p>I can find '+client+' in your HubSpot and draft the handoff so they know it is live. How should it go out?</p></div>');
+  const qr = push('<div class="qr">'+
+    '<button data-ch="email">Email only</button>'+
+    '<button data-ch="sms">Text only</button>'+
+    '<button data-ch="both">Email and text</button></div>');
+  if (qr) qr.querySelectorAll('button').forEach(b => b.addEventListener('click', async () => {
+    const ch = b.dataset.ch, label = b.textContent;
+    qr.remove();
+    push('<div class="msg user">'+label+'</div>');
+    await beat(620);
+    draftHandoff(ch);
+  }));
+}
+
+async function draftHandoff(ch){
+  const h = handoffCopy();
+  typing(true); await beat(950); typing(false);
+
+  const t1 = push('<div class="tool"><span class="tspin"></span><span class="tok">'+TICK+'</span>'+
+    '<span class="nm">hubspot:search_contacts</span><span class="res">'+h.to[0]+'</span></div>');
+  await beat(820); if (t1) t1.classList.add('settled');
+  await beat(240);
+  const t2 = push('<div class="tool"><span class="tspin"></span><span class="tok">'+TICK+'</span>'+
+    '<span class="nm">hubspot:get_contact</span><span class="res">'+h.to[1]+'</span></div>');
+  await beat(760); if (t2) t2.classList.add('settled');
+  await beat(360);
+
+  const wantEmail = ch === 'email' || ch === 'both';
+  const wantSms   = ch === 'sms'   || ch === 'both';
+
+  let body = '<div class="msg ai"><p>Found <b>'+h.to[0]+'</b> on the '+h.client+' record. Here is the draft'+(ch==='both'?'s':'')+' \u2014 nothing sends until you say so.</p>';
+  if (wantEmail) body +=
+    '<div class="draft"><div class="dhead">Email<span class="to">'+h.to[1]+'</span></div>'+
+      '<div class="dbody"><div class="dsubj">'+h.subject+'</div>'+
+      '<div class="dtext">'+h.email.replace(/</g,'&lt;')+'</div></div></div>';
+  if (wantSms) body +=
+    '<div class="draft"><div class="dhead">Text<span class="to">'+h.to[2]+'</span></div>'+
+      '<div class="dbody"><div class="sms">'+h.sms.replace(/</g,'&lt;')+'</div>'+
+      '<div class="smsmeta"><span>'+h.sms.length+' chars</span><span>'+smsSegments(h.sms)+'</span>'+
+      '<span>opt-out on file</span></div></div></div>';
+  body += '<div class="sendrow"><button class="sendbtn" id="sendit">'+TICK+' Send '+
+      (ch==='both'?'both':(ch==='email'?'the email':'the text'))+'</button>'+
+      '<button class="editbtn">Change the wording</button></div></div>';
+
+  const node = push(body);
+  const btn = node && node.querySelector('#sendit');
+  if (btn) btn.addEventListener('click', async () => {
+    btn.closest('.sendrow').innerHTML = '<span class="sentmark">'+TICK+' Sent \u00b7 logged to the '+h.client+' record in HubSpot</span>';
+    await beat(900); typing(true); await beat(900); typing(false);
+    push('<div class="msg ai"><p>Sent, and logged against the HubSpot record so it is on the timeline. '+
+      'Want me to set up the next client, or clone this agent into your other '+VERTICALS[S.vert][0].toLowerCase()+' accounts?</p></div>');
+  });
 }
 
 /* --- the call: the permissionless first unit of value --- */
