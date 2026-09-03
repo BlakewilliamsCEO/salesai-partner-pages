@@ -4,7 +4,7 @@
     "title": "Agent Builder · HVAC — SalesAi",
     "partner": "Watsco",
     "source": "watsco_carrier_q4",
-    "plan": "watsco_dealer_350",
+    "plan": "watsco_door_opener_299",
     "art": {
       "cool": "agent-builder-art-hvac-cool.jpg",
       "warm": "agent-builder-art-hvac-warm.jpg"
@@ -56,7 +56,7 @@
       ],
       "preview": "Thanks for calling {company}, this is {agent}. Is this for a repair, a tune-up, or a new system?"
     },
-    "creditCta": "Claim my $350 dealer credit ",
+    "creditCta": "Claim my $299 door opener offer ",
     "claim": {
       "sizeQ": "Roughly how big is the shop? (annual revenue)",
       "sizePre": "Shops your size typically take ",
@@ -289,16 +289,16 @@
       "connectCta": "Connect it to my dispatch "
     },
     "checkout": {
-      "h2": "Lock in dealer pricing.",
-      "lockLine": "Annual plan. Watsco dealer pricing locked for 12 months."
+      "h2": "Lock in your door opener rate.",
+      "lockLine": "Annual plan. Door opener pricing locked for 12 months."
     },
-    "readyCta": "Claim my dealer credit · $350/mo "
+    "readyCta": "Claim my door opener · $299/mo "
   },
   "electrical": {
     "title": "Agent Builder · Electrical — SalesAi",
     "partner": null,
     "source": "template_electrical",
-    "plan": "electrical_launch_350",
+    "plan": "electrical_door_opener_299",
     "art": {
       "cool": "agent-builder-art-electrical-cool.jpg",
       "warm": "agent-builder-art-electrical-warm.jpg"
@@ -350,7 +350,7 @@
       ],
       "preview": "Thanks for calling {company}, this is {agent}. Is this for a repair, a panel upgrade, or new wiring?"
     },
-    "creditCta": "Claim my $350 launch credit ",
+    "creditCta": "Claim my $299 door opener offer ",
     "claim": {
       "sizeQ": "Roughly how big is the shop? (annual revenue)",
       "sizePre": "Shops your size typically take ",
@@ -583,16 +583,16 @@
       "connectCta": "Connect it to my dispatch "
     },
     "checkout": {
-      "h2": "Lock in launch pricing.",
-      "lockLine": "Annual plan. Launch pricing locked for 12 months."
+      "h2": "Lock in your door opener rate.",
+      "lockLine": "Annual plan. Door opener pricing locked for 12 months."
     },
-    "readyCta": "Claim my launch credit · $350/mo "
+    "readyCta": "Claim my door opener · $299/mo "
   },
   "staffing": {
     "title": "Agent Builder · Staffing — SalesAi",
     "partner": null,
     "source": "template_staffing",
-    "plan": "staffing_launch_350",
+    "plan": "staffing_door_opener_299",
     "art": {
       "cool": "agent-builder-art-staffing-cool.jpg",
       "warm": "agent-builder-art-staffing-warm.jpg"
@@ -644,7 +644,7 @@
       ],
       "preview": "Hi, this is {agent} with {company} — you just applied for the warehouse associate role. Got two minutes?"
     },
-    "creditCta": "Claim my $350 launch credit ",
+    "creditCta": "Claim my $299 door opener offer ",
     "claim": {
       "sizeQ": "Roughly how big is the firm? (annual revenue)",
       "sizePre": "Firms your size typically make ",
@@ -877,9 +877,9 @@
       "connectCta": "Connect it to my ATS "
     },
     "checkout": {
-      "h2": "Lock in launch pricing.",
-      "lockLine": "Annual plan. Launch pricing locked for 12 months."
+      "h2": "Lock in your door opener rate.",
+      "lockLine": "Annual plan. Door opener pricing locked for 12 months."
     },
-    "readyCta": "Claim my launch credit · $350/mo "
+    "readyCta": "Claim my door opener · $299/mo "
   }
 }
