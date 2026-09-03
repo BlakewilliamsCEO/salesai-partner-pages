@@ -11,10 +11,10 @@
     },
     "systemNoun": "dispatch software",
     "offer": {
-      "h1": "A voice + text agent for your shop, negotiated down for Watsco dealers.",
-      "p": "Watsco arranged a $2,000/mo AI receptionist and messaging package at $350/mo for the next 2,000 Carrier dealers. It answers, books, and texts customers back — built for HVAC, not tweaked from a generic bot.",
+      "h1": "Build an AI voice + messaging agent for your shop in 90 seconds.",
+      "p": "It answers, books, and texts customers back — built for HVAC, not tweaked from a generic bot. Hear it on your own phone before you tell us anything.",
       "bullets": [
-        "1,000 minutes + 1,000 texts every month",
+        "Answers every call, day and night",
         "Receptionist, lead callback, maintenance outreach",
         "Connects to Jobber, ServiceTitan, Housecall Pro"
       ],
@@ -303,10 +303,10 @@
     },
     "systemNoun": "dispatch software",
     "offer": {
-      "h1": "A voice + text agent for your electrical shop.",
-      "p": "A $2,000/mo AI receptionist and messaging package at $350/mo for the first 2,000 contractors. It answers, books, and texts customers back — built for electrical work, not tweaked from a generic bot.",
+      "h1": "Build an AI voice + messaging agent for your electrical shop in 90 seconds.",
+      "p": "It answers, books, and texts customers back — built for electrical work, not tweaked from a generic bot. Hear it on your own phone before you tell us anything.",
       "bullets": [
-        "1,000 minutes + 1,000 texts every month",
+        "Answers every call, day and night",
         "Receptionist, estimate follow-up, lead callback",
         "Connects to ServiceTitan, Jobber, Housecall Pro"
       ],
@@ -595,11 +595,11 @@
     },
     "systemNoun": "ATS",
     "offer": {
-      "h1": "A voice + text agent for your staffing firm.",
-      "p": "A $2,000/mo AI recruiter and messaging package at $350/mo for the first 2,000 firms. It screens candidates, confirms shifts, and calls every applicant back in under a minute — built for staffing, not tweaked from a generic bot.",
+      "h1": "Build an AI voice + messaging agent for your staffing firm in 90 seconds.",
+      "p": "It screens candidates, confirms shifts, and calls every applicant back in under a minute — built for staffing, not tweaked from a generic bot. Hear it on your own phone before you tell us anything.",
       "bullets": [
-        "1,000 minutes + 1,000 texts every month",
-        "Candidate screening, shift confirmation, redeployment",
+        "Calls every applicant back in under a minute",
+        "Screening, shift confirmation, redeployment",
         "Connects to Bullhorn, Avionté, JobDiva"
       ],
       "seatsLabel": "Seats left",
