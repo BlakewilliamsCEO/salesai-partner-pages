@@ -7,42 +7,25 @@
 <meta name="description" content="Carrier dealer program — hear the agent, build it, and go live. A SalesAi funnel for Watsco dealers.">
 <meta property="og:title" content="Carrier Dealer Agent Builder">
 <meta property="og:description" content="Hear the agent on your phone, build it in a few taps, and book the kickoff.">
-<style>html{background:#F2F5F9}body{margin:0}</style>
+<meta property="og:image" content="carrier-builder-art-cool.jpg">
+<link rel="preload" as="image" href="carrier-builder-art-cool.jpg">
+<link rel="preload" as="image" href="carrier-builder-art-warm.jpg">
+<style>html{background:#F7F7F8}body{margin:0}</style>
 <title>Carrier Dealer Agent Builder</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;600;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
 :root{
-  --ground:#F2F5F9; --ground2:#E6ECF4; --card:rgba(255,255,255,.72); --card-border:rgba(20,32,48,.10);
-  --ink:#142030; --muted:#5F6E7E; --line:rgba(20,32,48,.12); --field:rgba(255,255,255,.85);
-  --accent:#0F5BD6; --accent-ink:#ffffff; --accent-soft:rgba(15,91,214,.10);
-  --heat:#E5702B; --heat-soft:rgba(229,112,43,.12); --cool:#2E8BDB; --cool-soft:rgba(46,139,219,.12);
-  --ok:#1E8E5A; --ok-soft:rgba(30,142,90,.12);
-  --blob1:rgba(46,139,219,.20); --blob2:rgba(229,112,43,.12); --blob3:rgba(15,91,214,.11);
-  --shadow:0 24px 60px -24px rgba(20,32,48,.28), 0 2px 6px rgba(20,32,48,.06);
+  --ground:#F7F7F8; --ground2:#EEF0F4; --card:rgba(255,255,255,.94); --card-border:rgba(24,24,27,.08);
+  --ink:#18181B; --muted:#74747E; --line:rgba(24,24,27,.11); --field:#FFFFFF;
+  --accent:#18181B; --accent-ink:#FFFFFF; --accent-soft:rgba(24,24,27,.05);
+  --heat:#C96A31; --heat-soft:rgba(201,106,49,.10); --cool:#48628F; --cool-soft:rgba(72,98,143,.09);
+  --ok:#3D7A5E; --ok-soft:rgba(61,122,94,.10);
+  --blob1:rgba(72,98,143,.15); --blob2:rgba(229,112,43,.10); --blob3:rgba(120,134,199,.11);
+  --shadow:0 18px 50px -22px rgba(24,24,27,.22), 0 2px 6px rgba(24,24,27,.05);
   --spring:cubic-bezier(.22,1.08,.36,1);
   --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
-  --display:'Schibsted Grotesk','Instrument Sans',system-ui,sans-serif;
-  --body:'Instrument Sans',system-ui,-apple-system,Segoe UI,sans-serif;
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --ground:#0F1620; --ground2:#151E2B; --card:rgba(22,31,44,.72); --card-border:rgba(255,255,255,.10);
-    --ink:#EAF0F7; --muted:#9AA9BA; --line:rgba(255,255,255,.12); --field:rgba(15,22,32,.7);
-    --accent:#5B9BFF; --accent-ink:#0B1220; --accent-soft:rgba(91,155,255,.14);
-    --heat:#F28A4B; --heat-soft:rgba(242,138,75,.16); --cool:#5FB0F5; --cool-soft:rgba(95,176,245,.16);
-    --ok:#4FCB8B; --ok-soft:rgba(79,203,139,.16);
-    --blob1:rgba(46,139,219,.22); --blob2:rgba(229,112,43,.16); --blob3:rgba(91,155,255,.14);
-    --shadow:0 24px 60px -24px rgba(0,0,0,.7), 0 2px 6px rgba(0,0,0,.3);
-  }
-}
-:root[data-theme="dark"]{
-  --ground:#0F1620; --ground2:#151E2B; --card:rgba(22,31,44,.72); --card-border:rgba(255,255,255,.10);
-  --ink:#EAF0F7; --muted:#9AA9BA; --line:rgba(255,255,255,.12); --field:rgba(15,22,32,.7);
-  --accent:#5B9BFF; --accent-ink:#0B1220; --accent-soft:rgba(91,155,255,.14);
-  --heat:#F28A4B; --heat-soft:rgba(242,138,75,.16); --cool:#5FB0F5; --cool-soft:rgba(95,176,245,.16);
-  --ok:#4FCB8B; --ok-soft:rgba(79,203,139,.16);
-  --blob1:rgba(46,139,219,.22); --blob2:rgba(229,112,43,.16); --blob3:rgba(91,155,255,.14);
-  --shadow:0 24px 60px -24px rgba(0,0,0,.7), 0 2px 6px rgba(0,0,0,.3);
+  --display:'Inter',system-ui,-apple-system,sans-serif;
+  --body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5;min-height:100vh}
@@ -54,32 +37,31 @@ body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--body);
 .wrap{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 16px;gap:18px}
 .topbar{width:100%;max-width:452px;display:flex;align-items:center;justify-content:space-between;gap:12px}
 .brand{display:flex;align-items:center;gap:8px;flex:none;white-space:nowrap;font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:.02em}
-.brand .dot{width:10px;height:10px;border-radius:50%;background:var(--accent)}
+.brand .dot{width:10px;height:10px;border-radius:50%;background:#0F5BD6}
 .brand .x{color:var(--muted);font-weight:500}
 .rail{display:flex;gap:5px;min-width:0;flex:0 1 auto}
 .rail i{display:block;height:5px;flex:0 1 22px;min-width:7px;border-radius:3px;background:var(--line);transition:background .3s}
 .rail i.on{background:var(--accent)}
 .rail i.done{background:var(--accent);opacity:.45}
-.card{width:100%;max-width:452px;border-radius:18px;border:1px solid var(--card-border);background:var(--card);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:var(--shadow);overflow:hidden}
-.banner{position:relative;height:128px;overflow:hidden;background:linear-gradient(120deg,var(--cool),var(--accent))}
-.banner canvas{position:absolute;inset:0;width:100%;height:100%}
-.banner .tag{position:absolute;left:18px;bottom:14px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.28);padding:5px 9px;border-radius:6px;backdrop-filter:blur(6px)}
-.body{padding:32px;display:flex;flex-direction:column;gap:24px;text-align:center}
-/* The reference centres its header block and re-lefts every interactive row.
-   Anything you read down a column stays left; anything you read as a
-   statement is centred. */
+.card{width:100%;max-width:452px;border-radius:16px;border:1px solid var(--card-border);background:var(--card);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:var(--shadow);overflow:hidden}
+.banner{position:relative;aspect-ratio:1000/650;overflow:hidden;background:#fff}
+.banner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center bottom}
+.banner .tag{display:none}
+.body{padding:30px 28px 32px;display:flex;flex-direction:column;gap:20px;text-align:center}
+/* Headers centre; anything read down a column re-lefts, the way the
+   reference re-lefts its rows inside a text-center card. */
 .opt,.toggle,.idrow,.sum,.map,.build .step,.phone,.bubble,.offer,.kb,pre.json,input,textarea{text-align:left}
 .chips{justify-content:center}
-.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-h1{font-family:var(--display);font-weight:700;font-size:24.5px;line-height:1.16;margin:0;letter-spacing:-.018em;text-wrap:balance}
-h2{font-family:var(--display);font-weight:700;font-size:19.5px;letter-spacing:-.012em;line-height:1.2;margin:0;text-wrap:balance}
+.eyebrow{display:none}
+h1{font-family:var(--display);font-weight:700;font-size:23px;line-height:1.22;margin:0;letter-spacing:-.015em;text-wrap:balance}
+h2{font-family:var(--display);font-weight:700;font-size:20px;line-height:1.28;margin:0;letter-spacing:-.012em;text-wrap:balance}
 p{margin:0;color:var(--muted)}
 p.ink{color:var(--ink)}
 .stack{display:flex;flex-direction:column;gap:12px}
 .row{display:flex;align-items:center;gap:12px}
 .between{justify-content:space-between}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.btn{appearance:none;border:1px solid transparent;border-radius:12px;padding:13px 18px;font:600 15px var(--body);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform .12s,background .2s,box-shadow .2s;width:100%}
+.btn{appearance:none;border:1px solid transparent;border-radius:12px;padding:14px 18px;font:600 15px var(--body);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform .12s,background .2s,box-shadow .2s;width:100%}
 .btn:active{transform:translateY(1px)}
 .btn:focus-visible,.chip:focus-visible,.opt:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .btn.primary{background:var(--accent);color:var(--accent-ink);box-shadow:0 10px 24px -12px var(--accent)}
@@ -98,14 +80,10 @@ label.lbl{display:block;font-size:12.5px;font-weight:600;color:var(--muted);marg
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chip{border:1px solid var(--line);background:var(--field);color:var(--ink);border-radius:999px;padding:8px 14px;font:500 13.5px var(--body);cursor:pointer;transition:all .15s}
 .chip.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
-.chip.heat.on{background:var(--heat);border-color:var(--heat);color:#fff}
 .opt{display:flex;align-items:flex-start;gap:12px;border:1px solid var(--line);background:var(--field);border-radius:14px;padding:13px 14px;cursor:pointer;text-align:left;width:100%;color:var(--ink);font:inherit;transition:all .15s}
 .opt:hover{border-color:var(--accent)}
-.opt.on{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 0 0 0 1px var(--accent)}
-.opt .ic{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;flex:none;background:var(--accent-soft);color:var(--accent)}
-.opt.heat .ic{background:var(--heat-soft);color:var(--heat)}
-.opt.cool .ic{background:var(--cool-soft);color:var(--cool)}
-.opt.ok .ic{background:var(--ok-soft);color:var(--ok)}
+.opt.on{border-color:var(--ink);background:#fff;box-shadow:inset 0 0 0 1px var(--ink),0 8px 20px -14px rgba(24,24,27,.3)}
+.opt .ic{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;flex:none;background:#F4F4F5;color:#3F3F46}
 .opt b{display:block;font-weight:600;font-size:14.5px}
 .opt small{display:block;color:var(--muted);font-size:12.5px;line-height:1.4;margin-top:2px}
 .opt .chk{margin-left:auto;width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);flex:none;display:grid;place-items:center;color:var(--accent-ink);background:transparent;transition:all .15s;margin-top:8px}
@@ -122,17 +100,17 @@ label.lbl{display:block;font-size:12.5px;font-weight:600;color:var(--muted);marg
 .idrow b{display:block;font-weight:600;font-size:13.5px;overflow-wrap:anywhere}
 .idrow small{display:block;color:var(--muted);font-size:12px}
 .btn.primary .spin{border-color:var(--accent-ink);border-right-color:transparent}
-.offer{display:grid;grid-template-columns:1fr auto;align-items:end;gap:12px;border:1px solid var(--line);border-radius:14px;padding:14px 16px;background:var(--field)}
-.offer .was{font-family:var(--display);font-size:15px;color:var(--muted);text-decoration:line-through}
-.offer .now{font-family:var(--display);font-weight:800;font-size:34px;line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.offer{display:flex;flex-direction:column;align-items:stretch;gap:10px;border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--field);text-align:left}
+.offer .was{font-family:var(--display);font-size:14px;color:var(--muted);text-decoration:line-through;white-space:nowrap}
+.offer .now{font-family:var(--display);font-weight:800;font-size:32px;white-space:nowrap;line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
 .offer .now span{font-size:14px;font-weight:600;color:var(--muted);letter-spacing:0}
 .offer ul{margin:0;padding:0;list-style:none;font-size:13px;color:var(--muted);display:flex;flex-direction:column;gap:3px}
 .offer ul li::before{content:"·";margin-right:6px;color:var(--accent)}
-.count{font-family:var(--mono);font-size:11.5px;color:var(--muted);display:flex;gap:6px;align-items:center}
+.count{font-family:var(--mono);font-size:11.5px;color:var(--muted);display:flex;gap:6px;align-items:center;border-top:1px solid var(--line);padding-top:10px}
 .count b{color:var(--heat);font-weight:500}
 .phone{border:1px solid var(--line);border-radius:16px;background:var(--field);padding:16px;display:flex;flex-direction:column;gap:12px}
 .phone .hdr{display:flex;align-items:center;gap:10px}
-.av{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--cool),var(--accent));display:grid;place-items:center;color:#fff;font-family:var(--display);font-weight:700;font-size:14px;flex:none}
+.av{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#D97A3F,#3B5488);display:grid;place-items:center;color:#fff;font-family:var(--display);font-weight:700;font-size:14px;flex:none}
 .wave{display:flex;gap:3px;align-items:center;height:22px}
 .wave i{display:block;width:3px;border-radius:2px;background:var(--accent);height:6px;animation:wave 1s ease-in-out infinite}
 .wave i:nth-child(2){animation-delay:.1s}.wave i:nth-child(3){animation-delay:.2s}.wave i:nth-child(4){animation-delay:.3s}.wave i:nth-child(5){animation-delay:.4s}
@@ -155,7 +133,7 @@ label.lbl{display:block;font-size:12.5px;font-weight:600;color:var(--muted);marg
 .bar{height:6px;border-radius:3px;background:var(--line);overflow:hidden}
 .bar i{display:block;height:100%;background:var(--accent);border-radius:3px;transition:width .4s}
 .kb{display:flex;flex-wrap:wrap;gap:6px}
-.kb span{font-family:var(--mono);font-size:11px;background:var(--ok-soft);color:var(--ok);border:1px solid transparent;padding:4px 8px;border-radius:6px}
+.kb span{font-family:var(--mono);font-size:11px;background:#F4F4F5;color:#52525B;border:1px solid transparent;padding:4px 8px;border-radius:6px}
 .sum{border:1px solid var(--line);border-radius:14px;background:var(--field);overflow:hidden}
 .sum .r{display:grid;grid-template-columns:120px 1fr;gap:10px;padding:10px 14px;border-top:1px solid var(--line);font-size:13.5px}
 .sum .r:first-child{border-top:0}
@@ -526,25 +504,16 @@ const ic={
 
 /* ---------- banner canvas: soft "airflow" lines ---------- */
 function Banner({tag,hot}){
-  const ref=useRef();
-  useEffect(()=>{
-    const c=ref.current,ctx=c.getContext('2d');const dpr=window.devicePixelRatio||1;
-    const W=c.clientWidth,H=c.clientHeight;c.width=W*dpr;c.height=H*dpr;ctx.scale(dpr,dpr);
-    const g=ctx.createLinearGradient(0,0,W,H);
-    if(hot){g.addColorStop(0,'#B85A22');g.addColorStop(1,'#123E73');}else{g.addColorStop(0,'#1C5FA8');g.addColorStop(1,'#102F5C');}
-    ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
-    ctx.strokeStyle='rgba(255,255,255,.11)';ctx.lineWidth=1;
-    for(let i=0;i<14;i++){ctx.beginPath();const y=10+i*11;ctx.moveTo(-20,y);for(let x=0;x<=W+20;x+=8){ctx.lineTo(x,y+Math.sin((x/70)+(i*.7))*9+Math.sin(x/23+i)*2);}ctx.stroke();}
-    ctx.fillStyle='rgba(255,255,255,.045)';for(let i=0;i<6;i++){ctx.beginPath();ctx.arc(W-40-i*58,H-30+((i%2)*14),16+i*3,0,Math.PI*2);ctx.fill();}
-  },[hot]);
-  return h('div',{className:'banner'},h('canvas',{ref}),h('span',{className:'tag'},tag));
+  // The artwork carries the card: a watercolor whose bottom edge dissolves
+  // into the same white as the body below it.
+  return h('div',{className:'banner'},h('img',{src:hot?'carrier-builder-art-warm.jpg':'carrier-builder-art-cool.jpg',alt:''}));
 }
 
 /* ---------- confetti ---------- */
 function Confetti({go}){
   const ref=useRef();
   useEffect(()=>{if(!go)return;const c=ref.current,ctx=c.getContext('2d');c.width=innerWidth;c.height=innerHeight;
-    const cols=['#0F5BD6','#2E8BDB','#E5702B','#1E8E5A','#F4C542'];
+    const cols=['#3B5488','#8DA3D4','#E5702B','#18181B','#F0BC6B'];
     const ps=Array.from({length:140},()=>({x:innerWidth/2+(Math.random()-.5)*200,y:innerHeight*.45,vx:(Math.random()-.5)*14,vy:-Math.random()*14-4,r:Math.random()*5+3,c:cols[Math.random()*cols.length|0],a:Math.random()*6,s:Math.random()*.3-.15}));
     let t=0,raf;const step=()=>{ctx.clearRect(0,0,c.width,c.height);ps.forEach(p=>{p.vy+=.35;p.x+=p.vx;p.y+=p.vy;p.vx*=.99;p.a+=p.s;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.a);ctx.fillStyle=p.c;ctx.fillRect(-p.r,-p.r/2,p.r*2,p.r);ctx.restore();});if(++t<150)raf=requestAnimationFrame(step);else ctx.clearRect(0,0,c.width,c.height);};
     raf=requestAnimationFrame(step);return()=>cancelAnimationFrame(raf);},[go]);
@@ -691,7 +660,7 @@ function Agents({go,data,set}){
         h('div',{className:'av'},((data.company||'A').trim()[0]||'A').toUpperCase()),
         h('div',{style:{minWidth:0}},
           h('b',null,data.company||'Your company'),
-          h('small',null,(data.voice||'Female')+' · '+(data.accent||'Neutral American')))),
+          h('small',null,(data.voice||'Female')+' \u00b7 '+(data.accent||'Neutral American')))),
       h('button',{className:'btn ghost sm',onClick:()=>setDemo(d=>!d)},I(ic.mic,{width:14,height:14}),demo?'Hide':'Hear')),
     demo&&h('div',{className:'bubble agent',style:{alignSelf:'stretch',maxWidth:'100%'}},'Thanks for calling '+(data.company||'your shop')+', this is '+(data.voice==='Male'?'Ryan':'Riley')+'. Is this for a repair, a tune-up, or a new system?'),
     h('div',{className:'stack fade',style:{gap:8}},USECASES.map(u=>h('button',{key:u.id,className:'opt '+u.tone+(data.uses.includes(u.id)?' on':''),onClick:()=>toggle(u.id)},
@@ -717,7 +686,7 @@ function Connect({go,data,set}){
     f&&h('div',{className:'fade stack',style:{gap:8}},
       h('p',{style:{fontSize:12.5}},'Every call always sends the customer\'s name, phone, email and what happened on the call. What else do you want with it?'),
       [['type','What kind of job it is','AC vs. furnace, install vs. repair',ic.snow,'cool'],['urgency','How urgent it is','"It\'s 91° and the AC is out" flags same-day',ic.flame,'heat'],['summary','A written summary of the call','Two or three sentences, in the job notes',ic.inbox,''],['recording','The call recording','Attached to the customer record',ic.mic,''],['sentiment','How the customer felt','Happy, frustrated, undecided',ic.spark,'ok']].map(([k,t,d,icn,tone])=>
-        h('button',{key:k,className:'toggle'+(data.push[k]?' on':''),onClick:()=>tog(k)},h('div',{className:'row'},h('div',{className:'ic opt-ic',style:{width:32,height:32,borderRadius:9,display:'grid',placeItems:'center',background:tone==='heat'?'var(--heat-soft)':tone==='cool'?'var(--cool-soft)':tone==='ok'?'var(--ok-soft)':'var(--accent-soft)',color:tone==='heat'?'var(--heat)':tone==='cool'?'var(--cool)':tone==='ok'?'var(--ok)':'var(--accent)'}},I(icn,{width:16,height:16})),h('div',null,h('b',null,t),h('small',null,d))),h('span',{className:'sw'})))),
+        h('button',{key:k,className:'toggle'+(data.push[k]?' on':''),onClick:()=>tog(k)},h('div',{className:'row'},h('div',{className:'ic opt-ic',style:{width:32,height:32,borderRadius:9,display:'grid',placeItems:'center',background:'#F4F4F5',color:'#3F3F46'}},I(icn,{width:16,height:16})),h('div',null,h('b',null,t),h('small',null,d))),h('span',{className:'sw'})))),
     f&&h('div',{className:'fade stack',style:{gap:8}},
       h('div',{className:'row between'},h('label',{className:'lbl',style:{margin:0}},'What we\'ll map in '+FSMS.find(x=>x.id===f).name),h('span',{className:'status'},FSM_DOC[f])),
       h('div',{className:'map'},
