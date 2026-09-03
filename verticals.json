@@ -285,12 +285,14 @@
         "recording": "recording",
         "sentiment": "sentiment"
       },
-      "sendsLabel": "Sends jobs to"
+      "sendsLabel": "Sends jobs to",
+      "connectCta": "Connect it to my dispatch "
     },
     "checkout": {
       "h2": "Lock in dealer pricing.",
       "lockLine": "Annual plan. Watsco dealer pricing locked for 12 months."
-    }
+    },
+    "readyCta": "Claim my dealer credit · $350/mo "
   },
   "electrical": {
     "title": "Agent Builder · Electrical — SalesAi",
@@ -577,12 +579,14 @@
         "recording": "recording",
         "sentiment": "sentiment"
       },
-      "sendsLabel": "Sends jobs to"
+      "sendsLabel": "Sends jobs to",
+      "connectCta": "Connect it to my dispatch "
     },
     "checkout": {
       "h2": "Lock in launch pricing.",
       "lockLine": "Annual plan. Launch pricing locked for 12 months."
-    }
+    },
+    "readyCta": "Claim my launch credit · $350/mo "
   },
   "staffing": {
     "title": "Agent Builder · Staffing — SalesAi",
@@ -869,11 +873,13 @@
         "recording": "recording",
         "sentiment": "sentiment"
       },
-      "sendsLabel": "Sends candidates to"
+      "sendsLabel": "Sends candidates to",
+      "connectCta": "Connect it to my ATS "
     },
     "checkout": {
       "h2": "Lock in launch pricing.",
       "lockLine": "Annual plan. Launch pricing locked for 12 months."
-    }
+    },
+    "readyCta": "Claim my launch credit · $350/mo "
   }
 }

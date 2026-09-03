@@ -19,6 +19,8 @@ CREATE TABLE funnel_verticals (
   seats_left      TEXT NOT NULL,
   seats_total     TEXT NOT NULL,
   credit_cta      TEXT NOT NULL,
+  ready_cta       TEXT NOT NULL,             -- step-7 claim CTA, matches credit_cta's story
+  connect_cta     TEXT NOT NULL,             -- step-5 CTA, matches the system noun
   claim_size_q    TEXT NOT NULL,
   claim_size_pre  TEXT NOT NULL,
   claim_size_post TEXT NOT NULL,
@@ -156,7 +158,7 @@ SELECT v.vertical_id,
             'audience', v.demo_audience, 'rolePlay', v.demo_roleplay, 'preview', v.demo_preview,
             'script', (SELECT jsonb_agg(jsonb_build_array(speaker, line) ORDER BY position) FROM funnel_demo_script s WHERE s.vertical_id = v.vertical_id),
             'pills', (SELECT jsonb_agg(label ORDER BY position) FROM funnel_demo_pills pl WHERE pl.vertical_id = v.vertical_id)),
-         'creditCta', v.credit_cta,
+         'creditCta', v.credit_cta, 'readyCta', v.ready_cta,
          'claim', jsonb_build_object(
             'sizeQ', v.claim_size_q, 'sizePre', v.claim_size_pre, 'sizePost', v.claim_size_post,
             'finishLine', v.claim_finish,
@@ -168,7 +170,7 @@ SELECT v.vertical_id,
          'usecases', (SELECT jsonb_agg(jsonb_build_object('id', use_case_id, 'name', name, 'desc', descr, 'icon', icon, 'tone', tone) ORDER BY position)
                       FROM funnel_use_cases u WHERE u.vertical_id = v.vertical_id),
          'integr', jsonb_build_object(
-            'h2', v.integr_h2, 'p', v.integr_p, 'alwaysLine', v.integr_always, 'sendsLabel', v.sends_label,
+            'h2', v.integr_h2, 'p', v.integr_p, 'alwaysLine', v.integr_always, 'sendsLabel', v.sends_label, 'connectCta', v.connect_cta,
             'fsms', (SELECT jsonb_agg(jsonb_build_object('id', integration_id, 'name', name) ORDER BY position) FROM funnel_integrations i WHERE i.vertical_id = v.vertical_id),
             'fsmDoc', (SELECT jsonb_object_agg(integration_id, doc) FROM funnel_integrations i WHERE i.vertical_id = v.vertical_id),
             'fsmFields', (SELECT jsonb_object_agg(integration_id, fields) FROM (
