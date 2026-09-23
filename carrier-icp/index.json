@@ -1,0 +1,48 @@
+{
+  "package": "carrier-icp-elite-26-agent-enablement",
+  "version": "September 23, 2026",
+  "base_url": "https://blakewilliamsceo.github.io/salesai-partner-pages/carrier-icp",
+  "knowledge_base": {
+    "html": "https://blakewilliamsceo.github.io/salesai-partner-pages/carrier-icp/kb.html",
+    "md": "https://blakewilliamsceo.github.io/salesai-partner-pages/carrier-icp/kb.md",
+    "json": "https://blakewilliamsceo.github.io/salesai-partner-pages/carrier-icp/kb.json"
+  },
+  "agents": [
+    {
+      "agent_id": "carrier-icp-distributor",
+      "title": "Distributor Partner Agent",
+      "contacts": 104,
+      "rep": "Blake Williams",
+      "booking_link": "https://cal.com/blake-williams-salesai/30min",
+      "url": {
+        "html": "https://blakewilliamsceo.github.io/salesai-partner-pages/carrier-icp/agent-distributor.html",
+        "md": "https://blakewilliamsceo.github.io/salesai-partner-pages/carrier-icp/agent-distributor.md",
+        "json": "https://blakewilliamsceo.github.io/salesai-partner-pages/carrier-icp/agent-distributor.json"
+      }
+    },
+    {
+      "agent_id": "carrier-icp-dealer-travis",
+      "title": "Dealer Agent — Travis Hankins",
+      "contacts": 171,
+      "rep": "Travis Hankins",
+      "booking_link": "https://meetings.hubspot.com/travis-hankins1",
+      "url": {
+        "html": "https://blakewilliamsceo.github.io/salesai-partner-pages/carrier-icp/agent-dealer-travis.html",
+        "md": "https://blakewilliamsceo.github.io/salesai-partner-pages/carrier-icp/agent-dealer-travis.md",
+        "json": "https://blakewilliamsceo.github.io/salesai-partner-pages/carrier-icp/agent-dealer-travis.json"
+      }
+    },
+    {
+      "agent_id": "carrier-icp-dealer-kelpin",
+      "title": "Dealer Agent — Blake Kelpin",
+      "contacts": 172,
+      "rep": "Blake Kelpin",
+      "booking_link": "https://meetings.hubspot.com/kelpin",
+      "url": {
+        "html": "https://blakewilliamsceo.github.io/salesai-partner-pages/carrier-icp/agent-dealer-kelpin.html",
+        "md": "https://blakewilliamsceo.github.io/salesai-partner-pages/carrier-icp/agent-dealer-kelpin.md",
+        "json": "https://blakewilliamsceo.github.io/salesai-partner-pages/carrier-icp/agent-dealer-kelpin.json"
+      }
+    }
+  ]
+}
